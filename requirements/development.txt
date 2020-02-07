@@ -1,0 +1,7 @@
+-r ./base.txt
+
+ipython
+flake8
+isort
+tox
+Sphinx

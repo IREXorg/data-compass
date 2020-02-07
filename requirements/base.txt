@@ -1,0 +1,11 @@
+django[argon2]==3.0.*
+django-environ
+
+# Postgresql
+psycopg2 --no-binary psycopg2
+
+# Other
+django-allauth
+
+# Debuging
+django-debug-toolbar
