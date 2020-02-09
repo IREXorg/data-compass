@@ -32,6 +32,7 @@ class Project(TimeStampedModel):
         blank=True,
         null=True,
         related_name='projects',
+        related_query_name='project',
         verbose_name=_('organization'),
         on_delete=models.SET_NULL
     )
