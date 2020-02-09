@@ -42,7 +42,7 @@ Connect to the database shell
 
 .. code:: bash
 
-    psql data compass
+    psql datacompass
 
 
 While you are in the database shell create the database user and grant appropriate privileges to the user.
@@ -50,7 +50,7 @@ While you are in the database shell create the database user and grant appropria
 .. code:: sql
 
     CREATE USER datacompass WITH PASSWORD 'datacompass';
-    GRANT ALL PRIVILEGES ON DATABASE datacomapss TO datacompass;
+    GRANT ALL PRIVILEGES ON DATABASE datacompass TO datacompass;
     exit;
 
 
