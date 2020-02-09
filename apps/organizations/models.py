@@ -42,6 +42,7 @@ class Organization(TimeStampedModel):
         settings.AUTH_USER_MODEL,
         verbose_name=_('members'),
         related_name='organizations',
+        related_query_name='organization',
         blank=True
     )
     tags = ArrayField(
@@ -55,6 +56,7 @@ class Organization(TimeStampedModel):
         verbose_name=_('creator'),
         blank=True,
         related_name='created_organizations',
+        related_query_name='created_organization',
         on_delete=models.CASCADE
     )
     extras = JSONField(_('extras'), blank=True, default=dict)
