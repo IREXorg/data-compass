@@ -51,8 +51,11 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'django_countries',
+    'phonenumber_field',
     # Custom apps
     'apps.users.apps.UsersConfig',
+    'apps.organizations.apps.OrganizationsConfig',
     # Debug toolbar
     'debug_toolbar',
 ]

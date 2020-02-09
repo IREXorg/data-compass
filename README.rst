@@ -71,7 +71,7 @@ Install Python development header files (python-dev) and Python package Installe
 
 .. code:: bash
 
-    sudo apt-get install python3-dev python3-pip
+    sudo apt install python3-dev python3-pip libz-dev libjpeg-dev libfreetype6-dev
 
 
 Setup a Python virtual environment
