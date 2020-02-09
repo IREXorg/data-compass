@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     # Custom apps
     'apps.users.apps.UsersConfig',
     'apps.organizations.apps.OrganizationsConfig',
+    'apps.projects.apps.ProjectsConfig',
     # Debug toolbar
     'debug_toolbar',
 ]
