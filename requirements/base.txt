@@ -4,8 +4,18 @@ django-environ
 # Postgresql
 psycopg2 --no-binary psycopg2
 
-# Other
+# Image processing
+Pillow
+
+# Authentication
 django-allauth
+
+# Country field
+django-countries
+
+# Phone number field
+phonenumbers
+django-phonenumber-field
 
 # Debuging
 django-debug-toolbar
