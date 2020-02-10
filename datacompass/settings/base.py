@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'apps.users.apps.UsersConfig',
     'apps.organizations.apps.OrganizationsConfig',
     'apps.projects.apps.ProjectsConfig',
+    'apps.surveys.apps.SurveysConfig',
     # Debug toolbar
     'debug_toolbar',
 ]
