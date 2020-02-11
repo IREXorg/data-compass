@@ -83,8 +83,8 @@ class Role(TimeStampedModel):
     extras = JSONField(_('extras'), blank=True, default=dict)
 
     class Meta:
-        verbose_name = _('Topic')
-        verbose_name_plural = _('Topics')
+        verbose_name = _('Role')
+        verbose_name_plural = _('Roles')
 
     def __str__(self):
         return self.name
