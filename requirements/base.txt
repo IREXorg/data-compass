@@ -17,5 +17,8 @@ django-countries
 phonenumbers
 django-phonenumber-field
 
+# Tree/Hierachy data structure
+django-mptt
+
 # Debuging
 django-debug-toolbar
