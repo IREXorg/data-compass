@@ -97,7 +97,7 @@ class ResponseAdmin(CreatorAdmin):
 
 
 @admin.register(QuestionResponse)
-class QuestionResponseAdmin(CreatorAdmin):
+class QuestionResponseAdmin(admin.ModelAdmin):
     list_display = ['question', 'data']
     list_select_related = ['question']
     list_filter = ['question__survey__project']
