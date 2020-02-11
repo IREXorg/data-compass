@@ -12,6 +12,12 @@ from core.models import TimeStampedModel
 
 
 class DataflowHierarchy(TimeStampedModel, MPTTModel):
+    uuid = models.UUIDField(
+        _('UUID'),
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
+    )
     project = models.ForeignKey(
         'projects.Project',
         verbose_name=_('project'),
