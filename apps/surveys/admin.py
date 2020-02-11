@@ -2,7 +2,8 @@ from django.contrib import admin
 
 from mptt.admin import DraggableMPTTAdmin
 
-from .models import Choice, DataflowHierarchy, Dataset, Question, QuestionGroup, Role, Survey, Topic
+from .models import (Choice, DataflowHierarchy, Dataset, Question, QuestionGroup, QuestionResponse, Respondent,
+                     Response, Role, Survey, Topic)
 
 
 class CreatorAdminMixin:
@@ -71,3 +72,33 @@ class QuestionAdmin(CreatorAdmin):
     list_select_related = ['survey']
     list_filter = ['name', 'survey__project']
     inlines = [ChoiceInline]
+
+
+@admin.register(Respondent)
+class RespondentAdmin(CreatorAdmin):
+    list_display = ['email', 'first_name', 'last_name', 'hierarchy', 'survey']
+    list_select_related = ['hierarchy', 'survey']
+    list_filter = ['hierarchy', 'survey__project']
+    autocomplete_fields = ['survey', 'creator', 'user']
+
+
+class QuestionResponseInline(admin.TabularInline):
+    model = QuestionResponse
+
+
+@admin.register(Response)
+class ResponseAdmin(CreatorAdmin):
+    list_display = ['survey', 'respondent']
+    list_select_related = ['survey', 'respondent']
+    list_filter = ['survey__project', 'created_at']
+    autocomplete_fields = ['survey']
+    raw_id_fields = ['respondent']
+    inlines = [QuestionResponseInline]
+
+
+@admin.register(QuestionResponse)
+class QuestionResponseAdmin(CreatorAdmin):
+    list_display = ['question', 'data']
+    list_select_related = ['question']
+    list_filter = ['question__survey__project']
+    raw_id_fields = ['question']
