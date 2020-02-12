@@ -12,9 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 For more information django-environ which is used to read environment variables settings, see
 https://django-environ.readthedocs.io/en/latest/
 """
-import sys
-import os
-
 from pathlib import Path
 
 import environ
@@ -183,7 +180,7 @@ MEDIA_ROOT = env('MEDIA_ROOT', default=str(BASE_DIR / 'media_root'))
 WEBPACK_LOADER = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'STATS_FILE': env('WEBPACK_STATS_FILE', default=str(BASE_DIR / 'webpack-stats.json')),
     }
 }
 
