@@ -22,3 +22,6 @@ django-mptt
 
 # Debuging
 django-debug-toolbar
+
+# Webpack Loader
+django-webpack-loader
