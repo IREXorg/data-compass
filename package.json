@@ -1,0 +1,45 @@
+{
+  "name": "data-compass",
+  "version": "1.0.0",
+  "description": "============ Data Compass ============",
+  "main": "webpack.config.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.26.3",
+    "react": "^16.12.0",
+    "webpack-bundle-tracker": "^0.4.3",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
+    "babel-loader": "^8.0.6",
+    "bootstrap": "^4.4.1",
+    "eslint": "^6.8.0",
+    "eslint-loader": "^3.0.3",
+    "jquery": "^3.4.1",
+    "lodash": "^4.17.15",
+    "node-sass": "^4.13.1",
+    "popper.js": "^1.16.1",
+    "webpack": "^4.41.6"
+  },
+  "scripts": {
+    "watch": "./node_modules/.bin/webpack --config webpack.config.js --watch --mode=development",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IREXorg/data-compass.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IREXorg/data-compass/issues"
+  },
+  "homepage": "https://github.com/IREXorg/data-compass#readme"
+}

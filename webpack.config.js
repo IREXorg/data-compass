@@ -18,13 +18,22 @@ module.exports = {
 
   module: {
     rules: [
-      { test: /\.js?$/, exclude: /node_modules/, loader: 'babel-loader'}, // to transform ES7+ into JS
-      // todo: css-loader
+      {
+        enforce: 'pre',
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loader: 'sass-loader',
+      },
     ],
-  },
-
-  resolve: {
-    modules: ['node_modules'],
-    extensions: ['.js']
-  },
+  }
 }
