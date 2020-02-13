@@ -16,4 +16,24 @@ try {
   require('bootstrap');
 } catch (e) {}
 
+/**
+ * We'll load jQuery plugins.
+ */
+require('autosize');
+require('apexcharts');
+require('flatpickr');
+require('@fullcalendar/core');
+require('@fullcalendar/daygrid');
+require('@fullcalendar/interaction');
+require('@fullcalendar/list');
+require('@fullcalendar/timegrid');
+require('imask');
+require('jqvmap');
+require('nouislider');
+require('peity');
+require('selectize');
+
+/**
+ * We'll load the theme's javascript.
+ */
 require('./theme/tabler.min');
