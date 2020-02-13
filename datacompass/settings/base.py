@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 For more information django-environ which is used to read environment variables settings, see
 https://django-environ.readthedocs.io/en/latest/
 """
-
 from pathlib import Path
 
 import environ
@@ -79,7 +78,9 @@ ROOT_URLCONF = 'datacompass.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            str(BASE_DIR / 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -167,7 +168,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATICFILES_DIRS = env.list('STATICFILES_DIRS', default=[str(BASE_DIR / 'static')])
+STATICFILES_DIRS = env.list('STATICFILES_DIRS', default=[
+    str(BASE_DIR / 'static'),
+    str(BASE_DIR / 'assets/bundles')]
+)
 
 STATIC_URL = env('STATIC_URL', default='/static/')
 
