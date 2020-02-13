@@ -3,7 +3,7 @@ Data Compass
 ============
 
 Data Flow Mapping.
- 
+
 
 Development Installation
 =========================
@@ -31,7 +31,7 @@ Login as  Postgresql admin user (`postgres`)
     sudo su -l postgres
 
 
-While logged in as `postgres` create the project database 
+While logged in as `postgres` create the project database
 
 .. code:: bash
 
@@ -149,6 +149,16 @@ Create a superuser for admin access
 
 **NOTE:** When you are executing ``manage.py ...`` commands make sure the vertualenv is active.
 
+Compiling assets
+----------------
+
+.. code:: bash
+
+  $ npm install
+  $ npm run watch
+
+  # build for production
+  $ npm run build
 
 Starting the development server
 --------------------------------
