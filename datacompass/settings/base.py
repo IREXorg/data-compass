@@ -187,7 +187,6 @@ WEBPACK_LOADER = {
 }
 
 
-
 # Site
 
 SITE_ID = env.int('SITE_ID', default=1)
