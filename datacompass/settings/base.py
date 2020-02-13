@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'django_countries',
     'phonenumber_field',
     'mptt',
+    'crispy_forms',
     # Custom apps
     'apps.users.apps.UsersConfig',
     'apps.organizations.apps.OrganizationsConfig',
@@ -181,6 +182,9 @@ MEDIA_URL = env('MEDIA_URL', default='/media/')
 
 MEDIA_ROOT = env('MEDIA_ROOT', default=str(BASE_DIR / 'media_root'))
 
+# Crispy forms
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Site
 
