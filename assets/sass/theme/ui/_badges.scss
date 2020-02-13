@@ -1,0 +1,42 @@
+
+
+.badge {
+  @include subheader(false);
+  background: $gray-200;
+
+  @at-root a#{&} {
+    color: $white;
+  }
+
+  &:empty {
+    display: inline-block;
+    width: $badge-empty-size;
+    height: $badge-empty-size;
+    min-width: 0;
+    min-height: auto;
+    padding: 0;
+    border-radius: 50%;
+  }
+}
+
+.badge-up {
+  position: absolute;
+  top: 25%;
+  right: 0;
+  min-width: 1rem;
+  min-height: 1rem;
+  padding: 0 .25rem;
+  line-height: 1rem;
+  background-clip: padding-box;
+  transform: translate(0%, -50%);
+}
+
+//bordered
+.badge-outline {
+  background-color: transparent;
+  border: 1px solid currentColor;
+}
+
+.badge-pill {
+  border-radius: 100px;
+}
