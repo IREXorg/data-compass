@@ -3,11 +3,23 @@
 <html>
   <head>
     <meta charset="UTF-8">
+
+    <!-- Styles -->
+    {% render_bundle 'main' 'css' %}
+    <link rel="stylesheet" href="https://opensource.keycdn.com/fontawesome/4.7.0/font-awesome.min.css" integrity="sha384-dNpIIXE8U05kAbPhy3G1cz+yZmTzA6CY8Vg/u2L9xRnHjJiAK76m2BIEaSEV+/aU" crossorigin="anonymous">
     <title>Data Compass</title>
   </head>
 
   <body>
-    <div id="app"></div>
-    {% render_bundle 'main' %}
+    <main class="app">
+
+      <p class="lead">Build something amazing!</p>
+
+      {% block content %}{% endblock content %}
+
+    </main>
+
+    <!-- Scripts -->
+    {% render_bundle 'main' 'js' %}
   </body>
 </html>

@@ -1,21 +1,39 @@
-var path = require("path")
-var webpack = require('webpack')
-var BundleTracker = require('webpack-bundle-tracker')
+const path = require("path")
+const webpack = require('webpack')
+const BundleTracker = require('webpack-bundle-tracker')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   context: __dirname,
-
-  entry: './assets/js/app',
-
+  entry: [
+    './assets/js/app.js',
+    './assets/sass/app.scss'
+  ],
   output: {
-    path: path.resolve('./static/bundles/'),
-    filename: "[name]-[hash].js",
+    path: path.resolve('./assets/bundles/'),
+    filename: devMode ? '[name].js' : '[name].hash.js',
   },
-
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+    },
+  },
   plugins: [
     new BundleTracker({filename: './webpack-stats.json'}),
+    new MiniCssExtractPlugin({
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
+    }),
   ],
-
   module: {
     rules: [
       {
@@ -31,8 +49,18 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
-        loader: 'sass-loader',
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: './assets/bundles/',
+              hmr: process.env.NODE_ENV === 'development',
+              reloadAll: true,
+            },
+          },
+          'css-loader',
+          'sass-loader',
+        ],
       },
     ],
   }

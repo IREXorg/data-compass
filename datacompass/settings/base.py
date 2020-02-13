@@ -169,7 +169,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATICFILES_DIRS = env.list('STATICFILES_DIRS', default=[str(BASE_DIR / 'static')])
+STATICFILES_DIRS = env.list('STATICFILES_DIRS', default=[str(BASE_DIR / 'static'), str(BASE_DIR / 'assets')])
 
 STATIC_URL = env('STATIC_URL', default='/static/')
 
