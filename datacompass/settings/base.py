@@ -100,7 +100,14 @@ WSGI_APPLICATION = 'datacompass.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres://datacompass:datacompass@127.0.0.1:5432/datacompass')
+    'default': {
+        'ENGINE': env('DATABASE_ENGINE', default='django.db.backends.postgresql'),
+        'NAME': env('DATABASE_NAME', default='datacompass'),
+        'USER': env('DATABASE_USER', default='datacompass'),
+        'PASSWORD': env('DATABASE_PASSWORD', default='datacompass'),
+        'HOST': env('DATABASE_HOST', default='127.0.0.1'),
+        'PORT': env('DATABASE_PORT', default='5432')
+    }
 }
 
 
