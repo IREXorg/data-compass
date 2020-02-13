@@ -21,6 +21,9 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+    path(r'surveys/', include('apps.surveys.urls', namespace='surveys'))
+    # path(r'surveys/', include('datacompass.surveys.urls', namespace='surveys')),
+    # url(r'^surveys/', include('apps.surveys.urls', namespace='surveys'))
 ]
 
 if settings.DEBUG:
