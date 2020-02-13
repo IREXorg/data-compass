@@ -1,11 +1,13 @@
-{% load render_bundle from webpack_loader %}
+{% load i18n %}
+{% load static %}
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>Data Compass</title>
+    <title>{% trans 'Data Compass' %} · {% block head_title %}{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <meta name="msapplication-TileColor" content="#206bc4"/>
     <meta name="theme-color" content="#206bc4"/>
@@ -17,100 +19,18 @@
     <meta name="robots" content="noindex,nofollow,noarchive"/>
     <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    {% render_bundle 'main' 'css' %}
+    <link href="{% static 'main.css' %}" rel="stylesheet">
   </head>
-  <body class="antialiased">
-    <div class="page">
-      <nav class="navbar navbar-expand-lg navbar-primary navbar-vertical navbar-dark" id="navbar-primary">
-        <div class="container">
-          <a href="." class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal">
-            <img src="./static/logo.svg" alt="Logo" class="navbar-brand-logo navbar-brand-logo-large">
-            <img src="./static/logo-small.svg" alt="Logo" class="navbar-brand-logo navbar-brand-logo-small">
-          </a>
-          <div class="navbar-collapse collapse">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="./index.html" >
-                  <span class="nav-link-icon"><i class="fa fa-home"></i></span>
-                  <span class="nav-link-title">Home</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link dropdown-toggle" href="#navbar-base" data-toggle="dropdown" role="button"
-			   aria-expanded="false" >
-                  <span class="nav-link-icon">
-                    <i class="fa fa-poll-h"></i>
-                  </span>
-                  <span class="nav-link-title">Users</span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-arrow dropdown-menu-columns  dropdown-menu-columns-2">
-                  <li >
-                    <a class="dropdown-item" href="#" >
-                      List
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#" >
-                      Roles
-                    </a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <nav class="navbar navbar-light navbar-secondary navbar-expand" id="navbar-secondary">
-        <div class="container">
-          <a href="." class="navbar-brand navbar-brand-autodark d-none-navbar-vertical">
-            <img src="./static/logo.svg" alt="Tabler" class="navbar-brand-logo navbar-brand-logo-large">
-            <img src="./static/logo-small.svg" alt="Tabler" class="navbar-brand-logo navbar-brand-logo-small">
-          </a>
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">My Projects</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                John Doe
-              </a>
-              <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                <a class="dropdown-item" href="#">
-                  My Profile
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Sign out</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <div class="content">
-        <main class="container">
-          <!-- Page title -->
-          <div class="page-header">
-            <div class="row align-items-center">
-              <div class="col-auto">
-                <h2 class="page-title">
-                  Home
-                </h2>
-              </div>
-            </div>
-          </div>
 
-          <!-- Main content -->
-          {% block content %}{% endblock content %}
-        </main>
-      </div>
-      {% render_bundle 'main' 'js' %}
-      <!-- Start google analytics script -->
+  <body class="antialiased {% block body_class %}{% endblock %}">
+      {% block body %}{% endblock %}
+
+      <script src="{% static 'main.js' %}"></script>
+  
+      <!-- Google analytics -->
       <script type="text/javascript">
         // Place google analytics scripts here.
       </script>
-      <!-- End google analytics script -->
+
   </body>
 </html>

@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'django_countries',
     'phonenumber_field',
     'mptt',
-    'webpack_loader',
     # Custom apps
     'apps.users.apps.UsersConfig',
     'apps.organizations.apps.OrganizationsConfig',
@@ -169,7 +168,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATICFILES_DIRS = env.list('STATICFILES_DIRS', default=[str(BASE_DIR / 'static'), str(BASE_DIR / 'assets')])
+STATICFILES_DIRS = env.list('STATICFILES_DIRS', default=[
+    str(BASE_DIR / 'static'),
+    str(BASE_DIR / 'assets/bundles')]
+)
 
 STATIC_URL = env('STATIC_URL', default='/static/')
 
@@ -178,13 +180,6 @@ STATIC_ROOT = env('STATIC_ROOT', default=str(BASE_DIR / 'static_root'))
 MEDIA_URL = env('MEDIA_URL', default='/media/')
 
 MEDIA_ROOT = env('MEDIA_ROOT', default=str(BASE_DIR / 'media_root'))
-
-WEBPACK_LOADER = {
-    'DEFAULT': {
-        'BUNDLE_DIR_NAME': 'bundles/',
-        'STATS_FILE': env('WEBPACK_STATS_FILE', default=str(BASE_DIR / 'webpack-stats.json')),
-    }
-}
 
 
 # Site

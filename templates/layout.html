@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="page">
+      {% include 'includes/primary_nav.html' %}
+
+      <div class="content">
+        <main class="container">
+          <!-- Page title -->
+          <div class="page-header">
+            <div class="row align-items-center">
+              <div class="col-auto">
+                <h2 class="page-title">
+                  {% block page_title %}{% endblock %}
+                </h2>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main content -->
+          {% block content %}{% endblock %}
+        </main>
+      </div>
+{% endblock body %}
