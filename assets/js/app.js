@@ -15,3 +15,5 @@ try {
 
   require('bootstrap');
 } catch (e) {}
+
+require('./theme/tabler.min');
