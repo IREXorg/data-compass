@@ -105,6 +105,46 @@ your code fits our styling standards.
 
    $ flake8
 
+Python imports are sorted using `isort`_.
+
+.. code:: sh
+
+   $ isort -rc .
+
+
+URLs
+~~~~
+
+* List pages should use plurals; e.g. ``/projects/``, ``/surveys/``
+
+* Detail pages should simply be a UUID/PK/slug on top of the list page; e.g.
+  ``/projects/99e0dc36-a8f0-4a58-8f91-416d355125d5/``, ``/notifications/1/``
+  ``/organizations/the-org/``
+
+* Create pages should have 'create' as the final path segment; e.g.
+  ``/notifications/create/``
+
+* URL names use dashes.
+
+* Update pages are sometimes the same as detail pages.
+  In those cases, just use the detail convention, e.g.
+  ``/projects/3/``.  If there is a distinction between the detail
+  page and the update page, use ``/projects/3/update/``.
+
+* Delete pages; e.g., ``/projects/3/delete/``
+
+View class names
+~~~~~~~~~~~~~~~~
+
+Classes should be named according to::
+
+    '{class_name}{verb}View'
+
+For example, ``ProjectUpdateView``, ``ProjectCreateView``
+``ProjectDeleteView``, ``ProjectListView`` and ``ProjectDetailView``.
+This doesn't fit all situations, but it's a good basis.
+
+
 Git Commit Guidelines
 ---------------------
 
@@ -244,6 +284,7 @@ By making a contribution to this project, I certify that:
 .. _Django Style Guide: https://docs.djangoproject.com/en/dev/internals/contributing/writing-code/coding-style/
 .. _PEP 8 Style guide: https://www.python.org/dev/peps/pep-0008/
 .. _flake8: https://pypi.org/project/flake8/
+.. _isort: https://isort.readthedocs.io/en/latest/
 .. _Conventional Commits: https://www.conventionalcommits.org/
 
 .. |git revert| replace:: ``git revert``
