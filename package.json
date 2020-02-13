@@ -7,6 +7,7 @@
     "doc": "docs"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.1",
     "@fullcalendar/core": "^4.4.0",
     "@fullcalendar/daygrid": "^4.4.0",
     "@fullcalendar/interaction": "^4.4.0",
@@ -37,6 +38,7 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-loader": "^3.0.3",
     "eslint-plugin-import": "^2.20.1",
+    "file-loader": "^5.0.2",
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
     "mini-css-extract-plugin": "^0.9.0",

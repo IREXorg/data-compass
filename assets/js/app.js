@@ -34,6 +34,17 @@ require('peity');
 require('selectize');
 
 /**
+ * We'll load fontawesome.
+ */
+
+
+require('@fortawesome/fontawesome-free/js/fontawesome');
+require('@fortawesome/fontawesome-free/js/solid');
+require('@fortawesome/fontawesome-free/js/regular');
+require('@fortawesome/fontawesome-free/js/brands');
+
+
+/**
  * We'll load the theme's javascript.
  */
 require('./theme/tabler.min');
