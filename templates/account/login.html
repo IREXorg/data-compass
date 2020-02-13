@@ -1,0 +1,44 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+
+{% block content %}
+  <div class="text-center pt-3">
+    <h1>{% trans 'Sign In to begin' %}</h1>
+    <p class="text-muted">
+      <small>{% trans 'or' %}</small>
+      <a class="text-muted" href="{{ signup_url }}">{% trans "Click here to register using new password" %}</a>
+    </p>
+  </div>
+
+  {% get_providers as socialaccount_providers %}
+  {% include "socialaccount/snippets/login_extra.html" %}
+
+  <div class="col-md-4 mx-auto">
+    <form class="login" method="POST" action="{% url 'account_login' %}">
+      {% csrf_token %}
+      {{ form|crispy }}
+      {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+      {% endif %}
+
+      <div class="">
+        <button class="btn btn-primary" type="submit">{% trans "Sign In" %}</button>
+        <span class="float-right">
+          <a class="small text-muted" href="{% url 'account_reset_password' %}">
+            {% trans "Click here if you forgot your password" %}
+          </a>
+        </span>
+      </div>
+    </form>
+  </div>
+{% endblock %}
+
+{% block footer %}
+  {% include 'includes/footer.html' with footer_class="col-lg-8 col-md-10 mx-auto mt-2" %}
+{% endblock footer %}
