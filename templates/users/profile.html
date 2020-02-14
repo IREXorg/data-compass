@@ -6,13 +6,18 @@
   <div class="row">
     <div class="col-sm-2"></div>
     <div class="col-sm-10">
-      {% if user.get_full_name %}
-        <h1>{{ user.get_full_name }}</h1>
-      {% else %}
-        <h1 class="text-muted">
-          <a href="#">{% trans 'Add Your Name' %} <i class="fas fa-edit small ml-4"></i></a>
-        </h1>
-      {% endif %}
+      <div class="d-inline">
+        {% if user.get_full_name %}
+          <h1 class="d-inline">{{ user.get_full_name }}</h1>
+        {% else %}
+          <h1 class="d-inline">
+            <a href="{% url 'users:profile-update' %}" class="text-muted">{% trans 'Your Name' %}</a>
+          </h1>
+        {% endif %}
+      </div>
+      <div class="d-inline ml-5">
+        <a href="{% url 'users:profile-update' %}">{% trans 'Edit' %}</a>
+      </div>
   
       <div>
         {% trans 'User type' %}: {{ user.user_type }}
@@ -57,12 +62,12 @@
         <p>
           <span class="font-weight-bold">{% trans "Email" %}</span>:<br>
           {{ user.email }}
-          <a href="#" class="ml-2">{% trans 'edit' %}</a>
+          <a href="{% url 'users:profile-update' %}" class="ml-2">{% trans 'Edit' %}</a>
         </p>
         <p>
           <span class="font-weight-bold">{% trans "Phone number" %}</span>:<br>
           {{ user.phone_number|default:'Not added yet' }}
-          <a href="#" class="ml-2">{% trans 'edit' %}</a>
+          <a href="{% url 'users:profile-update' %}" class="ml-2">{% trans 'Edit' %}</a>
         </p>
         <p><a href="{% url 'account_change_password' %}" class="btn btn-primary">{% trans 'Change password' %}</a></p>
       </div>

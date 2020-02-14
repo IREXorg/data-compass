@@ -1,0 +1,17 @@
+{% extends "users/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+  <div style="max-width: 800px">
+    <form method="POST" action="">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <input class="btn btn-primary" type="submit" value="{% trans 'Save' %}" />
+    </form>
+  </div>
+{% endblock %}
