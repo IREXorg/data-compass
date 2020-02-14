@@ -176,6 +176,15 @@ To start the development server go to your project root directory run
 Running tests
 -------------
 
+To run unit tests make sure you database user has permission to
+create a database. On your database shell, You can give your user permission
+to create database executing something like:
+
+.. code:: sql
+
+    ALTER USER datacompass CREATEDB;
+
+
 To run all tests against multiple versions of Django and Python, use tox_
 
 .. code:: bash
