@@ -5,6 +5,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from django_countries.fields import CountryField
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -24,6 +26,12 @@ class User(AbstractUser):
         blank=True,
         null=True,
         upload_to='users/avatars'
+    )
+    avatar_thumbnail = ImageSpecField(
+        source='avatar',
+        processors=[ResizeToFit(100, 100)],
+        format='JPEG',
+        options={'quality': 100}
     )
     phone_number = PhoneNumberField(_('phone number'), blank=True)
     country = CountryField(_('country'), blank=True)

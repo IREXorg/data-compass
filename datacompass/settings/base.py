@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'mptt',
     'crispy_forms',
+    'imagekit',
     # Custom apps
     'apps.users.apps.UsersConfig',
     'apps.organizations.apps.OrganizationsConfig',
