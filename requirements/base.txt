@@ -6,6 +6,7 @@ psycopg2 --no-binary psycopg2
 
 # Image processing
 Pillow
+django-imagekit
 
 # Authentication
 django-allauth

@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'mptt',
     'crispy_forms',
+    'imagekit',
     # Custom apps
     'apps.users.apps.UsersConfig',
     'apps.organizations.apps.OrganizationsConfig',
@@ -147,7 +148,7 @@ ACCOUNT_EMAIL_REQUIRED = env.bool('ACCOUNT_EMAIL_REQUIRED', default=True)
 
 ACCOUNT_USERNAME_REQUIRED = env.bool('ACCOUNT_USERNAME_REQUIRED', default=False)
 
-LOGIN_REDIRECT_URL = env('LOGIN_REDIRECT_URL', default='/accounts/profile/')
+LOGIN_REDIRECT_URL = env('LOGIN_REDIRECT_URL', default='users:profile-detail')
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
