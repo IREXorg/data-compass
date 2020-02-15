@@ -35,6 +35,8 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
 
+INTERNAL_IPS = env.list('INTERNAL_IPS', default=['127.0.0.1'])
+
 # Application definition
 
 INSTALLED_APPS = [
