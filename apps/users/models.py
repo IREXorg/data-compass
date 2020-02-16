@@ -41,9 +41,14 @@ class User(AbstractUser):
 
     @property
     def user_type(self):
+        titles = []
+
+        # NOTE: Calling str() on translatable/proxy string so that they can be joined as normal strings.
         if self.is_staff:
-            return self._ADMINISTRATOR
+            titles.append(str(self._ADMINISTRATOR))
         if self.is_facilitator:
-            return self._FACILITATOR
+            titles.append(str(self._FACILITATOR))
         if self.is_respondent:
-            return self._RESPONDENT
+            titles.append(str(self._RESPONDENT))
+
+        return ', '.join(titles)

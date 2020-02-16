@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView, TemplateView
 
+from apps.surveys.models import Survey
 from core.mixins import PageTitleMixin
 
 from .forms import ProfileForm
@@ -14,9 +15,14 @@ class ProfileView(LoginRequiredMixin, PageTitleMixin, TemplateView):
     page_title = _('Profile')
     template_name = 'users/profile.html'
 
+    def get_respondent_surveys(self):
+        """Get surveys for user as a respondent"""
+        return Survey.objects.filter(respondent__user=self.request.user)
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
+        context['respondent_surveys'] = self.get_respondent_surveys()
         return context
 
 
