@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 For more information django-environ which is used to read environment variables settings, see
 https://django-environ.readthedocs.io/en/latest/
 """
-
 from pathlib import Path
 
 import environ
@@ -36,6 +35,8 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=[])
 
+INTERNAL_IPS = env.list('INTERNAL_IPS', default=['127.0.0.1'])
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -54,6 +55,8 @@ INSTALLED_APPS = [
     'django_countries',
     'phonenumber_field',
     'mptt',
+    'crispy_forms',
+    'imagekit',
     # Custom apps
     'apps.users.apps.UsersConfig',
     'apps.organizations.apps.OrganizationsConfig',
@@ -79,7 +82,9 @@ ROOT_URLCONF = 'datacompass.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            str(BASE_DIR / 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -152,7 +157,7 @@ ACCOUNT_EMAIL_REQUIRED = env.bool('ACCOUNT_EMAIL_REQUIRED', default=True)
 
 ACCOUNT_USERNAME_REQUIRED = env.bool('ACCOUNT_USERNAME_REQUIRED', default=False)
 
-LOGIN_REDIRECT_URL = env('LOGIN_REDIRECT_URL', default='/accounts/profile/')
+LOGIN_REDIRECT_URL = env('LOGIN_REDIRECT_URL', default='users:profile-detail')
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
@@ -174,7 +179,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
-STATICFILES_DIRS = env.list('STATICFILES_DIRS', default=[str(BASE_DIR / 'static')])
+STATICFILES_DIRS = env.list('STATICFILES_DIRS', default=[
+    str(BASE_DIR / 'static'),
+    str(BASE_DIR / 'assets/bundles')]
+)
 
 STATIC_URL = env('STATIC_URL', default='/static/')
 
@@ -184,6 +192,9 @@ MEDIA_URL = env('MEDIA_URL', default='/media/')
 
 MEDIA_ROOT = env('MEDIA_ROOT', default=str(BASE_DIR / 'media_root'))
 
+# Crispy forms
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Site
 

@@ -1,0 +1,76 @@
+{% extends "users/base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-sm-2 text-center">
+      {% if user.avatar %}
+        <img src="{{ user.avatar_thumbnail.url }}" class="img-thumbnail img-fluid" alt="{% trans 'Avatar' %}">
+      {% else %}
+        <div class="">
+          <i class="fas fa-user fa-5x text-muted"></i>
+        </div>
+      {% endif %}
+      <div class="mt-3">
+        <a href="{% url 'users:profile-update' %}">{% trans 'Edit' %}</a>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="d-inline">
+        {% if user.get_full_name %}
+          <h1 class="d-inline">{{ user.get_full_name }}</h1>
+        {% else %}
+          <h1 class="d-inline">
+            <a href="{% url 'users:profile-update' %}" class="text-muted">{% trans 'Your Name' %}</a>
+          </h1>
+        {% endif %}
+      </div>
+      <div class="d-inline ml-5">
+        <a href="{% url 'users:profile-update' %}">{% trans 'Edit' %}</a>
+      </div>
+  
+      <div>
+        {% trans 'User type' %}: {{ user.user_type }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-2"></div>
+
+    <div class="col-sm-7">
+      <div>
+        {% if user.is_facilitator %}
+          {% include 'users/includes/facilitator_profile.html' %}
+        {% endif %}
+
+        {% if user.is_respondent %}
+          {% include 'users/includes/respondent_profile.html' %}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="col-sm-3 border-left">
+      <h2>
+        {% trans 'Account Settings' %}
+      </h2>
+
+      <div>
+        <p>
+          <span class="font-weight-bold">{% trans "Email" %}</span>:<br>
+          {{ user.email }}
+          <a href="{% url 'users:profile-update' %}" class="ml-2">{% trans 'Edit' %}</a>
+        </p>
+        <p>
+          <span class="font-weight-bold">{% trans "Phone number" %}</span>:<br>
+          {{ user.phone_number|default:'Not added yet' }}
+          <a href="{% url 'users:profile-update' %}" class="ml-2">{% trans 'Edit' %}</a>
+        </p>
+        <p><a href="{% url 'account_change_password' %}" class="btn btn-primary">{% trans 'Change password' %}</a></p>
+      </div>
+    </div>
+
+  </div>
+{% endblock %}

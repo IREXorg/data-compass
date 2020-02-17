@@ -6,6 +6,7 @@ psycopg2 --no-binary psycopg2
 
 # Image processing
 Pillow
+django-imagekit
 
 # Authentication
 django-allauth
@@ -19,6 +20,9 @@ django-phonenumber-field
 
 # Tree/Hierachy data structure
 django-mptt
+
+# UI
+django-crispy-forms
 
 # Debuging
 django-debug-toolbar

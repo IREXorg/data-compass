@@ -5,6 +5,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 from django_countries.fields import CountryField
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
 from phonenumber_field.modelfields import PhoneNumberField
 
 
@@ -25,6 +27,12 @@ class User(AbstractUser):
         null=True,
         upload_to='users/avatars'
     )
+    avatar_thumbnail = ImageSpecField(
+        source='avatar',
+        processors=[ResizeToFit(100, 100)],
+        format='JPEG',
+        options={'quality': 100}
+    )
     phone_number = PhoneNumberField(_('phone number'), blank=True)
     country = CountryField(_('country'), blank=True)
     address = models.TextField(_('address'), blank=True)
@@ -33,9 +41,14 @@ class User(AbstractUser):
 
     @property
     def user_type(self):
+        titles = []
+
+        # NOTE: Calling str() on translatable/proxy string so that they can be joined as normal strings.
         if self.is_staff:
-            return self._ADMINISTRATOR
+            titles.append(str(self._ADMINISTRATOR))
         if self.is_facilitator:
-            return self._FACILITATOR
+            titles.append(str(self._FACILITATOR))
         if self.is_respondent:
-            return self._RESPONDENT
+            titles.append(str(self._RESPONDENT))
+
+        return ', '.join(titles)

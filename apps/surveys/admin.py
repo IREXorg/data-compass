@@ -15,7 +15,7 @@ class CreatorAdminMixin:
         super().save_model(request, obj, form, change)
 
 
-class CreatorAdmin(admin.ModelAdmin, CreatorAdminMixin):
+class CreatorAdmin(CreatorAdminMixin, admin.ModelAdmin):
     pass
 
 
