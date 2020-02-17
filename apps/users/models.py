@@ -2,12 +2,38 @@ import uuid
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from django_countries.fields import CountryField
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFit
 from phonenumber_field.modelfields import PhoneNumberField
+
+from core.models import TimeStampedModel
+
+
+class Gender(TimeStampedModel):
+    uuid = models.UUIDField(
+        _('UUID'),
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
+    )
+    name = models.CharField(_('name'), max_length=50)
+    code = models.SlugField(_('code'), max_length=255, blank=True, unique=True)
+
+    class Meta:
+        verbose_name = _('Gender')
+        verbose_name_plural = _('Gender')
+
+    def __str__(self):
+        return self.name
+
+    def save(self, *args, **kwargs):
+        if not self.code:
+            self.code = slugify(self.name)
+        super().save(*args, **kwargs)
 
 
 class User(AbstractUser):
@@ -34,6 +60,15 @@ class User(AbstractUser):
         options={'quality': 100}
     )
     phone_number = PhoneNumberField(_('phone number'), blank=True)
+    gender = models.ForeignKey(
+        'users.Gender',
+        blank=True,
+        null=True,
+        related_name='users',
+        related_query_name='user',
+        on_delete=models.SET_NULL,
+        verbose_name=_('gender')
+    )
     country = CountryField(_('country'), blank=True)
     address = models.TextField(_('address'), blank=True)
     is_facilitator = models.BooleanField(_('is facilitator'), default=False)

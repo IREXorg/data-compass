@@ -76,10 +76,12 @@ class QuestionAdmin(CreatorAdmin):
 
 @admin.register(Respondent)
 class RespondentAdmin(CreatorAdmin):
-    list_display = ['email', 'first_name', 'last_name', 'hierarchy', 'survey']
-    list_select_related = ['hierarchy', 'survey']
-    list_filter = ['hierarchy', 'survey__project']
+    list_display = ['pk', 'email', 'first_name', 'last_name', 'survey', 'gender']
+    list_display_link = ['pk', 'email']
+    list_select_related = ['survey', 'gender']
+    list_filter = ['gender', 'survey__project']
     autocomplete_fields = ['survey', 'creator', 'user']
+    readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
 
 
 class QuestionResponseInline(admin.TabularInline):

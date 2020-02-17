@@ -43,6 +43,15 @@ class Respondent(TimeStampedModel):
     first_name = models.CharField(_('first name'), max_length=30, blank=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True)
     email = models.EmailField(_('email address'), blank=True)
+    gender = models.ForeignKey(
+        'users.Gender',
+        blank=True,
+        null=True,
+        related_name='respondents',
+        related_query_name='respondent',
+        on_delete=models.SET_NULL,
+        verbose_name=_('gender')
+    )
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('creator'),
@@ -76,6 +85,8 @@ class Respondent(TimeStampedModel):
             self.last_name = self.user.last_name
         if not self.email:
             self.email = self.user.email
+        if not self.gender:
+            self.email = self.user.gender
 
 
 class Response(TimeStampedModel):
