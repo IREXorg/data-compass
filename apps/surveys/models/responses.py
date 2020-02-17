@@ -60,6 +60,23 @@ class Respondent(TimeStampedModel):
     def __str__(self):
         return f'{self.first_name} {self.first_name}'
 
+    def save(self, *args, **kwargs):
+        self.autopopulate_from_user()
+        super().save(*args, **kwargs)
+
+    def autopopulate_from_user(self):
+        """Autopopulate empty `first_name`, `last_name` and `email` from instance user.
+        """
+        if not self.user:
+            return
+
+        if not self.first_name:
+            self.first_name = self.user.first_name
+        if not self.last_name:
+            self.last_name = self.user.last_name
+        if not self.email:
+            self.email = self.user.email
+
 
 class Response(TimeStampedModel):
     uuid = models.UUIDField(
