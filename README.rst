@@ -5,8 +5,8 @@ Data Compass
 Data Flow Mapping.
 
 
-Development Installation
-=========================
+Installation
+============
 
 Database Setup
 --------------
@@ -149,16 +149,6 @@ Create a superuser for admin access
 
 **NOTE:** When you are executing ``manage.py ...`` commands make sure the vertualenv is active.
 
-Compiling assets
-----------------
-
-.. code:: bash
-
-  $ npm install
-  $ npm run watch
-
-  # build for production
-  $ npm run build
 
 Starting the development server
 --------------------------------
@@ -171,6 +161,29 @@ To start the development server go to your project root directory run
 .. code:: bash
 
     ./manage.py runserver
+
+
+Working with frontend assets
+----------------------------
+The most frontend Javascript, CSS (SaSS) and static images for UI files are managed using Webpack.
+
+If you want to modify frontend assets; Install relevant dependancies using
+
+.. code:: bash
+
+    npm install
+
+To build static bundles which could be served in production run
+
+.. code:: bash
+
+    npm run build
+
+To build for development with live updates preview run
+
+.. code:: bash
+
+    npm run watch
 
 
 Running tests
@@ -209,7 +222,26 @@ To automatically sort imports, use isort_
 
     isort -rc .
 
+Building Documentation
+----------------------
+The project uses Sphinx_ for managing and compiling documentation.
+
+To build the HTML documentation, Install documentation dependancies:
+
+.. code:: bash
+
+    pip install -r requirements/docs.txt
+
+Build the documentation:
+
+.. code:: bash
+
+    make docs
+
+The HTML docs will be created in ``docs/_build/html/`` folder
+
 
 .. _tox: https://tox.readthedocs.io/en/latest/
 .. _flake8: https://flake8.pycqa.org/en/latest/
 .. _isort: https://isort.readthedocs.io/en/latest/
+.. _Sphinx: https://www.sphinx-doc.org/en/master/
