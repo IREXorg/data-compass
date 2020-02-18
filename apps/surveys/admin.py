@@ -2,8 +2,10 @@ from django.contrib import admin
 
 from mptt.admin import DraggableMPTTAdmin
 
-from .models import (Choice, DataflowHierarchy, Dataset, Question, QuestionGroup, QuestionResponse, Respondent,
-                     Response, Role, Survey, Topic)
+from .models import (Choice, DataflowHierarchy, Dataset, DatasetAccess, DatasetFrequency, DatasetResponse,
+                     DatasetStorage, DatasetTopicReceived, DatasetTopicResponse, DatasetTopicShared,
+                     DatasetTopicStorageAccess, Entity, Question, QuestionGroup, QuestionResponse, Respondent, Response,
+                     Role, Survey, Topic)
 
 
 class CreatorAdminMixin:
@@ -19,45 +21,95 @@ class CreatorAdmin(CreatorAdminMixin, admin.ModelAdmin):
     pass
 
 
-@admin.register(DataflowHierarchy)
-class DataflowHierarchyAdmin(DraggableMPTTAdmin, CreatorAdminMixin):
-    list_display = ['tree_actions', 'indented_title', 'project']
-    list_select_related = ['project']
-
-
-@admin.register(Role)
-class RoleAdmin(CreatorAdmin):
-    list_display = ['name', 'hierarchy']
-    list_filter = ['hierarchy__project']
-    list_select_related = ['hierarchy']
-
-
 @admin.register(Survey)
 class SurveyAdmin(CreatorAdmin):
     search_fields = ['id', 'uuid', 'name', 'code']
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
-    list_display = ['name', 'research_question', 'is_active']
+    list_display = ['pk', 'name', 'research_question', 'is_active']
     list_filter = ['is_active', 'created_at']
     autocomplete_fields = ['creator', 'project']
     prepopulated_fields = {'code': ['name']}
 
 
+@admin.register(DataflowHierarchy)
+class DataflowHierarchyAdmin(DraggableMPTTAdmin, CreatorAdminMixin):
+    list_display = ['tree_actions', 'indented_title', 'project', 'pk']
+    list_select_related = ['project']
+
+
+@admin.register(Role)
+class RoleAdmin(CreatorAdmin):
+    list_display = ['pk', 'name', 'hierarchy']
+    list_filter = ['hierarchy__project']
+    list_select_related = ['hierarchy']
+
+
+@admin.register(Entity)
+class EntityAdmin(CreatorAdmin):
+    list_display = ['pk', 'name', 'hierarchy']
+    list_filter = ['hierarchy__project']
+    list_select_related = ['hierarchy']
+
+
 @admin.register(Topic)
 class TopicAdmin(CreatorAdmin):
-    list_display = ['name', 'survey']
+    list_display = ['pk', 'name', 'survey']
     list_select_related = ['survey']
     list_filter = ['survey__project']
 
 
 @admin.register(Dataset)
 class DatasetAdmin(CreatorAdmin):
-    list_display = ['name', 'topic']
+    list_display = ['pk', 'name', 'topic']
+    list_display_link = ['pk', 'name']
     list_select_related = ['topic']
+
+
+@admin.register(DatasetStorage)
+class DatasetStorageAdmin(CreatorAdmin):
+    list_display = ['pk', 'name']
+    list_display_link = ['pk', 'name']
+
+
+@admin.register(DatasetAccess)
+class DatasetAccessAdmin(CreatorAdmin):
+    list_display = ['pk', 'name']
+    list_display_link = ['pk', 'name']
+
+
+@admin.register(DatasetFrequency)
+class DatasetFrequencyAdmin(CreatorAdmin):
+    list_display = ['pk', 'name']
+    list_display_link = ['pk', 'name']
+
+
+@admin.register(DatasetTopicReceived)
+class DatasetTopicReceivedAdmin(admin.ModelAdmin):
+    list_display = ['pk', 'entity', 'topic', 'dataset']
+    list_display_link = ['pk', 'entity']
+    list_select_related = ['entity', 'topic', 'dataset_response__dataset']
+    readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
+
+
+@admin.register(DatasetTopicShared)
+class DatasetTopicSharedAdmin(admin.ModelAdmin):
+    list_display = ['pk', 'entity', 'topic', 'dataset']
+    list_display_link = ['pk', 'entity']
+    list_select_related = ['entity', 'topic', 'dataset_response__dataset']
+    readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
+
+
+@admin.register(DatasetTopicStorageAccess)
+class DatasetTopicStorageAccessAdmin(admin.ModelAdmin):
+    # ~list_display = ['pk', 'entity', 'topic', 'dataset_response__dataset']
+    # ~list_display_link = ['pk', 'entity']
+    # ~list_select_related = ['entity', 'topic', 'dataset_response__dataset']
+    readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
 
 
 @admin.register(QuestionGroup)
 class QuestionGroupAdmin(CreatorAdmin):
-    list_display = ['name', 'survey']
+    list_display = ['pk', 'name', 'survey']
     list_display_link = ['name', 'survey']
     list_select_related = ['survey']
 
@@ -68,7 +120,7 @@ class ChoiceInline(admin.TabularInline):
 
 @admin.register(Question)
 class QuestionAdmin(CreatorAdmin):
-    list_display = ['label', 'name', 'survey']
+    list_display = ['pk', 'label', 'name', 'survey']
     list_select_related = ['survey']
     list_filter = ['name', 'survey__project']
     inlines = [ChoiceInline]
@@ -90,7 +142,8 @@ class QuestionResponseInline(admin.TabularInline):
 
 @admin.register(Response)
 class ResponseAdmin(CreatorAdmin):
-    list_display = ['survey', 'respondent']
+    list_display = ['pk', 'respondent', 'survey']
+    list_display_link = ['pk', 'respondent']
     list_select_related = ['survey', 'respondent']
     list_filter = ['survey__project', 'created_at']
     autocomplete_fields = ['survey']
@@ -98,9 +151,29 @@ class ResponseAdmin(CreatorAdmin):
     inlines = [QuestionResponseInline]
 
 
+@admin.register(DatasetResponse)
+class DatasetResponseAdmin(admin.ModelAdmin):
+    list_display = ['pk', 'respondent', 'dataset', 'survey']
+    list_display_link = ['pk', 'respondent']
+    list_select_related = ['response__respondent', 'dataset', 'response__survey']
+    list_filter = ['response__survey__project']
+    readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
+
+
+@admin.register(DatasetTopicResponse)
+class DatasetTopicResponseAdmin(admin.ModelAdmin):
+    list_display = ['pk', 'respondent', 'dataset', 'topic', 'survey']
+    list_display_link = ['pk', 'respondent']
+    list_select_related = ['response__respondent', 'dataset', 'survey']
+    list_filter = ['response__survey__project']
+    readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
+
+
 @admin.register(QuestionResponse)
 class QuestionResponseAdmin(admin.ModelAdmin):
-    list_display = ['question', 'data']
-    list_select_related = ['question']
-    list_filter = ['question__survey__project']
+    list_display = ['pk', 'respondent', 'question', 'data']
+    list_display_link = ['pk', 'respondent']
+    list_select_related = ['response__respondent', 'question']
+    list_filter = ['response__survey__project']
     raw_id_fields = ['question']
+    readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
