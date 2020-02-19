@@ -24,5 +24,8 @@ django-mptt
 # UI
 django-crispy-forms
 
+# date parsing, Python < 3.7
+python-dateutil
+
 # Debuging
 django-debug-toolbar

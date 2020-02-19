@@ -1,10 +1,14 @@
 from django.contrib.auth.views import redirect_to_login
 from django.core.exceptions import PermissionDenied
 from django.http import Http404
+from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView, UpdateView
+
+from dateutil.parser import ParserError as DateTimeParserError
+from dateutil.parser import parse as parse_datetime
 
 from core.exceptions import NotAuthenticated
 from core.mixins import PageTitleMixin
@@ -102,7 +106,7 @@ class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
 
         # store consent details
         session_surveys = self.request.session.get('surveys', {})
-        session_surveys[self.survey.pk] = {
+        session_surveys[str(self.survey.pk)] = {
             'consented_at': timezone.now().isoformat()
         }
         self.request.session['surveys'] = session_surveys
@@ -126,14 +130,55 @@ class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
         return {'user': user, 'email': email}
 
 
-class RespondentUpdateView(UpdateView):
+class RespondentUpdateView(PageTitleMixin, UpdateView):
     """A naive Respondent Update View"""
     model = Respondent
     form_class = RespondentForm
+    context_object_name = 'respondent'
     template_name = 'surveys/respondent_update.html'
 
+    def dispatch(self, *args, **kwargs):
+        self.survey_response = None
+        self.object = self.get_object()
+        self.consented_at = self.get_consent()
+        # If respondent has not provided the consent redirect to consent page
+        if not self.consented_at:
+            return redirect(reverse('surveys:respondent-consent', kwargs={'pk': self.object.survey.pk}))
+
+        return super().dispatch(*args, **kwargs)
+
     def get_queryset(self):
-        return self.model.objects.select_related('survey', 'survey__project')
+        return self.model.objects.active().select_related('survey', 'survey__project')
+
+    def get_object(self, queryset=None):
+        # Check if self.object is already set to prevent unnecessary DB calls
+        if hasattr(self, 'object'):
+            return self.object
+        else:
+            return super().get_object(queryset)
+
+    def get_consent(self):
+        """Check if user has consented.
+
+        Returns consent datetime if user has consented otherwise None.
+        """
+        # Check session
+        session_surveys = self.request.session.get('surveys', {})
+        session_survey = session_surveys.get(str(self.object.survey.pk), {})
+        _consented_at = session_survey.get('consented_at')
+        if _consented_at:
+            try:
+                return parse_datetime(_consented_at)
+            except DateTimeParserError:
+                print('--------------------------')
+                pass
+
+        # Check pre existing responses
+        latest_response = self.object.get_latest_response()
+        if latest_response:
+            return latest_response.consented_at
+
+        return None
 
     def get_form_kwargs(self):
         """
@@ -145,6 +190,27 @@ class RespondentUpdateView(UpdateView):
         kwargs = super().get_form_kwargs()
         kwargs['project'] = self.object.survey.project
         return kwargs
+
+    def get_page_title(self):
+        return f'{self.object.survey.display_name}'
+
+    def form_valid(self, form):
+        """
+        Update Respondent, get or create Response then redirect to response
+        update page.
+        """
+        self.object = form.save()
+
+        if self.request.user.is_authenticated:
+            creator = self.request.user
+        else:
+            creator = None
+
+        self.survey_response = self.object.get_or_create_response(
+            creator=creator,
+            consented_at=self.consented_at
+        )[0]
+        return redirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse('users:profile-detail')

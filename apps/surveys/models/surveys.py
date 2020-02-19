@@ -98,6 +98,16 @@ class Role(TimeStampedModel):
 
 
 class Survey(TimeStampedModel):
+    """A Survey model
+
+    If the survey has :attr:`~login_required` set to ``True`` only logged in
+    users should be allowed to respond to the survey.
+
+    If the survey has :attr:`~invitation_required` set to ``True`` only
+    users only invited users should be allowed to respond to the survey.
+    Currently this only registered users can be invitees by being pre-added
+    to the respondent list but this will change in future.
+    """
     uuid = models.UUIDField(
         _('UUID'),
         default=uuid.uuid4,
@@ -194,7 +204,7 @@ class Survey(TimeStampedModel):
         """
         # if login/user is not required
         if not self.login_required:
-            if user:
+            if user and user.is_authenticated:
                 return self.respondents.get_or_create(user=user, survey=self)
             elif email:
                 return self.respondents.get_or_create(email=email, survey=self)
@@ -203,9 +213,35 @@ class Survey(TimeStampedModel):
             return (respondent, True)
 
         # user is required
-        if not user:
+        if not user.is_authenticated:
             raise PermissionDenied(_('A user is required'))
         return self.respondents.get_or_create(user=user, survey=self)
+
+    def available_for_respondent(self, respondent):
+        """
+        Checks if the survey is available for respondent.
+
+        Args:
+            respondent: :class:`.Respondent` object
+
+        Returns:
+            bool: True if survey can be taken by respondent otherwise False.
+        """
+        user = None
+        if respondent:
+            user = respondent.user
+
+        if user is None and (self.login_required or self.invitation_required):
+            return False
+
+        if self.invitation_required and not self.respondents.filter(user=user).exists():
+            return False
+
+        # Make sure user is not AnonymousUser
+        if user.is_authenticated:
+            return True
+
+        return False
 
 
 class Topic(TimeStampedModel):

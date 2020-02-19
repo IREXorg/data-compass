@@ -7,6 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from core.models import TimeStampedModel
 
+from ..managers import RespondentManager
+
 
 class Entity(TimeStampedModel):
     uuid = models.UUIDField(
@@ -315,12 +317,15 @@ class Respondent(TimeStampedModel):
     #: Extra data
     extras = JSONField(_('extras'), blank=True, default=dict)
 
+    #:
+    objects = RespondentManager()
+
     class Meta:
         verbose_name = _('Respondent')
         verbose_name_plural = _('Respondents')
 
     def __str__(self):
-        return f'{self.first_name} {self.first_name}'
+        return f'{self.first_name} {self.last_name}'
 
     def save(self, *args, **kwargs):
         self.autopopulate_from_user()
@@ -342,6 +347,37 @@ class Respondent(TimeStampedModel):
             self.email = self.user.email
         if not self.gender:
             self.gender = self.user.gender
+
+    def get_latest_response(self):
+        """
+        Get the latest response from the repondent.
+
+        Returns `None` if no responden's response was found.
+        """
+        try:
+            return self.responses.filter(survey=self.survey).latest('created_at')
+        except Response.DoesNotExist:
+            return None
+
+    def get_or_create_response(self, creator=None, consented_at=None):
+        """Get or Create Response object owned by the respondent."""
+        response = self.get_latest_response()
+        created = False
+
+        if not response:
+            response = self.responses.create(
+                survey=self.survey,
+                respondent=self,
+                creator=creator,
+                consented_at=consented_at
+            )
+            created = True
+
+        if not created and response.consented_at != consented_at:
+            response.consented_at = consented_at
+            response.save()
+
+        return (response, created)
 
 
 class Response(TimeStampedModel):
@@ -394,6 +430,8 @@ class Response(TimeStampedModel):
         on_delete=models.CASCADE
     )
 
+    consented_at = models.DateTimeField(_('consented at'), blank=True, null=True)
+
     #: Extra data.
     extras = JSONField(_('extras'), blank=True, default=dict)
 
@@ -402,7 +440,7 @@ class Response(TimeStampedModel):
         verbose_name_plural = _('Responses')
 
     def __str__(self):
-        return self.survey
+        return f'{self.survey.display_name} response'
 
 
 class DatasetResponse(TimeStampedModel):
@@ -468,7 +506,7 @@ class DatasetResponse(TimeStampedModel):
         verbose_name_plural = _('Dataset Responses')
 
     def __str__(self):
-        return f'{self.survey} response'
+        return f'{self.survey.display_name} response'
 
     @property
     def respondent(self):
@@ -546,7 +584,7 @@ class DatasetTopicResponse(TimeStampedModel):
         verbose_name_plural = _('Dataset Topic Responses')
 
     def __str__(self):
-        return self.survey
+        return self.survey.display_name
 
     @property
     def respondent(self):
@@ -604,7 +642,7 @@ class QuestionResponse(TimeStampedModel):
         verbose_name_plural = _('Question Responses')
 
     def __str__(self):
-        return self.survey
+        return self.survey.display_name
 
     @property
     def respondent(self):
