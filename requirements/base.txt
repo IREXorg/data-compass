@@ -26,6 +26,7 @@ django-filter
 
 # UI
 django-crispy-forms
+django-bootstrap-breadcrumbs
 django-view-breadcrumbs
 
 # Debuging

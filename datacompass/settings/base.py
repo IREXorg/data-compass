@@ -57,6 +57,9 @@ INSTALLED_APPS = [
     'mptt',
     'crispy_forms',
     'imagekit',
+    'django_filters',
+    'django_bootstrap_breadcrumbs',
+    'view_breadcrumbs',
     # Custom apps
     'apps.users.apps.UsersConfig',
     'apps.organizations.apps.OrganizationsConfig',

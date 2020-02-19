@@ -1,1 +1,44 @@
-{% extends "layout.html" %}
+{% extends 'base.html' %}
+
+{% load i18n %}
+
+{% block body %}
+    <div class="page">
+      {# Include: primary navigations #}
+      {% include 'includes/nav_primary.html' %}
+
+      {# Start: Content #}
+      <div class="content">
+        <main class="container">
+          {# Start: Breadcrumbs #}
+
+          {# End: Breadcrumbs #}
+
+          {# Start: Page header #}
+          <div class="page-header">
+            <div class="row align-items-center">
+
+              {# Start: Page title #}
+              <div class="col-auto">
+                <h2 class="page-title">
+                  {{ page_title }}
+                </h2>
+              </div>
+              {# End: Page title #}
+
+              {# Start: Page actions #}
+              {% block page_actions %}{% endblock %}
+              {# End: Page actions #}
+
+            </div>
+          </div>
+          {# End: Page header #}
+
+          {# Start: Content #}
+          {% block content %}{% endblock %}
+          {# End: Content #}
+
+        </main>
+      </div>
+      {# End: Content #}
+{% endblock body %}

@@ -3,6 +3,7 @@ import uuid
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField, JSONField
 from django.db import models
+from django.urls import reverse_lazy as reverse
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -95,3 +96,6 @@ class Survey(TimeStampedModel):
         if not self.display_name:
             self.display_name = self.name
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('surveys:survey-detail', args=[str(self.id)])

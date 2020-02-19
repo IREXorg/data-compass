@@ -6,7 +6,8 @@ from django.views.generic.list import ListView
 
 from core.mixins import PageTitleMixin
 
-from ..forms import SurveyForm
+from ..filters import SurveyListFilter
+from ..forms import SurveyCreateForm, SurveyUpdateForm
 from ..models import Survey
 
 
@@ -26,10 +27,11 @@ class SurveyListView(PageTitleMixin, ListView):
     # Translators: This is surveys list page title
     page_title = _('Surveys List')
     template_name = 'surveys/survey_list.html'
+    list_view_name = 'surveys/survey_list.html'
     model = Survey
     context_object_name = 'surveys'
-    # filterset_class = SurveyFilter
-    # queryset = Survey.objects.all() use model filter
+    filterset_class = SurveyListFilter
+    queryset = Survey.objects.all()
     # ordering = ['-created_at']
     paginate_by = 20
 
@@ -52,7 +54,7 @@ class SurveyCreateView(PageTitleMixin, CreateView):
     page_title = _('Create Survey')
     template_name = 'surveys/survey_create.html'
     model = Survey
-    form_class = SurveyForm
+    form_class = SurveyCreateForm
     success_url = reverse('surveys:survey-list')
 
 
@@ -93,7 +95,7 @@ class SurveyUpdateView(PageTitleMixin, UpdateView):
     page_title = _('Update Survey')
     template_name = 'surveys/survey_update.html'
     model = Survey
-    form_class = SurveyForm
+    form_class = SurveyUpdateForm
     success_url = reverse('surveys:survey-list')
 
 
