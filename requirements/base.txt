@@ -21,8 +21,12 @@ django-phonenumber-field
 # Tree/Hierachy data structure
 django-mptt
 
+# Django Filter
+django-filter
+
 # UI
 django-crispy-forms
+django-view-breadcrumbs
 
 # Debuging
 django-debug-toolbar

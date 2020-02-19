@@ -10,6 +10,10 @@ from core.models import TimeStampedModel
 
 
 class Survey(TimeStampedModel):
+    """
+    Survey model class
+    """
+
     uuid = models.UUIDField(
         _('UUID'),
         default=uuid.uuid4,
@@ -80,6 +84,7 @@ class Survey(TimeStampedModel):
     class Meta:
         verbose_name = _('Survey')
         verbose_name_plural = _('Surveys')
+        ordering = ['-created_at']
 
     def __str__(self):
         return self.display_name
