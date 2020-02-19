@@ -15,6 +15,12 @@ class SurveyListView(PageTitleMixin, ListView):
     List surveys view.
 
     Allow current signin user to view list of allowed surveys.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        GET  /surveys/
     """
 
     # Translators: This is surveys list page title
@@ -34,6 +40,12 @@ class SurveyCreateView(PageTitleMixin, CreateView):
 
     Allow current signin user to create a new survey and
     redirect to survey list page.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        POST  /surveys/create
     """
 
     # Translators: This is survey create page title
@@ -49,6 +61,12 @@ class SurveyDetailView(PageTitleMixin, DetailView):
     View survey details view.
 
     Allow current signin user to view survey details.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        GET  /surveys/1234567890
     """
 
     # Translators: This is survey view page title
@@ -63,6 +81,12 @@ class SurveyUpdateView(PageTitleMixin, UpdateView):
 
     Allow current signin user to update existing survey details and
     redirect to survey list page.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        PUT  /surveys/1234567890/update
     """
 
     # Translators: This is survey update page title
@@ -79,6 +103,12 @@ class SurveyDeleteView(PageTitleMixin, DeleteView):
 
     Allow current signin user to delete existing survey and
     redirect to survey list page.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        DELETE  /surveys/1234567890/delete
     """
 
     # Translators: This is survey delete page title
