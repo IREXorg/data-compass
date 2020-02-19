@@ -4,7 +4,50 @@
 
 {% block content %}
 <div class="row">
-  <p>This page is empty</p>
+  <div class="col-sm-offset-2 col-sm-8">
+    <h1>My Projects</h1>
+
+    <p class="text-muted">
+      A project is a set of one or more surveys. You can only create or modify a survey once you've created a project for it.
+    </p>
+
+    <!-- TODO: advanced filters go here. -->
+
+    <hr>
+
+    {% if projects|length > 0 %}
+      {% for project in projects %}
+        {% if forloop.first %}<div class="row">{% endif %}
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="card-body">
+                <div class="card-title">
+                  <h5><a href="#">{{ project.name }}</a> &nbsp; <span class="badge badge-pill badge-suCCESS">open</span></h5>
+                  <p class="text-muted">{{ project.description }}</p>
+                </div>
+
+                <br>
+
+                <div class="row">
+                  <div class="col-sm-offset-2 col-sm-8">
+                    <small class="text-muted">
+                      <i class="fas fa-poll"></i> &nbsp; {{ total_surveys }} surveys</small> <br>
+                    <small class="text-muted">
+                      <i class="fas fa-clock"></i> Updated &nbsp; {{ project.updated_at|timesince|capfirst }} ago &nbsp;
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+          {% if forloop.last %}</div>{% endif %}
+      {% endfor %}
+    {% else %}
+      <p class="lead">Your projects go here.</p>
+
+    {% endif %}
+  </div>
 </div>
 
 {% endblock %}
