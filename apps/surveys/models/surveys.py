@@ -11,6 +11,8 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 from core.models import TimeStampedModel
 
+from ..managers import SurveyManager
+
 
 class DataflowHierarchy(TimeStampedModel, MPTTModel):
     uuid = models.UUIDField(
@@ -180,6 +182,9 @@ class Survey(TimeStampedModel):
         on_delete=models.CASCADE
     )
     extras = JSONField(_('extras'), blank=True, default=dict)
+
+    #: Default manager.
+    objects = SurveyManager()
 
     class Meta:
         verbose_name = _('Survey')

@@ -22,14 +22,13 @@ class RespondentSurveyMixin:
     Provides ability to retrive a Survey object for user as a respondent.
     """
 
-    slug_field = 'pk'
-    slug_url_kwarg = 'pk'
+    #: Survey field to be queried against
+    survey_slug_field = 'pk'
 
-    def get_queryset(self):
-        """Get queryset of all active surveys."""
-        return Survey.objects.filter(is_active=True)
+    #: URL parameter to be used for to provide a survey lookup value
+    survey_slug_url_kwarg = 'pk'
 
-    def get_survey(self):
+    def get_survey(self, queryset=None):
         """
         Return survey object from queryset.
 
@@ -41,19 +40,28 @@ class RespondentSurveyMixin:
         """
 
         # get lookup parameters
-        slug = self.kwargs.get(self.slug_url_kwarg)
+        slug = self.kwargs.get(self.survey_slug_url_kwarg)
         if not slug:
             raise AttributeError(
-                _(f'{self.__class__.__name__} view must be called with {self.slug_url_kwarg}.')
+                _(f'{self.__class__.__name__} view must be called with {self.survey_slug_url_kwarg}.')
             )
 
         # get survey object matching the query
+        queryset = queryset or Survey.objects.active()
         try:
-            survey = self.get_queryset().get(**{self.slug_field: slug})
+            survey = queryset.get(**{self.survey_slug_field: slug})
         except Survey.DoesNotExist:
             raise Http404(_('Page not found.'))
 
-        # ensure user is allowed to take the survey
+        return survey
+
+    def validate_respondent_for_survey(self):
+        """Ensure user is allowed to take the survey"""
+        if hasattr(self, 'survey'):
+            survey = self.survey
+        else:
+            survey = self.get_survey()
+
         if not self.request.user.is_authenticated and survey.login_required:
             raise NotAuthenticated
 
@@ -61,8 +69,6 @@ class RespondentSurveyMixin:
                 not self.request.user.is_authenticated
                 or not survey.respondents.filter(user=self.request.user).exists()):
             raise PermissionDenied(_('You are not allowed to take this survey'))
-
-        return survey
 
 
 class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
@@ -85,11 +91,14 @@ class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
         If ``NotAuthenticated`` exception was raised user will be
         redirected to ``LOGIN_URL``.
         """
+        self.respondent = None
+
+        self.survey = self.get_survey()
         try:
-            self.survey = self.get_survey()
+            self.validate_respondent_for_survey()
         except NotAuthenticated:
             return redirect_to_login(self.request.get_full_path())
-        self.respondent = None
+
         return super().dispatch(*args, **kwargs)
 
     def get_page_title(self):
@@ -130,7 +139,7 @@ class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
         return {'user': user, 'email': email}
 
 
-class RespondentUpdateView(PageTitleMixin, UpdateView):
+class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, UpdateView):
     """A naive Respondent Update View"""
     model = Respondent
     form_class = RespondentForm
@@ -140,6 +149,13 @@ class RespondentUpdateView(PageTitleMixin, UpdateView):
     def dispatch(self, *args, **kwargs):
         self.survey_response = None
         self.object = self.get_object()
+        self.survey = self.get_survey()
+
+        try:
+            self.validate_respondent_for_survey()
+        except NotAuthenticated:
+            return redirect_to_login(self.request.get_full_path())
+
         self.consented_at = self.get_consent()
         # If respondent has not provided the consent redirect to consent page
         if not self.consented_at:
@@ -157,6 +173,9 @@ class RespondentUpdateView(PageTitleMixin, UpdateView):
         else:
             return super().get_object(queryset)
 
+    def get_survey(self):
+        return self.object.survey
+
     def get_consent(self):
         """Check if user has consented.
 
@@ -170,7 +189,6 @@ class RespondentUpdateView(PageTitleMixin, UpdateView):
             try:
                 return parse_datetime(_consented_at)
             except DateTimeParserError:
-                print('--------------------------')
                 pass
 
         # Check pre existing responses
