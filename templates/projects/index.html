@@ -8,7 +8,7 @@
     <h1>My Projects</h1>
 
     <p class="text-muted">
-      A project is a set of one or more surveys. You can only create or modify a survey once you've created a project for it.
+    A project is a set of one or more surveys. You can only create or modify a survey once you've created a project for it.
     </p>
 
     <hr>
@@ -16,48 +16,66 @@
     <div class="row">
       <div class="col-sm-9">
         <!-- todo: advanced filters go here. -->
+
+        <form action="." method="get">
+          <div class="input-icon">
+            <span class="input-icon-addon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
+            <input type="text" class="form-control" placeholder="Search…">
+          </div>
+        </form>
       </div>
 
       <div class="col-md-3">
         <a href="{% url 'projects:create' %}" class="btn btn-primary">
-          <i class="fas fa-folder-plus"></i> &nbsp; New
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+
+          Add a project
         </a>
       </div>
     </div>
 
-    <br>
+    <hr>
 
     {% if projects|length > 0 %}
-      {% for project in projects %}
-        {% if forloop.first %}<div class="row">{% endif %}
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="card-body">
-                <div class="card-title">
-                  <h5><a href="#">{{ project.name }}</a> &nbsp; <span class="badge badge-pill badge-suCCESS">open</span></h5>
-                  <p class="text-muted">{{ project.description }}</p>
-                </div>
+    {% for project in projects %}
+    {% if forloop.first %}<div class="row">{% endif %}
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-body">
+              <h2><a href="#">{{ project.name }}</a></h2>
 
-                <br>
+              <br>
 
-                <div class="row">
-                  <div class="col-sm-offset-2 col-sm-8">
-                    <small class="text-muted">
-                      <i class="fas fa-poll"></i> &nbsp; {{ total_surveys }} surveys</small> <br>
-                    <small class="text-muted">
-                      <i class="fas fa-clock"></i> &nbsp; Updated &nbsp; {{ project.updated_at|timesince|capfirst }} ago &nbsp;
-                    </small>
-                  </div>
+              <p class="text-muted">{{ project.description }}</p>
+
+              <div class="row">
+                <div class="col-sm-offset-2 col-sm-8">
+                  <small class="text-muted">
+                    <i class="fas fa-poll"></i> &nbsp; {{ total_surveys }} surveys</small> <br>
+                  <small class="text-muted">
+                    <i class="fas fa-clock"></i> &nbsp; Updated &nbsp; {{ project.updated_at|timesince|capfirst }} ago &nbsp;
+                  </small>
                 </div>
               </div>
             </div>
           </div>
-          {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
-          {% if forloop.last %}</div>{% endif %}
-      {% endfor %}
+        </div>
+      </div>
+      {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+      {% if forloop.last %}</div>{% endif %}
+    {% endfor %}
     {% else %}
-      <p class="lead">Your projects go here.</p>
-
+    <p class="empty-title h3">No results found.</p>
+    <p class="empty-subtitle text-muted">Try adjusting your search or filter to find what you're looking for.</p>
+    <div class="empty-action">
+      <a href="{% url 'projects:create' %}" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+        Add your first project
+      </a>
+    </div>
     {% endif %}
   </div>
 </div>
