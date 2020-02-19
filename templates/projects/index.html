@@ -11,9 +11,21 @@
       A project is a set of one or more surveys. You can only create or modify a survey once you've created a project for it.
     </p>
 
-    <!-- TODO: advanced filters go here. -->
-
     <hr>
+
+    <div class="row">
+      <div class="col-sm-9">
+        <!-- todo: advanced filters go here. -->
+      </div>
+
+      <div class="col-md-3">
+        <a href="{% url 'projects:create' %}" class="btn btn-primary">
+          <i class="fas fa-folder-plus"></i> &nbsp; New
+        </a>
+      </div>
+    </div>
+
+    <br>
 
     {% if projects|length > 0 %}
       {% for project in projects %}

@@ -1,0 +1,65 @@
+{% extends "projects/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block page_title %}{{ page_title }}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-offset-2 col-sm-10">
+    <h1>Create a project</h1>
+    <p class="text-muted">Provide some basic information about this project.</p>
+
+    <hr>
+    <form method="POST" action="{% url 'projects:store' %}" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form|crispy }}
+
+      <div class="form-group">
+        <label for="project-name" class="col-sm-3 control-label">
+          Project name
+        </label>
+
+        <div class="col-sm-6">
+          <input type="text" name="project_name" id="project-name" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="project-description" class="col-sm-3 control-label">
+          Project description
+        </label>
+
+        <div class="col-sm-6">
+          <textarea name="project_description" id="project-description" class="form-control">
+          </textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="project-name" class="col-sm-3 control-label">
+          Backup contact information
+        </label>
+
+        <div class="col-sm-6">
+          <input type="text" name="project_name" id="project-name" class="form-control">
+
+          <small class="text-muted">
+            {% trans 'In case you are not available, please provide an email address of a colleague who IREX administrators can contact about this project.' %}
+          </small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-6">
+          <button type="submit" class="btn btn-primary">
+            {% trans 'Save' %}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

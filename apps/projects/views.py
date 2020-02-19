@@ -9,3 +9,8 @@ def index(request):
     context = { 'projects': projects }
 
     return render(request, 'projects/index.html', context)
+
+def create(request):
+    context={}
+
+    return render(request, 'projects/create.html', context)
