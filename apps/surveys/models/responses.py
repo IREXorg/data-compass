@@ -341,7 +341,7 @@ class Respondent(TimeStampedModel):
         if not self.email:
             self.email = self.user.email
         if not self.gender:
-            self.email = self.user.gender
+            self.gender = self.user.gender
 
 
 class Response(TimeStampedModel):
