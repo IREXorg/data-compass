@@ -32,8 +32,8 @@ class SurveyAdmin(CreatorAdmin):
 
 
 @admin.register(DataflowHierarchy)
-class DataflowHierarchyAdmin(DraggableMPTTAdmin, CreatorAdminMixin):
-    list_display = ['tree_actions', 'indented_title', 'project', 'pk']
+class DataflowHierarchyAdmin(CreatorAdminMixin, DraggableMPTTAdmin):
+    list_display = ['tree_actions', 'indented_title', 'level_name', 'project', 'pk']
     list_select_related = ['project']
 
 

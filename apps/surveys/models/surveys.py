@@ -2,6 +2,7 @@ import uuid
 
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField, JSONField
+from django.core.exceptions import PermissionDenied
 from django.db import models
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
@@ -20,6 +21,7 @@ class DataflowHierarchy(TimeStampedModel, MPTTModel):
     )
     project = models.ForeignKey(
         'projects.Project',
+        blank=True,
         verbose_name=_('project'),
         on_delete=models.CASCADE,
         related_name='hierarchies',
@@ -33,7 +35,7 @@ class DataflowHierarchy(TimeStampedModel, MPTTModel):
         related_name='children',
         verbose_name=_('parent')
     )
-    level_name = models.CharField(_('level name'), max_length=128, unique=True)
+    level_name = models.CharField(_('level name'), max_length=128)
     name = models.CharField(_('name'), max_length=128, unique=True)
     description = models.TextField(_('description'), blank=True)
     creator = models.ForeignKey(
@@ -54,6 +56,11 @@ class DataflowHierarchy(TimeStampedModel, MPTTModel):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if self.parent:
+            self.project = self.parent.project
+        super().save(*args, **kwargs)
 
 
 class Role(TimeStampedModel):
@@ -130,6 +137,12 @@ class Survey(TimeStampedModel):
         blank=True,
         default=True
     )
+    invitation_required = models.BooleanField(
+        _('invitation required'),
+        help_text=_('Do you want the survey to be taken by invited users only?'),
+        blank=True,
+        default=True
+    )
     respondent_can_aggregate = models.BooleanField(
         _('respondent can aggregate'),
         help_text=_("Do you want repondents to see visualizations or aggregates of other users' responses?"),
@@ -171,6 +184,28 @@ class Survey(TimeStampedModel):
         if not self.display_name:
             self.display_name = self.name
         super().save(*args, **kwargs)
+
+    def get_or_create_respondent(self, user=None, email=None):
+        """
+        Get or create respondent.
+
+        Returns: (respondent, created). If a new respondent was created in
+        the process the second value of the tuple (created) will be ``True``.
+        """
+        # if login/user is not required
+        if not self.login_required:
+            if user:
+                return self.respondents.get_or_create(user=user, survey=self)
+            elif email:
+                return self.respondents.get_or_create(email=email, survey=self)
+
+            respondent = self.respondents.create(survey=self)
+            return (respondent, True)
+
+        # user is required
+        if not user:
+            raise PermissionDenied(_('A user is required'))
+        return self.respondents.get_or_create(user=user, survey=self)
 
 
 class Topic(TimeStampedModel):

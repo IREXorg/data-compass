@@ -1,0 +1,20 @@
+{% extends "surveys/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+  <div class="overflow-auto bg-light border col-sm-8 mb-3" style="height: 200px">
+    {{ survey.description|linebreaks }}
+  </div>
+
+  <form method="POST" action="">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <button class="btn btn-primary" type="submit">
+      {% trans 'Continue' %} <i class="fas fa-arrow-right"></i>
+    </button>
+  </form>
+{% endblock %}
