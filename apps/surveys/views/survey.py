@@ -34,8 +34,8 @@ class SurveyListView(LoginRequiredMixin, PageTitleMixin, ListView):
     context_object_name = 'surveys'
     filterset_class = SurveyListFilter
     queryset = Survey.objects.all()
-    # ordering = ['-created_at']
-    paginate_by = 20
+    ordering = ['created_at']
+    paginate_by = 10
 
 
 class SurveyCreateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, CreateView):

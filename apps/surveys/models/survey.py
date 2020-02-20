@@ -130,7 +130,7 @@ class Survey(TimeStampedModel):
     class Meta:
         verbose_name = _('Survey')
         verbose_name_plural = _('Surveys')
-        ordering = ['-created_at']
+        ordering = ['created_at']
 
     # Provide string representation of survey
     def __str__(self):
@@ -147,3 +147,14 @@ class Survey(TimeStampedModel):
     # Obtain survey absolute url
     def get_absolute_url(self):
         return reverse('surveys:survey-detail', kwargs={'pk': self.pk})
+
+    # Derive survey name abbreviation
+    @property
+    def abbreviation(self):
+        parts = []
+
+        words = self.name.split(' ')
+        for word in words:
+            parts.append(str(word[0]))
+
+        return ''.join(parts[:2])
