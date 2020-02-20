@@ -150,6 +150,8 @@ ACCOUNT_EMAIL_REQUIRED = env.bool('ACCOUNT_EMAIL_REQUIRED', default=True)
 
 ACCOUNT_USERNAME_REQUIRED = env.bool('ACCOUNT_USERNAME_REQUIRED', default=False)
 
+ACCOUNT_EMAIL_VERIFICATION = env('ACCOUNT_EMAIL_VERIFICATION', default='none')
+
 LOGIN_REDIRECT_URL = env('LOGIN_REDIRECT_URL', default='users:profile-detail')
 
 # Internationalization
