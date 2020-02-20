@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
@@ -8,10 +9,11 @@ from core.mixins import PageTitleMixin
 
 from ..filters import SurveyListFilter
 from ..forms import SurveyCreateForm, SurveyUpdateForm
+from ..mixins import SurveyCreatorMixin
 from ..models import Survey
 
 
-class SurveyListView(PageTitleMixin, ListView):
+class SurveyListView(LoginRequiredMixin, PageTitleMixin, ListView):
     """
     List surveys view.
 
@@ -36,7 +38,7 @@ class SurveyListView(PageTitleMixin, ListView):
     paginate_by = 20
 
 
-class SurveyCreateView(PageTitleMixin, CreateView):
+class SurveyCreateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, CreateView):
     """
     Create survey view.
 
@@ -58,7 +60,7 @@ class SurveyCreateView(PageTitleMixin, CreateView):
     success_url = reverse('surveys:survey-list')
 
 
-class SurveyDetailView(PageTitleMixin, DetailView):
+class SurveyDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
     """
     View survey details view.
 
@@ -77,7 +79,7 @@ class SurveyDetailView(PageTitleMixin, DetailView):
     model = Survey
 
 
-class SurveyUpdateView(PageTitleMixin, UpdateView):
+class SurveyUpdateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
     """
     Update survey details view.
 
@@ -99,7 +101,7 @@ class SurveyUpdateView(PageTitleMixin, UpdateView):
     success_url = reverse('surveys:survey-list')
 
 
-class SurveyDeleteView(PageTitleMixin, DeleteView):
+class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
     """
     Delete survey details
 
