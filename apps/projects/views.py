@@ -22,3 +22,9 @@ def store(request):
 
     return redirect('projects:index')
 
+def show(request, project_id):
+    project = Project.objects.filter(pk=project_id)
+
+    context = { 'project': project }
+    return render(request, 'projects/show.html', context)
+

@@ -44,22 +44,21 @@
       <div class="col-sm-4">
         <div class="card">
           <div class="card-body">
-            <div class="card-body">
-              <h2><a href="#">{{ project.name }}</a></h2>
+            <h2 class="card-title"><a href="{% url 'projects:show' project.id %}">{{ project.name }}</a></h2>
 
-              <br>
+            <p>{{ project.description }}</p>
 
-              <p class="text-muted">{{ project.description }}</p>
+            <div class="card-text">
+              <small class="text-muted">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon mr-2 text-muted"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
 
-              <div class="row">
-                <div class="col-sm-offset-2 col-sm-8">
-                  <small class="text-muted">
-                    <i class="fas fa-poll"></i> &nbsp; {{ total_surveys }} surveys</small> <br>
-                  <small class="text-muted">
-                    <i class="fas fa-clock"></i> &nbsp; Updated &nbsp; {{ project.updated_at|timesince|capfirst }} ago &nbsp;
-                  </small>
-                </div>
-              </div>
+                {%if project.updated_at %}
+                  Updated {{ project.updated_at |timesince|capfirst }} ago &nbsp;
+                {% else %}
+                  Created {{ project.created_at |timesince|capfirst }} ago &nbsp;
+                {% endif %}
+                </i>
+              </small>
             </div>
           </div>
         </div>
