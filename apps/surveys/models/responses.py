@@ -7,7 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from core.models import TimeStampedModel
 
-from ..managers import RespondentManager
+from ..managers import RespondentManager, SurveyResponseManager
+from .surveys import Dataset
 
 
 class Entity(TimeStampedModel):
@@ -435,12 +436,33 @@ class Response(TimeStampedModel):
     #: Extra data.
     extras = JSONField(_('extras'), blank=True, default=dict)
 
+    #: Default manager.
+    objects = SurveyResponseManager()
+
     class Meta:
         verbose_name = _('Response')
         verbose_name_plural = _('Responses')
 
     def __str__(self):
         return f'{self.survey.display_name} response'
+
+    def get_datasets(self):
+        """Get queryset of datasets associated with this response."""
+        return Dataset.objects.filter(response__response=self)
+
+    def set_dataset_responses(self, datasets):
+        """Created or delete dataset responses according to the datasets."""
+
+        # remove existing datasets responses according to the datasets.
+        self.dataset_responses.exclude(dataset__in=datasets).delete()
+
+        # get old dataset responses
+        old_datasets = self.get_datasets()
+
+        # add newly added datasets
+        for dataset in datasets:
+            if dataset not in old_datasets:
+                self.dataset_responses.create(dataset=dataset)
 
 
 class DatasetResponse(TimeStampedModel):
@@ -474,6 +496,8 @@ class DatasetResponse(TimeStampedModel):
     #: Frequency of respondent producing, accessing or sharing the dataset.
     dataset_frequency = models.ForeignKey(
         'surveys.DatasetFrequency',
+        null=True,
+        blank=True,
         related_name='responses',
         related_query_name='response',
         on_delete=models.CASCADE,

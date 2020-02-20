@@ -60,33 +60,32 @@ class TopicAdmin(CreatorAdmin):
 
 @admin.register(Dataset)
 class DatasetAdmin(CreatorAdmin):
-    list_display = ['pk', 'name', 'topic']
-    list_display_link = ['pk', 'name']
-    list_select_related = ['topic']
+    list_display = ['pk', 'name']
+    list_display_links = ['pk', 'name']
 
 
 @admin.register(DatasetStorage)
 class DatasetStorageAdmin(CreatorAdmin):
     list_display = ['pk', 'name']
-    list_display_link = ['pk', 'name']
+    list_display_links = ['pk', 'name']
 
 
 @admin.register(DatasetAccess)
 class DatasetAccessAdmin(CreatorAdmin):
     list_display = ['pk', 'name']
-    list_display_link = ['pk', 'name']
+    list_display_links = ['pk', 'name']
 
 
 @admin.register(DatasetFrequency)
 class DatasetFrequencyAdmin(CreatorAdmin):
     list_display = ['pk', 'name']
-    list_display_link = ['pk', 'name']
+    list_display_links = ['pk', 'name']
 
 
 @admin.register(DatasetTopicReceived)
 class DatasetTopicReceivedAdmin(admin.ModelAdmin):
     list_display = ['pk', 'entity', 'topic', 'dataset']
-    list_display_link = ['pk', 'entity']
+    list_display_links = ['pk', 'entity']
     list_select_related = ['entity', 'topic', 'dataset_response__dataset']
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
 
@@ -94,23 +93,20 @@ class DatasetTopicReceivedAdmin(admin.ModelAdmin):
 @admin.register(DatasetTopicShared)
 class DatasetTopicSharedAdmin(admin.ModelAdmin):
     list_display = ['pk', 'entity', 'topic', 'dataset']
-    list_display_link = ['pk', 'entity']
+    list_display_links = ['pk', 'entity']
     list_select_related = ['entity', 'topic', 'dataset_response__dataset']
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
 
 
 @admin.register(DatasetTopicStorageAccess)
 class DatasetTopicStorageAccessAdmin(admin.ModelAdmin):
-    # ~list_display = ['pk', 'entity', 'topic', 'dataset_response__dataset']
-    # ~list_display_link = ['pk', 'entity']
-    # ~list_select_related = ['entity', 'topic', 'dataset_response__dataset']
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
 
 
 @admin.register(QuestionGroup)
 class QuestionGroupAdmin(CreatorAdmin):
     list_display = ['pk', 'name', 'survey']
-    list_display_link = ['name', 'survey']
+    list_display_links = ['name', 'survey']
     list_select_related = ['survey']
 
 
@@ -129,7 +125,7 @@ class QuestionAdmin(CreatorAdmin):
 @admin.register(Respondent)
 class RespondentAdmin(CreatorAdmin):
     list_display = ['pk', 'email', 'first_name', 'last_name', 'survey', 'gender']
-    list_display_link = ['pk', 'email']
+    list_display_links = ['pk', 'email']
     list_select_related = ['survey', 'gender']
     list_filter = ['gender', 'survey__project']
     autocomplete_fields = ['survey', 'creator', 'user']
@@ -143,7 +139,7 @@ class QuestionResponseInline(admin.TabularInline):
 @admin.register(Response)
 class ResponseAdmin(CreatorAdmin):
     list_display = ['pk', 'respondent', 'survey']
-    list_display_link = ['pk', 'respondent']
+    list_display_links = ['pk', 'respondent']
     list_select_related = ['survey', 'respondent']
     list_filter = ['survey__project', 'created_at']
     autocomplete_fields = ['survey']
@@ -154,7 +150,7 @@ class ResponseAdmin(CreatorAdmin):
 @admin.register(DatasetResponse)
 class DatasetResponseAdmin(admin.ModelAdmin):
     list_display = ['pk', 'respondent', 'dataset', 'survey']
-    list_display_link = ['pk', 'respondent']
+    list_display_links = ['pk', 'respondent']
     list_select_related = ['response__respondent', 'dataset', 'response__survey']
     list_filter = ['response__survey__project']
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
@@ -163,7 +159,7 @@ class DatasetResponseAdmin(admin.ModelAdmin):
 @admin.register(DatasetTopicResponse)
 class DatasetTopicResponseAdmin(admin.ModelAdmin):
     list_display = ['pk', 'respondent', 'dataset', 'topic', 'survey']
-    list_display_link = ['pk', 'respondent']
+    list_display_links = ['pk', 'respondent']
     list_select_related = ['response__respondent', 'dataset', 'survey']
     list_filter = ['response__survey__project']
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
@@ -172,7 +168,7 @@ class DatasetTopicResponseAdmin(admin.ModelAdmin):
 @admin.register(QuestionResponse)
 class QuestionResponseAdmin(admin.ModelAdmin):
     list_display = ['pk', 'respondent', 'question', 'data']
-    list_display_link = ['pk', 'respondent']
+    list_display_links = ['pk', 'respondent']
     list_select_related = ['response__respondent', 'question']
     list_filter = ['response__survey__project']
     raw_id_fields = ['question']

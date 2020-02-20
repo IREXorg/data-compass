@@ -290,12 +290,19 @@ class Dataset(TimeStampedModel):
         editable=False,
         unique=True
     )
-    topic = models.ForeignKey(
+    survey = models.ForeignKey(
+        'survey',
+        related_name='datasets',
+        related_query_name='dataset',
+        verbose_name=_('survey'),
+        on_delete=models.CASCADE
+    )
+    topics = models.ManyToManyField(
         'surveys.Topic',
         related_name='datasets',
         related_query_name='dataset',
-        verbose_name=_('topic'),
-        on_delete=models.CASCADE
+        verbose_name=_('topics'),
+        blank=True
     )
     name = models.CharField(_('name'), max_length=255)
     description = models.TextField(_('description'), blank=True)

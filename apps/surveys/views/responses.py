@@ -13,8 +13,10 @@ from dateutil.parser import parse as parse_datetime
 from core.exceptions import NotAuthenticated
 from core.mixins import PageTitleMixin
 
-from ..forms import RespondentConsentForm, RespondentForm
-from ..models import Respondent, Survey
+from ..forms import DatasetSelectForm, RespondentConsentForm, RespondentForm
+from ..models import Respondent
+from ..models import Response as SurveyResponse
+from ..models import Survey
 
 
 class RespondentSurveyMixin:
@@ -71,6 +73,35 @@ class RespondentSurveyMixin:
             raise PermissionDenied(_('You are not allowed to take this survey'))
 
 
+class ConsentCheckMixin:
+
+    def get_consent(self, respondent=None, survey=None):
+        """Check if user has consented.
+
+        Returns consent datetime if user has consented otherwise None.
+        """
+
+        respondent = respondent or self.respondent
+        survey = survey or self.survey
+
+        # Check session
+        session_surveys = self.request.session.get('surveys', {})
+        session_survey = session_surveys.get(str(survey.pk), {})
+        _consented_at = session_survey.get('consented_at')
+        if _consented_at:
+            try:
+                return parse_datetime(_consented_at)
+            except DateTimeParserError:
+                pass
+
+        # Check pre existing responses
+        latest_response = respondent.get_latest_response()
+        if latest_response:
+            return latest_response.consented_at
+
+        return None
+
+
 class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
     """Ask respondent for consent.
 
@@ -80,9 +111,8 @@ class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
 
     # Basing this on Survey model because at this point a user might be
     # unauthenticated or not assosiated with any respondent object.
-    context_object_name = 'survey'
-    template_name = 'surveys/respondent_consent.html'
     form_class = RespondentConsentForm
+    template_name = 'surveys/respondent_consent.html'
 
     def dispatch(self, *args, **kwargs):
         """
@@ -123,7 +153,7 @@ class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context[self.context_object_name] = self.survey
+        context['survey'] = self.survey
         return context
 
     def get_respondent_lookup(self):
@@ -139,8 +169,8 @@ class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
         return {'user': user, 'email': email}
 
 
-class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, UpdateView):
-    """A naive Respondent Update View"""
+class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, ConsentCheckMixin, UpdateView):
+    """Respondent Update View."""
     model = Respondent
     form_class = RespondentForm
     context_object_name = 'respondent'
@@ -156,10 +186,10 @@ class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, UpdateView):
         except NotAuthenticated:
             return redirect_to_login(self.request.get_full_path())
 
-        self.consented_at = self.get_consent()
+        self.consented_at = self.get_consent(respondent=self.object, survey=self.survey)
         # If respondent has not provided the consent redirect to consent page
         if not self.consented_at:
-            return redirect(reverse('surveys:respondent-consent', kwargs={'pk': self.object.survey.pk}))
+            return redirect(reverse('surveys:respondent-consent', kwargs={'pk': self.survey.pk}))
 
         return super().dispatch(*args, **kwargs)
 
@@ -176,28 +206,6 @@ class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, UpdateView):
     def get_survey(self):
         return self.object.survey
 
-    def get_consent(self):
-        """Check if user has consented.
-
-        Returns consent datetime if user has consented otherwise None.
-        """
-        # Check session
-        session_surveys = self.request.session.get('surveys', {})
-        session_survey = session_surveys.get(str(self.object.survey.pk), {})
-        _consented_at = session_survey.get('consented_at')
-        if _consented_at:
-            try:
-                return parse_datetime(_consented_at)
-            except DateTimeParserError:
-                pass
-
-        # Check pre existing responses
-        latest_response = self.object.get_latest_response()
-        if latest_response:
-            return latest_response.consented_at
-
-        return None
-
     def get_form_kwargs(self):
         """
         Add project to form class initialization arguments and return
@@ -206,11 +214,11 @@ class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, UpdateView):
         https://docs.djangoproject.com/en/3.0/ref/class-based-views/mixins-editing/#django.views.generic.edit.FormMixin.get_form_kwargs
         """
         kwargs = super().get_form_kwargs()
-        kwargs['project'] = self.object.survey.project
+        kwargs['project'] = self.survey.project
         return kwargs
 
     def get_page_title(self):
-        return f'{self.object.survey.display_name}'
+        return f'{self.survey.display_name}'
 
     def form_valid(self, form):
         """
@@ -231,4 +239,77 @@ class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, UpdateView):
         return redirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('users:profile-detail')
+        return reverse('surveys:dataset-select', kwargs={'pk': self.survey_response.pk})
+
+
+class DatasetSelectView(PageTitleMixin, RespondentSurveyMixin, ConsentCheckMixin, FormView):
+    """Dataset Selection View.
+
+    Allows user to select datasets.
+    """
+    form_class = DatasetSelectForm
+
+    #: Field to be queried against
+    slug_field = 'pk'
+
+    #: URL parameter to be used for to provide a lookup value
+    slug_url_kwarg = 'pk'
+
+    template_name = 'surveys/dataset_select.html'
+
+    def dispatch(self, *args, **kwargs):
+        self.survey_response = self.get_survey_response()
+        self.survey = self.get_survey()
+        self.respondent = self.survey_response.respondent
+
+        try:
+            self.validate_respondent_for_survey()
+        except NotAuthenticated:
+            return redirect_to_login(self.request.get_full_path())
+
+        self.consented_at = self.get_consent(respondent=self.respondent, survey=self.survey)
+        # If respondent has not provided the consent redirect to consent page
+        if not self.consented_at:
+            return redirect(reverse('surveys:respondent-consent', kwargs={'pk': self.survey.pk}))
+
+        # If respondent has not provided hierarchy yet redirect to respondent update page
+        if not self.respondent.hierarchy:
+            return redirect(reverse('surveys:respondent-update', kwargs={'pk': self.respondent.pk}))
+
+        return super().dispatch(*args, **kwargs)
+
+    def get_survey_response(self):
+        slug = self.kwargs.get(self.slug_url_kwarg)
+        if not slug:
+            raise AttributeError(
+                _(f'{self.__class__.__name__} view must be called with {self.slug_url_kwarg}.')
+            )
+
+        queryset = SurveyResponse.objects.active().select_related('survey', 'respondent')
+        try:
+            survey_response = queryset.get(**{self.slug_field: slug})
+        except SurveyResponse.DoesNotExist:
+            raise Http404(_('Page not found.'))
+
+        return survey_response
+
+    def get_survey(self):
+        return self.survey_response.survey
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['survey'] = self.survey
+        kwargs['survey_response'] = self.survey_response
+        return kwargs
+
+    def get_page_title(self):
+        return f'{self.survey.display_name}'
+
+    def form_valid(self, form):
+        self.survey_response.set_dataset_responses(form.cleaned_data['datasets'])
+        return redirect(self.request.get_full_path())
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['survey_response'] = self.survey_response
+        return context

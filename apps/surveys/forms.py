@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from mptt.forms import TreeNodeChoiceField
 
-from .models import DataflowHierarchy, Respondent
+from .models import Respondent
 
 
 class RespondentConsentForm(forms.Form):
@@ -21,7 +21,7 @@ class RespondentConsentForm(forms.Form):
 
 
 class RespondentForm(forms.ModelForm):
-    hierarchy = TreeNodeChoiceField(queryset=DataflowHierarchy.objects.all())
+    hierarchy = TreeNodeChoiceField(queryset=None)
 
     class Meta:
         model = Respondent
@@ -30,10 +30,31 @@ class RespondentForm(forms.ModelForm):
     def __init__(self, survey=None, project=None, *args, **kwargs):
 
         # get project inorder to limit hierarchy choices
-        if project and survey:
+        if not project and survey:
             project = survey.project
         elif not project:
-            raise AttributeError(_('Project or Survey must be specified to initialize RespondentForm'))
+            raise ValueError(_(f'Project or Survey must be specified to initialize {self.__class__.__name__}'))
 
         super().__init__(*args, **kwargs)
         self.fields['hierarchy'].queryset = project.hierarchies.all()
+
+
+class DatasetSelectForm(forms.Form):
+    datasets = forms.ModelMultipleChoiceField(
+        queryset=None,
+        widget=forms.CheckboxSelectMultiple,
+        label=_('datasets'),
+    )
+
+    def __init__(self, survey=None, survey_response=None, *args, **kwargs):
+        self.survey_response = survey_response
+
+        # get project inorder to limit hierarchy choices
+        if not survey:
+            raise ValueError(_(f'Survey must be specified to initialize {self.__class__.__name__}'))
+
+        super().__init__(*args, **kwargs)
+        if survey_response:
+            self.initial['datasets'] = survey_response.get_datasets()
+
+        self.fields['datasets'].queryset = survey.datasets.all()
