@@ -13,6 +13,10 @@
     {% csrf_token %}
     {{ form|crispy }}
 
+    <a href="{% url 'users:profile-detail' %}" class="btn btn-outline-secondary">
+      {% trans 'Quit' %} <i class="fas fa-arrow-left"></i>
+    </a>
+
     <button class="btn btn-primary" type="submit">
       {% trans 'Continue' %} <i class="fas fa-arrow-right"></i>
     </button>
