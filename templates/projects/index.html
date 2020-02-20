@@ -39,33 +39,44 @@
     <hr>
 
     {% if projects|length > 0 %}
-    {% for project in projects %}
-    {% if forloop.first %}<div class="row">{% endif %}
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="card-body">
-            <h2 class="card-title"><a href="{% url 'projects:show' project.id %}">{{ project.name }}</a></h2>
 
-            <p>{{ project.description }}</p>
+    <div class="card">
+      <div class="card-body">
+        <table class="table no-wrap">
+          <thead>
+            <tr>
+              <th>Project name</th>
+              <th>Project description</th>
+              <th>Created at</th>
+              <th>Last updated</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for project in projects %}
+            <tr>
+              <td>{{ project.name }}</td>
+              <td>{{ project.description }}</td>
+              <td>{{ project.created_at|timesince|capfirst}} ago</td>
 
-            <div class="card-text">
-              <small class="text-muted">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon mr-2 text-muted"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              {%if project.updated_at %}
 
-                {%if project.updated_at %}
-                  Updated {{ project.updated_at |timesince|capfirst }} ago &nbsp;
-                {% else %}
-                  Created {{ project.created_at |timesince|capfirst }} ago &nbsp;
-                {% endif %}
-                </i>
-              </small>
-            </div>
-          </div>
-        </div>
+              <td>{{ project.updated_at|timesince|capfirst}} ago</td>
+
+              {% else %}
+
+              <td>Never</td>
+
+              {% endif %}
+
+              <td></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
       </div>
-      {% if forloop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
-      {% if forloop.last %}</div>{% endif %}
-    {% endfor %}
+    </div>
+
     {% else %}
     <p class="empty-title h3">No results found.</p>
     <p class="empty-subtitle text-muted">Try adjusting your search or filter to find what you're looking for.</p>
