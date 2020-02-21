@@ -13,7 +13,7 @@ from ..mixins import ProjectCreatorMixin
 from ..models import Project
 
 
-class ProjectListView(ListView):
+class ProjectListView(PageTitleMixin, ListView):
     """
     List projects view.
 
@@ -37,7 +37,7 @@ class ProjectListView(ListView):
     ordering = ['created_at']
     paginate_by = 10
 
-class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, CreateView):
+class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin, CreateView):
     """
     Create project view.
 
