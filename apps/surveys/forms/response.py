@@ -3,7 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from mptt.forms import TreeNodeChoiceField
 
-from .models import Respondent
+from ..models import Respondent
 
 
 class RespondentConsentForm(forms.Form):

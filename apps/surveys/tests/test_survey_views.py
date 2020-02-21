@@ -5,16 +5,17 @@ from model_bakery import baker
 
 from apps.users.models import User
 
-from ..models import Survey
+# from ..models import Survey
 
 
 class SurveyViewTest(TestCase):
+
     def setUp(self):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
         # self.user = AnonymousUser()
         self.user = baker.make(User)
-        self.survey = baker.make(Survey)
+        # self.survey = baker.make(Survey)
 
     def test_list_view(self):
         """

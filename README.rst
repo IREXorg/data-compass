@@ -59,7 +59,6 @@ When running test locally against `postgresql` database, allow created user to h
 
     CREATE USER datacompass WITH PASSWORD 'datacompass';
     GRANT ALL PRIVILEGES ON DATABASE datacompass TO datacompass;
-    ALTER USER datacompass CREATEDB;
     exit;
 
 Logout as `postgres` user
