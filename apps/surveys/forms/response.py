@@ -37,24 +37,3 @@ class RespondentForm(forms.ModelForm):
 
         super().__init__(*args, **kwargs)
         self.fields['hierarchy'].queryset = project.hierarchies.all()
-
-
-class DatasetSelectForm(forms.Form):
-    datasets = forms.ModelMultipleChoiceField(
-        queryset=None,
-        widget=forms.CheckboxSelectMultiple,
-        label=_('datasets'),
-    )
-
-    def __init__(self, survey=None, survey_response=None, *args, **kwargs):
-        self.survey_response = survey_response
-
-        # get project inorder to limit hierarchy choices
-        if not survey:
-            raise ValueError(_(f'Survey must be specified to initialize {self.__class__.__name__}'))
-
-        super().__init__(*args, **kwargs)
-        if survey_response:
-            self.initial['datasets'] = survey_response.get_datasets()
-
-        self.fields['datasets'].queryset = survey.datasets.all()

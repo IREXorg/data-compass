@@ -49,7 +49,7 @@ class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
         return super().dispatch(*args, **kwargs)
 
     def get_page_title(self):
-        return f'{self.survey.display_name}'
+        return self.survey.display_name
 
     def get_success_url(self):
         return reverse('surveys:respondent-update', kwargs={'pk': self.respondent.pk})
@@ -139,7 +139,7 @@ class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, ConsentCheckMi
         return kwargs
 
     def get_page_title(self):
-        return f'{self.survey.display_name}'
+        return self.survey.display_name
 
     def form_valid(self, form):
         """
