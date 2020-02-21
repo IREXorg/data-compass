@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 For more information django-environ which is used to read environment variables settings, see
 https://django-environ.readthedocs.io/en/latest/
 """
+from email.utils import getaddresses
 from pathlib import Path
 
 import environ
@@ -160,6 +161,8 @@ ACCOUNT_EMAIL_REQUIRED = env.bool('ACCOUNT_EMAIL_REQUIRED', default=True)
 
 ACCOUNT_USERNAME_REQUIRED = env.bool('ACCOUNT_USERNAME_REQUIRED', default=False)
 
+ACCOUNT_EMAIL_VERIFICATION = env('ACCOUNT_EMAIL_VERIFICATION', default='none')
+
 LOGIN_REDIRECT_URL = env('LOGIN_REDIRECT_URL', default='users:profile-detail')
 
 # Internationalization
@@ -213,3 +216,24 @@ ADMIN_SITE_NAME = env('ADMIN_SITE_HEADER', default=SITE_NAME)
 ADMIN_SITE_HEADER = env('ADMIN_SITE_HEADER', default=SITE_NAME)
 
 ADMIN_INDEX_TITLE = env('ADMIN_INDEX_TITLE', default='Administration')
+
+
+# Email
+
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
+
+EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+
+EMAIL_HOST = env('EMAIL_HOST', default='localhost')
+
+EMAIL_PORT = env.int('EMAIL_PORT', default=25)
+
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
+
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
+
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='')
+
+SERVER_EMAIL = env('SERVER_EMAIL', default='')
+
+ADMINS = getaddresses([env('ADMINS', default='')])

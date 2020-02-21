@@ -1,0 +1,21 @@
+{% extends "surveys/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+<form method="POST" action="">
+  {% csrf_token %}
+  {{ form|crispy }}
+
+  <a href="{% url 'surveys:respondent-consent' respondent.survey.pk %}" class="btn btn-outline-secondary">
+    {% trans 'Back' %} <i class="fas fa-arrow-left"></i>
+  </a>
+
+  <button class="btn btn-primary" type="submit">
+    {% trans 'Save and Continue' %} <i class="fas fa-arrow-right"></i>
+  </button>
+</form>
+{% endblock %}

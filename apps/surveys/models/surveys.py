@@ -19,6 +19,7 @@ class DataflowHierarchy(TimeStampedModel, MPTTModel):
     )
     project = models.ForeignKey(
         'projects.Project',
+        blank=True,
         verbose_name=_('project'),
         on_delete=models.CASCADE,
         related_name='hierarchies',
@@ -32,7 +33,7 @@ class DataflowHierarchy(TimeStampedModel, MPTTModel):
         related_name='children',
         verbose_name=_('parent')
     )
-    level_name = models.CharField(_('level name'), max_length=128, unique=True)
+    level_name = models.CharField(_('level name'), max_length=128)
     name = models.CharField(_('name'), max_length=128, unique=True)
     description = models.TextField(_('description'), blank=True)
     creator = models.ForeignKey(
@@ -53,6 +54,11 @@ class DataflowHierarchy(TimeStampedModel, MPTTModel):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        if self.parent:
+            self.project = self.parent.project
+        super().save(*args, **kwargs)
 
 
 class Role(TimeStampedModel):
@@ -130,12 +136,19 @@ class Dataset(TimeStampedModel):
         editable=False,
         unique=True
     )
-    topic = models.ForeignKey(
+    survey = models.ForeignKey(
+        'survey',
+        related_name='datasets',
+        related_query_name='dataset',
+        verbose_name=_('survey'),
+        on_delete=models.CASCADE
+    )
+    topics = models.ManyToManyField(
         'surveys.Topic',
         related_name='datasets',
         related_query_name='dataset',
-        verbose_name=_('topic'),
-        on_delete=models.CASCADE
+        verbose_name=_('topics'),
+        blank=True
     )
     name = models.CharField(_('name'), max_length=255)
     description = models.TextField(_('description'), blank=True)
