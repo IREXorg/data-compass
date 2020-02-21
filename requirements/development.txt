@@ -5,3 +5,4 @@ ipython
 flake8
 isort
 tox
+model_bakery
