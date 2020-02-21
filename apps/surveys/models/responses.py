@@ -542,6 +542,18 @@ class DatasetResponse(TimeStampedModel):
         """The survey."""
         return self.response.survey
 
+    def get_next_in_response(self):
+        return self.response.dataset_responses.filter(pk__gt=self.pk).order_by('pk').first()
+
+    def get_previous_in_response(self):
+        return self.response.dataset_responses.filter(pk__lt=self.pk).order_by('-pk').first()
+
+    def is_first_in_response(self):
+        return not self.response.dataset_responses.filter(pk__lt=self.pk).exists()
+
+    def is_last_in_response(self):
+        return not self.response.dataset_responses.filter(pk__gt=self.pk).exists()
+
 
 class DatasetTopicResponse(TimeStampedModel):
     """A survey response related to a specific :class:`.Dataset`

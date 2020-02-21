@@ -53,12 +53,13 @@ While you are in the database shell create the database user and grant appropria
     GRANT ALL PRIVILEGES ON DATABASE datacompass TO datacompass;
     exit;
 
-When running test locally against `postgresql` database, allow created user to have `CREATEDB` role.
+When running tests locally against `postgresql` database, you should allow database user to have `CREATEDB` role.
 
 .. code:: sql
 
     CREATE USER datacompass WITH PASSWORD 'datacompass';
     GRANT ALL PRIVILEGES ON DATABASE datacompass TO datacompass;
+    ALTER USER datacompass CREATEDB;
     exit;
 
 Logout as `postgres` user

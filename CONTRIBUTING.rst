@@ -144,6 +144,18 @@ For example, ``ProjectUpdateView``, ``ProjectCreateView``
 ``ProjectDeleteView``, ``ProjectListView`` and ``ProjectDetailView``.
 This doesn't fit all situations, but it's a good basis.
 
+Migrations
+~~~~~~~~~~
+Always name your migration files. You can easily do that by running the
+Django's makemigrations command including `--name` or `-n` option.
+The name gives brief description of your migration.
+
+Example
+
+.. code:: sh
+
+    ./manage.py makemigrations -n add_user_surname
+
 
 Git Commit Guidelines
 ---------------------

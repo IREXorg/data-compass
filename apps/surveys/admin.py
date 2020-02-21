@@ -12,7 +12,7 @@ class CreatorAdminMixin:
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
 
     def save_model(self, request, obj, form, change):
-        if not change or not obj.creator:
+        if not obj.pk:
             obj.creator = request.user
         super().save_model(request, obj, form, change)
 
@@ -65,21 +65,24 @@ class DatasetAdmin(CreatorAdmin):
 
 
 @admin.register(DatasetStorage)
-class DatasetStorageAdmin(CreatorAdmin):
+class DatasetStorageAdmin(admin.ModelAdmin):
     list_display = ['pk', 'name']
     list_display_links = ['pk', 'name']
+    readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
 
 
 @admin.register(DatasetAccess)
-class DatasetAccessAdmin(CreatorAdmin):
+class DatasetAccessAdmin(admin.ModelAdmin):
     list_display = ['pk', 'name']
     list_display_links = ['pk', 'name']
+    readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
 
 
 @admin.register(DatasetFrequency)
-class DatasetFrequencyAdmin(CreatorAdmin):
+class DatasetFrequencyAdmin(admin.ModelAdmin):
     list_display = ['pk', 'name']
     list_display_links = ['pk', 'name']
+    readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
 
 
 @admin.register(DatasetTopicReceived)

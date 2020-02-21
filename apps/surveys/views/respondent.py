@@ -1,25 +1,29 @@
 from django.contrib.auth.views import redirect_to_login
-from django.http import Http404
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView, UpdateView
 
 from core.exceptions import NotAuthenticated
 from core.mixins import PageTitleMixin
 
-from ..forms import DatasetSelectForm, RespondentConsentForm, RespondentForm
+from ..forms import RespondentConsentForm, RespondentForm
 from ..mixins import ConsentCheckMixin, RespondentSurveyMixin
 from ..models import Respondent
-from ..models import Response as SurveyResponse
 
 
 class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
-    """Ask respondent for consent.
+    """
+    Asks respondent for consent and saves consent data in user's session.
 
-    If the user is not authenicated and survey requires login,
-    redirect user to ``LOGIN_URL``
+    If user is not authenicated and the survey requires login,
+    user will be redirected to default ``LOGIN_URL``
+
+    If user is a new respondent for the survey a new respondent
+    object will be created.
+
+    On successful consent user will be redirected to continue
+    with the survey.
     """
 
     # Basing this on Survey model because at this point a user might be
@@ -45,7 +49,7 @@ class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
         return super().dispatch(*args, **kwargs)
 
     def get_page_title(self):
-        return f'{self.survey.display_name}'
+        return self.survey.display_name
 
     def get_success_url(self):
         return reverse('surveys:respondent-update', kwargs={'pk': self.respondent.pk})
@@ -83,7 +87,11 @@ class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
 
 
 class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, ConsentCheckMixin, UpdateView):
-    """Respondent Update View."""
+    """
+    Prompts respondents to update their basic data for the survey.
+
+    if consent hasn't been provided yet, user will be redirected to consent page.
+    """
     model = Respondent
     form_class = RespondentForm
     context_object_name = 'respondent'
@@ -131,7 +139,7 @@ class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, ConsentCheckMi
         return kwargs
 
     def get_page_title(self):
-        return f'{self.survey.display_name}'
+        return self.survey.display_name
 
     def form_valid(self, form):
         """
@@ -152,77 +160,4 @@ class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, ConsentCheckMi
         return redirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('surveys:dataset-select', kwargs={'pk': self.survey_response.pk})
-
-
-class DatasetSelectView(PageTitleMixin, RespondentSurveyMixin, ConsentCheckMixin, FormView):
-    """Dataset Selection View.
-
-    Allows user to select datasets.
-    """
-    form_class = DatasetSelectForm
-
-    #: Field to be queried against
-    slug_field = 'pk'
-
-    #: URL parameter to be used for to provide a lookup value
-    slug_url_kwarg = 'pk'
-
-    template_name = 'surveys/dataset_select.html'
-
-    def dispatch(self, *args, **kwargs):
-        self.survey_response = self.get_survey_response()
-        self.survey = self.get_survey()
-        self.respondent = self.survey_response.respondent
-
-        try:
-            self.validate_respondent_for_survey()
-        except NotAuthenticated:
-            return redirect_to_login(self.request.get_full_path())
-
-        self.consented_at = self.get_consent(respondent=self.respondent, survey=self.survey)
-        # If respondent has not provided the consent redirect to consent page
-        if not self.consented_at:
-            return redirect(reverse('surveys:respondent-consent', kwargs={'pk': self.survey.pk}))
-
-        # If respondent has not provided hierarchy yet redirect to respondent update page
-        if not self.respondent.hierarchy:
-            return redirect(reverse('surveys:respondent-update', kwargs={'pk': self.respondent.pk}))
-
-        return super().dispatch(*args, **kwargs)
-
-    def get_survey_response(self):
-        slug = self.kwargs.get(self.slug_url_kwarg)
-        if not slug:
-            raise AttributeError(
-                _(f'{self.__class__.__name__} view must be called with {self.slug_url_kwarg}.')
-            )
-
-        queryset = SurveyResponse.objects.active().select_related('survey', 'respondent')
-        try:
-            survey_response = queryset.get(**{self.slug_field: slug})
-        except SurveyResponse.DoesNotExist:
-            raise Http404(_('Page not found.'))
-
-        return survey_response
-
-    def get_survey(self):
-        return self.survey_response.survey
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['survey'] = self.survey
-        kwargs['survey_response'] = self.survey_response
-        return kwargs
-
-    def get_page_title(self):
-        return f'{self.survey.display_name}'
-
-    def form_valid(self, form):
-        self.survey_response.set_dataset_responses(form.cleaned_data['datasets'])
-        return redirect(self.request.get_full_path())
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['survey_response'] = self.survey_response
-        return context
+        return reverse('surveys:dataset-response-list-create', kwargs={'pk': self.survey_response.pk})
