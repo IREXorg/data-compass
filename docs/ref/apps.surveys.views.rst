@@ -6,7 +6,12 @@ apps.surveys.views
    :undoc-members:
    :show-inheritance:
 
-.. automodule:: apps.surveys.views.responses
+.. automodule:: apps.surveys.views.respondent
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+.. automodule:: apps.surveys.views.dataset_response
    :members:
    :undoc-members:
    :show-inheritance:
