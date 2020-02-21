@@ -29,10 +29,10 @@ class RespondentSurveyMixin:
     """
 
     #: Survey field to be queried against
-    survey_slug_field = 'pk'
+    survey_lookup_field = 'pk'
 
     #: URL parameter to be used for to provide a survey lookup value
-    survey_slug_url_kwarg = 'pk'
+    survey_lookup_url_kwarg = 'pk'
 
     def get_survey(self, queryset=None):
         """
@@ -46,16 +46,16 @@ class RespondentSurveyMixin:
         """
 
         # get lookup parameters
-        slug = self.kwargs.get(self.survey_slug_url_kwarg)
+        slug = self.kwargs.get(self.survey_lookup_url_kwarg)
         if not slug:
             raise AttributeError(
-                _(f'{self.__class__.__name__} view must be called with {self.survey_slug_url_kwarg}.')
+                _(f'{self.__class__.__name__} view must be called with {self.survey_lookup_url_kwarg}.')
             )
 
         # get survey object matching the query
         queryset = queryset or Survey.objects.active()
         try:
-            survey = queryset.get(**{self.survey_slug_field: slug})
+            survey = queryset.get(**{self.survey_lookup_field: slug})
         except Survey.DoesNotExist:
             raise Http404(_('Page not found.'))
 
