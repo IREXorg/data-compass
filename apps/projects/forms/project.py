@@ -1,7 +1,9 @@
 from django import forms
 from django.forms import ModelForm
 
+
 from ..models import Project
+
 
 class ProjectCreateForm(ModelForm):
     """
@@ -14,6 +16,7 @@ class ProjectCreateForm(ModelForm):
             'description': forms.Textarea(attrs={'rows': 2}),
         }
 
+
 class ProjectUpdateForm(ModelForm):
     """
     Project create form
@@ -24,4 +27,3 @@ class ProjectUpdateForm(ModelForm):
         widgets = {
             'description': forms.Textarea(attrs={'rows': 2}),
         }
-

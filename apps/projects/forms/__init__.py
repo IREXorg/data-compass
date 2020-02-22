@@ -1,2 +1,2 @@
-from .response import * #noqa
-from .project import * #noqa
+from .project import *  # noqa
+from .response import *  # noqa
