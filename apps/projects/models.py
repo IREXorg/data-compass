@@ -70,6 +70,7 @@ class Project(TimeStampedModel):
     class Meta:
         verbose_name = _('Project')
         verbose_name_plural = _('Projects')
+        ordering = ['created_at']
 
     def __str__(self):
         return self.name
