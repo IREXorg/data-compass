@@ -99,3 +99,24 @@ class ProjectUpdateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin,
     model = Project
     form_class = ProjectUpdateForm
     success_url = reverse('projects:project-list')
+
+
+class ProjectDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
+    """
+    Delete project details
+
+    Allow current signin user to delete existing project and
+    redirect to project list page.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        DELETE  /projects/1234567890/delete
+    """
+
+    # Translators: This is project delete page title
+    page_title = _('Delete Project')
+    template_name = 'projects/project_delete.html'
+    model = Project
+    success_url = reverse('projects:project-list')
