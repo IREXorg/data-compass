@@ -20,7 +20,7 @@ class ProjectUpdateForm(ModelForm):
     """
     class Meta:
         model = Project
-        fields = ['name', 'description', ]
+        fields = ['name', 'description', 'email', 'tags', ]
         widgets = {
             'description': forms.Textarea(attrs={'rows': 2}),
         }

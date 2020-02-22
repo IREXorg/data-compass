@@ -78,3 +78,24 @@ class ProjectDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
     template_name = 'projects/project_detail.html'
     model = Project
 
+
+class ProjectUpdateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin, UpdateView):
+    """
+    Update project details view.
+
+    Allow current signin user to update existing project details and
+    redirect to project list page.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        PUT  /projects/1234567890/update
+    """
+
+    # Translators: This is project update page title
+    page_title = _('Update project')
+    template_name = 'projects/project_update.html'
+    model = Project
+    form_class = ProjectUpdateForm
+    success_url = reverse('projects:project-list')
