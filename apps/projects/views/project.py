@@ -13,7 +13,7 @@ from ..mixins import ProjectCreatorMixin
 from ..models import Project
 
 
-class ProjectListView(PageTitleMixin, ListView):
+class ProjectListView(LoginRequiredMixin, PageTitleMixin, ListView):
     """
     List projects view.
 
@@ -48,7 +48,7 @@ class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin,
 
     .. code-block:: http
 
-        GET  /projects/create
+        POST /projects/create
     """
 
     # Translators: This is projects list page title
