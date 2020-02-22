@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
-# from django.views.generic.detail import DetailView
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
@@ -37,6 +37,7 @@ class ProjectListView(LoginRequiredMixin, PageTitleMixin, ListView):
     ordering = ['created_at']
     paginate_by = 10
 
+
 class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin, CreateView):
     """
     Create project view.
@@ -57,3 +58,23 @@ class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin,
     model = Project
     form_class = ProjectCreateForm
     success_url = reverse('projects:project-list')
+
+
+class ProjectDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
+    """
+    View project details view.
+
+    Allow current signin user to view project details.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        GET  /projects/1234567890
+    """
+
+    # Translators: This is project view page title
+    page_title = _('View Project')
+    template_name = 'projects/project_detail.html'
+    model = Project
+

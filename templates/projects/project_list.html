@@ -39,7 +39,7 @@
             </span>
           </div>
           <div class="col">
-            <h3 class="mb-0"><a href="#">{{ project.name }}</a></h3>
+            <h3 class="mb-0"><a href="{% url 'projects:project-detail' project.pk %}">{{ project.name }}</a></h3>
             <div class="text-muted text-h5">{{ project.display_name }}</div>
           </div>
           <div class="col-auto lh-1 align-self-start">
