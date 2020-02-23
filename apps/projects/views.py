@@ -7,10 +7,10 @@ from django.views.generic.list import ListView
 
 from core.mixins import PageTitleMixin
 
-from ..filters import ProjectListFilter
-from ..forms import ProjectCreateForm, ProjectUpdateForm
-from ..mixins import ProjectCreatorMixin
-from ..models import Project
+from .filters import ProjectListFilter
+from .forms import ProjectCreateForm, ProjectUpdateForm
+from .mixins import ProjectCreatorMixin
+from .models import Project
 
 
 class ProjectListView(LoginRequiredMixin, PageTitleMixin, ListView):
@@ -23,7 +23,7 @@ class ProjectListView(LoginRequiredMixin, PageTitleMixin, ListView):
 
     .. code-block:: http
 
-        GET  /project/
+        GET  /projects/
     """
 
     # Translators: This is projects list page title
