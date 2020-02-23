@@ -6,11 +6,12 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView, UpdateView
 
 from core.exceptions import NotAuthenticated
-from core.mixins import PageMixin
+from core.mixins import InlineFormsetMixin, PageMixin
 
-from ..forms import DatasetResponseFrequencyForm, DatasetSelectForm
+from ..forms import (DatasetResponseFrequencyForm, DatasetSelectForm, DatasetTopicResponseForm,
+                     DatasetTopicStorageAccessFormSet)
 from ..mixins import ConsentCheckMixin, RespondentSurveyMixin
-from ..models import DatasetResponse
+from ..models import DatasetResponse, DatasetTopicResponse
 from ..models import Response as SurveyResponse
 
 
@@ -107,13 +108,6 @@ class BaseDatasetResponseUpdateView(PageMixin, RespondentSurveyMixin, ConsentChe
     def get_queryset(self):
         return DatasetResponse.objects.select_related('response', 'response__survey', 'dataset')
 
-    def get_object(self, queryset=None):
-        # Check if self.object is already set to prevent unnecessary DB calls
-        if hasattr(self, 'object'):
-            return self.object
-        else:
-            return super().get_object(queryset)
-
     def dispatch(self, *args, **kwargs):
         self.object = self.get_object()
         self.survey = self.object.response.survey
@@ -140,10 +134,103 @@ class DatasetResponseUpdateFrequencyView(BaseDatasetResponseUpdateView):
     form_class = DatasetResponseFrequencyForm
     template_name = 'surveys/dataset_response_update_frequency.html'
 
+    def get_object(self, queryset=None):
+        # Check if self.object is already set to prevent unnecessary DB calls
+        if hasattr(self, 'object'):
+            return self.object
+        else:
+            return super().get_object(queryset)
+
     def get_back_url_path(self):
         if self.object.is_first_in_response():
             return reverse('surveys:dataset-response-list-create', kwargs={'pk': self.survey_response.pk})
         return super().get_back_url_path()
 
     def get_success_url(self):
+        topic_response = self.object.topic_responses.first()
+        if topic_response:
+            return reverse('surveys:dataset-topic-response-update', kwargs={'pk': topic_response.pk})
         return self.request.get_full_path()
+
+
+class DatasetTopicResponseUpdateView(PageMixin, InlineFormsetMixin, RespondentSurveyMixin,
+                                     ConsentCheckMixin, UpdateView):
+    model = DatasetTopicResponse
+    form_class = DatasetTopicResponseForm
+    formset_class = DatasetTopicStorageAccessFormSet
+    context_object_name = 'dataset_topic_response'
+    template_name = 'surveys/dataset_topic_response_update.html'
+
+    def get_queryset(self):
+        return DatasetTopicResponse.objects.select_related(
+            'topic',
+            'dataset_response__response',
+            'dataset_response__dataset',
+            'dataset_response__response__survey',
+            'dataset_response__response__respondent__hierarchy',
+            'dataset_response__response__survey__project',
+        )
+
+    def get_object(self, queryset=None):
+        # Check if self.object is already set to prevent unnecessary DB calls
+        if hasattr(self, 'object'):
+            return self.object
+        else:
+            return super().get_object(queryset)
+
+    def dispatch(self, *args, **kwargs):
+        self.object = self.get_object()
+        self.survey = self.object.dataset_response.response.survey
+        self.survey_response = self.object.dataset_response
+
+        # Check if user is allowed to take the survey
+        try:
+            self.validate_respondent_for_survey()
+        except NotAuthenticated:
+            return redirect_to_login(self.request.get_full_path())
+
+        # Check respondent's consent
+        self.consented_at = self.get_consent(respondent=self.object, survey=self.survey)
+        if not self.consented_at:
+            return redirect(reverse('surveys:respondent-consent', kwargs={'pk': self.survey.pk}))
+
+        return super().dispatch(*args, **kwargs)
+
+    def get_success_url(self):
+        _next = self.object.get_next_in_response()
+        if _next:
+            return reverse('surveys:dataset-topic-response-update', kwargs={'pk': _next.pk})
+
+        return self.request.get_full_path()
+
+    def get_back_url_path(self):
+        _previous = self.object.get_previous_in_response()
+        if _previous:
+            return reverse('surveys:dataset-topic-response-update', kwargs={'pk': _previous.pk})
+        else:
+            return reverse('surveys:dataset-response-update-frequency', kwargs={'pk': self.survey_response.pk})
+
+    def get_page_title(self):
+        return self.survey.display_name
+
+    def post(self, request, *args, **kwargs):
+        """
+        Handle POST requests: instantiate a form instance with the passed
+        POST variables and then check if it's valid.
+        """
+
+        form = self.get_form()
+        formset = self.get_formset()
+
+        if form.is_valid() and formset.is_valid():
+            return self.form_valid(form, formset)
+        else:
+            return self.form_invalid(form, formset)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['formset'] = self.get_formset()
+        context['topic'] = self.object.topic
+        context['dataset'] = self.object.dataset_response.dataset
+        context['respondent_hierarchy'] = self.object.dataset_response.respondent.hierarchy
+        return context

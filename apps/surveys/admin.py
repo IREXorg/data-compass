@@ -150,6 +150,14 @@ class ResponseAdmin(CreatorAdmin):
     inlines = [QuestionResponseInline]
 
 
+class DatasetTopicSharedInline(admin.TabularInline):
+    model = DatasetTopicShared
+
+
+class DatasetTopicReceivedInline(admin.TabularInline):
+    model = DatasetTopicReceived
+
+
 @admin.register(DatasetResponse)
 class DatasetResponseAdmin(admin.ModelAdmin):
     list_display = ['pk', 'respondent', 'dataset', 'survey']
@@ -157,15 +165,22 @@ class DatasetResponseAdmin(admin.ModelAdmin):
     list_select_related = ['response__respondent', 'dataset', 'response__survey']
     list_filter = ['response__survey__project']
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
+    inlines = [DatasetTopicSharedInline, DatasetTopicReceivedInline]
+
+
+class DatasetTopicStorageAccessInline(admin.TabularInline):
+    model = DatasetTopicStorageAccess
 
 
 @admin.register(DatasetTopicResponse)
 class DatasetTopicResponseAdmin(admin.ModelAdmin):
     list_display = ['pk', 'respondent', 'dataset', 'topic', 'survey']
     list_display_links = ['pk', 'respondent']
-    list_select_related = ['response__respondent', 'dataset', 'survey']
-    list_filter = ['response__survey__project']
+    list_select_related = ['dataset_response__response__respondent', 'dataset_response__dataset',
+                           'topic', 'dataset_response__response__survey']
+    list_filter = ['dataset_response__response__survey__project']
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
+    inlines = [DatasetTopicStorageAccessInline]
 
 
 @admin.register(QuestionResponse)
