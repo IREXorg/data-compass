@@ -1,24 +1,41 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <div class="page">
-      {% include 'includes/nav_primary.html' %}
+{# Start: Page #}
+<div class="page">
 
-      <div class="content">
-        <main class="container">
-          <!-- Page title -->
-          <div class="page-header">
-            <div class="row align-items-center">
-              <div class="col-auto">
-                <h1 class="page-title">
-                  {% block page_title %}{{ page_title }}{% endblock %}
-                </h1>
-              </div>
-            </div>
+  {# Start: Navbar Primary #}
+  {% include 'includes/nav_primary.html' %}
+  {# End: Navbar Primary #}
+
+  {# Start: Page Content #}
+  <div class="content">
+
+    {# Start: Page Container #}
+    <main class="container">
+
+      {# Start: Page Header #}
+      <div class="page-header">
+        <div class="row align-items-center">
+          <div class="col-auto">
+            <h1 class="page-title">
+              {% block page_title %}{{ page_title }}{% endblock %}
+            </h1>
           </div>
-
-          <!-- Main content -->
-          {% block content %}{% endblock %}
-        </main>
+        </div>
       </div>
+      {# End: Page Header #}
+
+      {# Start: Main Content #}
+      {% block content %}{% endblock %}
+      {# End: Main Content #}
+
+    </main>
+    {# End: Page Container #}
+
+  </div>
+  {# End: Page Content #}
+
+</div>
+{# End: Page #}
 {% endblock body %}

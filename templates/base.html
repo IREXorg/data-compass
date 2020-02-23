@@ -1,14 +1,17 @@
 {% load i18n %}
 {% load static %}
-{% load django_bootstrap_breadcrumbs %}
 
 <!doctype html>
+
+{# Start: Html #}
 <html lang="en">
+  {# Start: Head #}
   <head>
+
+    {# Start: Meta #}
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <title>{% trans 'Data Compass' %} · {% block head_title %}{{ page_title }}{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
     <meta name="msapplication-TileColor" content="#206bc4"/>
     <meta name="theme-color" content="#206bc4"/>
@@ -18,20 +21,42 @@
     <meta name="HandheldFriendly" content="True"/>
     <meta name="MobileOptimized" content="320"/>
     <meta name="robots" content="noindex,nofollow,noarchive"/>
+    {# End: Meta #}
+
+    {# Start: Links #}
     <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
     <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
     <link href="{% static 'main.css' %}" rel="stylesheet">
+    {# End: Links #}
+
+    {# Start: Title #}
+    <title>
+     {% trans 'Data Compass' %} ·
+     {% block head_title %}{{ page_title }}{% endblock %}
+    </title>
+    {# End: Title #}
+
   </head>
+  {# End: Head #}
 
+  {# Start: Body  #}
   <body class="antialiased {% block body_class %}{% endblock %}">
+
+      {# Start: Body block #}
       {% block body %}{% endblock %}
+      {# End: Body block #}
 
+      {# Start: Scripts #}
       <script src="{% static 'main.js' %}"></script>
-
-      <!-- Google analytics -->
+      {# Start: Google analytics #}
       <script type="text/javascript">
         // Place google analytics scripts here.
       </script>
+      {# End: Google analytics #}
+      {# End: Scripts #}
 
   </body>
+  {# End: Body #}
+
 </html>
+{# End: Html #}
