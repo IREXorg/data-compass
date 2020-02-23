@@ -1,19 +1,17 @@
-apps.surveys.models
+apps.surveys.views
 ===================
 
-.. automodule:: apps.surveys.models.survey
+.. automodule:: apps.surveys.views.survey
    :members:
    :undoc-members:
    :show-inheritance:
 
-
-.. automodule:: apps.surveys.models.surveys
+.. automodule:: apps.surveys.views.respondent
    :members:
    :undoc-members:
    :show-inheritance:
 
-
-.. automodule:: apps.surveys.models.responses
+.. automodule:: apps.surveys.views.dataset_response
    :members:
    :undoc-members:
    :show-inheritance:

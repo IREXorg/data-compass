@@ -29,10 +29,12 @@
       <div class="d-inline ml-5">
         <a href="{% url 'users:profile-update' %}">{% trans 'Edit' %}</a>
       </div>
-  
-      <div>
-        {% trans 'User type' %}: {{ user.user_type }}
-      </div>
+
+      {% if user.user_type %}
+        <div>
+          {% trans 'User type' %}: {{ user.user_type }}
+        </div>
+      {% endif %}
     </div>
   </div>
 

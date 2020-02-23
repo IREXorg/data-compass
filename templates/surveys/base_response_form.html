@@ -1,0 +1,23 @@
+{% extends "surveys/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+  <form method="POST" action="">
+    {% csrf_token %}
+
+    {% block form_fields %}{{ form|crispy }}{% endblock %}
+
+    {% block form_buttons %}
+      <a href="{{ back_url_path }}" class="btn btn-outline-secondary">
+        <i class="fas fa-arrow-left"></i> {% trans 'Back' %}
+      </a>
+
+      <button class="btn btn-primary" type="submit">
+        {% trans 'Save and Continue' %} <i class="fas fa-arrow-right"></i>
+      </button>
+    {% endblock form_buttons %}
+  </form>
+{% endblock %}

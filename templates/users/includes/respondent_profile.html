@@ -23,7 +23,7 @@
         <div>
           <!-- Displayed action buttons should be dependent on survey status-->
           <a class="btn btn-outline-info btn-sm">{% trans 'More details' %}</a>
-          <a class="btn btn-outline-info btn-sm">{% trans 'Start survey' %}</a>
+          <a href="{% url 'surveys:respondent-consent' survey.pk %}" class="btn btn-outline-info btn-sm">{% trans 'Start survey' %}</a>
           <a class="btn btn-outline-info btn-sm">{% trans 'Continue survey' %}</a>
           <a class="btn btn-outline-info btn-sm">{% trans 'Contact facilitator' %}</a>
           <a class="btn btn-outline-info btn-sm">{% trans 'View my response' %}</a>

@@ -88,7 +88,7 @@ class SurveyUpdateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, U
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         PUT  /surveys/1234567890/update
     """
