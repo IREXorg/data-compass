@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'imagekit',
     'django_filters',
+    'active_link',
     # Custom apps
     'apps.users.apps.UsersConfig',
     'apps.organizations.apps.OrganizationsConfig',
@@ -199,6 +200,11 @@ MEDIA_ROOT = env('MEDIA_ROOT', default=str(BASE_DIR / 'media_root'))
 # Crispy forms
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+# Active link
+ACTIVE_LINK_CSS_CLASS = 'active'
+
+ACTIVE_LINK_STRICT = True
 
 # Site
 
