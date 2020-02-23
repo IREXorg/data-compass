@@ -1,0 +1,42 @@
+{% extends "projects/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="row justify-content-md-center">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <p class="text-muted">Provide some basic information about this project.</p>
+
+        <hr>
+
+        <form method="POST" action="" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form|crispy }}
+
+          <hr>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-6">
+                <a href={% url 'projects:project-list' %} class="btn btn-secondary">
+                  Cancel
+                </a>
+
+                &nbsp;
+
+                <button type="submit" class="btn btn-primary">
+                  {% trans 'Save project' %}
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
