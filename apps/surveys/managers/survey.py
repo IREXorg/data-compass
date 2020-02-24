@@ -34,7 +34,9 @@ class SurveyQuerySet(models.QuerySet):
         return qs.annotate(
             user_status=Case(
                 When(
-                    Q(respondent__user=user) & Q(respondent__response__completed_at__isnull=True),
+                    Q(respondent__user=user)
+                    & Q(respondent__response__isnull=False)
+                    & Q(respondent__response__completed_at__isnull=True),
                     then=Value('in progress')
                 ),
                 When(
