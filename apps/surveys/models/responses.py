@@ -394,6 +394,7 @@ class Response(TimeStampedModel):
     specific :class:`.Survey`. Other models holding partial survey response
     data are linked to this model.
     """
+
     #: Response UUID.
     uuid = models.UUIDField(
         _('UUID'),
@@ -437,7 +438,12 @@ class Response(TimeStampedModel):
         on_delete=models.CASCADE
     )
 
+    #: Date and Time when consent was received
     consented_at = models.DateTimeField(_('consented at'), blank=True, null=True)
+
+    #: Date and time when the survey was completed.
+    #: The value of this should be ``None`` for incomplete responses.
+    completed_at = models.DateTimeField(_('completed at'), blank=True, null=True)
 
     #: Extra data.
     extras = JSONField(_('extras'), blank=True, default=dict)
