@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'django_bootstrap_breadcrumbs',
     'view_breadcrumbs',
     # Custom apps
+    'core',
     'apps.users.apps.UsersConfig',
     'apps.organizations.apps.OrganizationsConfig',
     'apps.projects.apps.ProjectsConfig',

@@ -1,0 +1,87 @@
+{% load i18n %}
+
+{% load datacompass %}
+
+<div class="card">
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col-auto">
+        {% with avatar_url=survey.project.organization.avatar_sm.url|default:'' %}
+          {% if avatar_url %}
+            <img src="{{ avatar_url }}"
+                 alt="{{ survey.project.organization.name }}"
+                 class="avatar avatar-md rounded">
+          {% else %}
+            <span class="avatar avatar-md rounded">
+              {% if survey.project.organization %}
+                {{ survey.project.organization.name|first|capfirst }}
+              {% else %}
+                {{ survey.name|first|capfirst }}
+              {% endif %}
+            </span>
+          {% endif %}
+        {% endwith %}
+      </div>
+
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            <h3><a href="#">{{ survey.display_name }}</a></h3>
+          </div>
+
+          <div class="col-auto">
+            <span class="badge badge-primary bg-{{ survey.user_status|bgclass }}">{{ survey.user_status }}</span>
+          </div>
+        </div>
+
+        {% if survey.project.facilitators.all %}
+          <div class="text-muted">
+            <div class="font-weight-bold small">{% trans 'Facilited by' %}</div>
+            {% for facilitator in survey.project.facilitators.all %}
+              <div class="my-1 px-0 col-auto">
+                {% if facilitator.avatar_sm %}
+                  <img src="{{ facilitator.avatar_sm.url }}"
+                       alt="{{ survey.project.organization.name }}"
+                       class="avatar avatar-sm">
+                {% else %}
+                  <span class="avatar avatar-sm">
+                    {% if facilitator.first_name %}
+                      {{ facilitator.first_name|first|capfirst }}
+                    {% else %}
+                      {{ facilitator.email|first|capfirst }}
+                    {% endif %}
+                  </span>
+                {% endif %}
+                <span class="my-auto">{{ facilitator.get_full_name|default:facilitator.email }}</span>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+    <div class="row mt-4">
+      <div class="col offset-md-1">
+        {% if survey.user_status == 'completed' %}
+          <a class="btn btn-primary btn-sm">{% trans 'View my survey response' %}</a>
+          <a href="#" class="btn btn-info btn-sm">{% trans 'View survey visual' %}</a>
+        {% elif survey.user_status == 'not started' %}
+          <a href="{% url 'surveys:respondent-consent' survey.pk %}"
+             class="btn btn-primary btn-sm">
+            {% trans 'Start survey' %}
+          </a>
+        {% elif survey.user_status == 'in progress' %}
+          <a href="{% url 'surveys:respondent-consent' survey.pk %}"
+             class="btn btn-primary btn-sm">
+            {% trans 'Continue survey' %}
+          </a>
+        {% endif %}
+
+        <a href="#" class="btn btn-outline-info btn-sm">{% trans 'Contact facilitator' %}</a>
+      </div>
+    </div>
+
+  </div>
+</div>
