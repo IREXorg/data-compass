@@ -57,6 +57,16 @@ class Project(TimeStampedModel):
         blank=True,
         default=list
     )
+    #: Project facilitators.
+    #: Only users with facilitator status can be project facilitators.
+    facilitators = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        limit_choices_to={'is_facilitator': True},
+        related_name='facilitates_projects',
+        related_query_name='facilitates_project',
+        verbose_name=_('facilitators'),
+        blank=True
+    )
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('creator'),
