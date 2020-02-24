@@ -10,7 +10,7 @@ from core.mixins import PageTitleMixin
 from .forms import ProfileForm
 
 
-class ProfileView(LoginRequiredMixin, PageTitleMixin, TemplateView):
+class ProfileDetailView(LoginRequiredMixin, PageTitleMixin, TemplateView):
     """User's own profile view."""
     page_title = _('Profile')
     template_name = 'users/profile.html'
