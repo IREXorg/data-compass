@@ -53,7 +53,6 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: './assets/bundles/',
               hmr: process.env.NODE_ENV === 'development',
               reloadAll: true,
             },
@@ -69,7 +68,7 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[name].[ext]',
-              outputPath: './fonts/'
+              outputPath: 'fonts/'
             }
           }
         ]
