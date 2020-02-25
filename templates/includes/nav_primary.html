@@ -1,19 +1,16 @@
 {% load i18n %}
 
-
-<nav class="navbar navbar-expand-lg navbar-primary navbar-light" id="navbar-primary">
+<nav class="navbar navbar-expand-lg navbar-primary navbar-light py-2" id="navbar-primary">
   <div class="container">
-    <a href="." class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal">
-      <img src="./static/logo.svg" alt="Logo" class="navbar-brand-logo navbar-brand-logo-large">
-      <img src="./static/logo-small.svg" alt="Logo" class="navbar-brand-logo navbar-brand-logo-small">
+    <a href="." class="navbar-brand navbar-brand-autodark">
+      Data Compass
     </a>
-    <div class="navbar-collapse collapse">
-      <ul class="navbar-nav">
-      </ul>
-    </div>
   </div>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-  <div class="navbar-collapse">
+  <div class="collapse navbar-collapse">
     <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
       {% if user.is_authenticated %}
         <li class="nav-item">
