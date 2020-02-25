@@ -18,13 +18,23 @@ class Entity(TimeStampedModel):
         editable=False,
         unique=True
     )
+    project = models.ForeignKey(
+        'projects.Project',
+        verbose_name=_('project'),
+        on_delete=models.CASCADE,
+        related_name='entities',
+        related_query_name='entity',
+        null=True,  # TODO: remove this.
+    )
     name = models.CharField(_('name'), max_length=255)
     hierarchy = models.ForeignKey(
         'surveys.DataflowHierarchy',
-        verbose_name=_('hierarchy'),
         related_name='entities',
         related_query_name='entity',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name=_('hierarchy'),
     )
     description = models.TextField(_('description'), blank=True)
     creator = models.ForeignKey(
@@ -589,11 +599,12 @@ class DatasetResponse(TimeStampedModel):
         self.topic_responses.exclude(topic__in=topics).delete()
 
         # get old topics
-        old_topics = self.topic_responses.values_list('topic', flat=True)
+        old_topics = list(self.topic_responses.values_list('topic_id', flat=True))
 
         # add missing topic responses
         for topic in topics:
-            if topic not in old_topics:
+            if topic.id not in old_topics:
+                self.topic_responses
                 self.topic_responses.create(topic=topic)
 
 
@@ -627,7 +638,7 @@ class DatasetTopicResponse(TimeStampedModel):
         on_delete=models.CASCADE
     )
 
-    #: Entity perceived as owners of the dataset.
+    #: Entity perceived as owners of the dataset within the organization.
     percieved_owner = models.ForeignKey(
         'surveys.Role',
         related_name='percieved_owns_datasets',

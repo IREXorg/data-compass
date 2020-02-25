@@ -27,4 +27,9 @@ urlpatterns = [
         views.DatasetTopicResponseUpdateView.as_view(),
         name='dataset-topic-response-update'
     ),
+    path(
+        'dataset-response/<int:pk>/update-shared/',
+        views.DatasetTopicSharedUpdateView.as_view(),
+        name='dataset-response-update-shared'
+    ),
 ]

@@ -47,8 +47,8 @@ class RoleAdmin(CreatorAdmin):
 @admin.register(Entity)
 class EntityAdmin(CreatorAdmin):
     list_display = ['pk', 'name', 'hierarchy']
-    list_filter = ['hierarchy__project']
     list_select_related = ['hierarchy']
+    list_filter = ['project']
 
 
 @admin.register(Topic)
