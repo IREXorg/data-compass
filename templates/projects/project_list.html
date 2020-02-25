@@ -86,10 +86,10 @@
   {% endfor %}
 
   {% else %}
-  <p class="empty-title h3">No results found.</p>
-  <p class="empty-subtitle text-muted">Try adjusting your search or filter to find what you're looking for.</p>
-  <div class="empty-action">
-    <a href="#" class="btn btn-primary">
+  <p class="col-auto empty-title h3">No results found.</p>
+  <p class="col-auto empty-subtitle text-muted">Try adjusting your search or filter to find what you're looking for.</p>
+  <div class="col-auto empty-action">
+    <a href="{% url 'projects:project-create' %}" class="btn btn-primary">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
       Add your first project
     </a>
