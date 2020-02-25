@@ -74,8 +74,9 @@ class ProjectDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
     """
 
     # Translators: This is project view page title
-    page_title = _('View Project')
+    page_title = _('View a project')
     template_name = 'projects/project_detail.html'
+    context_object_name = 'project'
     model = Project
 
 
@@ -94,7 +95,7 @@ class ProjectUpdateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin,
     """
 
     # Translators: This is project update page title
-    page_title = _('Update project')
+    page_title = _('Update a project')
     template_name = 'projects/project_update.html'
     model = Project
     form_class = ProjectUpdateForm
@@ -116,7 +117,7 @@ class ProjectDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
     """
 
     # Translators: This is project delete page title
-    page_title = _('Delete Project')
+    page_title = _('Delete a project')
     template_name = 'projects/project_delete.html'
     model = Project
     success_url = reverse('projects:project-list')
