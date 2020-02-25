@@ -5,6 +5,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
+from apps.surveys.models import Survey
 from core.mixins import PageTitleMixin
 
 from .filters import ProjectListFilter
@@ -55,6 +56,7 @@ class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin,
     # Translators: This is projects list page title
     page_title = _('Create a project')
     template_name = 'projects/project_create.html'
+    context_object_name = 'project'
     model = Project
     form_class = ProjectCreateForm
     success_url = reverse('projects:project-list')
@@ -79,6 +81,18 @@ class ProjectDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
     context_object_name = 'project'
     model = Project
 
+    def get_surveys(self):
+        """Get allowed surveys for a user project"""
+        # TODO filter by project
+        # TODO filter by user
+        return Survey.objects.filter()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        context['surveys'] = self.get_surveys()
+        return context
+
 
 class ProjectUpdateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin, UpdateView):
     """
@@ -97,6 +111,7 @@ class ProjectUpdateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin,
     # Translators: This is project update page title
     page_title = _('Update a project')
     template_name = 'projects/project_update.html'
+    context_object_name = 'project'
     model = Project
     form_class = ProjectUpdateForm
     success_url = reverse('projects:project-list')
@@ -119,5 +134,6 @@ class ProjectDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
     # Translators: This is project delete page title
     page_title = _('Delete a project')
     template_name = 'projects/project_delete.html'
+    context_object_name = 'project'
     model = Project
     success_url = reverse('projects:project-list')
