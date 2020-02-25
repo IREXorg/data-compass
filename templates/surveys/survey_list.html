@@ -19,6 +19,23 @@
 {% block content %}
 {# Start: Survey list #}
 <div class="row">
+  {% if surveys|length == 0 %}
+  <div class="container d-flex flex-column justify-content-center">
+    <div class="empty">
+      <p class="empty-title h3">No results found</p>
+      <p class="empty-subtitle text-muted">
+      Try adjusting your search or filter to find what you're looking for.
+      </p>
+      <div class="empty-action">
+        <a href="./." class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          Add your survey
+        </a>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
   {% for survey in surveys %}
   <div class="col-md-6 col-lg-4">
     <div class="card">
@@ -26,7 +43,7 @@
         <div class="row row-sm align-items-center">
           <div class="col-auto">
             <span class="avatar avatar-md rounded">
-             {{ survey.abbreviation }}
+              {{ survey.abbreviation }}
             </span>
           </div>
           <div class="col">
@@ -81,18 +98,18 @@
 <div class="d-flex">
   <ul class="pagination ml-auto">
     <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
-            <a class="page-link" href="{% if page_obj.has_previous %}?{% url 'surveys:survey-list' %}?page={{ page_obj.previous_page_number }}{% endif %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="15 18 9 12 15 6"></polyline></svg>{% trans 'Previous' %}</a>
-        </li>
+      <a class="page-link" href="{% if page_obj.has_previous %}?{% url 'surveys:survey-list' %}?page={{ page_obj.previous_page_number }}{% endif %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="15 18 9 12 15 6"></polyline></svg>{% trans 'Previous' %}</a>
+    </li>
 
-        {% for page_number in paginator.page_range %}
-            <li class="page-item {% if page_obj.number == page_number %}active{% endif %}">
-                <a class="page-link" href="{% url 'surveys:survey-list' %}?page={{ page_number }}">{{ page_number }}</a>
-            </li>
-        {% endfor %}
+    {% for page_number in paginator.page_range %}
+    <li class="page-item {% if page_obj.number == page_number %}active{% endif %}">
+      <a class="page-link" href="{% url 'surveys:survey-list' %}?page={{ page_number }}">{{ page_number }}</a>
+    </li>
+    {% endfor %}
 
-        <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
-            <a class="page-link" href="{% if page_obj.has_next %}{% url 'surveys:survey-list' %}?page={{ page_obj.next_page_number }}{% endif %}">{% trans 'Next' %} <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
-        </li>
+    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+      <a class="page-link" href="{% if page_obj.has_next %}{% url 'surveys:survey-list' %}?page={{ page_obj.next_page_number }}{% endif %}">{% trans 'Next' %} <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="9 18 15 12 9 6"></polyline></svg></a>
+    </li>
   </ul>
 </div>
 {% endif %}
