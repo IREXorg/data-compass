@@ -5,12 +5,14 @@
 {% load widget_tweaks %}
 
 {% block form_fields %}
-  <div class="pb-4">{{ form|crispy }}</div>
 
   <div class="my-4">
-    {% blocktrans trimmed with hierarchy=respondent_hierarchy.name topic_name=topic.name dataset_name=dataset.name %}
-    Where at {{ hierarchy }} is {{ topic_name }} regarding {{ dataset_name }} is stored.
-    {% endblocktrans %}
+    {% block form_intro %}
+      {% blocktrans trimmed with dataset_name=dataset.name %}
+      To whom do you send or share information about {{ dataset_name }},
+      and what kind of information do you share?
+      {% endblocktrans %}
+    {% endblock form_intro %}
 
     <div class="my-3">
       {{ formset.management_form }}
@@ -33,19 +35,20 @@
           </div>
         </div>
 
-        <div class="col-sm-2">
-          {% include 'bootstrap4/layout/field_errors_block.html' with field=form.errors %}
-          {{ form.storage|add_class:'d-none' }}
-          {{ form.storage_name }}
+        <div class="col-sm-3">
+          {% include 'bootstrap4/layout/field_errors_block.html' with field=form.entity %}
+          {{ form.entity|add_class:'d-none' }}
+          {{ form.entity_name }}
         </div>
 
         <div class="col-auto">
-          {% include 'bootstrap4/layout/field_errors_block.html' with field=form.access %}
-          {{ form.access|add_class:'form-control' }}
+          {% include 'bootstrap4/layout/field_errors_block.html' with field=form.topic %}
+          {{ form.topic|add_class:'form-control' }}
         </div>
       </div>
 
       {% endfor %}
     </div>
+
   </div>
 {% endblock %}

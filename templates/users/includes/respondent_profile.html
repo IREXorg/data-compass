@@ -8,27 +8,15 @@
   </p>
 
   <div class="mx-1">
+
     <h2>{% trans 'My Surveys' %}</h2>
 
+    <p class="text-muted">
+      {% blocktrans %}Click to continue with further action.{% endblocktrans %}
+    </p>
+
     {% for survey in respondent_surveys %}
-      <div class="border-bottom py-3">
-        <h3><a href="#">{{ survey.display_name }}</a></h3>
-        <div>{% trans 'Status' %}: {{ survey.status|default:'-' }}</div>
-        <div>
-          {% trans 'Facilitated by' %}:
-          {% for facilitator in survey.facilitators.all %}
-            {{ facilitator.full_name }} {% if not forloop.last %}, {% endif %}
-          {% endfor %}
-        </div>
-        <div>
-          <!-- Displayed action buttons should be dependent on survey status-->
-          <a class="btn btn-outline-info btn-sm">{% trans 'More details' %}</a>
-          <a href="{% url 'surveys:respondent-consent' survey.pk %}" class="btn btn-outline-info btn-sm">{% trans 'Start survey' %}</a>
-          <a class="btn btn-outline-info btn-sm">{% trans 'Continue survey' %}</a>
-          <a class="btn btn-outline-info btn-sm">{% trans 'Contact facilitator' %}</a>
-          <a class="btn btn-outline-info btn-sm">{% trans 'View my response' %}</a>
-        </div>
-      </div>
+      {% include 'surveys/includes/user_survey_item.html' %}
     {% endfor %}
   </div>
 </div>

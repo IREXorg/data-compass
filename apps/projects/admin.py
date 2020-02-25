@@ -8,6 +8,7 @@ class ProjectAdmin(admin.ModelAdmin):
     search_fields = ['id', 'uuid', 'name', 'code']
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
     list_display = ['name', 'countries', 'description']
+    filter_horizontal = ['facilitators']
     autocomplete_fields = ['creator']
 
     def save_model(self, request, obj, form, change):
