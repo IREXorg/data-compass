@@ -22,4 +22,9 @@ urlpatterns = [
         views.DatasetResponseUpdateFrequencyView.as_view(),
         name='dataset-response-update-frequency'
     ),
+    path(
+        'dataset-topic-response/<int:pk>/update/',
+        views.DatasetTopicResponseUpdateView.as_view(),
+        name='dataset-topic-response-update'
+    ),
 ]

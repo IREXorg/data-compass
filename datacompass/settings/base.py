@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'phonenumber_field',
     'mptt',
     'crispy_forms',
+    'widget_tweaks',
     'imagekit',
     'django_filters',
     'active_link',

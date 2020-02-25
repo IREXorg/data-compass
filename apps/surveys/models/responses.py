@@ -127,19 +127,25 @@ class DatasetTopicStorageAccess(TimeStampedModel):
         editable=False,
         unique=True
     )
-    dataset_response = models.ForeignKey(
+    response = models.ForeignKey(
         'surveys.DatasetTopicResponse',
         on_delete=models.CASCADE,
+        related_name='storages',
+        related_query_name='storage',
         verbose_name=_('dataset topic storage')
     )
     storage = models.ForeignKey(
         'surveys.DatasetStorage',
         on_delete=models.CASCADE,
+        related_name='dataset_topic_responses',
+        related_query_name='dataset_topic_response',
         verbose_name=_('dataset storage')
     )
     access = models.ForeignKey(
         'surveys.DatasetAccess',
         on_delete=models.CASCADE,
+        related_name='dataset_topic_responses',
+        related_query_name='dataset_topic_response',
         verbose_name=_('dataset access')
     )
 
@@ -148,7 +154,7 @@ class DatasetTopicStorageAccess(TimeStampedModel):
         verbose_name_plural = _('Dataset Response Storage Access')
 
     def __str__(self):
-        return f'{self.dataset_storage} - {self.dataset_access}'
+        return f'{self.storage} - {self.access}'
 
     @property
     def dataset(self):
@@ -446,8 +452,17 @@ class Response(TimeStampedModel):
     def __str__(self):
         return f'{self.survey.display_name} response'
 
-    def get_datasets(self):
-        """Get queryset of datasets associated with this response."""
+    def get_datasets(self, topic=False):
+        """
+        Get queryset of datasets associated with this response.
+
+        Args:
+            topic (bool): If topic is set to true the datasets will be
+                queried based on DatasetTopicResponse model otherwise
+                DatasetResponse model will be used.
+        """
+        if topic:
+            return Dataset.objects.filter(response__topic_response=self)
         return Dataset.objects.filter(response__response=self)
 
     def set_dataset_responses(self, datasets):
@@ -463,6 +478,10 @@ class Response(TimeStampedModel):
         for dataset in datasets:
             if dataset not in old_datasets:
                 self.dataset_responses.create(dataset=dataset)
+
+        # set topic responses
+        for dataset_response in self.dataset_responses.all():
+            dataset_response.set_topic_responses()
 
 
 class DatasetResponse(TimeStampedModel):
@@ -542,17 +561,34 @@ class DatasetResponse(TimeStampedModel):
         """The survey."""
         return self.response.survey
 
+    def is_first_in_response(self):
+        return not self.response.dataset_responses.filter(pk__lt=self.pk).exists()
+
+    def is_last_in_response(self):
+        return not self.response.dataset_responses.filter(pk__gt=self.pk).exists()
+
     def get_next_in_response(self):
         return self.response.dataset_responses.filter(pk__gt=self.pk).order_by('pk').first()
 
     def get_previous_in_response(self):
         return self.response.dataset_responses.filter(pk__lt=self.pk).order_by('-pk').first()
 
-    def is_first_in_response(self):
-        return not self.response.dataset_responses.filter(pk__lt=self.pk).exists()
+    def set_topic_responses(self):
+        """Created or delete dataset-topic responses for the dataset."""
 
-    def is_last_in_response(self):
-        return not self.response.dataset_responses.filter(pk__gt=self.pk).exists()
+        # get dataset topics
+        topics = self.dataset.topics.all() or self.survey.topics.all()
+
+        # remove existing dataset-topic unwanted topic responses.
+        self.topic_responses.exclude(topic__in=topics).delete()
+
+        # get old topics
+        old_topics = self.topic_responses.values_list('topic', flat=True)
+
+        # add missing topic responses
+        for topic in topics:
+            if topic not in old_topics:
+                self.topic_responses.create(topic=topic)
 
 
 class DatasetTopicResponse(TimeStampedModel):
@@ -567,25 +603,16 @@ class DatasetTopicResponse(TimeStampedModel):
         unique=True
     )
 
-    #: The main survey response.
-    response = models.ForeignKey(
-        'surveys.Response',
-        verbose_name=_('response'),
-        related_name='dataset_topic_responses',
-        related_query_name='dataset_topic_response',
-        on_delete=models.CASCADE
-    )
-
-    #: The dataset.
-    dataset = models.ForeignKey(
-        'surveys.Dataset',
+    #: The dataset response object.
+    dataset_response = models.ForeignKey(
+        'surveys.DatasetResponse',
+        verbose_name=_('dataset response'),
         related_name='topic_responses',
         related_query_name='topic_response',
-        verbose_name=_('dataset'),
         on_delete=models.CASCADE
     )
 
-    #: The topic
+    #: The topic.
     topic = models.ForeignKey(
         'surveys.Topic',
         related_name='dataset_responses',
@@ -600,16 +627,9 @@ class DatasetTopicResponse(TimeStampedModel):
         related_name='percieved_owns_datasets',
         related_query_name='percieved_owns_dataset',
         on_delete=models.CASCADE,
+        blank=True,
+        null=True,
         verbose_name=_('perceived owner')
-    )
-
-    #: How the dataset is stored and what are access permissions.
-    dataset_storages = models.ManyToManyField(
-        'surveys.DatasetStorage',
-        related_name='dataset_responses',
-        related_query_name='dataset_response',
-        through='surveys.DatasetTopicStorageAccess',
-        verbose_name=_('dataset storages')
     )
 
     #: Extra data.
@@ -625,12 +645,29 @@ class DatasetTopicResponse(TimeStampedModel):
     @property
     def respondent(self):
         """A survey respondent."""
-        return self.response.respondent
+        return self.dataset_response.respondent
 
     @property
     def survey(self):
         """The survey."""
-        return self.response.survey
+        return self.dataset_response.survey
+
+    @property
+    def dataset(self):
+        """The dataset."""
+        return self.dataset_response.dataset
+
+    def is_first_in_response(self):
+        return not self.dataset_response.topic_responses.filter(pk__lt=self.pk).exists()
+
+    def is_last_in_response(self):
+        return not self.dataset_response.topic_responses.filter(pk__gt=self.pk).exists()
+
+    def get_next_in_response(self):
+        return self.dataset_response.topic_responses.filter(pk__gt=self.pk).order_by('pk').first()
+
+    def get_previous_in_response(self):
+        return self.dataset_response.topic_responses.filter(pk__lt=self.pk).order_by('-pk').first()
 
 
 class QuestionResponse(TimeStampedModel):
