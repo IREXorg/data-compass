@@ -10,7 +10,7 @@ class ProjectCreateForm(ModelForm):
     """
     class Meta:
         model = Project
-        fields = ['name', 'description', 'email', 'tags', ]
+        fields = ['name', 'description', 'email', 'tags', 'dataflow_hierarchy']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 2}),
         }
@@ -18,11 +18,11 @@ class ProjectCreateForm(ModelForm):
 
 class ProjectUpdateForm(ModelForm):
     """
-    Project create form
+    Project update form
     """
     class Meta:
         model = Project
-        fields = ['name', 'description', 'email', 'tags', ]
+        fields = ['name', 'description', 'email', 'tags', 'dataflow_hierarchy']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 2}),
         }
