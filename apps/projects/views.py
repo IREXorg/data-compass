@@ -53,7 +53,7 @@ class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin,
     """
 
     # Translators: This is projects list page title
-    page_title = _('Create Project')
+    page_title = _('Create a project')
     template_name = 'projects/project_create.html'
     model = Project
     form_class = ProjectCreateForm

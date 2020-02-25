@@ -22,7 +22,7 @@
         </a>
       </li>
       {% if user.is_authenticated %}
-      <li class="nav-item {% active_link 'projects:project-list' %}">
+      <li class="nav-item {% active_link 'projects:project-list || projects:project-create' %}">
         <a class="nav-link" href="{% url 'projects:project-list' %}">
           {% trans 'My Projects' %}
         </a>

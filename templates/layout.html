@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 
+{% load i18n %}
+{% load static %}
+{% load active_link_tags %}
+
+
 {% block body %}
 {# Start: Page #}
 <div class="page">
@@ -9,8 +14,59 @@
   {# End: Include Navbar Primary #}
 
   {# Start: Include Navbar Secondary #}
-  {% include 'includes/navbar_secondary.html' %}
+  {# {% include 'includes/navbar_secondary.html' %} #}
   {# End: Include Navbar Secondary #}
+
+  {# Start: Navbar Secondary #}
+  <nav class="navbar navbar-expand navbar-no-shadow" id="navbar-secondary">
+
+    {# Start: Navbar Container #}
+    <div class="container">
+
+      {# Start: Breadcrumbs #}
+      {% if user.is_authenticated %}
+      {% block breadcrumbs %}{% endblock %}
+      {% endif %}
+      {# End: Breadcrumbs #}
+
+      {# Star: Navbar Nav #}
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item {% active_link 'home' %}">
+          <a class="nav-link" href="{% url 'home' %}">
+            {% trans 'Home' %}
+          </a>
+        </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item {% active_link 'projects:project-list || projects:project-create' %}">
+          <a class="nav-link" href="{% url 'projects:project-list' %}">
+            {% trans 'My Projects' %}
+          </a>
+        </li>
+        <li class="nav-item {% active_link 'users:profile-detail' %}">
+          <a class="nav-link" href="{% url 'users:profile-detail' %}">
+            {% trans 'My Profile' %}
+          </a>
+        </li>
+        <li class="nav-item {% active_link 'account_logout' %}">
+          <a class="nav-link" href="{% url 'account_logout' %}">
+            {% trans 'Sign out' %}
+          </a>
+        </li>
+        {% else %}
+        <li class="nav-item {% active_link 'account_login' %}">
+          <a class="nav-link" href="{% url 'account_login' %}">
+            {% trans 'Sign in' %}
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+      {# End: Navbar Nav  #}
+
+    </div>
+    {# End: Navbar Container #}
+
+  </nav>
+  {# End: Navbar Secondary #}
 
   {# Start: Page Content #}
   <div class="content">
