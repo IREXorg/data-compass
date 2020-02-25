@@ -7,10 +7,12 @@
 {% block form_fields %}
 
   <div class="my-4">
-    {% blocktrans trimmed with dataset_name=dataset.name %}
-    To whom do you send or share information about {{ dataset_name }},
-    and what kind of information do you share?
-    {% endblocktrans %}
+    {% block form_intro %}
+      {% blocktrans trimmed with dataset_name=dataset.name %}
+      To whom do you send or share information about {{ dataset_name }},
+      and what kind of information do you share?
+      {% endblocktrans %}
+    {% endblock form_intro %}
 
     <div class="my-3">
       {{ formset.management_form }}

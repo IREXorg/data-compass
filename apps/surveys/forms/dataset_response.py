@@ -1,7 +1,8 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from ..models import DatasetResponse, DatasetTopicResponse, DatasetTopicShared, DatasetTopicStorageAccess, Role
+from ..models import (DatasetResponse, DatasetTopicReceived, DatasetTopicResponse, DatasetTopicShared,
+                      DatasetTopicStorageAccess, Role)
 
 
 class DatasetSelectForm(forms.Form):
@@ -210,7 +211,7 @@ class BaseDatasetTopicSharedFormSet(forms.BaseModelFormSet):
         self.instance = instance
 
         if self.instance:
-            self.queryset = self.instance.datasettopicshared_set.all()
+            self.queryset = self._get_queryset()
 
             project = project or self.instance.dataset_response.response.survey.project
             entities = project.entities.all()
@@ -220,7 +221,7 @@ class BaseDatasetTopicSharedFormSet(forms.BaseModelFormSet):
 
             self.initial = [{'entity': entity} for entity in entities]
 
-            initial_selected = self.instance.datasettopicshared_set.select_related('entity', 'topic')
+            initial_selected = self.get_initial_selected()
             initial_entities = [item.entity for item in initial_selected]
 
             # if form is unbound setup the initial data
@@ -240,7 +241,7 @@ class BaseDatasetTopicSharedFormSet(forms.BaseModelFormSet):
         saved_forms = []
 
         # clear existing records
-        self.instance.shared_to.clear()
+        self.clear_entities()
 
         # save each of the selected records
         for form in self.forms:
@@ -251,9 +252,44 @@ class BaseDatasetTopicSharedFormSet(forms.BaseModelFormSet):
 
         return saved_forms
 
+    def _get_queryset(self):
+        return self.instance.datasettopicshared_set.all()
+
+    def get_initial_selected(self):
+        return self.instance.datasettopicshared_set.select_related('entity', 'topic')
+
+    def clear_entities(self):
+        self.instance.shared_to.clear()
+
 
 DatasetTopicSharedFormSet = forms.modelformset_factory(
     DatasetTopicShared,
     form=DatasetTopicSharedForm,
     formset=BaseDatasetTopicSharedFormSet
+)
+
+
+class DatasetTopicReceivedForm(DatasetTopicSharedForm):
+
+    class Meta:
+        model = DatasetTopicReceived
+        fields = ['selected', 'entity', 'topic']
+
+
+class BaseDatasetTopicReceivedFormSet(BaseDatasetTopicSharedFormSet):
+
+    def _get_queryset(self):
+        return self.instance.datasettopicreceived_set.all()
+
+    def get_initial_selected(self):
+        return self.instance.datasettopicreceived_set.select_related('entity', 'topic')
+
+    def clear_entities(self):
+        self.instance.received_from.clear()
+
+
+DatasetTopicReceivedFormSet = forms.modelformset_factory(
+    DatasetTopicReceived,
+    form=DatasetTopicReceivedForm,
+    formset=BaseDatasetTopicReceivedFormSet
 )
