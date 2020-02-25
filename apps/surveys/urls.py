@@ -37,4 +37,9 @@ urlpatterns = [
         views.DatasetTopicReceivedUpdateView.as_view(),
         name='dataset-response-update-received'
     ),
+    path(
+        '<int:pk>/response-complete/',
+        views.SurveyResponseCompleteView.as_view(),
+        name='survey-response-complete'
+    ),
 ]

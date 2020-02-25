@@ -247,7 +247,7 @@ class DatasetTopicReceivedUpdateView(DatasetTopicSharedUpdateView):
         if _next:
             return reverse('surveys:dataset-response-update-frequency', kwargs={'pk': _next.pk})
 
-        return '#'
+        return reverse('surveys:survey-response-complete', kwargs={'pk': self.survey_response.pk})
 
     def get_back_url_path(self):
         return reverse('surveys:dataset-response-update-shared', kwargs={'pk': self.dataset_response.pk})

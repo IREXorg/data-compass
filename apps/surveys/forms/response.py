@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from mptt.forms import TreeNodeChoiceField
 
 from ..models import Respondent
+from ..models import Response as SurveyResponse
 
 
 class RespondentConsentForm(forms.Form):
@@ -37,3 +38,13 @@ class RespondentForm(forms.ModelForm):
 
         super().__init__(*args, **kwargs)
         self.fields['hierarchy'].queryset = project.hierarchies.all()
+
+
+class SurveyResponseCompleteForm(forms.ModelForm):
+
+    class Meta:
+        model = SurveyResponse
+        fields = ['completed_at']
+        widgets = {
+            'completed_at': forms.HiddenInput()
+        }
