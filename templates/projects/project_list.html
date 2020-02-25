@@ -2,26 +2,41 @@
 
 {% load i18n %}
 
-{# Start: Page actions #}
-{% block page_actions %}
-<div class="col-auto ml-auto d-print-none">
-  <div class="row">
-    <div class="input-icon">
-      <span class="input-icon-addon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      </span>
-      <input type="search" class="form-control d-inline-block w-9 mr-3" placeholder="{% trans 'Search projects…' %}"/>
+{# Start: Page header #}
+{% block page_header %}
+<div class="page-header">
+  <div class="row align-items-center">
+
+    {# Start: Page title #}
+    <div class="col">
+      <h1 class="page-title">
+        {% block page_title %}{{ page_title }}{% endblock %}
+      </h1>
     </div>
+    {# End: Page title #}
 
-    <a href="{% url 'projects:project-create' %}" class="btn btn-primary ml-3 d-none d-sm-inline-block">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+    {# Start: Page actions #}
+    <div class="col-auto ml-auto d-print-none">
+      <div class="row">
+        <div class="input-icon">
+          <span class="input-icon-addon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </span>
+          <input type="search" class="form-control d-inline-block w-9 mr-3" placeholder="{% trans 'Search projects…' %}"/>
+        </div>
 
-      Add a project
-    </a>
+        <a href="{% url 'projects:project-create' %}" class="btn btn-primary ml-3 d-none d-sm-inline-block">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            {% trans 'New Project' %}
+        </a>
+      </div>
+    </div>
+    {# End: Page actions #}
+
   </div>
 </div>
 {% endblock %}
-{# End: Page actions #}
+{# End: Page header #}
 
 {# Start: Page content #}
 {% block content %}
@@ -99,12 +114,12 @@
   {% endfor %}
 
   {% else %}
-  <p class="empty-title h3">No results found.</p>
-  <p class="empty-subtitle text-muted">Try adjusting your search or filter to find what you're looking for.</p>
+  <p class="empty-title h3">{% trans 'No projects found.' %}</p>
+  <p class="empty-subtitle text-muted">{% trans 'Try adjusting your search or filter to find projects you are looking for.' %}</p>
   <div class="empty-action">
-    <a href="#" class="btn btn-primary">
+    <a href="{% url 'projects:project-create' %}" class="btn btn-primary">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-      Add your first project
+       {% trans 'Add your first project' %}
     </a>
   </div>
   {% endif %}

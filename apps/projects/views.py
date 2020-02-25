@@ -27,7 +27,7 @@ class ProjectListView(LoginRequiredMixin, PageTitleMixin, ListView):
     """
 
     # Translators: This is projects list page title
-    page_title = _('Project List')
+    page_title = _('My Projects')
     template_name = 'projects/project_list.html'
     list_view_name = 'projects/project_list.html'
     model = Project
