@@ -200,6 +200,11 @@ MEDIA_URL = env('MEDIA_URL', default='/media/')
 
 MEDIA_ROOT = env('MEDIA_ROOT', default=str(BASE_DIR / 'media_root'))
 
+DEFAULT_FILE_STORAGE = env('DEFAULT_FILE_STORAGE', default='django.core.files.storage.FileSystemStorage')
+
+STATICFILES_STORAGE = env('STATICFILES_STORAGE',
+                          default='django.contrib.staticfiles.storage.StaticFilesStorage')
+
 # Crispy forms
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -239,3 +244,26 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='')
 SERVER_EMAIL = env('SERVER_EMAIL', default='')
 
 ADMINS = getaddresses([env('ADMINS', default='')])
+
+
+# Azure
+
+AZURE_ACCOUNT_NAME = env('AZURE_ACCOUNT_NAME', default=None)
+
+AZURE_ACCOUNT_KEY = env('AZURE_ACCOUNT_KEY', default=None)
+''
+AZURE_CONTAINER = env('AZURE_CONTAINER', default=None)
+
+AZURE_STATIC_CONTAINER = env('AZURE_STATIC_CONTAINER', default=None)
+
+AZURE_MEDIA_CONTAINER = env('AZURE_MEDIA_CONTAINER', default=None)
+
+AZURE_URL_EXPIRATION_SECS = env('AZURE_URL_EXPIRATION_SECS', default=None)
+
+AZURE_LOCATION = env('AZURE_LOCATION', default='')
+
+AZURE_STATIC_LOCATION = env('AZURE_STATIC_LOCATION', default='static')
+
+AZURE_MEDIA_LOCATION = env('AZURE_MEDIA_LOCATION', default='media')
+
+AZURE_CUSTOM_DOMAIN = env('AZURE_CUSTOM_DOMAIN', default=None)
