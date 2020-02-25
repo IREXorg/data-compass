@@ -1,9 +1,43 @@
 {% extends 'surveys/base.html' %}
 
-
 {% load i18n %}
 {% load crispy_forms_tags %}
 
+{# Start: Breadcrumbs #}
+{% block breadcrumbs %}
+<ol class="breadcrumb" aria-label="breadcrumbs">
+   <li class="breadcrumb-item"><a href="{% url 'projects:project-list' %}">{% trans 'My Projects' %}</a></li>
+   {# TODO: link back to a project #}
+   <li class="breadcrumb-item active" aria-current="page"><a href="#">{{page_title}}</a></li>
+</ol>
+{% endblock %}
+{# End: Breadcrumbs #}
+
+{# Start: Page header #}
+{% block page_header %}
+<div class="page-header">
+  <div class="row align-items-center">
+
+    {# Start: Page title #}
+    <div class="col">
+      <h1 class="page-title">
+        {% block page_title %}{{ page_title }}{% endblock %}
+      </h1>
+    </div>
+    {# End: Page title #}
+
+    {# Start: Page actions #}
+    <div class="col-auto ml-auto d-print-none">
+      <div class="row">
+        &nbsp;
+      </div>
+    </div>
+    {# End: Page actions #}
+
+  </div>
+</div>
+{% endblock %}
+{# End: Page header #}
 
 {# Start: Content #}
 {% block content %}

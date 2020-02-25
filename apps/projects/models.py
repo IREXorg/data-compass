@@ -3,6 +3,7 @@ import uuid
 from django.conf import settings
 from django.contrib.postgres.fields import ArrayField, JSONField
 from django.db import models
+from django.urls import reverse_lazy as reverse
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
@@ -79,3 +80,7 @@ class Project(TimeStampedModel):
         if not self.code:
             self.code = slugify(self.name[:50])
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        """Obtain project absolute url."""
+        return reverse('projects:project-detail', kwargs={'pk': self.pk})

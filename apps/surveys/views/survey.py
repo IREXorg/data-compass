@@ -53,7 +53,7 @@ class SurveyCreateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, C
     """
 
     # Translators: This is survey create page title
-    page_title = _('Create Survey')
+    page_title = _('Create a survey')
     template_name = 'surveys/survey_create.html'
     context_object_name = 'survey'
     model = Survey
