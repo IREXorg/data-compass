@@ -29,9 +29,9 @@ class SurveyListView(LoginRequiredMixin, PageTitleMixin, ListView):
     # Translators: This is surveys list page title
     page_title = _('Surveys List')
     template_name = 'surveys/survey_list.html'
+    context_object_name = 'surveys'
     list_view_name = 'surveys/survey_list.html'
     model = Survey
-    context_object_name = 'surveys'
     filterset_class = SurveyListFilter
     queryset = Survey.objects.all()
     ordering = ['created_at']
@@ -55,6 +55,7 @@ class SurveyCreateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, C
     # Translators: This is survey create page title
     page_title = _('Create Survey')
     template_name = 'surveys/survey_create.html'
+    context_object_name = 'survey'
     model = Survey
     form_class = SurveyCreateForm
     success_url = reverse('surveys:survey-list')
@@ -76,6 +77,7 @@ class SurveyDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
     # Translators: This is survey view page title
     page_title = _('View Survey')
     template_name = 'surveys/survey_detail.html'
+    context_object_name = 'survey'
     model = Survey
 
 
@@ -94,8 +96,9 @@ class SurveyUpdateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, U
     """
 
     # Translators: This is survey update page title
-    page_title = _('Update Survey')
+    page_title = _('Update a survey')
     template_name = 'surveys/survey_update.html'
+    context_object_name = 'survey'
     model = Survey
     form_class = SurveyUpdateForm
     success_url = reverse('surveys:survey-list')
@@ -116,7 +119,8 @@ class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
     """
 
     # Translators: This is survey delete page title
-    page_title = _('Delete Survey')
+    page_title = _('Delete a survey')
     template_name = 'surveys/survey_delete.html'
+    context_object_name = 'survey'
     model = Survey
     success_url = reverse('surveys:survey-list')
