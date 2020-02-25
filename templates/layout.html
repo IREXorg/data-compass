@@ -19,15 +19,7 @@
     <main class="container">
 
       {# Start: Page Header #}
-      <div class="page-header">
-        <div class="row align-items-center">
-          <div class="col-auto">
-            <h1 class="page-title">
-              {% block page_title %}{{ page_title }}{% endblock %}
-            </h1>
-          </div>
-        </div>
-      </div>
+      {% block page_header %}{% endblock %}
       {# End: Page Header #}
 
       {# Start: Main Content #}

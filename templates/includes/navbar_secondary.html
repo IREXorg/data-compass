@@ -10,11 +10,7 @@
 
     {# Start: Breadcrumbs #}
     {% if user.is_authenticated %}
-    <ol class="breadcrumb" aria-label="breadcrumbs">
-       <li class="breadcrumb-item"><a href="#">Home</a></li>
-       <li class="breadcrumb-item"><a href="#">Library</a></li>
-       <li class="breadcrumb-item active" aria-current="page"><a href="#">Data</a></li>
-    </ol>
+    {% block breadcrumbs %}{% endblock %}
     {% endif %}
     {# End: Breadcrumbs #}
 
