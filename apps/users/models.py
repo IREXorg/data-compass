@@ -56,7 +56,13 @@ class User(AbstractUser):
     avatar_thumbnail = ImageSpecField(
         source='avatar',
         processors=[ResizeToFit(100, 100)],
-        format='JPEG',
+        format='PNG',
+        options={'quality': 100}
+    )
+    avatar_sm = ImageSpecField(
+        source='avatar',
+        processors=[ResizeToFit(50, 50)],
+        format='PNG',
         options={'quality': 100}
     )
     phone_number = PhoneNumberField(_('phone number'), blank=True)

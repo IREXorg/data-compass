@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'django_filters',
     'active_link',
     # Custom apps
+    'core',
     'apps.users.apps.UsersConfig',
     'apps.organizations.apps.OrganizationsConfig',
     'apps.projects.apps.ProjectsConfig',
@@ -115,7 +116,9 @@ DATABASES = {
         'USER': env('DATABASE_USER', default='datacompass'),
         'PASSWORD': env('DATABASE_PASSWORD', default='datacompass'),
         'HOST': env('DATABASE_HOST', default='127.0.0.1'),
-        'PORT': env('DATABASE_PORT', default='5432')
+        'PORT': env('DATABASE_PORT', default='5432'),
+        'CONN_MAX_AGE': env.int('DATABASE_CONN_MAX_AGE', default=0),
+        'ATOMIC_REQUESTS': env.bool('DATABASE_ATOMIC_REQUESTS', default=True)
     }
 }
 
@@ -198,6 +201,11 @@ MEDIA_URL = env('MEDIA_URL', default='/media/')
 
 MEDIA_ROOT = env('MEDIA_ROOT', default=str(BASE_DIR / 'media_root'))
 
+DEFAULT_FILE_STORAGE = env('DEFAULT_FILE_STORAGE', default='django.core.files.storage.FileSystemStorage')
+
+STATICFILES_STORAGE = env('STATICFILES_STORAGE',
+                          default='django.contrib.staticfiles.storage.StaticFilesStorage')
+
 # Crispy forms
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -242,3 +250,81 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='')
 SERVER_EMAIL = env('SERVER_EMAIL', default='')
 
 ADMINS = getaddresses([env('ADMINS', default='')])
+
+
+# Azure
+
+AZURE_ACCOUNT_NAME = env('AZURE_ACCOUNT_NAME', default=None)
+
+AZURE_ACCOUNT_KEY = env('AZURE_ACCOUNT_KEY', default=None)
+
+AZURE_CONTAINER = env('AZURE_CONTAINER', default=None)
+
+AZURE_STATIC_CONTAINER = env('AZURE_STATIC_CONTAINER', default=None)
+
+AZURE_MEDIA_CONTAINER = env('AZURE_MEDIA_CONTAINER', default=None)
+
+AZURE_URL_EXPIRATION_SECS = env('AZURE_URL_EXPIRATION_SECS', default=None)
+
+AZURE_LOCATION = env('AZURE_LOCATION', default='')
+
+AZURE_STATIC_LOCATION = env('AZURE_STATIC_LOCATION', default='static')
+
+AZURE_MEDIA_LOCATION = env('AZURE_MEDIA_LOCATION', default='media')
+
+AZURE_CUSTOM_DOMAIN = env('AZURE_CUSTOM_DOMAIN', default=None)
+
+
+# Logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'formatters': {
+        'django.server': {
+            '()': 'django.utils.log.ServerFormatter',
+            'format': '[%(server_time)s] %(message)s',
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+        },
+        'console_debug_false': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'logging.StreamHandler',
+        },
+        'django.server': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'django.server',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'console_debug_false', 'mail_admins'],
+            'level': 'INFO',
+        },
+        'django.server': {
+            'handlers': ['django.server'],
+            'level': 'INFO',
+            'propagate': False,
+        }
+    }
+}

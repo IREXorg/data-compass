@@ -7,6 +7,8 @@ from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from django_countries.fields import CountryField
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
 from phonenumber_field.modelfields import PhoneNumberField
 
 from core.models import TimeStampedModel
@@ -34,6 +36,18 @@ class Organization(TimeStampedModel):
         blank=True,
         null=True,
         upload_to='organizations/avatars'
+    )
+    avatar_thumbnail = ImageSpecField(
+        source='avatar',
+        processors=[ResizeToFit(100, 100)],
+        format='PNG',
+        options={'quality': 100}
+    )
+    avatar_sm = ImageSpecField(
+        source='avatar',
+        processors=[ResizeToFit(50, 50)],
+        format='PNG',
+        options={'quality': 100}
     )
     website = models.URLField(_('website'), blank=True)
     country = CountryField(_('country'), blank=True)
