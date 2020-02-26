@@ -124,7 +124,7 @@ class BaseDatasetResponseUpdateView(PageMixin, RespondentSurveyMixin, ConsentChe
             return redirect_to_login(self.request.get_full_path())
 
         # Check respondent's consent
-        self.consented_at = self.get_consent(respondent=self.object, survey=self.survey)
+        self.consented_at = self.get_consent(survey=self.survey)
         if not self.consented_at:
             return redirect(reverse('surveys:respondent-consent', kwargs={'pk': self.survey.pk}))
 
