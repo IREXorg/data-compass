@@ -118,6 +118,7 @@ DATABASES = {
         'PASSWORD': env('DATABASE_PASSWORD', default='datacompass'),
         'HOST': env('DATABASE_HOST', default='127.0.0.1'),
         'PORT': env('DATABASE_PORT', default='5432'),
+        'CONN_MAX_AGE': env.int('DATABASE_CONN_MAX_AGE', default=0),
         'ATOMIC_REQUESTS': env.bool('DATABASE_ATOMIC_REQUESTS', default=True)
     }
 }
