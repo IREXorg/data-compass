@@ -75,12 +75,6 @@ class Project(TimeStampedModel):
         related_query_name='created_project',
         on_delete=models.CASCADE
     )
-    dataflow_hierarchy = models.FileField(
-        _('Dataflow hierarchy'),
-        blank=True,
-        null=True,
-        upload_to='projects/dataflows'
-    )
     extras = JSONField(_('extras'), blank=True, default=dict)
 
     class Meta:
