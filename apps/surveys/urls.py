@@ -38,6 +38,11 @@ urlpatterns = [
         name='dataset-response-update-received'
     ),
     path(
+        '<int:pk>/response-resume/',
+        views.SurveyResponseResumeView.as_view(),
+        name='survey-response-resume'
+    ),
+    path(
         '<int:pk>/response-complete/',
         views.SurveyResponseCompleteView.as_view(),
         name='survey-response-complete'

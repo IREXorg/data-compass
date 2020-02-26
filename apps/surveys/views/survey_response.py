@@ -1,8 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import redirect_to_login
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
+from django.views import View
 from django.views.generic import UpdateView
+from django.views.generic.detail import SingleObjectMixin
 
 from core.exceptions import NotAuthenticated
 from core.mixins import PageMixin
@@ -10,6 +13,40 @@ from core.mixins import PageMixin
 from ..forms import SurveyResponseCompleteForm
 from ..mixins import ConsentCheckMixin, RespondentSurveyMixin
 from ..models import Response as SurveyResponse
+
+
+class SurveyResponseResumeView(LoginRequiredMixin, PageMixin, SingleObjectMixin, View):
+    """
+    Redirect to respondents last stage of survey response if possible.
+
+    If the resume point won't be found user will beredirected to
+    respondent information update page.
+    """
+    model = SurveyResponse
+
+    def get_queryset(self):
+        return self.model.objects\
+            .active()\
+            .filter(
+                completed_at__isnull=True,
+                consented_at__isnull=False,
+                respondent__user=self.request.user)\
+            .select_related('respondent', 'survey')
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        # check last response URL from state data
+        _state = self.object.extras.get('_state', {})
+        resume_path = _state.get('resume_path')
+
+        if not resume_path:
+            # if resume point not found redirect to respondent information update
+            return redirect(
+                reverse('surveys:respondent-update', kwargs={'pk': self.object.respondent.pk})
+            )
+
+        return redirect(resume_path)
 
 
 class SurveyResponseCompleteView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, UpdateView):
