@@ -1,3 +1,14 @@
+.btn-primary {
+  background-color: $green !important;
+  border-color: $green !important;
+}
+
+.btn-secondary {
+  background-color: $orange !important;
+  border-color: $orange !important;
+  color: $white;
+}
+
 .navbar-light {
   background: #d8e6e6;
 
