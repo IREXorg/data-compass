@@ -81,6 +81,7 @@ class DatasetResponseListCreateView(PageMixin, RespondentSurveyMixin, ConsentChe
 
     def form_valid(self, form):
         self.survey_response.set_dataset_responses(form.cleaned_data['datasets'])
+        self.survey_response.set_resume_path(self.request.get_full_path())
         return redirect(self.get_success_url())
 
     def get_success_url(self):
@@ -128,6 +129,10 @@ class BaseDatasetResponseUpdateView(PageMixin, RespondentSurveyMixin, ConsentChe
             return redirect(reverse('surveys:respondent-consent', kwargs={'pk': self.survey.pk}))
 
         return super().dispatch(*args, **kwargs)
+
+    def form_valid(self, form):
+        self.survey_response.set_resume_path(self.request.get_full_path())
+        return super().form_valid(form)
 
     def get_page_title(self):
         return self.survey.display_name
@@ -217,6 +222,7 @@ class DatasetTopicSharedUpdateView(PageMixin, RespondentSurveyMixin, ConsentChec
 
     def form_valid(self, form):
         form.save()
+        self.survey_response.set_resume_path(self.request.get_full_path())
         return super().form_valid(form)
 
     def get_success_url(self):
@@ -325,6 +331,7 @@ class DatasetTopicResponseUpdateView(PageMixin, InlineFormsetMixin, RespondentSu
         formset = self.get_formset()
 
         if form.is_valid() and formset.is_valid():
+            self.survey_response.set_resume_path(self.request.get_full_path())
             return self.form_valid(form, formset)
         else:
             return self.form_invalid(form, formset)

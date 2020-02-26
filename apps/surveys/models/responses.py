@@ -499,6 +499,13 @@ class Response(TimeStampedModel):
         for dataset_response in self.dataset_responses.all():
             dataset_response.set_topic_responses()
 
+    def set_resume_path(self, path):
+        """Set resume URL path for the response."""
+        _state = self.extras.get('_state', {})
+        _state['resume_path'] = path
+        self.extras['_state'] = _state
+        self.__class__.objects.filter(id=self.id).update(extras=self.extras)
+
 
 class DatasetResponse(TimeStampedModel):
     """A survey response related to a specific :class:`.Dataset`."""

@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Case, CharField, Q, Value, When
+from django.db.models import Case, CharField, Max, Q, Value, When
 
 
 class SurveyQuerySet(models.QuerySet):
@@ -45,7 +45,9 @@ class SurveyQuerySet(models.QuerySet):
                 ),
                 default=Value('not started'),
                 output_field=CharField()
-            )
+            ),
+            respondent_id=Max('respondent__pk', filter=Q(respondent__user=user)),
+            response_id=Max('respondent__response__pk', filter=Q(respondent__user=user)),
         )
 
 

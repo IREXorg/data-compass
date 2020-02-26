@@ -73,7 +73,7 @@
             {% trans 'Start survey' %}
           </a>
         {% elif survey.user_status == 'in progress' %}
-          <a href="{% url 'surveys:respondent-consent' survey.pk %}"
+          <a href="{% url 'surveys:survey-response-resume' survey.response_id %}"
              class="btn btn-primary btn-sm">
             {% trans 'Continue survey' %}
           </a>
