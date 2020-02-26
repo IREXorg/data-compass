@@ -9,11 +9,15 @@ module.exports = {
   context: __dirname,
   entry: [
     './assets/js/app.js',
-    './assets/sass/app.scss'
+    './assets/sass/app.scss',
   ],
   output: {
     path: path.resolve('./assets/bundles/'),
     filename: devMode ? '[name].js' : '[name].hash.js',
+  },
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000
   },
   optimization: {
     splitChunks: {
