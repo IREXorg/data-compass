@@ -58,7 +58,9 @@ class SurveyCreateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, C
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyCreateForm
-    success_url = reverse('surveys:survey-list')
+
+    def get_success_url(self):
+        return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
 
 
 class SurveyDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
@@ -103,7 +105,7 @@ class SurveyUpdateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, U
     form_class = SurveyUpdateForm
 
     def get_success_url(self):
-        return reverse('projects:project-detail', kwargs={'pk': self.get_object().project.pk})
+        return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
 
 
 class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
@@ -127,4 +129,4 @@ class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
     model = Survey
 
     def get_success_url(self):
-        return reverse('projects:project-detail', kwargs={'pk': self.get_object().project.pk})
+        return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
