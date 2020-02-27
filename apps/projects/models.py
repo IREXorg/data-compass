@@ -85,7 +85,7 @@ class Project(TimeStampedModel):
         """Obtain project absolute url."""
         return reverse('projects:project-detail', kwargs={'pk': self.pk})
 
-     # Derive project name abbreviation
+    # Derive project name abbreviation
     @property
     def abbreviation(self):
         parts = []
