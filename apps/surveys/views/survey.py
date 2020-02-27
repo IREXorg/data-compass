@@ -101,7 +101,9 @@ class SurveyUpdateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, U
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyUpdateForm
-    success_url = reverse('surveys:survey-list')
+
+    def get_success_url(self):
+        return reverse('projects:project-detail', kwargs={'pk': self.get_object().project.pk})
 
 
 class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
