@@ -15,6 +15,7 @@
 
 {# Start: Page header #}
 {% block page_header %}
+{% if surveys|length > 0 %}
 <div class="page-header">
   <div class="row align-items-center">
 
@@ -36,7 +37,7 @@
           <input type="search" class="form-control d-inline-block w-9 mr-3" placeholder="{% trans 'Search surveys…' %}"/>
         </div>
 
-        <a href="{% url 'surveys:survey-create' %}" class="btn btn-primary ml-3 d-none d-sm-inline-block">
+        <a href="{% url 'projects:project-create-survey' project=project.pk %}" class="btn btn-primary ml-3 d-none d-sm-inline-block">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             {% trans 'New Survey' %}
         </a>
@@ -46,11 +47,13 @@
 
   </div>
 </div>
+{% endif %}
 {% endblock %}
 {# End: Page header #}
 
 {# Start: Page content #}
 {% block content %}
+{% if surveys|length > 0 %}
 {# Start: Survey list #}
 <div class="row">
   {% for survey in surveys %}
@@ -123,10 +126,19 @@
   </div>
   {% endfor %}
 </div>
-{# Start: Pagination #}
-{# TODO: paginate surveys #}
-{# End: Pagination #}
 {# End: Survey list #}
+{# Start: Empty Survey state #}
+{% else %}
+<div class="container text-center">
+  <p class="h2 mb-3 mt-5">{{project.name}} {% trans 'project has no surveys.' %}</p>
+  <p class="h4 text-muted font-weight-normal mb-5">{% trans 'Start by creating new survey.' %}</p>
+  <a href="{% url 'projects:project-create-survey' project=project.pk %}" class="btn btn-primary">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+     {% trans 'New Survey' %}
+  </a>
+</div>
+{% endif %}
+{# End: Empty Survey state #}
 
 {% endblock %}
 {# End: Page content #}

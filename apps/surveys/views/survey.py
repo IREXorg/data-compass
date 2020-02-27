@@ -5,6 +5,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
+from apps.projects.models import Project
 from core.mixins import PageTitleMixin
 
 from ..filters import SurveyListFilter
@@ -43,13 +44,19 @@ class SurveyCreateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, C
     Create survey view.
 
     Allow current signin user to create a new survey and
-    redirect to survey list page.
+    redirect to project survey list page.
 
     **Example request**:
 
     .. code-block:: http
 
         POST  /surveys/create
+
+    **Example request**:
+
+    .. code-block:: http
+
+        POST  /projects/1234567890/create-survey
     """
 
     # Translators: This is survey create page title
@@ -58,7 +65,37 @@ class SurveyCreateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, C
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyCreateForm
-    success_url = reverse('surveys:survey-list')
+
+    def get_project(self):
+        """
+        Get project to associate a survey with from url parameters
+        """
+        project_pk = self.kwargs.get('project', None)
+        if project_pk:
+            return Project.objects.get(pk=project_pk)
+
+    def get_form_kwargs(self):
+        """
+        Add project to form class initialization arguments
+        """
+        form_kwargs = super().get_form_kwargs()
+        project = self.get_project()
+        if project:
+            form_kwargs['project'] = self.get_project()
+        return form_kwargs
+
+    def get_context_data(self, **kwargs):
+        """
+        Add project to view context data
+        """
+        context = super().get_context_data(**kwargs)
+        project = self.get_project()
+        if project:
+            context['project'] = self.get_project()
+        return context
+
+    def get_success_url(self):
+        return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
 
 
 class SurveyDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
@@ -86,7 +123,7 @@ class SurveyUpdateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, U
     Update survey details view.
 
     Allow current signin user to update existing survey details and
-    redirect to survey list page.
+    redirect to project survey list page.
 
     **Example request**:
 
@@ -101,7 +138,9 @@ class SurveyUpdateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, U
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyUpdateForm
-    success_url = reverse('surveys:survey-list')
+
+    def get_success_url(self):
+        return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
 
 
 class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
@@ -109,7 +148,7 @@ class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
     Delete survey details
 
     Allow current signin user to delete existing survey and
-    redirect to survey list page.
+    redirect to project survey list page.
 
     **Example request**:
 
@@ -123,4 +162,6 @@ class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
     template_name = 'surveys/survey_delete.html'
     context_object_name = 'survey'
     model = Survey
-    success_url = reverse('surveys:survey-list')
+
+    def get_success_url(self):
+        return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})

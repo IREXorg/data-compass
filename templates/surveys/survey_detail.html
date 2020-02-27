@@ -7,8 +7,8 @@
 {% block breadcrumbs %}
 <ol class="breadcrumb" aria-label="breadcrumbs">
    <li class="breadcrumb-item"><a href="{% url 'projects:project-list' %}">{% trans 'My Projects' %}</a></li>
-   {# TODO: link back to a project #}
-   <li class="breadcrumb-item active" aria-current="page"><a href="#">{{page_title}}</a></li>
+   <li class="breadcrumb-item"><a href="{% url 'projects:project-detail' survey.project.pk %}">{{survey.project.name}}</a></li>
+   <li class="breadcrumb-item active" aria-current="page"><a href="#">{{survey.name}}</a></li>
 </ol>
 {% endblock %}
 {# End: Breadcrumbs #}
@@ -21,7 +21,7 @@
     {# Start: Page title #}
     <div class="col">
       <h1 class="page-title">
-        {% block page_title %}{{ page_title }}{% endblock %}
+        {% block page_title %}{{ survey.name }}{% endblock %}
       </h1>
     </div>
     {# End: Page title #}
@@ -42,7 +42,17 @@
 {# Start: Content #}
 {% block content %}
 <div class="row">
-  TODO
+  <div class="col">
+    <div class="text-wrap">
+      <p class="text-muted">{% trans 'This survey is part of' %} {{project.name}}. {% trans 'More detail about it are written heres' %}.</p>
+      <p class="text-muted">{% trans 'What would you like to do with the survey' %}</p>
+    </div>
+    <div class="btn-list mt-5">
+      <a href="#" class="btn btn-secondary">{% trans 'Edit Survey' %}</a>
+      <a href="#" class="btn btn-primary">{% trans 'Duplicate Survey' %}</a>
+      <a href="{% url 'surveys:survey-delete' survey.pk %}" class="btn btn-danger">{% trans 'Delete Survey' %}</a>
+    </div>
+  </div>
 </div>
 {% endblock %}
 {# End: Content #}

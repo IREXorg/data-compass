@@ -13,36 +13,17 @@
 {% endblock %}
 {# End: Breadcrumbs #}
 
-{# Start: Page header #}
-{% block page_header %}
-<div class="page-header">
-  <div class="row align-items-center">
-
-    {# Start: Page title #}
-    <div class="col">
-      <h1 class="page-title">
-        {% block page_title %}{{ page_title }}{% endblock %}
-      </h1>
-    </div>
-    {# End: Page title #}
-
-    {# Start: Page actions #}
-    <div class="col-auto ml-auto d-print-none">
-      <div class="row">
-        &nbsp;
-      </div>
-    </div>
-    {# End: Page actions #}
-
-  </div>
-</div>
-{% endblock %}
-{# End: Page header #}
-
 {# Start: Content #}
 {% block content %}
-<div class="row">
-  TODO
+<h1 class="text-center text-dark">{% trans "Delete a project" %}</h1>
+
+<div class="text-center">
+    <p class="text-muted">{% trans 'Are you sure you want to delete this project?' %}</p>
+
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <button class="btn btn-warning" type="submit">{% trans 'Delete' %}</button>
+    </form>
 </div>
 {% endblock %}
 {# End: Content #}
