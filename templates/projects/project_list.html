@@ -13,6 +13,7 @@
 
 {# Start: Page header #}
 {% block page_header %}
+{% if projects|length > 0 %}
 <div class="page-header">
   <div class="row align-items-center">
 
@@ -44,14 +45,15 @@
 
   </div>
 </div>
+{% endif %}
 {% endblock %}
 {# End: Page header #}
 
 {# Start: Page content #}
 {% block content %}
-
+{# Start: Projects list #}
+{% if projects|length > 0 %}
 <div class="row">
-  {% if projects|length > 0 %}
   {% for project in projects %}
   <div class="col-md-6 col-lg-4">
     <div class="card">
@@ -121,18 +123,21 @@
     </div>
   </div>
   {% endfor %}
-
-  {% else %}
-  <p class="empty-title h3">{% trans 'No projects found.' %}</p>
-  <p class="empty-subtitle text-muted">{% trans 'Try adjusting your search or filter to find projects you are looking for.' %}</p>
-  <div class="empty-action">
-    <a href="{% url 'projects:project-create' %}" class="btn btn-primary">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-       {% trans 'Add your first project' %}
-    </a>
-  </div>
-  {% endif %}
 </div>
+{# End: Projects list #}
+{# Start: Empty Projects state #}
+{% else %}
+<div class="container text-center">
+  <p class={# Start: Empty Survey state #}
+"h2 mb-3 mt-5">{% trans 'No projects found.' %}</p>
+  <p class="h4 text-muted font-weight-normal mb-5">{% trans 'Start by creating new project.' %}</p>
+  <a href="{% url 'projects:project-create' %}" class="btn btn-primary">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+     {% trans 'New Project' %}
+  </a>
+</div>
+{% endif %}
+{# End: Empty Projects state #}
 
 {% endblock %}
 {# End: Page actions #}
