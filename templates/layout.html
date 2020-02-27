@@ -6,21 +6,34 @@
 
       <div class="content">
         <main class="container">
-          <!-- Page title -->
-          <div class="page-header">
-            <div class="row align-items-center">
-              <div class="col">
-                <h1 class="page-title">
-                  {% block page_title %}{{ page_title }}{% endblock %}
-                </h1>
-              </div>
 
-              <div class="col-auto">{% block page_actions %}{% endblock %}</div>
+          {# Start: Breadcrumbs #}
+          <div class="row">
+            <div class="col">
+            {% block breadcrumbs %}{% endblock %}
             </div>
           </div>
+          {# Start: Breadcrumbs #}
 
-          <!-- Main content -->
+          {# Start: Page Header #}
+          {% block page_header %}
+            <div class="page-header">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h1 class="page-title">
+                    {% block page_title %}{{ page_title }}{% endblock %}
+                  </h1>
+                </div>
+
+                <div class="col-auto">{% block page_actions %}{% endblock %}</div>
+              </div>
+            </div>
+          {% endblock %}
+          {# End: Page Header #}
+
+          {# Start: Main content #}
           {% block content %}{% endblock %}
+          {# End: Main content #}
         </main>
       </div>
 {% endblock body %}
