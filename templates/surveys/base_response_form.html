@@ -8,6 +8,8 @@
   <form method="POST" action="">
     {% csrf_token %}
 
+    {% block form_intro %}{% endblock %}
+
     {% block form_fields %}{{ form|crispy }}{% endblock %}
 
     {% block form_buttons %}

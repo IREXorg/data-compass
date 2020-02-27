@@ -32,5 +32,8 @@ django-widget-tweaks
 # date parsing, Python < 3.7
 python-dateutil
 
+# file storage
+django-storages
+
 # Debuging
 django-debug-toolbar

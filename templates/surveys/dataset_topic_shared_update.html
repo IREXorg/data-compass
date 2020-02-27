@@ -1,0 +1,55 @@
+{% extends 'surveys/base_response_form.html' %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block form_intro %}
+  {% blocktrans trimmed with dataset_name=dataset.name %}
+  To whom do you send or share information about {{ dataset_name }},
+  and what kind of information do you share?
+  {% endblocktrans %}
+{% endblock form_intro %}
+
+{% block form_fields %}
+
+  <div class="my-4">
+
+    <div class="my-3">
+      {{ formset.management_form }}
+
+      {% for form in formset.forms %}
+  
+        {% include 'bootstrap4/errors.html' %}
+
+        {% for hidden_field in form.hidden_fields %}
+          {{ hidden_field.errors }}
+          {{ hidden_field }}
+        {% endfor %}
+
+      <div class="form-row my-3">
+
+        <div class="col-auto">
+          <div class="form-check d-inline">
+            {% include 'bootstrap4/layout/field_errors_block.html' with field=form.selected %}
+            {{ form.selected|add_class:"form-check-input" }}
+          </div>
+        </div>
+
+        <div class="col-sm-3">
+          {% include 'bootstrap4/layout/field_errors_block.html' with field=form.entity %}
+          {{ form.entity|add_class:'d-none' }}
+          {{ form.entity_name }}
+        </div>
+
+        <div class="col-auto">
+          {% include 'bootstrap4/layout/field_errors_block.html' with field=form.topic %}
+          {{ form.topic|add_class:'form-control' }}
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+
+  </div>
+{% endblock %}

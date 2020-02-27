@@ -8,8 +8,8 @@ from django.views.generic import FormView, UpdateView
 from core.exceptions import NotAuthenticated
 from core.mixins import InlineFormsetMixin, PageMixin
 
-from ..forms import (DatasetResponseFrequencyForm, DatasetSelectForm, DatasetTopicResponseForm,
-                     DatasetTopicStorageAccessFormSet)
+from ..forms import (DatasetResponseFrequencyForm, DatasetSelectForm, DatasetTopicReceivedFormSet,
+                     DatasetTopicResponseForm, DatasetTopicSharedFormSet, DatasetTopicStorageAccessFormSet)
 from ..mixins import ConsentCheckMixin, RespondentSurveyMixin
 from ..models import DatasetResponse, DatasetTopicResponse
 from ..models import Response as SurveyResponse
@@ -41,7 +41,7 @@ class DatasetResponseListCreateView(PageMixin, RespondentSurveyMixin, ConsentChe
         except NotAuthenticated:
             return redirect_to_login(self.request.get_full_path())
 
-        self.consented_at = self.get_consent(respondent=self.respondent, survey=self.survey)
+        self.consented_at = self.get_consent(survey=self.survey)
         # If respondent has not provided the consent redirect to consent page
         if not self.consented_at:
             return redirect(reverse('surveys:respondent-consent', kwargs={'pk': self.survey.pk}))
@@ -81,6 +81,7 @@ class DatasetResponseListCreateView(PageMixin, RespondentSurveyMixin, ConsentChe
 
     def form_valid(self, form):
         self.survey_response.set_dataset_responses(form.cleaned_data['datasets'])
+        self.survey_response.set_resume_path(self.request.get_full_path())
         return redirect(self.get_success_url())
 
     def get_success_url(self):
@@ -106,12 +107,15 @@ class BaseDatasetResponseUpdateView(PageMixin, RespondentSurveyMixin, ConsentChe
     context_object_name = 'dataset_response'
 
     def get_queryset(self):
-        return DatasetResponse.objects.select_related('response', 'response__survey', 'dataset')
+        return DatasetResponse.objects.select_related(
+            'response', 'response__survey', 'response__respondent', 'dataset'
+        )
 
     def dispatch(self, *args, **kwargs):
         self.object = self.get_object()
         self.survey = self.object.response.survey
         self.survey_response = self.object.response
+        self.respondent = self.object.response.respondent
 
         # Check if user is allowed to take the survey
         try:
@@ -120,11 +124,15 @@ class BaseDatasetResponseUpdateView(PageMixin, RespondentSurveyMixin, ConsentChe
             return redirect_to_login(self.request.get_full_path())
 
         # Check respondent's consent
-        self.consented_at = self.get_consent(respondent=self.object, survey=self.survey)
+        self.consented_at = self.get_consent(survey=self.survey)
         if not self.consented_at:
             return redirect(reverse('surveys:respondent-consent', kwargs={'pk': self.survey.pk}))
 
         return super().dispatch(*args, **kwargs)
+
+    def form_valid(self, form):
+        self.survey_response.set_resume_path(self.request.get_full_path())
+        return super().form_valid(form)
 
     def get_page_title(self):
         return self.survey.display_name
@@ -151,6 +159,104 @@ class DatasetResponseUpdateFrequencyView(BaseDatasetResponseUpdateView):
         if topic_response:
             return reverse('surveys:dataset-topic-response-update', kwargs={'pk': topic_response.pk})
         return self.request.get_full_path()
+
+
+class DatasetTopicSharedUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, FormView):
+
+    form_class = DatasetTopicSharedFormSet
+    context_object_name = 'dataset_topic_response'
+    template_name = 'surveys/dataset_topic_shared_update.html'
+    lookup_field = 'pk'
+    lookup_url_kwarg = 'pk'
+
+    def get_queryset(self):
+        return DatasetResponse.objects\
+            .select_related(
+                'response',
+                'dataset',
+                'response__survey',
+                'response__respondent',
+                'response__survey__project',
+            )\
+            .prefetch_related('datasettopicreceived_set')
+
+    def get_dataset_response(self):
+        lookup_value = self.kwargs.get(self.lookup_url_kwarg)
+        if not lookup_value:
+            raise AttributeError(
+                _(f'{self.__class__.__name__} view must be called with {self.lookup_url_kwarg}.')
+            )
+
+        try:
+            dataset_response = self.get_queryset().get(**{self.lookup_field: lookup_value})
+        except DatasetResponse.DoesNotExist:
+            raise Http404(_('Page not found.'))
+
+        return dataset_response
+
+    def dispatch(self, *args, **kwargs):
+        self.dataset_response = self.get_dataset_response()
+        self.survey_response = self.dataset_response.response
+        self.survey = self.survey_response.survey
+        self.project = self.survey.project
+        self.respondent = self.survey_response.respondent
+
+        # Check if user is allowed to take the survey
+        try:
+            self.validate_respondent_for_survey()
+        except NotAuthenticated:
+            return redirect_to_login(self.request.get_full_path())
+
+        # Check respondent's consent
+        self.consented_at = self.get_consent(survey=self.survey)
+        if not self.consented_at:
+            return redirect(reverse('surveys:respondent-consent', kwargs={'pk': self.survey.pk}))
+
+        return super().dispatch(*args, **kwargs)
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['instance'] = self.dataset_response
+        kwargs['project'] = self.project
+        return kwargs
+
+    def form_valid(self, form):
+        form.save()
+        self.survey_response.set_resume_path(self.request.get_full_path())
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('surveys:dataset-response-update-received', kwargs={'pk': self.dataset_response.pk})
+
+    def get_back_url_path(self):
+        topic_response = self.dataset_response.topic_responses.last()
+        if topic_response:
+            return reverse('surveys:dataset-topic-response-update', kwargs={'pk': topic_response.pk})
+        return self.request.get_full_path()
+
+    def get_page_title(self):
+        return self.survey.display_name
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['formset'] = context.pop('form')
+        context['dataset'] = self.dataset_response.dataset
+        return context
+
+
+class DatasetTopicReceivedUpdateView(DatasetTopicSharedUpdateView):
+    form_class = DatasetTopicReceivedFormSet
+    template_name = 'surveys/dataset_topic_received_update.html'
+
+    def get_success_url(self):
+        _next = self.dataset_response.get_next_in_response()
+        if _next:
+            return reverse('surveys:dataset-response-update-frequency', kwargs={'pk': _next.pk})
+
+        return reverse('surveys:survey-response-complete', kwargs={'pk': self.survey_response.pk})
+
+    def get_back_url_path(self):
+        return reverse('surveys:dataset-response-update-shared', kwargs={'pk': self.dataset_response.pk})
 
 
 class DatasetTopicResponseUpdateView(PageMixin, InlineFormsetMixin, RespondentSurveyMixin,
@@ -181,7 +287,9 @@ class DatasetTopicResponseUpdateView(PageMixin, InlineFormsetMixin, RespondentSu
     def dispatch(self, *args, **kwargs):
         self.object = self.get_object()
         self.survey = self.object.dataset_response.response.survey
-        self.survey_response = self.object.dataset_response
+        self.survey_response = self.object.dataset_response.response
+        self.dataset_response = self.object.dataset_response
+        self.respondent = self.object.dataset_response.response.respondent
 
         # Check if user is allowed to take the survey
         try:
@@ -190,7 +298,7 @@ class DatasetTopicResponseUpdateView(PageMixin, InlineFormsetMixin, RespondentSu
             return redirect_to_login(self.request.get_full_path())
 
         # Check respondent's consent
-        self.consented_at = self.get_consent(respondent=self.object, survey=self.survey)
+        self.consented_at = self.get_consent(survey=self.survey)
         if not self.consented_at:
             return redirect(reverse('surveys:respondent-consent', kwargs={'pk': self.survey.pk}))
 
@@ -201,14 +309,14 @@ class DatasetTopicResponseUpdateView(PageMixin, InlineFormsetMixin, RespondentSu
         if _next:
             return reverse('surveys:dataset-topic-response-update', kwargs={'pk': _next.pk})
 
-        return self.request.get_full_path()
+        return reverse('surveys:dataset-response-update-shared', kwargs={'pk': self.dataset_response.pk})
 
     def get_back_url_path(self):
         _previous = self.object.get_previous_in_response()
         if _previous:
             return reverse('surveys:dataset-topic-response-update', kwargs={'pk': _previous.pk})
         else:
-            return reverse('surveys:dataset-response-update-frequency', kwargs={'pk': self.survey_response.pk})
+            return reverse('surveys:dataset-response-update-frequency', kwargs={'pk': self.dataset_response.pk})
 
     def get_page_title(self):
         return self.survey.display_name
@@ -223,6 +331,7 @@ class DatasetTopicResponseUpdateView(PageMixin, InlineFormsetMixin, RespondentSu
         formset = self.get_formset()
 
         if form.is_valid() and formset.is_valid():
+            self.survey_response.set_resume_path(self.request.get_full_path())
             return self.form_valid(form, formset)
         else:
             return self.form_invalid(form, formset)

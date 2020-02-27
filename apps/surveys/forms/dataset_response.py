@@ -1,7 +1,8 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from ..models import DatasetResponse, DatasetTopicResponse, DatasetTopicStorageAccess, Role
+from ..models import (DatasetResponse, DatasetTopicReceived, DatasetTopicResponse, DatasetTopicShared,
+                      DatasetTopicStorageAccess, Role)
 
 
 class DatasetSelectForm(forms.Form):
@@ -117,7 +118,7 @@ class DatasetTopicStorageAccessForm(forms.ModelForm):
 
         if self.cleaned_data['selected']:
             if not self.cleaned_data['access']:
-                raise forms.ValidationError(_('Please please specify how this is accessible'))
+                raise forms.ValidationError(_('Please specify how this is accessible'))
 
 
 class BaseDatasetTopicStorageAccessFormSet(forms.BaseModelFormSet):
@@ -141,14 +142,14 @@ class BaseDatasetTopicStorageAccessFormSet(forms.BaseModelFormSet):
             initial_selected = self.instance.storages.select_related('access', 'storage')
             initial_storages = [item.storage for item in initial_selected]
 
-            for item in self.initial:
-                try:
-                    i = initial_storages.index(item['storage'])
-                    item['selected'] = True
-                    item['access'] = initial_selected[i].access
-                except ValueError:
-                    item['access'] = None
-                    pass
+            if not self.is_bound:
+                for item in self.initial:
+                    try:
+                        i = initial_storages.index(item['storage'])
+                        item['selected'] = True
+                        item['access'] = initial_selected[i].access
+                    except ValueError:
+                        item['access'] = None
 
     def save(self):
         if not self.instance:
@@ -172,4 +173,123 @@ DatasetTopicStorageAccessFormSet = forms.modelformset_factory(
     DatasetTopicStorageAccess,
     form=DatasetTopicStorageAccessForm,
     formset=BaseDatasetTopicStorageAccessFormSet
+)
+
+
+class DatasetTopicSharedForm(forms.ModelForm):
+    selected = forms.BooleanField(required=False)
+
+    class Meta:
+        model = DatasetTopicShared
+        fields = ['selected', 'entity', 'topic']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.entity_name = None
+
+        if self.initial:
+            entity = self.initial.get('entity')
+            if entity:
+                self.entity_name = entity.name
+
+        self.fields['topic'].required = False
+
+    def clean(self):
+        super().clean()
+        if self.cleaned_data['selected']:
+            if not self.cleaned_data['topic']:
+                raise forms.ValidationError(_('Please specify topic'))
+
+
+class BaseDatasetTopicSharedFormSet(forms.BaseModelFormSet):
+
+    def __init__(self, instance=None, project=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.queryset = None
+        self.can_delete = False
+        self.instance = instance
+
+        if self.instance:
+            self.queryset = self._get_queryset()
+
+            project = project or self.instance.dataset_response.response.survey.project
+            entities = project.entities.all()
+
+            # set number of forms equal to entity options
+            self.extra = self.max_num = len(entities)
+
+            self.initial = [{'entity': entity} for entity in entities]
+
+            initial_selected = self.get_initial_selected()
+            initial_entities = [item.entity for item in initial_selected]
+
+            # if form is unbound setup the initial data
+            if not self.is_bound:
+                for item in self.initial:
+                    try:
+                        i = initial_entities.index(item['entity'])
+                        item['selected'] = True
+                        item['topic'] = initial_selected[i].topic
+                    except ValueError:
+                        item['topic'] = None
+
+    def save(self):
+        if not self.instance:
+            raise ValueError(_('Instance not specified'))
+
+        saved_forms = []
+
+        # clear existing records
+        self.clear_entities()
+
+        # save each of the selected records
+        for form in self.forms:
+
+            if form.cleaned_data.get('selected'):
+                form.instance.dataset_response = self.instance
+                saved_forms.append(form.save())
+
+        return saved_forms
+
+    def _get_queryset(self):
+        return self.instance.datasettopicshared_set.all()
+
+    def get_initial_selected(self):
+        return self.instance.datasettopicshared_set.select_related('entity', 'topic')
+
+    def clear_entities(self):
+        self.instance.shared_to.clear()
+
+
+DatasetTopicSharedFormSet = forms.modelformset_factory(
+    DatasetTopicShared,
+    form=DatasetTopicSharedForm,
+    formset=BaseDatasetTopicSharedFormSet
+)
+
+
+class DatasetTopicReceivedForm(DatasetTopicSharedForm):
+
+    class Meta:
+        model = DatasetTopicReceived
+        fields = ['selected', 'entity', 'topic']
+
+
+class BaseDatasetTopicReceivedFormSet(BaseDatasetTopicSharedFormSet):
+
+    def _get_queryset(self):
+        return self.instance.datasettopicreceived_set.all()
+
+    def get_initial_selected(self):
+        return self.instance.datasettopicreceived_set.select_related('entity', 'topic')
+
+    def clear_entities(self):
+        self.instance.received_from.clear()
+
+
+DatasetTopicReceivedFormSet = forms.modelformset_factory(
+    DatasetTopicReceived,
+    form=DatasetTopicReceivedForm,
+    formset=BaseDatasetTopicReceivedFormSet
 )

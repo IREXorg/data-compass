@@ -18,13 +18,23 @@ class Entity(TimeStampedModel):
         editable=False,
         unique=True
     )
+    project = models.ForeignKey(
+        'projects.Project',
+        verbose_name=_('project'),
+        on_delete=models.CASCADE,
+        related_name='entities',
+        related_query_name='entity',
+        null=True,  # TODO: remove this.
+    )
     name = models.CharField(_('name'), max_length=255)
     hierarchy = models.ForeignKey(
         'surveys.DataflowHierarchy',
-        verbose_name=_('hierarchy'),
         related_name='entities',
         related_query_name='entity',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name=_('hierarchy'),
     )
     description = models.TextField(_('description'), blank=True)
     creator = models.ForeignKey(
@@ -394,6 +404,7 @@ class Response(TimeStampedModel):
     specific :class:`.Survey`. Other models holding partial survey response
     data are linked to this model.
     """
+
     #: Response UUID.
     uuid = models.UUIDField(
         _('UUID'),
@@ -437,7 +448,12 @@ class Response(TimeStampedModel):
         on_delete=models.CASCADE
     )
 
+    #: Date and Time when consent was received
     consented_at = models.DateTimeField(_('consented at'), blank=True, null=True)
+
+    #: Date and time when the survey was completed.
+    #: The value of this should be ``None`` for incomplete responses.
+    completed_at = models.DateTimeField(_('completed at'), blank=True, null=True)
 
     #: Extra data.
     extras = JSONField(_('extras'), blank=True, default=dict)
@@ -482,6 +498,13 @@ class Response(TimeStampedModel):
         # set topic responses
         for dataset_response in self.dataset_responses.all():
             dataset_response.set_topic_responses()
+
+    def set_resume_path(self, path):
+        """Set resume URL path for the response."""
+        _state = self.extras.get('_state', {})
+        _state['resume_path'] = path
+        self.extras['_state'] = _state
+        self.__class__.objects.filter(id=self.id).update(extras=self.extras)
 
 
 class DatasetResponse(TimeStampedModel):
@@ -583,11 +606,12 @@ class DatasetResponse(TimeStampedModel):
         self.topic_responses.exclude(topic__in=topics).delete()
 
         # get old topics
-        old_topics = self.topic_responses.values_list('topic', flat=True)
+        old_topics = list(self.topic_responses.values_list('topic_id', flat=True))
 
         # add missing topic responses
         for topic in topics:
-            if topic not in old_topics:
+            if topic.id not in old_topics:
+                self.topic_responses
                 self.topic_responses.create(topic=topic)
 
 
@@ -621,7 +645,7 @@ class DatasetTopicResponse(TimeStampedModel):
         on_delete=models.CASCADE
     )
 
-    #: Entity perceived as owners of the dataset.
+    #: Entity perceived as owners of the dataset within the organization.
     percieved_owner = models.ForeignKey(
         'surveys.Role',
         related_name='percieved_owns_datasets',

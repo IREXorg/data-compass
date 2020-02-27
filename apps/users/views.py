@@ -10,14 +10,23 @@ from core.mixins import PageTitleMixin
 from .forms import ProfileForm
 
 
-class ProfileView(LoginRequiredMixin, PageTitleMixin, TemplateView):
+class ProfileDetailView(LoginRequiredMixin, PageTitleMixin, TemplateView):
     """User's own profile view."""
     page_title = _('My Profile')
     template_name = 'users/profile.html'
 
     def get_respondent_surveys(self):
-        """Get surveys for user as a respondent"""
-        return Survey.objects.filter(respondent__user=self.request.user)
+        """
+        Get surveys for user as a respondent.
+
+        Respondent surveys includes
+          - All surveys that do not require authentication.
+          - All surveys where respondents is invited.
+        """
+        return Survey.objects\
+            .for_user(self.request.user)\
+            .select_related('project', 'project__organization')\
+            .prefetch_related('project__facilitators')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

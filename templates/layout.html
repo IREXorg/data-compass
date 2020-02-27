@@ -1,93 +1,26 @@
 {% extends 'base.html' %}
 
-{% load i18n %}
-{% load static %}
-{% load active_link_tags %}
-
-
 {% block body %}
-{# Start: Page #}
-<div class="page">
+    <div class="page">
+      {% include 'includes/nav_primary.html' %}
 
-  {# Start: Include Navbar Primary #}
-  {# {% include 'includes/nav_primary.html' %} #}
-  {# End: Include Navbar Primary #}
+      <div class="content">
+        <main class="container">
+          <!-- Page title -->
+          <div class="page-header">
+            <div class="row align-items-center">
+              <div class="col">
+                <h1 class="page-title">
+                  {% block page_title %}{{ page_title }}{% endblock %}
+                </h1>
+              </div>
 
-  {# Start: Include Navbar Secondary #}
-  {# {% include 'includes/navbar_secondary.html' %} #}
-  {# End: Include Navbar Secondary #}
+              <div class="col-auto">{% block page_actions %}{% endblock %}</div>
+            </div>
+          </div>
 
-  {# Start: Navbar Secondary #}
-  <nav class="navbar navbar-expand navbar-no-shadow" id="navbar-secondary">
-
-    {# Start: Navbar Container #}
-    <div class="container">
-
-      {# Start: Breadcrumbs #}
-      {% if user.is_authenticated %}
-      {% block breadcrumbs %}{% endblock %}
-      {% endif %}
-      {# End: Breadcrumbs #}
-
-      {# Star: Navbar Nav #}
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item {% active_link 'home' %}">
-          <a class="nav-link" href="{% url 'home' %}">
-            {% trans 'Home' %}
-          </a>
-        </li>
-        {% if user.is_authenticated %}
-        <li class="nav-item {% active_link 'projects:project-list || projects:project-create' %}">
-          <a class="nav-link" href="{% url 'projects:project-list' %}">
-            {% trans 'My Projects' %}
-          </a>
-        </li>
-        <li class="nav-item {% active_link 'users:profile-detail' %}">
-          <a class="nav-link" href="{% url 'users:profile-detail' %}">
-            {% trans 'My Profile' %}
-          </a>
-        </li>
-        <li class="nav-item {% active_link 'account_logout' %}">
-          <a class="nav-link" href="{% url 'account_logout' %}">
-            {% trans 'Sign out' %}
-          </a>
-        </li>
-        {% else %}
-        <li class="nav-item {% active_link 'account_login' %}">
-          <a class="nav-link" href="{% url 'account_login' %}">
-            {% trans 'Sign in' %}
-          </a>
-        </li>
-        {% endif %}
-      </ul>
-      {# End: Navbar Nav  #}
-
-    </div>
-    {# End: Navbar Container #}
-
-  </nav>
-  {# End: Navbar Secondary #}
-
-  {# Start: Page Content #}
-  <div class="content">
-
-    {# Start: Page Container #}
-    <main class="container">
-
-      {# Start: Page Header #}
-      {% block page_header %}{% endblock %}
-      {# End: Page Header #}
-
-      {# Start: Main Content #}
-      {% block content %}{% endblock %}
-      {# End: Main Content #}
-
-    </main>
-    {# End: Page Container #}
-
-  </div>
-  {# End: Page Content #}
-
-</div>
-{# End: Page #}
+          <!-- Main content -->
+          {% block content %}{% endblock %}
+        </main>
+      </div>
 {% endblock body %}
