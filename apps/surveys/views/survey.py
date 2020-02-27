@@ -109,7 +109,7 @@ class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
     Delete survey details
 
     Allow current signin user to delete existing survey and
-    redirect to survey list page.
+    redirect to project survey list page.
 
     **Example request**:
 
@@ -123,4 +123,6 @@ class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
     template_name = 'surveys/survey_delete.html'
     context_object_name = 'survey'
     model = Survey
-    success_url = reverse('surveys:survey-list')
+
+    def get_success_url(self):
+        return reverse('projects:project-detail', kwargs={'pk': self.get_object().project.pk})
