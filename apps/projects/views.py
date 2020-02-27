@@ -83,9 +83,8 @@ class ProjectDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
 
     def get_surveys(self):
         """Get allowed surveys for a user project"""
-        # TODO filter by project
         # TODO filter by user
-        return Survey.objects.filter()
+        return Survey.objects.filter(project=self.object)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
