@@ -12,7 +12,7 @@ from .forms import ProfileForm
 
 class ProfileView(LoginRequiredMixin, PageTitleMixin, TemplateView):
     """User's own profile view."""
-    page_title = _('Profile')
+    page_title = _('My Profile')
     template_name = 'users/profile.html'
 
     def get_respondent_surveys(self):
