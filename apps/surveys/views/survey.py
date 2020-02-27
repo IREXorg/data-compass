@@ -43,7 +43,7 @@ class SurveyCreateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, C
     Create survey view.
 
     Allow current signin user to create a new survey and
-    redirect to survey list page.
+    redirect to project survey list page.
 
     **Example request**:
 
@@ -88,7 +88,7 @@ class SurveyUpdateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, U
     Update survey details view.
 
     Allow current signin user to update existing survey details and
-    redirect to survey list page.
+    redirect to project survey list page.
 
     **Example request**:
 
