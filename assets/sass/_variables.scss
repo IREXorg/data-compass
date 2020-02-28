@@ -1,19 +1,81 @@
-// Colors
-$green: #99b83c !default;
-$orange: #d76427 !default;
-
 // Body
 
-// Borders
+$body-bg: #ffffff;
+$body-badding-bottom: 100px;
 
-// Brands
+// Colors
+
+$primary: #098b8e;
+$success: #99b83c;
+$warning: #d76427;
+$light: #d8e6e6;
+$secondary: #9ba7a7;
 
 // Typography
 
-// Navbar
+$font-family-sans-serif: 'Source Sans Pro', sans-serif;
+$font-family-base: 'Source Sans Pro', sans-seri;
+
+// $font-size-base: 1.2rem;
+
+$link-color: #d76427;
+
+$h1-font-size: 2em;
+$h1-color: $success;
+
+$h2-color: $primary;
+$h2-font-size: 1.2em;
+$h2-font-weight: 700;
+
+$headings-font-weight: 300;
+
+// Grid containers
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 800px,
+  xl: 800px
+);
+
+// Borders
+
+$border-width: 1px;
+
+$border-radius: .35rem;
+$border-radius-lg: .4rem;
+$border-radius-sm: .2rem;
+
+// Forms
+
+$input-bg: $light;
+
+$input-border-width: $border-width;
+$input-border-color: $secondary;
+
+
+$input-btn-font-size: 1rem;
+$input-btn-padding-y: 0.625rem;
+$input-btn-padding-x: 1rem;
+
+$input-focus-border-color: none;
+$input-focus-box-shadow:  none;
 
 // Buttons
 
-// Inputs
+$btn-font-weight: 400;
 
-// Footer
+$btn-border-width: 0;
+
+// Nav
+
+$navbar-height: 40px;
+
+$navbar-padding-y: 0;
+
+$navbar-brand-font-size: 0.8rem;
+$navbar-brand-font-weight: 600;
+$navbar-brand-letter-spacing: 1px;
+
+$navbar-light-brand-color: #075254;
+$navbar-light-brand-hover-color: $navbar-light-brand-color;
