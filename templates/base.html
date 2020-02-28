@@ -19,30 +19,12 @@
     <meta name="MobileOptimized" content="320"/>
     <meta name="robots" content="noindex,nofollow,noarchive"/>
     <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
-    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
     <link href="{% static 'main.css' %}" rel="stylesheet">
   </head>
 
   <body class="antialiased {% block body_class %}{% endblock %}">
       {% block body %}{% endblock %}
-
-      <footer class="footer">
-        <div class="container">
-          <div class="row text-center align-items-center">
-            <div class="col-12 mb-3">
-              Developed by
-              <a href="https://www.irex.org/" class="link-secondary" target="_blank">
-                <img src="{% static 'img/irex-logo.png' %}" class="logo">
-              </a>
-
-              With support from
-              <a href="http://dcli.co/" class="link-secondary" target="_blank">
-                <img src="{% static 'img/dcli-logo.png' %}" class="logo">
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
 
       <script src="{% static 'main.js' %}"></script>
 

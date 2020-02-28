@@ -7,13 +7,13 @@
       <div class="content">
         <main class="container">
 
-          {# Start: Breadcrumbs #}
-          <div class="row">
-            <div class="col">
-            {% block breadcrumbs %}{% endblock %}
+          {% block breadcrumbs_container %}
+            <div class="row mt-2 mb-4">
+              <div class="col">
+              {% block breadcrumbs %}{% endblock %}
+              </div>
             </div>
-          </div>
-          {# Start: Breadcrumbs #}
+          {% endblock breadcrumbs_container %}
 
           {# Start: Page Header #}
           {% block page_header %}
@@ -28,12 +28,14 @@
                 <div class="col-auto">{% block page_actions %}{% endblock %}</div>
               </div>
             </div>
-          {% endblock %}
+          {% endblock page_header %}
           {# End: Page Header #}
 
           {# Start: Main content #}
           {% block content %}{% endblock %}
           {# End: Main content #}
+
+          {% block footer %}{% include 'includes/footer.html' %}{% endblock %}
         </main>
       </div>
 {% endblock body %}
