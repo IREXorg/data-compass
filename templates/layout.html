@@ -5,7 +5,7 @@
       {% include 'includes/nav_primary.html' %}
 
       <div class="content">
-        <main class="container">
+        <main class="{% block content_container %}container{% endblock %}">
 
           {% block breadcrumbs_container %}
             <div class="row mt-2 mb-4">
