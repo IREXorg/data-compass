@@ -14,8 +14,8 @@
   <a class="btn btn-primary btn-lg" href="{% url 'users:profile-detail' %}" role="button">My Profile</a>
   {% else %}
   <p>Please login or sign up to continue.</p>
-  <a class="btn btn-primary btn-lg" href="{% url 'account_login' %}" role="button">Sign In</a> or
-  <a class="btn btn-outline-success btn-lg" href="{% url 'account_signup' %}" role="button">Register</a>
+  <a class="btn btn-success btn-lg" href="{% url 'account_login' %}" role="button">Sign In</a> or
+  <a class="btn btn-primary btn-lg" href="{% url 'account_signup' %}" role="button">Register</a>
   {% endif %}
 </div>
 {% endblock content %}
