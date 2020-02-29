@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
@@ -14,7 +13,7 @@ from .mixins import ProjectCreatorMixin, ProjectFacilitatorMixin
 from .models import Project
 
 
-class ProjectListView(LoginRequiredMixin, ProjectFacilitatorMixin, PageMixin, ListView):
+class ProjectListView(ProjectFacilitatorMixin, PageMixin, ListView):
     """
     List projects view.
 
@@ -39,7 +38,7 @@ class ProjectListView(LoginRequiredMixin, ProjectFacilitatorMixin, PageMixin, Li
     paginate_by = 10
 
 
-class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, PageMixin, CreateView):
+class ProjectCreateView(ProjectFacilitatorMixin, ProjectCreatorMixin, PageMixin, CreateView):
     """
     Create project view.
 
@@ -64,7 +63,7 @@ class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, PageMixin, Crea
         return reverse('projects:project-detail', kwargs={'pk': self.object.pk})
 
 
-class ProjectDetailView(LoginRequiredMixin, ProjectFacilitatorMixin, PageMixin, DetailView):
+class ProjectDetailView(ProjectFacilitatorMixin, PageMixin, DetailView):
     """
     View project details view.
 
@@ -95,7 +94,7 @@ class ProjectDetailView(LoginRequiredMixin, ProjectFacilitatorMixin, PageMixin, 
         return context
 
 
-class ProjectUpdateView(LoginRequiredMixin, ProjectFacilitatorMixin, PageMixin, UpdateView):
+class ProjectUpdateView(ProjectFacilitatorMixin, PageMixin, UpdateView):
     """
     Update project details view.
 
@@ -118,7 +117,7 @@ class ProjectUpdateView(LoginRequiredMixin, ProjectFacilitatorMixin, PageMixin, 
     success_url = reverse('projects:project-list')
 
 
-class ProjectDeleteView(LoginRequiredMixin, ProjectFacilitatorMixin, PageMixin, DeleteView):
+class ProjectDeleteView(ProjectFacilitatorMixin, PageMixin, DeleteView):
     """
     Delete project details
 

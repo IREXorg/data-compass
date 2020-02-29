@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect
 
 
@@ -21,14 +22,22 @@ class ProjectCreatorMixin:
         return redirect(self.get_success_url())
 
 
-class ProjectFacilitatorMixin:
+class ProjectFacilitatorMixin(LoginRequiredMixin, UserPassesTestMixin):
     """
-    CBV mixin which limits projects queryset to only objects where the user is
-    among facilitators.
-
-    Note: Using this mixin you will need to ensure the user
-    is authenticated example by using `LoginRequiredMixin`.
+    CBV mixin which makes sure user is a facilitator and limits project
+    queryset to only objects where the user is among the facilitators.
     """
 
     def get_queryset(self):
+        """
+        Returns queryset of projects where user is among facilitators.
+        """
         return self.model.objects.filter(facilitators=self.request.user)
+
+    def test_func(self):
+        """
+        Ensure user is a facilitator.
+
+        Returns true if user is facilitator.
+        """
+        return self.request.user.is_facilitator
