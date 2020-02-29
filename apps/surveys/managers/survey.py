@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import Case, CharField, Max, Q, Value, When
+from django.db.models import Case, CharField, Max, NullBooleanField, Q, Value, When
 
 
 class SurveyQuerySet(models.QuerySet):
@@ -24,14 +24,18 @@ class SurveyQuerySet(models.QuerySet):
         if not user or not user.is_authenticated:
             return self.filter(login_required=False)
 
-        qs = self.filter(Q(invitation_required=False) | Q(respondent__user=user))
-
         # For each survey in the queryset;
         # If respondent is user and response has completed status then the survey is completed.
         # Otherwise if the survey is in progress.
         #
         # If respondent is not the user then the user hasn't started the survey yet.'
-        return qs.annotate(
+        return self.annotate(
+            is_available=Case(
+                When(invitation_required=True, then=True),
+                When(respondent__user=user, then=True),
+                default=False,
+                output_field=NullBooleanField(),
+            ),
             user_status=Case(
                 When(
                     Q(respondent__user=user)
@@ -48,7 +52,7 @@ class SurveyQuerySet(models.QuerySet):
             ),
             respondent_id=Max('respondent__pk', filter=Q(respondent__user=user)),
             response_id=Max('respondent__response__pk', filter=Q(respondent__user=user)),
-        )
+        ).filter(is_available=True)
 
 
 class SurveyManager(models.Manager):
