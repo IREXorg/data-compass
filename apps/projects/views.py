@@ -6,15 +6,15 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
 from apps.surveys.models import Survey
-from core.mixins import PageTitleMixin
+from core.mixins import PageMixin
 
 from .filters import ProjectListFilter
 from .forms import ProjectCreateForm, ProjectUpdateForm
-from .mixins import ProjectCreatorMixin
+from .mixins import ProjectCreatorMixin, ProjectFacilitatorMixin
 from .models import Project
 
 
-class ProjectListView(LoginRequiredMixin, PageTitleMixin, ListView):
+class ProjectListView(LoginRequiredMixin, ProjectFacilitatorMixin, PageMixin, ListView):
     """
     List projects view.
 
@@ -39,12 +39,12 @@ class ProjectListView(LoginRequiredMixin, PageTitleMixin, ListView):
     paginate_by = 10
 
 
-class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin, CreateView):
+class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, PageMixin, CreateView):
     """
     Create project view.
 
-    Allow current signin user to create a new project and redirect to
-    projects list page.
+    Allow current signed in user to create a new project and redirect to
+    projects detail page.
 
     **Example request**:
 
@@ -59,10 +59,12 @@ class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin,
     context_object_name = 'project'
     model = Project
     form_class = ProjectCreateForm
-    success_url = reverse('projects:project-list')
+
+    def get_success_url(self):
+        return reverse('projects:project-detail', kwargs={'pk': self.object.pk})
 
 
-class ProjectDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
+class ProjectDetailView(LoginRequiredMixin, ProjectFacilitatorMixin, PageMixin, DetailView):
     """
     View project details view.
 
@@ -93,7 +95,7 @@ class ProjectDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
         return context
 
 
-class ProjectUpdateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin, UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, ProjectFacilitatorMixin, PageMixin, UpdateView):
     """
     Update project details view.
 
@@ -116,7 +118,7 @@ class ProjectUpdateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin,
     success_url = reverse('projects:project-list')
 
 
-class ProjectDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
+class ProjectDeleteView(LoginRequiredMixin, ProjectFacilitatorMixin, PageMixin, DeleteView):
     """
     Delete project details
 
