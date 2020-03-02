@@ -45,20 +45,24 @@
     <form method="POST" action="" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form|crispy }}
-      <div style="max-height: 200px" class="overflow-auto bg-light">
-        <ul class="root">
-          {% recursetree dataflow_hierarchy %}
-            <li>
-              {{ node.name }} <small>({{ node.level_name }})</small>
-              {% if not node.is_leaf_node %}
-                <ul class="children">
-                  {{ children }}
-                </ul>
-              {% endif %}
-            </li>
-          {% endrecursetree %}
-        </ul>
-      </div>
+
+      {% if dataflow_hierarchy %}
+        <div style="max-height: 200px" class="overflow-auto bg-light my-3">
+          <h2 class="border-bottom p-3">{% trans 'Current Data flow hierarchy' %}</h2>
+          <ul class="root">
+            {% recursetree dataflow_hierarchy %}
+              <li>
+                {{ node.name }} <small>({{ node.level_name }})</small>
+                {% if not node.is_leaf_node %}
+                  <ul class="children">
+                    {{ children }}
+                  </ul>
+                {% endif %}
+              </li>
+            {% endrecursetree %}
+          </ul>
+        </div>
+      {% endif %}
   
       <input class="btn btn-primary" type="submit" value="{% trans 'Save' %}" />
     </form>
