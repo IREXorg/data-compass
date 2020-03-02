@@ -31,7 +31,7 @@ class SurveyQuerySet(models.QuerySet):
         # If respondent is not the user then the user hasn't started the survey yet.'
         return self.annotate(
             is_available=Case(
-                When(invitation_required=True, then=True),
+                When(invitation_required=False, then=True),
                 When(respondent__user=user, then=True),
                 default=False,
                 output_field=NullBooleanField(),

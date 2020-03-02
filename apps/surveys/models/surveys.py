@@ -34,7 +34,7 @@ class DataflowHierarchy(TimeStampedModel, MPTTModel):
         verbose_name=_('parent')
     )
     level_name = models.CharField(_('level name'), max_length=128)
-    name = models.CharField(_('name'), max_length=128, unique=True)
+    name = models.CharField(_('name'), max_length=128)
     description = models.TextField(_('description'), blank=True)
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,

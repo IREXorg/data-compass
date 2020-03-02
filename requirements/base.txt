@@ -32,6 +32,10 @@ django-widget-tweaks
 # date parsing, Python < 3.7
 python-dateutil
 
+# processing hierarchy uploads
+xlrd
+treelib
+
 # file storage
 django-storages
 

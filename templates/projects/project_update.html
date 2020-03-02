@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load crispy_forms_tags %}
+{% load mptt_tags %}
 
 {# Start: Breadcrumbs #}
 {% block breadcrumbs %}
@@ -38,14 +39,28 @@
 {% endblock %}
 {# End: Page header #}
 
-{# Start: Content #}
+
 {% block content %}
   <div>
     <form method="POST" action="" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form|crispy }}
+      <div style="max-height: 200px" class="overflow-auto bg-light">
+        <ul class="root">
+          {% recursetree dataflow_hierarchy %}
+            <li>
+              {{ node.name }} <small>({{ node.level_name }})</small>
+              {% if not node.is_leaf_node %}
+                <ul class="children">
+                  {{ children }}
+                </ul>
+              {% endif %}
+            </li>
+          {% endrecursetree %}
+        </ul>
+      </div>
+  
       <input class="btn btn-primary" type="submit" value="{% trans 'Save' %}" />
     </form>
   </div>
-{% endblock %}
-{# End: Content #}
+{% endblock content %}

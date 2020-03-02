@@ -27,7 +27,7 @@
       <div class="col">
         <div class="row">
           <div class="col">
-            <h3><a href="#">{{ survey.display_name }}</a></h3>
+            <h2><a href="#">{{ survey.display_name }}</a></h2>
           </div>
 
           <div class="col-auto">
@@ -63,7 +63,7 @@
     </div>
 
     <div class="row mt-4">
-      <div class="col offset-md-1">
+      <div class="col offset-md-1 btn-list">
         {% if survey.user_status == 'completed' %}
           <a class="btn btn-primary btn-sm">{% trans 'View my survey response' %}</a>
           <a href="#" class="btn btn-info btn-sm">{% trans 'View survey visual' %}</a>

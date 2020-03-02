@@ -57,15 +57,13 @@
           <div class="form-group">
             <div class="row">
               <div class="col-sm-6">
-                <a href={% url 'projects:project-list' %} class="btn btn-secondary">
-                  Cancel
-                </a>
-
-                &nbsp;
-
                 <button type="submit" class="btn btn-primary">
                   {% trans 'Save project' %}
                 </button>
+
+                <a href={% url 'projects:project-list' %} class="btn btn-secondary">
+                  Cancel
+                </a>
               </div>
             </div>
           </div>

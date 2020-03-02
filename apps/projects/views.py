@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
@@ -6,15 +5,15 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
 from apps.surveys.models import Survey
-from core.mixins import PageTitleMixin
+from core.mixins import PageMixin
 
 from .filters import ProjectListFilter
 from .forms import ProjectCreateForm, ProjectUpdateForm
-from .mixins import ProjectCreatorMixin
+from .mixins import ProjectCreatorMixin, ProjectFacilitatorMixin
 from .models import Project
 
 
-class ProjectListView(LoginRequiredMixin, PageTitleMixin, ListView):
+class ProjectListView(ProjectFacilitatorMixin, PageMixin, ListView):
     """
     List projects view.
 
@@ -39,12 +38,12 @@ class ProjectListView(LoginRequiredMixin, PageTitleMixin, ListView):
     paginate_by = 10
 
 
-class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin, CreateView):
+class ProjectCreateView(ProjectFacilitatorMixin, ProjectCreatorMixin, PageMixin, CreateView):
     """
     Create project view.
 
-    Allow current signin user to create a new project and redirect to
-    projects list page.
+    Allow current signed in user to create a new project and redirect to
+    projects detail page.
 
     **Example request**:
 
@@ -59,10 +58,18 @@ class ProjectCreateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin,
     context_object_name = 'project'
     model = Project
     form_class = ProjectCreateForm
-    success_url = reverse('projects:project-list')
+
+    def get_success_url(self):
+        """
+        Returns project edit URL as success URL.
+
+        Update URL is returned instead of detail URL to allow user to
+        preview the created hierarchy.
+        """
+        return reverse('projects:project-update', kwargs={'pk': self.object.pk})
 
 
-class ProjectDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
+class ProjectDetailView(ProjectFacilitatorMixin, PageMixin, DetailView):
     """
     View project details view.
 
@@ -93,7 +100,7 @@ class ProjectDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
         return context
 
 
-class ProjectUpdateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin, UpdateView):
+class ProjectUpdateView(ProjectFacilitatorMixin, PageMixin, UpdateView):
     """
     Update project details view.
 
@@ -115,8 +122,21 @@ class ProjectUpdateView(LoginRequiredMixin, ProjectCreatorMixin, PageTitleMixin,
     form_class = ProjectUpdateForm
     success_url = reverse('projects:project-list')
 
+    def get_form_kwargs(self):
+        """
+        Add request form class initialization arguments to help identifying hierarchy creator
+        """
+        form_kwargs = super().get_form_kwargs()
+        form_kwargs['user'] = self.request.user
+        return form_kwargs
 
-class ProjectDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['dataflow_hierarchy'] = self.object.hierarchies.all()
+        return context
+
+
+class ProjectDeleteView(ProjectFacilitatorMixin, PageMixin, DeleteView):
     """
     Delete project details
 
