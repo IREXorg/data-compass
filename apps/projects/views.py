@@ -60,7 +60,13 @@ class ProjectCreateView(ProjectFacilitatorMixin, ProjectCreatorMixin, PageMixin,
     form_class = ProjectCreateForm
 
     def get_success_url(self):
-        return reverse('projects:project-detail', kwargs={'pk': self.object.pk})
+        """
+        Returns project edit URL as success URL.
+
+        Update URL is returned instead of detail URL to allow user to
+        preview the created hierarchy.
+        """
+        return reverse('projects:project-update', kwargs={'pk': self.object.pk})
 
 
 class ProjectDetailView(ProjectFacilitatorMixin, PageMixin, DetailView):
@@ -115,6 +121,19 @@ class ProjectUpdateView(ProjectFacilitatorMixin, PageMixin, UpdateView):
     model = Project
     form_class = ProjectUpdateForm
     success_url = reverse('projects:project-list')
+
+    def get_form_kwargs(self):
+        """
+        Add request form class initialization arguments to help identifying hierarchy creator
+        """
+        form_kwargs = super().get_form_kwargs()
+        form_kwargs['user'] = self.request.user
+        return form_kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['dataflow_hierarchy'] = self.object.hierarchies.all()
+        return context
 
 
 class ProjectDeleteView(ProjectFacilitatorMixin, PageMixin, DeleteView):
