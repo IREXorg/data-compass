@@ -30,7 +30,7 @@ class SurveyQuerySet(models.QuerySet):
         #
         # If respondent is not the user then the user hasn't started the survey yet.'
 
-        queryset = self.filter(Q(invitation_required=True) | Q(respondent__user=user)).distinct()
+        queryset = self.filter(Q(invitation_required=False) | Q(respondent__user=user)).distinct()
         return queryset.annotate(
             user_status=Case(
                 When(

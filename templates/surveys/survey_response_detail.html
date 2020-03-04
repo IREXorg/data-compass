@@ -1,0 +1,181 @@
+{% extends 'surveys/base.html' %}
+
+{% load i18n %}
+
+
+{% block content %}
+<div class="card">
+  <div class="card-header">
+    <h2 class="">{% trans 'General Information' %}</h2>
+  </div>
+  <div class="card-body">
+    <dl class="row">
+      <dt class="col-sm-3">{% trans 'First name' %}:</dt>
+      <dd class="col-sm-9">{{ survey_response.respondent.first_name }}</dd>
+
+      <dt class="col-sm-3">{% trans 'Last name' %}:</dt>
+      <dd class="col-sm-9">{{ survey_response.respondent.last_name }}</dd>
+
+      <dt class="col-sm-3">{% trans 'Gender' %}:</dt>
+      <dd class="col-sm-9">{{ survey_response.respondent.gender }}</dd>
+
+      <dt class="col-sm-3">{% trans 'Email' %}:</dt>
+      <dd class="col-sm-9">{{ survey_response.respondent.email}}</dd>
+    </dl>
+  </div>
+</div>
+
+<div>
+  <h2>{% trans 'Topic-related responses' %}</h2>
+
+  <ul class="nav nav-tabs">
+    {% for dataset_response in survey_response.dataset_responses.all %}
+      <li class="nav-item">
+        <a href="#topic-{{ dataset_response.id }}" class="nav-link {% if forloop.first %}active{% endif %}" data-toggle="tab">
+          {{ dataset_response.dataset.name }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <div class="tab-content py-4">
+    {% for dataset_response in survey_response.dataset_responses.all %}
+      {% with dataset_name=dataset_response.dataset hierarchy_name=respondent.hierarchy.name  %}
+
+        <div class="tab-pane container {% if forloop.first %}active{% endif %}" id="topic-{{ dataset_response.id }}">
+          <div class="row my-2">
+            <div class="col-xs"><i class="fas fa-circle fa-xs"></i></div>
+            <div class="col">
+              <h3>
+                {% blocktrans trimmed %}
+                How often do you produce, access or share information about {{ dataset_name }}?
+                {% endblocktrans %}
+              </h3>
+              <h3 class="text-success font-weight-bold">
+                {{ dataset_response.dataset_frequency }}
+              </h3>
+              <hr class="mt-3">
+            </div>
+          </div>
+
+          {% for topic_response in dataset_response.topic_responses.all %}
+            {% with topic_name=topic_response.topic.name %}
+
+              <h3 class="font-weight-bold text-warning">{{ topic_name }}</h3>
+
+              <div class="row m-2">
+                <div class="col-xs"><i class="fas fa-circle fa-xs"></i></div>
+                <div class="col">
+                  <h3>
+                    {% blocktrans trimmed %}
+                      Who at {{ hierarchy_name }} do you believe knows most about {{ topic_name }} regarding {{ dataset_name }}?
+                    {% endblocktrans %}
+                  </h3>
+                  <h3 class="text-success font-weight-bold">
+                    {{ topic_response.percieved_owner.name }}
+                  </h3>
+                  <hr class="mt-3">
+                </div>
+              </div>
+
+              <div class="row m-2">
+                <div class="col-xs"><i class="fas fa-circle fa-xs"></i></div>
+                <div class="col">
+                  <h3>
+                    {% blocktrans trimmed with topic_name=topic_response.topic.name %}
+                      Where at {{ hierarchy_name }} is {{ topic_name }} regarding {{ dataset_name }} is stored?
+                    {% endblocktrans %}
+                  </h3>
+
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead class="thead-light">
+                        <tr>
+                          <th>{% trans 'Storage' %}</th>
+                          <th>{% trans 'Access' %}</th>
+                        </tr>
+                      </thead>
+                      {% for storage in topic_response.storages.all %}
+                        <tr>
+                          <th><span class="text-success">{{ storage.storage.name }}</span></th>
+                          <td>{{ storage.access.name }}</td>
+                        </tr>
+                      {% endfor %}
+                    </table>
+                  </div>
+
+                  <hr class="mt-3">
+                </div>
+              </div>
+            {% endwith %}
+          {% endfor %}
+
+          <h3 class="font-weight-bold text-warning">{% trans 'Information sources' %}</h3>
+          <div class="row my-2">
+            <div class="col-xs"><i class="fas fa-circle fa-xs"></i></div>
+            <div class="col">
+              <h3>
+                {% blocktrans trimmed %}
+                  From whom do you receive information about {{ dataset_name }},
+                  and what kind of information do you receive?
+                {% endblocktrans %}
+              </h3>
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>{% trans 'Entity' %}</th>
+                      <th>{% trans 'Information received' %}</th>
+                    </tr>
+                  </thead>
+                  {% for received in dataset_response.datasettopicreceived_set.all %}
+                    <tr>
+                      <th><span class="text-success">{{ received.entity.name }}</span></th>
+                      <td>{{ received.topic.name }}</td>
+                    </tr>
+                  {% endfor %}
+                </table>
+              </div>
+            </div>
+          </div>
+          <hr class="mt-3">
+
+          <h3 class="font-weight-bold text-warning">{% trans 'Information sharing' %}</h3>
+          <div class="row my-2">
+            <div class="col-xs"><i class="fas fa-circle fa-xs"></i></div>
+            <div class="col">
+              <h3>
+                {% blocktrans trimmed %}
+                  To whom do you send or share information about {{ dataset_name }},
+                  and what kind of information do you share?
+                {% endblocktrans %}
+              </h3>
+
+              <div class="table-responsive">
+                <table class="table table-bordered">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>{% trans 'Entity' %}</th>
+                      <th>{% trans 'Information shared' %}</th>
+                    </tr>
+                  </thead>
+                  {% for shared in dataset_response.datasettopicshared_set.all %}
+                    <tr>
+                      <th><span class="text-success">{{ shared.entity.name }}</span></th>
+                      <td>{{ shared.topic.name }}</td>
+                    </tr>
+                  {% endfor %}
+                </table>
+              </div>
+            </div>
+          </div>
+          <hr class="mt-3">
+
+        </div>
+
+      {% endwith %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock content %}

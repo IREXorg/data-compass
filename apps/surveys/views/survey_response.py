@@ -3,8 +3,9 @@ from django.contrib.auth.views import redirect_to_login
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 from django.views import View
-from django.views.generic import UpdateView
+from django.views.generic import DetailView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 
 from core.exceptions import NotAuthenticated
@@ -110,3 +111,39 @@ class SurveyResponseCompleteView(PageMixin, RespondentSurveyMixin, ConsentCheckM
             return reverse('surveys:dataset-response-update-received', kwargs={'pk': last_dataset_response.pk})
 
         return '#'
+
+
+class SurveyResponseDetailView(LoginRequiredMixin, PageMixin, DetailView):
+    template_name = 'surveys/survey_response_detail.html'
+    context_object_name = 'survey_response'
+    model = SurveyResponse
+
+    def get_queryset(self):
+        return self.model.objects\
+            .filter(respondent__user=self.request.user)\
+            .select_related('survey', 'respondent', 'respondent__gender', 'respondent__hierarchy')\
+            .prefetch_related(
+                'dataset_responses',
+                'dataset_responses__dataset',
+                'dataset_responses__dataset_frequency',
+                'dataset_responses__datasettopicreceived_set',
+                'dataset_responses__datasettopicreceived_set__entity',
+                'dataset_responses__datasettopicreceived_set__topic',
+                'dataset_responses__datasettopicshared_set',
+                'dataset_responses__datasettopicshared_set__entity',
+                'dataset_responses__datasettopicshared_set__topic',
+                'dataset_responses__topic_responses',
+                'dataset_responses__topic_responses__topic',
+                'dataset_responses__topic_responses__percieved_owner',
+                'dataset_responses__topic_responses__storages',
+                'dataset_responses__topic_responses__storages__storage',
+                'dataset_responses__topic_responses__storages__access'
+            )
+
+    def get_page_title(self):
+        return _('Survey Response: %(survey_name)s') % {'survey_name': self.object.survey.name}
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['respondent'] = self.object.respondent
+        return context
