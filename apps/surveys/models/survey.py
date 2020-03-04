@@ -1,7 +1,6 @@
 import uuid
 
 from django.conf import settings
-# from django.contrib.postgres.fields import ArrayField, JSONField
 from django.contrib.postgres.fields import JSONField
 from django.core.exceptions import PermissionDenied
 from django.db import models
@@ -94,8 +93,7 @@ class Survey(TimeStampedModel):
             choices=settings.LANGUAGES,
             ),
         verbose_name=_('languages'),
-        blank=False,
-        default=settings.DEFAULT_LANGUAGES
+        blank=False
     )
 
     #: Unique slug for the survey.

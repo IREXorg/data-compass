@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'imagekit',
     'django_filters',
     'active_link',
+    'django_select2',
     # Custom apps
     'core',
     'apps.users.apps.UsersConfig',
