@@ -22,7 +22,7 @@
     {# Start: Page title #}
     <div class="col">
       <h1 class="page-title">
-        {% block page_title %}{{ survey.name }}{% endblock %}
+        {% block page_title %}{% trans 'Editing' %} {{ survey.name }}{% endblock %}
       </h1>
     </div>
     {# End: Page title #}
@@ -48,9 +48,31 @@
       <p>{% trans 'This survey is part of' %} {{survey.project.name}} project. {% trans 'More detail about it are written heres' %}. {% trans 'Use the buttons in the sidebar to change version.' %}</p>
       <p>{% trans 'Complete the fields below in English to configure your survey for your audience. Once complete this fields, you will be asked to translate terms to your Survey language.' %}</p>
     </div>
-    <div class="btn-list mt-6 justify-content-center">
-      <a href="#" class="btn btn-primary">{% trans 'Start Edit Survey' %}</a>
-    </div>
+  </div>
+</div>
+<div class="row justify-content-md-center mt-3">
+  <div class="col">
+    <form method="POST" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form|crispy }}
+
+      <hr>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <button type="submit" class="btn btn-primary">
+              {% trans 'Save Survey Changes' %}
+            </button>
+
+            <a href="{% url 'surveys:survey-detail' survey.pk %}" class="btn btn-secondary">
+              {% trans 'Cancel' %}
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </form>
   </div>
 </div>
 {% endblock %}

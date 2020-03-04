@@ -31,6 +31,7 @@ class Survey(TimeStampedModel):
     Currently this only registered users can be invitees by being pre-added
     to the respondent list but this will change in future.
     """
+    YES_NO_CHOICES = ((True, _('Yes')), (False, _('No')))
 
     #: Global unique identifier for a survey.
     uuid = models.UUIDField(
@@ -107,9 +108,10 @@ class Survey(TimeStampedModel):
     #: Flag whether survey respondents must login.
     login_required = models.BooleanField(
         _('login required'),
-        help_text=_('Do you want users to login before responding to the survey?'),
+        help_text=_("If no, they won't be able to save and return to their results, or view previous results."),
         blank=True,
-        default=True
+        default=True,
+        choices=YES_NO_CHOICES
     )
 
     #: Flag whether survey respondents must be envited.
@@ -123,17 +125,19 @@ class Survey(TimeStampedModel):
     #: Flag wether respondent can see others responses.
     respondent_can_aggregate = models.BooleanField(
         _('respondent can aggregate'),
-        help_text=_("Do you want repondents to see visualizations or aggregates of other users' responses?"),
+        help_text=_("'Yes', will update their networ visual with all users' responses in realtime. 'No' will not."),
         blank=True,
-        default=True
+        default=True,
+        choices=YES_NO_CHOICES
     )
 
     #: Flag wether respondent can invite others.
     respondent_can_invite = models.BooleanField(
         _('respondent can suggest others'),
-        help_text=_('Do you want users to share email addresses of other potential respondents?'),
+        help_text=_('If Yes, the survey will include question collecting email address. Respondents are responsible for ensuring consent.'),  # noqa: E501
         blank=True,
-        default=True
+        default=True,
+        choices=YES_NO_CHOICES
     )
 
     #: Flag is survey is published.
