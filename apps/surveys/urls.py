@@ -47,4 +47,9 @@ urlpatterns = [
         views.SurveyResponseCompleteView.as_view(),
         name='survey-response-complete'
     ),
+    path(
+        'responses/<int:pk>/',
+        views.SurveyResponseDetailView.as_view(),
+        name='survey-response-detail'
+    ),
 ]

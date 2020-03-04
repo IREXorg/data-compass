@@ -18,13 +18,19 @@ class ProfileDetailView(LoginRequiredMixin, PageTitleMixin, TemplateView):
     def get_respondent_surveys(self):
         """
         Get surveys for user as a respondent.
-
-        Respondent surveys includes
-          - All surveys that do not require authentication.
-          - All surveys where respondents is invited.
         """
         return Survey.objects\
             .for_user(self.request.user)\
+            .select_related('project', 'project__organization')\
+            .prefetch_related('project__facilitators')
+
+    def get_available_surveys(self):
+        """
+        Get all active surveys that do not require invitation and user
+        isn't a respondent yet.
+        """
+        return Survey.objects\
+            .available(self.request.user)\
             .select_related('project', 'project__organization')\
             .prefetch_related('project__facilitators')
 
@@ -32,6 +38,7 @@ class ProfileDetailView(LoginRequiredMixin, PageTitleMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
         context['respondent_surveys'] = self.get_respondent_surveys()
+        context['available_surveys'] = self.get_available_surveys()
         return context
 
 
