@@ -1,13 +1,15 @@
 import uuid
 
 from django.conf import settings
-from django.contrib.postgres.fields import ArrayField, JSONField
+# from django.contrib.postgres.fields import ArrayField, JSONField
+from django.contrib.postgres.fields import JSONField
 from django.core.exceptions import PermissionDenied
 from django.db import models
 from django.urls import reverse_lazy as reverse
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
+from core.fields import ChoiceArrayField
 from core.models import TimeStampedModel
 
 from ..managers import SurveyManager
@@ -84,11 +86,14 @@ class Survey(TimeStampedModel):
     )
 
     #: Survey languages for translations.
-    languages = ArrayField(
-        models.CharField(max_length=5),
+    languages = ChoiceArrayField(
+        models.CharField(
+            max_length=5,
+            choices=settings.LANGUAGES,
+            ),
         verbose_name=_('languages'),
-        blank=True,
-        default=list
+        blank=False,
+        default=settings.DEFAULT_LANGUAGES
     )
 
     #: Unique slug for the survey.

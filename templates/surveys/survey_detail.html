@@ -44,12 +44,12 @@
 <div class="row">
   <div class="col">
     <div class="text-wrap">
-      <p class="text-muted">{% trans 'This survey is part of' %} {{project.name}}. {% trans 'More detail about it are written heres' %}.</p>
-      <p class="text-muted">{% trans 'What would you like to do with the survey' %}</p>
+      <p>{% trans 'This survey is part of' %} {{survey.project.name}} project. {% trans 'More detail about it are written heres' %}.</p>
+      <p>{% trans 'What would you like to do with the survey' %}</p>
     </div>
     <div class="btn-list mt-5">
-      <a href="#" class="btn btn-secondary">{% trans 'Edit Survey' %}</a>
-      <a href="#" class="btn btn-primary">{% trans 'Duplicate Survey' %}</a>
+      <a href="#" class="btn btn-primary">{% trans 'Edit Survey' %}</a>
+      <a href="#" class="btn btn-secondary">{% trans 'Duplicate Survey' %}</a>
       <a href="{% url 'surveys:survey-delete' survey.pk %}" class="btn btn-danger">{% trans 'Delete Survey' %}</a>
     </div>
   </div>

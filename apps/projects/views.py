@@ -99,6 +99,10 @@ class ProjectDetailView(ProjectFacilitatorMixin, PageMixin, DetailView):
         context['surveys'] = self.get_surveys()
         return context
 
+    def get_page_title(self):
+        """Prvide page_title."""
+        return self.object.name
+
 
 class ProjectUpdateView(ProjectFacilitatorMixin, PageMixin, UpdateView):
     """
