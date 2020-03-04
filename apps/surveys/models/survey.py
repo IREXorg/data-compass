@@ -74,7 +74,8 @@ class Survey(TimeStampedModel):
 
     #: Human readable, survey alternative name for respondents.
     display_name = models.CharField(
-        _('display name'),
+        _('alternative name'),
+        help_text=_('Use this optional field to provide the survey name as Respondents will see it.'),
         max_length=255,
         blank=True
     )
@@ -82,6 +83,7 @@ class Survey(TimeStampedModel):
     #: Accompanies survey research questions.
     research_question = models.CharField(
         _('research question'),
+        help_text=_('Every Data Compass survey must have a specific research question. What is yours?'),
         max_length=255
     )
 
