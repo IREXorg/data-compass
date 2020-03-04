@@ -165,3 +165,23 @@ class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
+
+
+class SurveyStartEditView(LoginRequiredMixin, PageTitleMixin, DetailView):
+    """
+    View survey edit start view.
+
+    Allow current signin user to start edit survey details.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        GET  /surveys/1234567890/start-edit
+    """
+
+    # Translators: This is survey view page title
+    page_title = _('Edit new survey')
+    template_name = 'surveys/survey_start_edit.html'
+    context_object_name = 'survey'
+    model = Survey

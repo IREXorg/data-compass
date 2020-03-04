@@ -10,7 +10,6 @@ class SurveyCreateForm(ModelForm):
 
     TODO: remove project once in project context
     """
-    # languages = forms.MultipleChoiceField(choices=settings.LANGUAGES),
 
     class Meta:
         model = Survey
@@ -23,10 +22,6 @@ class SurveyCreateForm(ModelForm):
 
     def __init__(self, project=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.fields['languages'] = forms.MultipleChoiceField(
-        #     widget=forms.CheckboxSelectMultiple(),
-        #     choices=settings.LANGUAGES
-        #     ),
         if project:
             self.initial['project'] = project
 
@@ -41,5 +36,4 @@ class SurveyUpdateForm(ModelForm):
         widgets = {
             'description': forms.Textarea(attrs={'rows': 2}),
             'languages': forms.CheckboxSelectMultiple(),
-            # 'languages': forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(), choices=settings.LANGUAGES),
         }

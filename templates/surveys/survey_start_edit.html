@@ -8,7 +8,8 @@
 <ol class="breadcrumb" aria-label="breadcrumbs">
    <li class="breadcrumb-item"><a href="{% url 'projects:project-list' %}">{% trans 'My Projects' %}</a></li>
    <li class="breadcrumb-item"><a href="{% url 'projects:project-detail' survey.project.pk %}">{{survey.project.name}}</a></li>
-   <li class="breadcrumb-item active" aria-current="page"><a href="#">{{survey.name}}</a></li>
+   <li class="breadcrumb-item"><a href="{% url 'surveys:survey-detail' survey.pk %}">{{survey.name}}</a></li>
+   <li class="breadcrumb-item active" aria-current="page"><a href="#">{{page_title}}</a></li>
 </ol>
 {% endblock %}
 {# End: Breadcrumbs #}
@@ -44,13 +45,11 @@
 <div class="row">
   <div class="col">
     <div class="text-wrap">
-      <p>{% trans 'This survey is part of' %} {{survey.project.name}} project. {% trans 'More detail about it are written heres' %}.</p>
-      <p>{% trans 'What would you like to do with the survey' %}</p>
+      <p>{% trans 'This survey is part of' %} {{survey.project.name}} project. {% trans 'More detail about it are written heres' %}. {% trans 'Use the buttons in the sidebar to change version.' %}</p>
+      <p>{% trans 'Complete the fields below in English to configure your survey for your audience. Once complete this fields, you will be asked to translate terms to your Survey language.' %}</p>
     </div>
-    <div class="btn-list mt-5">
-      <a href="{% url 'surveys:survey-start-edit' survey.pk %}" class="btn btn-primary">{% trans 'Edit Survey' %}</a>
-      <a href="#" class="btn btn-secondary">{% trans 'Duplicate Survey' %}</a>
-      <a href="{% url 'surveys:survey-delete' survey.pk %}" class="btn btn-danger">{% trans 'Delete Survey' %}</a>
+    <div class="btn-list mt-5 text-center">
+      <a href="#" class="btn btn-primary">{% trans 'Start Edit' %}</a>
     </div>
   </div>
 </div>
