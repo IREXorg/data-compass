@@ -223,6 +223,11 @@ ACTIVE_LINK_CSS_CLASS = 'active'
 
 ACTIVE_LINK_STRICT = True
 
+# Select2
+SELECT2_JS = ''
+
+SELECT2_CSS = ''
+
 # Site
 
 SITE_ID = env.int('SITE_ID', default=1)
