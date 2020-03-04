@@ -19,4 +19,16 @@
       {% include 'surveys/includes/user_survey_item.html' %}
     {% endfor %}
   </div>
+  <hr>
+
+  {% if available_surveys %}
+    <div class="mx-1">
+
+      <h1>{% trans 'Other Surveys' %}</h1>
+
+      {% for survey in available_surveys %}
+        {% include 'surveys/includes/user_survey_item.html' %}
+      {% endfor %}
+    </div>
+  {% endif %}
 </div>
