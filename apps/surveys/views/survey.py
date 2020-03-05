@@ -335,4 +335,24 @@ class SurveyEditStepSixView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMix
     form_class = SurveyEditStepSixForm
 
     def get_success_url(self):
-        return reverse('surveys:survey-detail', kwargs={'pk': self.object.pk})
+        return reverse('surveys:survey-edit-finish', kwargs={'pk': self.object.pk})
+
+
+class SurveyEditFinishView(LoginRequiredMixin, PageTitleMixin, DetailView):
+    """
+    View survey edit start view.
+
+    Allow current signin user to finish edit survey details.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        GET  /surveys/1234567890/edit-finish
+    """
+
+    # Translators: This is survey view page title
+    page_title = _('Edit new survey')
+    template_name = 'surveys/survey_edit_finish.html'
+    context_object_name = 'survey'
+    model = Survey

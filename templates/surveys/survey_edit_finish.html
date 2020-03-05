@@ -22,7 +22,7 @@
     {# Start: Page title #}
     <div class="col">
       <h1 class="page-title">
-        {% block page_title %}{% trans 'Editing' %} {{ survey.name }}{% endblock %}
+        {% block page_title %}{{ survey.name }}{% endblock %}
       </h1>
     </div>
     {# End: Page title #}
@@ -48,42 +48,20 @@
       <p>{% trans 'This survey is part of' %} {{survey.project.name}} project. {% trans 'More detail about it are written heres' %}. {% trans 'Use the buttons in the sidebar to change version.' %}</p>
       <p>{% trans 'Complete the fields below in English to configure your survey for your audience. Once complete this fields, you will be asked to translate terms to your Survey language.' %}</p>
     </div>
-  </div>
-</div>
-<div class="row justify-content-md-center mt-3">
-  <div class="btn-list justify-content-center">
-    <a href="{% url 'surveys:survey-edit-step-five' survey.pk %}" class="btn btn-light btn-sm btn-icon" aria-label="Back">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    </a>
-    <p class="h2 pt-1 ml-3 mr-3">6. {% trans 'Additional information?' %}</p>
-    <a href="{% url 'surveys:survey-edit-finish' survey.pk %}" class="btn btn-light btn-sm btn-icon" aria-label="Next">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </a>
-  </div>
-</div>
-<div class="row justify-content-md-center mt-5">
-  <div class="col">
-    <form method="POST" action="" enctype="multipart/form-data">
-      {% csrf_token %}
-      {{ form|crispy }}
-
-      <hr>
-
-      <div class="form-group">
-        <div class="row">
-          <div class="col-sm-6">
-            <button type="submit" class="btn btn-primary">
-              {% trans 'Save Survey Changes' %}
-            </button>
-
-            <a href="{% url 'surveys:survey-detail' survey.pk %}" class="btn btn-secondary">
-              {% trans 'Cancel' %}
-            </a>
-          </div>
-        </div>
+    <div class="justify-content-md-center mt-5">
+      <div class="btn-list justify-content-center">
+        <a href="{% url 'surveys:survey-edit-step-six' survey.pk %}" class="btn btn-light btn-sm btn-icon" aria-label="Back">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </a>
+        <p class="h2 pt-1 ml-3 mr-3">{% trans 'Done' %}</p>
       </div>
-
-    </form>
+    </div>
+    <div class="text-wrap mt-4">
+    <p>{% trans 'Click button below to return to the' %} {{survey.name}} overview page.</p>
+    </div>
+    <div class="btn-list mt-4 justify-content-center">
+      <a href="{% url 'surveys:survey-detail' survey.pk %}" class="btn btn-primary">{% trans 'Back Survey Overview' %}</a>
+    </div>
   </div>
 </div>
 {% endblock %}
