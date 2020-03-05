@@ -27,10 +27,10 @@
           {{ hidden_field }}
         {% endfor %}
 
-      <div class="form-row my-3">
+      <div class="form-row">
 
         <div class="col-auto">
-          <div class="form-check d-inline">
+          <div class="form-check">
             {% include 'bootstrap4/layout/field_errors_block.html' with field=form.selected %}
             {{ form.selected|add_class:"form-check-input" }}
           </div>

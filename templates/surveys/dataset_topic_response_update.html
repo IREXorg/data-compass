@@ -24,16 +24,16 @@
           {{ hidden_field }}
         {% endfor %}
 
-      <div class="form-row my-3">
+      <div class="form-row">
 
         <div class="col-auto">
-          <div class="form-check d-inline">
-            {% include 'bootstrap4/layout/field_errors_block.html' with field=form.selected %}
+          <div class="form-check">
             {{ form.selected|add_class:"form-check-input" }}
           </div>
         </div>
 
         <div class="col-sm-2">
+          {% include 'bootstrap4/layout/field_errors_block.html' with field=form.selected %}
           {% include 'bootstrap4/layout/field_errors_block.html' with field=form.errors %}
           {{ form.storage|add_class:'d-none' }}
           {{ form.storage_name }}

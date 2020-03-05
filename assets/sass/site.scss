@@ -1,5 +1,5 @@
 body {
-  padding-bottom: $body-badding-bottom;
+  padding-bottom: $body-padding-bottom;
 }
 
 h1 {
@@ -52,6 +52,7 @@ h2 {
   text-align: center;
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: 300;
+  font-size: 0.83em;
   color: #075254;
   padding: $content-padding-y !important;
 
@@ -62,5 +63,17 @@ h2 {
     padding-left: 10px;
     box-sizing: border-box;
     vertical-align: middle;
+  }
+}
+
+.form-control {
+  margin-top: $input-margin-top;
+  margin-bottom: $input-margin-bottom;
+}
+
+.form-row {
+  .form-control {
+    margin-top: $input-margin-top / 2;
+    margin-bottom: $input-margin-bottom / 2;
   }
 }
