@@ -168,6 +168,15 @@ class Survey(TimeStampedModel):
         choices=YES_NO_CHOICES
     )
 
+    #: Flag whether respondents can add their own entities.
+    allow_respondent_entities = models.BooleanField(
+        _('allow respondent entities'),
+        help_text=_('If Yes, respondents will be able to add their own entities.'),  # noqa: E501
+        blank=True,
+        default=False,
+        choices=YES_NO_CHOICES
+    )
+
     #: Flag is survey is published.
     is_active = models.BooleanField(
         _('is active'),

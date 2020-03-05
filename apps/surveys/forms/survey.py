@@ -89,3 +89,18 @@ class SurveyEditStepThreeForm(ModelForm):
         labels = {
             'allow_respondent_datasets': _('Allow users to add their own options(not recommended)'),
         }
+
+
+class SurveyEditStepFourForm(ModelForm):
+    """
+    Survey update step four form
+    """
+    class Meta:
+        model = Survey
+        fields = ['allow_respondent_entities']
+        widgets = {
+            'allow_respondent_entities': forms.RadioSelect(),
+        }
+        labels = {
+            'allow_respondent_entities': _('Allow respondents to enter their own value here'),
+        }
