@@ -104,3 +104,18 @@ class SurveyEditStepFourForm(ModelForm):
         labels = {
             'allow_respondent_entities': _('Allow respondents to enter their own value here'),
         }
+
+
+class SurveyEditStepFiveForm(ModelForm):
+    """
+    Survey update step five form
+    """
+    class Meta:
+        model = Survey
+        fields = ['allow_respondent_storages']
+        widgets = {
+            'allow_respondent_storages': forms.RadioSelect(),
+        }
+        labels = {
+            'allow_respondent_storages': _('Allow users to enter their own value here'),
+        }

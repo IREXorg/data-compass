@@ -9,8 +9,8 @@ from apps.projects.models import Project
 from core.mixins import PageTitleMixin
 
 from ..filters import SurveyListFilter
-from ..forms import (SurveyCreateForm, SurveyEditStepFourForm, SurveyEditStepOneForm, SurveyEditStepThreeForm,
-                     SurveyEditStepTwoForm, SurveyUpdateForm)
+from ..forms import (SurveyCreateForm, SurveyEditStepFiveForm, SurveyEditStepFourForm, SurveyEditStepOneForm,
+                     SurveyEditStepThreeForm, SurveyEditStepTwoForm, SurveyUpdateForm)
 from ..mixins import SurveyCreatorMixin
 from ..models import Survey
 
@@ -265,7 +265,7 @@ class SurveyEditStepThreeView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleM
 
 class SurveyEditStepFourView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
     """
-    Edit survey step fo vieurw.
+    Edit survey step four view.
 
     Allow current signin user to update existing survey details and
     redirect to survey edit step five page.
@@ -274,7 +274,7 @@ class SurveyEditStepFourView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMi
 
     .. code-block::
 
-        PUT  /surveys/1234567890/edit-step-three
+        PUT  /surveys/1234567890/edit-step-four
     """
 
     # Translators: This is survey update page title
@@ -283,6 +283,31 @@ class SurveyEditStepFourView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMi
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyEditStepFourForm
+
+    def get_success_url(self):
+        return reverse('surveys:survey-edit-step-five', kwargs={'pk': self.object.pk})
+
+
+class SurveyEditStepFiveView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
+    """
+    Edit survey step five view.
+
+    Allow current signin user to update existing survey details and
+    redirect to survey edit step six page.
+
+    **Example request**:
+
+    .. code-block::
+
+        PUT  /surveys/1234567890/edit-step-five
+    """
+
+    # Translators: This is survey update page title
+    page_title = _('Edit new survey')
+    template_name = 'surveys/survey_edit_step_five.html'
+    context_object_name = 'survey'
+    model = Survey
+    form_class = SurveyEditStepFiveForm
 
     def get_success_url(self):
         return reverse('surveys:survey-detail', kwargs={'pk': self.object.pk})
