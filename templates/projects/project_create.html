@@ -44,7 +44,11 @@
   <div class="col-sm-12">
     <div class="card">
       <div class="card-body">
-        <p class="text-muted">Provide some basic information about this project.</p>
+        <p class="text-muted">
+          {% blocktrans trimmed %}
+          Provide some basic information about this project.
+          {% endblocktrans %}
+        </p>
 
         <hr>
 
@@ -62,7 +66,7 @@
                 </button>
 
                 <a href={% url 'projects:project-list' %} class="btn btn-secondary">
-                  Cancel
+                  {% trans 'Cancel' %}
                 </a>
               </div>
             </div>

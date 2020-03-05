@@ -6,139 +6,79 @@
 
 {# Start: Breadcrumbs #}
 {% block breadcrumbs %}
-<ol class="breadcrumb" aria-label="breadcrumbs">
-   <li class="breadcrumb-item"><a href="{% url 'projects:project-list' %}">{% trans 'My Projects' %}</a></li>
-   <li class="breadcrumb-item active" aria-current="page"><a href="#">{{project.name}}</a></li>
-</ol>
+  <ol class="breadcrumb" aria-label="breadcrumbs">
+     <li class="breadcrumb-item">
+        <a href="{% url 'projects:project-list' %}">
+          {% trans 'My Projects' %}
+        </a>
+     </li>
+     <li class="breadcrumb-item active" aria-current="page">
+      <a href="#">{{project.name}}</a>
+     </li>
+  </ol>
 {% endblock %}
 {# End: Breadcrumbs #}
 
-{# Start: Page header #}
-{% block page_header %}
-{% if surveys|length > 0 %}
-<div class="page-header">
-  <div class="row align-items-center">
+{# Start: Page content #}
+{% block content %}
 
-    {# Start: Page title #}
+  {# Start: Page info #}
+  <div class="row">
     <div class="col">
-      <h1 class="page-title">
-        {% block page_title %}{{ project.name }}{% endblock %}
-      </h1>
+      <p>
+        {% blocktrans trimmed %}
+        This project contains {% endblocktrans %} {{ surveys.count }} {% blocktrans trimmed %} surveys. Select one you would like to edit from the list below, or create new one.
+        {% endblocktrans %}
+      </p>
     </div>
-    {# End: Page title #}
+  </div>
+  {# End: Page info #}
 
-    {# Start: Page actions #}
-    <div class="col-auto ml-auto d-print-none">
-      <div class="row">
-        <div class="input-icon">
-          <span class="input-icon-addon">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-          </span>
-          <input type="search" class="form-control d-inline-block w-9 mr-3" placeholder="{% trans 'Search surveys…' %}"/>
-        </div>
+  {# Start: Surveys list #}
+  {% if surveys|length > 0 %}
+    {# Start: Surveys list actions #}
+    <div class="row my-4">
+      <div class="col">
+        <form>
+          <div class="input-icon">
+            <span class="input-icon-addon">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
+            <input type="search" class="form-control d-inline-block w-9 mr-3" placeholder="{% trans 'Search surveys…' %}"/>
+          </div>
+        </form>
+      </div>
 
-        <a href="{% url 'projects:project-create-survey' project=project.pk %}" class="btn btn-primary ml-3 d-none d-sm-inline-block">
+      <div class="col-auto pr-3">
+        <a href="{% url 'projects:project-create-survey' project=project.pk %}" class="btn btn-warning ml-3 d-none d-sm-inline-block">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             {% trans 'New Survey' %}
         </a>
       </div>
     </div>
-    {# End: Page actions #}
+    {# End: Surveys list actions #}
 
-  </div>
-</div>
-{% endif %}
-{% endblock %}
-{# End: Page header #}
-
-{# Start: Page content #}
-{% block content %}
-{% if surveys|length > 0 %}
-{# Start: Survey list #}
-<div class="row">
-  {% for survey in surveys %}
-  <div class="col-md-6 col-lg-4">
-    <div class="card">
-      <div class="card-body">
-        <div class="row row-sm align-items-center">
-          <div class="col-auto">
-            <span class="avatar avatar-md rounded">
-             {{ survey.abbreviation }}
-            </span>
-          </div>
-          <div class="col">
-            <h3 class="mb-0"><a href="{% url 'surveys:survey-detail' survey.pk %}">{{ survey.name }}</a></h3>
-            <div class="text-muted text-h5">{{ survey.display_name }}</div>
-          </div>
-          <div class="col-auto lh-1 align-self-start">
-            {% if survey.is_active %}
-            <span class="badge bg-gray-lt">{% trans 'Un-published' %}</span>
-            {% else %}
-            <span class="badge bg-green-lt">{% trans 'Published' %}</span>
-            {% endif %}
-          </div>
-        </div>
-        <div class="row align-items-center mt-4">
-          <div class="col">
-            <div>
-              <div class="d-flex mb-1 align-items-center lh-1">
-                <div class="text-h5 font-weight-bolder m-0">Progress</div>
-                <span class="ml-auto text-h6 strong">84%</span>
-              </div>
-              <div class="progress progress-sm">
-                <div class="progress-bar bg-blue" style="width: 84%" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100">
-                  <span class="sr-only">84% Complete</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-auto">
-            <div class="btn-list">
-              <a href="{% url 'surveys:survey-delete' survey.pk %}" class="btn btn-danger btn-sm">
-                {% trans 'Delete' %}
-              </a>
-              <a href="{% url 'surveys:survey-update' survey.pk %}" class="btn btn-secondary btn-sm">
-                {% trans 'Edit' %}
-              </a>
-            </div>
-          </div>
-          <div class="col-auto">
-            <div class="dropdown">
-              <button class="btn-options" type="button" data-toggle="dropdown">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg>
-              </button>
-              <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="#">
-                  Publish
-                </a>
-                <a class="dropdown-item" href="#">
-                  Duplicate
-                </a>
-                <a class="dropdown-item" href="#">
-                  Translate
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    {# Start: Render Surveys list #}
+    <div class="row">
+      {% for survey in surveys %}
+        {% include 'surveys/includes/survey_item.html' %}
+      {% endfor %}
     </div>
-  </div>
-  {% endfor %}
-</div>
-{# End: Survey list #}
-{# Start: Empty Survey state #}
-{% else %}
-<div class="container text-center">
-  <p class="h2 mb-3 mt-5">{{project.name}} {% trans 'project has no surveys.' %}</p>
-  <p class="h4 text-muted font-weight-normal mb-5">{% trans 'Start by creating new survey.' %}</p>
-  <a href="{% url 'projects:project-create-survey' project=project.pk %}" class="btn btn-primary">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-     {% trans 'New Survey' %}
-  </a>
-</div>
-{% endif %}
-{# End: Empty Survey state #}
+    {# End: Render Surveys list #}
+  {# End: Surveys list #}
+
+  {# Start: Empty Surveys state #}
+  {% else %}
+    <div class="container text-center">
+      <p class="h2 mb-3 mt-5">{{project.name}} {% trans 'project has no surveys.' %}</p>
+      <p class="h4 text-muted font-weight-normal mb-5">{% trans 'Start by creating new survey.' %}</p>
+      <a href="{% url 'projects:project-create-survey' project=project.pk %}" class="btn btn-primary">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+         {% trans 'New Survey' %}
+      </a>
+    </div>
+  {% endif %}
+  {# End: Empty Surveys state #}
 
 {% endblock %}
 {# End: Page content #}

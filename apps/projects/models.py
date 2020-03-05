@@ -10,6 +10,7 @@ from django.utils.translation import ugettext_lazy as _
 from django_countries.fields import CountryField
 from phonenumber_field.modelfields import PhoneNumberField
 
+from core.fields import ChoiceArrayField
 from core.models import TimeStampedModel
 
 
@@ -46,7 +47,7 @@ class Project(TimeStampedModel):
         upload_to='organizations/avatars'
     )
     website = models.URLField(_('website'), blank=True)
-    countries = ArrayField(
+    countries = ChoiceArrayField(
         CountryField(),
         verbose_name=_('countries'),
         blank=True,

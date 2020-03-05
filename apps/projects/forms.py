@@ -3,6 +3,7 @@ from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 
 import xlrd
+from django_select2.forms import Select2MultipleWidget
 from treelib import Tree
 
 from .models import Project
@@ -26,9 +27,10 @@ class ProjectCreateForm(ModelForm):
 
     class Meta:
         model = Project
-        fields = ['name', 'description', 'email']
+        fields = ['name', 'description', 'email', 'countries']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 2}),
+            'countries': Select2MultipleWidget
         }
         help_texts = {
             'email': _('Please provide an email address of a collegue whom '
@@ -164,9 +166,10 @@ class ProjectUpdateForm(ProjectCreateForm):
 
     class Meta:
         model = Project
-        fields = ['name', 'description', 'email']
+        fields = ['name', 'description', 'email', 'countries']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 2}),
+            'countries': Select2MultipleWidget
         }
 
     def get_hierarchy_creator(self):

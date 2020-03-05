@@ -28,6 +28,7 @@ django-filter
 django-crispy-forms
 django-active-link
 django-widget-tweaks
+django_select2
 
 # date parsing, Python < 3.7
 python-dateutil

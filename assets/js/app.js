@@ -14,6 +14,8 @@ try {
   window.Popper = require('popper.js').default;
 
   require('bootstrap');
+
+  require('select2')(window.$);
 } catch (e) {}
 
 /**

@@ -1,13 +1,14 @@
 import uuid
 
 from django.conf import settings
-from django.contrib.postgres.fields import ArrayField, JSONField
+from django.contrib.postgres.fields import JSONField
 from django.core.exceptions import PermissionDenied
 from django.db import models
 from django.urls import reverse_lazy as reverse
 from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
+from core.fields import ChoiceArrayField
 from core.models import TimeStampedModel
 
 from ..managers import SurveyManager
@@ -72,7 +73,8 @@ class Survey(TimeStampedModel):
 
     #: Human readable, survey alternative name for respondents.
     display_name = models.CharField(
-        _('display name'),
+        _('alternative name'),
+        help_text=_('Use this optional field to provide the survey name as Respondents will see it.'),
         max_length=255,
         blank=True
     )
@@ -80,15 +82,18 @@ class Survey(TimeStampedModel):
     #: Accompanies survey research questions.
     research_question = models.CharField(
         _('research question'),
+        help_text=_('Every Data Compass survey must have a specific research question. What is yours?'),
         max_length=255
     )
 
     #: Survey languages for translations.
-    languages = ArrayField(
-        models.CharField(max_length=5),
+    languages = ChoiceArrayField(
+        models.CharField(
+            max_length=5,
+            choices=settings.LANGUAGES,
+            ),
         verbose_name=_('languages'),
-        blank=True,
-        default=list
+        blank=False
     )
 
     #: Unique slug for the survey.

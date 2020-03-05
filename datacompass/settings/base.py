@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'imagekit',
     'django_filters',
     'active_link',
+    'django_select2',
     # Custom apps
     'core',
     'apps.users.apps.UsersConfig',
@@ -181,6 +182,13 @@ USE_L10N = True
 
 USE_TZ = True
 
+LANGUAGES = [
+    ('en', 'English'),
+    ('sw', 'Swahili'),
+]
+
+DEFAULT_LANGUAGES = ['en']
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
@@ -214,6 +222,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ACTIVE_LINK_CSS_CLASS = 'active'
 
 ACTIVE_LINK_STRICT = True
+
+# Select2
+SELECT2_JS = ''
+
+SELECT2_CSS = ''
 
 # Site
 

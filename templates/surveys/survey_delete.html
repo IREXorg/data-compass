@@ -13,17 +13,23 @@
 {% endblock %}
 {# End: Breadcrumbs #}
 
+{# Start: Page header #}
+{% block page_header %}
+<div class="page-header">&nbsp;</div>
+{% endblock %}
+{# End: Page header #}
+
 {# Start: Content #}
 {% block content %}
-<h1 class="text-center text-dark">{% trans "Delete a survey" %}</h1>
+<div class="container text-center">
+  <p class="h2 mb-3 mt-5">{% trans 'Delete a survey' %}</p>
 
-<div class="text-center">
-    <p class="text-muted">{% trans 'Are you sure you want to delete this survey?' %}</p>
+  <p class="h4 text-muted font-weight-normal mb-5">{% trans 'Are you sure you want to delete this survey?' %}</p>
 
-    <form method="POST" action="" enctype="multipart/form-data">
-        {% csrf_token %}
-        <button class="btn btn-warning" type="submit">{% trans 'Delete' %}</button>
-    </form>
+  <form method="POST" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      <button class="btn btn-warning" type="submit">{% trans 'Delete' %}</button>
+  </form>
 </div>
 {% endblock %}
 {# End: Content #}
