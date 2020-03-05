@@ -13,6 +13,7 @@ urlpatterns = [
     path('<int:pk>/edit-start/', views.SurveyEditStartView.as_view(), name='survey-edit-start'),
     path('<int:pk>/edit-step-one/', views.SurveyEditStepOneView.as_view(), name='survey-edit-step-one'),
     path('<int:pk>/edit-step-two/', views.SurveyEditStepTwoView.as_view(), name='survey-edit-step-two'),
+    path('<int:pk>/edit-step-three/', views.SurveyEditStepThreeView.as_view(), name='survey-edit-step-three'),
     path('<int:pk>/consent/', views.RespondentConsentView.as_view(), name='respondent-consent'),
     path('<int:pk>/respondent/update/', views.RespondentUpdateView.as_view(), name='respondent-update'),
     path(

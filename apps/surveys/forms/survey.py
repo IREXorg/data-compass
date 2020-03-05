@@ -71,6 +71,21 @@ class SurveyEditStepTwoForm(ModelForm):
             'allow_respondent_topics': forms.RadioSelect(),
         }
         labels = {
-            'allow_respondent_topics': _('Allow respondents to enter their won value here'),
+            'allow_respondent_topics': _('Allow respondents to enter their own value here'),
             'respondent_topic_number': _('How many topics would you like Respondents to select?. They will complete the entire survey for each topic.'),  # noqa: E501
+        }
+
+
+class SurveyEditStepThreeForm(ModelForm):
+    """
+    Survey update step three form
+    """
+    class Meta:
+        model = Survey
+        fields = ['allow_respondent_datasets']
+        widgets = {
+            'allow_respondent_datasets': forms.RadioSelect(),
+        }
+        labels = {
+            'allow_respondent_datasets': _('Allow users to add their own options(not recommended)'),
         }

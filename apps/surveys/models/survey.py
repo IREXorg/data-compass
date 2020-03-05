@@ -159,6 +159,15 @@ class Survey(TimeStampedModel):
         validators=[MinValueValidator(1), MaxValueValidator(10)]
     )
 
+    #: Flag whether respondents can add their own datasets.
+    allow_respondent_datasets = models.BooleanField(
+        _('allow respondent datasets'),
+        help_text=_('If Yes, respondents will be able to add their own datasets.'),  # noqa: E501
+        blank=True,
+        default=False,
+        choices=YES_NO_CHOICES
+    )
+
     #: Flag is survey is published.
     is_active = models.BooleanField(
         _('is active'),

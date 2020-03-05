@@ -9,7 +9,8 @@ from apps.projects.models import Project
 from core.mixins import PageTitleMixin
 
 from ..filters import SurveyListFilter
-from ..forms import SurveyCreateForm, SurveyEditStepOneForm, SurveyEditStepTwoForm, SurveyUpdateForm
+from ..forms import (SurveyCreateForm, SurveyEditStepOneForm, SurveyEditStepThreeForm, SurveyEditStepTwoForm,
+                     SurveyUpdateForm)
 from ..mixins import SurveyCreatorMixin
 from ..models import Survey
 
@@ -217,7 +218,7 @@ class SurveyEditStepTwoView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMix
     Edit survey step two view.
 
     Allow current signin user to update existing survey details and
-    redirect to survey edit step two page.
+    redirect to survey edit step three page.
 
     **Example request**:
 
@@ -232,6 +233,31 @@ class SurveyEditStepTwoView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMix
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyEditStepTwoForm
+
+    def get_success_url(self):
+        return reverse('surveys:survey-edit-step-three', kwargs={'pk': self.object.pk})
+
+
+class SurveyEditStepThreeView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
+    """
+    Edit survey step three view.
+
+    Allow current signin user to update existing survey details and
+    redirect to survey edit step four page.
+
+    **Example request**:
+
+    .. code-block::
+
+        PUT  /surveys/1234567890/edit-step-three
+    """
+
+    # Translators: This is survey update page title
+    page_title = _('Edit new survey')
+    template_name = 'surveys/survey_edit_step_three.html'
+    context_object_name = 'survey'
+    model = Survey
+    form_class = SurveyEditStepThreeForm
 
     def get_success_url(self):
         return reverse('surveys:survey-detail', kwargs={'pk': self.object.pk})
