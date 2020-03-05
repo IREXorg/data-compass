@@ -186,6 +186,22 @@ class Survey(TimeStampedModel):
         choices=YES_NO_CHOICES
     )
 
+    #: Human readable, header(introductory information) of survey.
+    introduction_text = models.TextField(
+        _('introduction text'),
+        help_text=_('What text do you want to appear when a respondent begins the survey?'),  # noqa: E501
+        blank=False,
+        default=''
+    )
+
+    #: Human readable, footer(closing information) of survey.
+    closing_text = models.TextField(
+        _('closing text'),
+        help_text=_('What text do you want to appear when a respondent ends the survey?'),  # noqa: E501
+        blank=False,
+        default=''
+    )
+
     #: Flag is survey is published.
     is_active = models.BooleanField(
         _('is active'),

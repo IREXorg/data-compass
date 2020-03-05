@@ -42,7 +42,7 @@ class SurveyUpdateForm(ModelForm):
 
 class SurveyEditStepOneForm(ModelForm):
     """
-    Survey update step one form
+    Survey edit step one form
     """
     class Meta:
         model = Survey
@@ -62,7 +62,7 @@ class SurveyEditStepOneForm(ModelForm):
 
 class SurveyEditStepTwoForm(ModelForm):
     """
-    Survey update step two form
+    Survey edit step two form
     """
     class Meta:
         model = Survey
@@ -78,7 +78,7 @@ class SurveyEditStepTwoForm(ModelForm):
 
 class SurveyEditStepThreeForm(ModelForm):
     """
-    Survey update step three form
+    Survey edit step three form
     """
     class Meta:
         model = Survey
@@ -93,7 +93,7 @@ class SurveyEditStepThreeForm(ModelForm):
 
 class SurveyEditStepFourForm(ModelForm):
     """
-    Survey update step four form
+    Survey edit step four form
     """
     class Meta:
         model = Survey
@@ -108,7 +108,7 @@ class SurveyEditStepFourForm(ModelForm):
 
 class SurveyEditStepFiveForm(ModelForm):
     """
-    Survey update step five form
+    Survey edit step five form
     """
     class Meta:
         model = Survey
@@ -118,4 +118,21 @@ class SurveyEditStepFiveForm(ModelForm):
         }
         labels = {
             'allow_respondent_storages': _('Allow users to enter their own value here'),
+        }
+
+
+class SurveyEditStepSixForm(ModelForm):
+    """
+    Survey edit step six form
+    """
+    class Meta:
+        model = Survey
+        fields = ['introduction_text', 'closing_text']
+        widgets = {
+            'introduction_text': forms.Textarea(attrs={'rows': 2}),
+            'closing_text': forms.Textarea(attrs={'rows': 2}),
+        }
+        labels = {
+            'introduction_text': _('Introduction text:'),
+            'closing_text': _('Closing text:'),
         }
