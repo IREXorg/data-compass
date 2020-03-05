@@ -13,13 +13,15 @@
     {% block form_fields %}{{ form|crispy }}{% endblock %}
 
     {% block form_buttons %}
-      <a href="{{ back_url_path }}" class="btn btn-warning">
-        «« {% trans 'Back' %}
-      </a>
+      <div class="my-3">
+        <a href="{{ back_url_path }}" class="btn btn-warning">
+          «« {% trans 'Back' %}
+        </a>
 
-      <button class="btn btn-success" type="submit">
-        {% trans 'Save and Continue' %} »
-      </button>
+        <button class="btn btn-success" type="submit">
+          {% trans 'Save and Continue' %} »
+        </button>
+      </div>
     {% endblock form_buttons %}
   </form>
 {% endblock %}

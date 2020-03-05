@@ -5,14 +5,14 @@ from django.utils import timezone
 from django.views.generic import FormView, UpdateView
 
 from core.exceptions import NotAuthenticated
-from core.mixins import PageTitleMixin
+from core.mixins import PageMixin
 
 from ..forms import RespondentConsentForm, RespondentForm
 from ..mixins import ConsentCheckMixin, RespondentSurveyMixin
 from ..models import Respondent
 
 
-class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
+class RespondentConsentView(PageMixin, RespondentSurveyMixin, FormView):
     """
     Asks respondent for consent and saves consent data in user's session.
 
@@ -86,7 +86,7 @@ class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
         return {'user': user, 'email': email}
 
 
-class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, ConsentCheckMixin, UpdateView):
+class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, UpdateView):
     """
     Prompts respondents to update their basic data for the survey.
 
@@ -161,3 +161,6 @@ class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, ConsentCheckMi
 
     def get_success_url(self):
         return reverse('surveys:dataset-response-list-create', kwargs={'pk': self.survey_response.pk})
+
+    def get_back_url_path(self):
+        return reverse('surveys:respondent-consent', kwargs={'pk': self.survey.pk})

@@ -1,7 +1,8 @@
 // Body
 
 $body-bg: #ffffff;
-$body-badding-bottom: 100px;
+$body-padding-bottom: 100px;
+$body-color: #0a2c2d;
 
 // Colors
 
@@ -16,7 +17,7 @@ $secondary: #9ba7a7;
 $font-family-sans-serif: 'Source Sans Pro', sans-serif;
 $font-family-base: 'Source Sans Pro', sans-seri;
 
-// $font-size-base: 1.2rem;
+$font-size-base: 1.1rem;
 
 $link-color: #d76427;
 
@@ -60,6 +61,11 @@ $input-btn-padding-x: 1rem;
 
 $input-focus-border-color: none;
 $input-focus-box-shadow:  none;
+
+$input-margin-top: 15px;
+$input-margin-bottom: 40px;
+
+$label-margin-bottom: 0;
 
 // Buttons
 

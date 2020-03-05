@@ -77,6 +77,11 @@
              class="btn btn-success btn-sm">
             {% trans 'Continue survey' %}
           </a>
+        {% else %}
+          <a href="{% url 'surveys:respondent-consent' survey.pk %}"
+             class="btn btn-success btn-sm">
+            {% trans 'Start survey' %}
+          </a>
         {% endif %}
 
         <a href="#" class="btn btn-outline-secondary btn-sm">{% trans 'Contact facilitator' %}</a>
