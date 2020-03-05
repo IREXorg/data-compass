@@ -48,7 +48,7 @@
       <p>{% trans 'What would you like to do with the survey' %}</p>
     </div>
     <div class="btn-list mt-5">
-      <a href="#" class="btn btn-primary">{% trans 'Edit Survey' %}</a>
+      <a href="{% url 'surveys:survey-update' survey.pk %}" class="btn btn-primary">{% trans 'Edit Survey' %}</a>
       <a href="#" class="btn btn-secondary">{% trans 'Duplicate Survey' %}</a>
       <a href="{% url 'surveys:survey-delete' survey.pk %}" class="btn btn-danger">{% trans 'Delete Survey' %}</a>
     </div>
