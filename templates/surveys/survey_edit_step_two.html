@@ -52,11 +52,11 @@
 </div>
 <div class="row justify-content-md-center mt-3">
   <div class="btn-list justify-content-center">
-    <a href="{% url 'surveys:survey-detail' survey.pk %}" class="btn btn-light btn-sm btn-icon" aria-label="Back">
+    <a href="{% url 'surveys:survey-edit-step-one' survey.pk %}" class="btn btn-light btn-sm btn-icon" aria-label="Back">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="15 18 9 12 15 6"></polyline></svg>
     </a>
-    <p class="h2 pt-1 ml-3 mr-3">1. {% trans 'Who will take this survey?' %}</p>
-    <a href="{% url 'surveys:survey-edit-step-two' survey.pk %}" class="btn btn-light btn-sm btn-icon" aria-label="Next">
+    <p class="h2 pt-1 ml-3 mr-3">2. {% trans 'What topics they will respond about?' %}</p>
+    <a href="#" class="btn btn-light btn-sm btn-icon" aria-label="Next">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </a>
   </div>

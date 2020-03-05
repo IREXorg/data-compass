@@ -58,3 +58,19 @@ class SurveyEditStepOneForm(ModelForm):
                 _("Do you want repondents to see visualizations or aggregates of other users' responses?"),
             'respondent_can_invite': _('Do you want users to share email addresses of other potential respondents?'),
         }
+
+
+class SurveyEditStepTwoForm(ModelForm):
+    """
+    Survey update step two form
+    """
+    class Meta:
+        model = Survey
+        fields = ['allow_respondent_topics', 'respondent_topic_number']
+        widgets = {
+            'allow_respondent_topics': forms.RadioSelect(),
+        }
+        labels = {
+            'allow_respondent_topics': _('Allow respondents to enter their won value here'),
+            'respondent_topic_number': _('How many topics would you like Respondents to select?. They will complete the entire survey for each topic.'),  # noqa: E501
+        }

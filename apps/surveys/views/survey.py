@@ -9,7 +9,7 @@ from apps.projects.models import Project
 from core.mixins import PageTitleMixin
 
 from ..filters import SurveyListFilter
-from ..forms import SurveyCreateForm, SurveyEditStepOneForm, SurveyUpdateForm
+from ..forms import SurveyCreateForm, SurveyEditStepOneForm, SurveyEditStepTwoForm, SurveyUpdateForm
 from ..mixins import SurveyCreatorMixin
 from ..models import Survey
 
@@ -177,7 +177,7 @@ class SurveyEditStartView(LoginRequiredMixin, PageTitleMixin, DetailView):
 
     .. code-block:: http
 
-        GET  /surveys/1234567890/start-edit
+        GET  /surveys/1234567890/edit-start
     """
 
     # Translators: This is survey view page title
@@ -198,7 +198,7 @@ class SurveyEditStepOneView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMix
 
     .. code-block::
 
-        PUT  /surveys/1234567890/update-step-one
+        PUT  /surveys/1234567890/edit-step-one
     """
 
     # Translators: This is survey update page title
@@ -207,6 +207,31 @@ class SurveyEditStepOneView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMix
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyEditStepOneForm
+
+    def get_success_url(self):
+        return reverse('surveys:survey-edit-step-two', kwargs={'pk': self.object.pk})
+
+
+class SurveyEditStepTwoView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
+    """
+    Edit survey step two view.
+
+    Allow current signin user to update existing survey details and
+    redirect to survey edit step two page.
+
+    **Example request**:
+
+    .. code-block::
+
+        PUT  /surveys/1234567890/edit-step-two
+    """
+
+    # Translators: This is survey update page title
+    page_title = _('Edit new survey')
+    template_name = 'surveys/survey_edit_step_two.html'
+    context_object_name = 'survey'
+    model = Survey
+    form_class = SurveyEditStepTwoForm
 
     def get_success_url(self):
         return reverse('surveys:survey-detail', kwargs={'pk': self.object.pk})
