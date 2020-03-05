@@ -1,4 +1,7 @@
+import json
+
 from django.shortcuts import redirect
+from django.template.response import TemplateResponse
 
 
 class PageTitleMixin:
@@ -77,3 +80,58 @@ class InlineFormsetMixin:
     def form_invalid(self, form, formset):
         """If the form is invalid, render the invalid form."""
         return self.render_to_response(self.get_context_data(form=form, formset=formset))
+
+
+class PopupTemplateMixin:
+
+    def is_popup(self):
+        return bool(self.request.GET.get('_popup'))
+
+    def get_template_names(self):
+        if self.is_popup():
+            return [f"{self.template_name.split('.')[0]}_popup.html"]
+
+        return super().get_template_names()
+
+
+class ModelFormMixin(PopupTemplateMixin):
+
+    def get_popup_response_data(self):
+        return {}
+
+    def form_valid(self, form):
+        self.object = form.save()
+
+        if self.is_popup():
+            return TemplateResponse(
+                self.request,
+                'common/popup_response.html',
+                {'popup_response_data': json.dumps(self.get_popup_response_data())}
+            )
+
+        return redirect(self.get_success_url())
+
+
+class DeleteMixin(PopupTemplateMixin):
+    """Delete object.
+
+    Taking into account popups.
+    """
+
+    def delete(self, request, *args, **kwargs):
+
+        if self.is_popup():
+            self.object = self.get_object()
+            self.object.delete()
+
+            popup_response_data = json.dumps({
+                'action': 'delete_object',
+            })
+
+            return TemplateResponse(
+                self.request,
+                'common/popup_response.html',
+                {'popup_response_data': popup_response_data}
+            )
+
+        return super().delete(request, *args, **kwargs)
