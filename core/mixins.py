@@ -94,7 +94,7 @@ class PopupTemplateMixin:
         return super().get_template_names()
 
 
-class ModelFormMixin(PopupTemplateMixin):
+class PopupModelFormMixin(PopupTemplateMixin):
 
     def get_popup_response_data(self):
         return {}
@@ -112,7 +112,7 @@ class ModelFormMixin(PopupTemplateMixin):
         return redirect(self.get_success_url())
 
 
-class DeleteMixin(PopupTemplateMixin):
+class PopupDeleteMixin(PopupTemplateMixin):
     """Delete object.
 
     Taking into account popups.
