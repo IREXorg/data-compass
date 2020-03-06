@@ -105,7 +105,7 @@ class PopupModelFormMixin(PopupTemplateMixin):
         if self.is_popup():
             return TemplateResponse(
                 self.request,
-                'common/popup_response.html',
+                'core/popup_response.html',
                 {'popup_response_data': json.dumps(self.get_popup_response_data())}
             )
 
@@ -130,7 +130,7 @@ class PopupDeleteMixin(PopupTemplateMixin):
 
             return TemplateResponse(
                 self.request,
-                'common/popup_response.html',
+                'core/popup_response.html',
                 {'popup_response_data': popup_response_data}
             )
 
