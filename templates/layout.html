@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <div class="page">
-      {% include 'includes/nav_primary.html' %}
+  <div class="page">
+    {% include 'includes/nav_primary.html' %}
 
+    {% block content_wrapper %}
       <div class="content">
+
         <main class="{% block content_container %}container{% endblock %}">
 
           {% block breadcrumbs_container %}
@@ -37,5 +39,9 @@
 
           {% block footer %}{% include 'includes/footer.html' %}{% endblock %}
         </main>
+
       </div>
+    {% endblock content_wrapper %}
+
+  </div>
 {% endblock body %}

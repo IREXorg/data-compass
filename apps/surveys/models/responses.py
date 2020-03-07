@@ -253,6 +253,15 @@ class Respondent(TimeStampedModel):
     :attr:`~last_name`, :attr:`~email` and :attr:`~gender` will
     be autopopulated from the user object when object :meth:`~save` method is called.
     """
+    NOT_STARTED = 'not started'
+    IN_PROGRESS = 'in progress'
+    COMPLETED = 'completed'
+
+    STATUS_CHOICES = (
+        (NOT_STARTED, _('not yet started')),
+        (IN_PROGRESS, _('started but not completed')),
+        (COMPLETED, _('completed')),
+    )
 
     #: Respondent's UUID.
     uuid = models.UUIDField(
@@ -340,6 +349,7 @@ class Respondent(TimeStampedModel):
     class Meta:
         verbose_name = _('Respondent')
         verbose_name_plural = _('Respondents')
+        ordering = ['-created_at']
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'

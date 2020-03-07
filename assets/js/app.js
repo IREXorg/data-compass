@@ -15,8 +15,8 @@ try {
 
   require('bootstrap');
 
-  require('./related-objects.js');
-  require('./popup-response.js');
+  //require('./related-objects.js');
+  //require('./popup-response.js');
 
   require('select2')(window.$);
 } catch (e) {}

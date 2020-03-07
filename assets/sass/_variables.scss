@@ -62,8 +62,8 @@ $input-btn-padding-x: 1rem;
 $input-focus-border-color: none;
 $input-focus-box-shadow:  none;
 
-$input-margin-top: 15px;
-$input-margin-bottom: 40px;
+$input-margin-top: 0;
+$input-margin-bottom: 0;
 
 $label-margin-bottom: 0;
 
@@ -85,3 +85,11 @@ $navbar-brand-letter-spacing: 1px;
 
 $navbar-light-brand-color: #075254;
 $navbar-light-brand-hover-color: $navbar-light-brand-color;
+
+$navbar-font-size: 0.9rem;
+
+// Page
+
+$page-master-margin-top: 1px;
+$page-master-padding-top: 30px;
+$page-master-font-size: 0.9rem;
