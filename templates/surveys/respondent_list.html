@@ -25,7 +25,7 @@
   </div>
 
   <div class="row my-4">
-    <div class="col">
+    <div class="col-sm">
       <form>
 
         <div class="input-icon">
@@ -42,13 +42,13 @@
       </form>
     </div>
 
-    <div class="col-auto pr-3">
+    <div class="col-sm-auto pr-3">
+      <a id="export-csv" class="btn btn-warning btn-sm mx-3" href="#">{% trans 'Export table' %}</a>
+
       <span class="text-muted">
         {% trans 'Respondents found' %}:
         <span class="badge badge-pill badge-dark">{{ paginator.count }}</span>
       </span>
-
-      <a id="export-csv" class="btn btn-warning btn-sm" href="#">{% trans 'Export table' %}</a>
     </div>
   </div>
 
