@@ -7,7 +7,7 @@
 {% block content_master %}
   <h2>{% trans 'Filter respondents' %}</h2>
 
-  <form method="GET">
+  <form id="respondent-filter" method="GET">
     {{ filter.form|crispy }}
     <div class="my-4">
       <button type="submit" class="btn btn-success btn-sm">{% trans 'Apply filters' %}</button>
@@ -27,6 +27,7 @@
   <div class="row my-4">
     <div class="col">
       <form>
+
         <div class="input-icon">
           <span class="input-icon-addon">
             <i class="fas fa-search"></i>
@@ -37,6 +38,7 @@
                  class="form-control d-inline-block w-9 mr-3"
                  placeholder="{% trans 'Search projects…' %}"/>
         </div>
+
       </form>
     </div>
 
@@ -45,6 +47,8 @@
         {% trans 'Respondents found' %}:
         <span class="badge badge-pill badge-dark">{{ paginator.count }}</span>
       </span>
+
+      <a id="export-csv" class="btn btn-warning btn-sm" href="#">{% trans 'Export table' %}</a>
     </div>
   </div>
 
@@ -77,3 +81,18 @@
     </table>
   </div>
 {% endblock content_detail %}
+
+
+{% block extra_js %}
+  {# FIXME: move this to js files #}
+  <script>
+    $('#export-csv').click(function() {
+      var form = '#respondent-filter'
+      $("<input />").attr("type", "hidden")
+        .attr("name", "format")
+        .attr("value", "csv")
+        .appendTo(form);
+      $(form).submit();
+    });
+  </script>
+{% endblock extra_js %}
