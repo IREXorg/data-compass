@@ -349,6 +349,7 @@ class Respondent(TimeStampedModel):
     class Meta:
         verbose_name = _('Respondent')
         verbose_name_plural = _('Respondents')
+        ordering = ['-created_at']
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
