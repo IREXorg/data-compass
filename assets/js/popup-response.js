@@ -1,6 +1,5 @@
 /*global opener */
 (function() {
-    'use strict';
     var initData = JSON.parse(document.getElementById('popup-response-constants').dataset.popupResponse);
 
     switch(initData.action) {

@@ -2,6 +2,10 @@ body {
   padding-bottom: $body-padding-bottom;
 }
 
+body.fixed-nav-primary {
+  padding-top: $navbar-height;
+}
+
 h1 {
   color: $h1-color;
 }
@@ -23,6 +27,15 @@ h2 {
   padding-bottom: 0.25em;
 }
 
+.page-master {
+  top: $navbar-height;
+  margin-top: $page-master-margin-top;
+  padding-top: $page-master-padding-top;
+  height: calc(100% - 80px - #{$navbar-height});
+  font-size: $page-master-font-size;
+  overflow: auto;
+}
+
 .navbar-brand {
   text-transform: uppercase;
   font-weight: $navbar-brand-font-weight;
@@ -40,6 +53,10 @@ h2 {
       max-width: 68%;
     }
   }
+}
+
+.navbar{
+  font-size: $navbar-font-size;
 }
 
 .footer {

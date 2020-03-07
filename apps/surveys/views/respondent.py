@@ -1,15 +1,41 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import redirect_to_login
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView, UpdateView
+
+from django_filters.views import FilterView
 
 from core.exceptions import NotAuthenticated
 from core.mixins import PageMixin
 
+from ..filters import RespondentFilter
 from ..forms import RespondentConsentForm, RespondentForm
 from ..mixins import ConsentCheckMixin, RespondentSurveyMixin
 from ..models import Respondent
+
+
+class RespondentListView(LoginRequiredMixin, PageMixin, FilterView):
+    """
+    Listing respondents as a facilitator.
+    """
+
+    # Translators: This is respondents list page title
+    page_title = _('Manage respondents')
+    template_name = 'surveys/respondent_list.html'
+    context_object_name = 'respondents'
+    model = Respondent
+    filterset_class = RespondentFilter
+    ordering = ['-created_at']
+    paginate_by = 30
+
+    def get_queryset(self):
+        return self.model.objects\
+            .filter(survey__project__facilitators=self.request.user)\
+            .select_related('survey', 'gender')\
+            .with_status()
 
 
 class RespondentConsentView(PageMixin, RespondentSurveyMixin, FormView):

@@ -12,6 +12,7 @@ urlpatterns = [
     path('<int:pk>/delete/', views.SurveyDeleteView.as_view(), name='survey-delete'),
     path('<int:pk>/consent/', views.RespondentConsentView.as_view(), name='respondent-consent'),
     path('<int:pk>/respondent/update/', views.RespondentUpdateView.as_view(), name='respondent-update'),
+    path('respondents/', views.RespondentListView.as_view(), name='respondent-list'),
     path(
         '<int:pk>/select-datasets/',
         views.DatasetResponseListCreateView.as_view(),
