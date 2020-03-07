@@ -41,10 +41,10 @@
     </div>
 
     <div class="col-auto pr-3">
-      <a href="#" class="btn btn-warning ml-3 d-none d-sm-inline-block">
-        <i class="fas fa-plus"></i>
-        {% trans 'Add a Respondent' %}
-      </a>
+      <span class="text-muted">
+        {% trans 'Respondents found' %}:
+        <span class="badge badge-pill badge-dark">{{ paginator.count }}</span>
+      </span>
     </div>
   </div>
 
