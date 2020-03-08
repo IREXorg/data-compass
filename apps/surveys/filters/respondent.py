@@ -1,29 +1,17 @@
 from distutils.util import strtobool
 
 from django import forms
-from django.contrib.postgres.search import SearchVector
 from django.utils.translation import ugettext_lazy as _
 
 import django_filters
 
 from apps.users.models import Gender
 
-from .models import Respondent, Survey
+from ..mixins import SearchVectorFilterMixin
+from ..models import Respondent
 
 
-class SurveyListFilter(django_filters.FilterSet):
-    """
-    Surveys list filters
-    """
-    name = django_filters.CharFilter(lookup_expr='icontains')
-    display_name = django_filters.CharFilter(lookup_expr='icontains')
-
-    class Meta:
-        model = Survey
-        fields = ('name', 'display_name')
-
-
-class RespondentFilter(django_filters.FilterSet):
+class RespondentFilter(SearchVectorFilterMixin, django_filters.FilterSet):
     REGISTERED = 1
     NOT_REGISTERED = 0
 
@@ -34,7 +22,7 @@ class RespondentFilter(django_filters.FilterSet):
 
     q = django_filters.CharFilter(
         label=_('Search text'),
-        method='filter_q',
+        method='filter_search_vector',
         widget=forms.HiddenInput,
     )
 
@@ -56,17 +44,8 @@ class RespondentFilter(django_filters.FilterSet):
         coerce=strtobool
     )
 
+    search_vector_fields = ['first_name', 'last_name', 'email']
+
     class Meta:
         model = Respondent
-        fields = ['gender', 'status', 'registered', 'survey__project', 'survey']
-
-    def filter_q(self, queryset, name, value):
-        # TODO: Create Index to avoid performance issues
-        # https://docs.djangoproject.com/en/3.0/ref/contrib/postgres/search/#performance
-
-        if not value:
-            return queryset
-
-        return queryset.annotate(
-            search_vector=SearchVector('first_name', 'last_name', 'email')
-        ).filter(search_vector=value)
+        fields = ['q', 'gender', 'status', 'registered', 'survey__project', 'survey']

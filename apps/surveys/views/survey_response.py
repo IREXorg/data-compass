@@ -8,12 +8,53 @@ from django.views import View
 from django.views.generic import DetailView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 
-from core.exceptions import NotAuthenticated
-from core.mixins import PageMixin
+from django_filters.views import FilterView
 
+from core.exceptions import NotAuthenticated
+from core.mixins import CSVResponseMixin, PageMixin
+
+from ..filters import SurveyResponseFilter
 from ..forms import SurveyResponseCompleteForm
-from ..mixins import ConsentCheckMixin, RespondentSurveyMixin
+from ..mixins import ConsentCheckMixin, FacilitatorMixin, RespondentSurveyMixin
 from ..models import Response as SurveyResponse
+
+
+class SurveyResponseListView(FacilitatorMixin, PageMixin, CSVResponseMixin, FilterView):
+    """
+    Listing survey responses as a facilitator.
+    """
+
+    # Translators: This is respondents list page title
+    page_title = _('Manage responses')
+    template_name = 'surveys/survey_response_list.html'
+    context_object_name = 'survey_responses'
+    model = SurveyResponse
+    filterset_class = SurveyResponseFilter
+    ordering = ['-created_at']
+    paginate_by = 30
+
+    def get_queryset(self):
+        return self.model.objects\
+            .filter(survey__project__facilitators=self.request.user)\
+            .select_related('respondent', 'survey', 'survey__project')\
+            .with_status()
+
+    def get_rows(self):
+        yield ('id', 'respondent_email', 'respondent_id', 'survey', 'survey_id', 'project', 'project_id',
+               'status', 'consented_at', 'completed_at')
+
+        for obj in self.object_list:
+            yield (obj.id, obj.respondent.email, obj.respondent_id,
+                   obj.survey.name, obj.survey_id, obj.survey.project.name, obj.survey.project.id,
+                   obj.status, obj.consented_at, obj.completed_at)
+
+    def get_filename(self):
+        return f'responses-{str(timezone.now().date())}.csv'
+
+    def get_renderer(self):
+        # When `format=csv` in URL query string return csv
+        if self.request.GET.get('format') == 'csv':
+            return 'csv'
 
 
 class SurveyResponseResumeView(LoginRequiredMixin, PageMixin, SingleObjectMixin, View):

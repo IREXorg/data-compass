@@ -49,6 +49,11 @@ urlpatterns = [
         name='survey-response-complete'
     ),
     path(
+        'responses/',
+        views.SurveyResponseListView.as_view(),
+        name='survey-response-list'
+    ),
+    path(
         'responses/<int:pk>/',
         views.SurveyResponseDetailView.as_view(),
         name='survey-response-detail'
