@@ -1,8 +1,5 @@
-import csv
-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import redirect_to_login
-from django.http import StreamingHttpResponse
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
@@ -12,7 +9,7 @@ from django.views.generic import FormView, UpdateView
 from django_filters.views import FilterView
 
 from core.exceptions import NotAuthenticated
-from core.mixins import PageMixin
+from core.mixins import CSVResponseMixin, PageMixin
 
 from ..filters import RespondentFilter
 from ..forms import RespondentConsentForm, RespondentForm
@@ -20,17 +17,7 @@ from ..mixins import ConsentCheckMixin, RespondentSurveyMixin
 from ..models import Respondent
 
 
-class PseudoBuffer:
-    """An object that implements just the write method of the file-like
-    interface.
-    """
-
-    def write(self, value):
-        """Write the value by returning it, instead of storing in a buffer."""
-        return value
-
-
-class RespondentListView(LoginRequiredMixin, PageMixin, FilterView):
+class RespondentListView(LoginRequiredMixin, PageMixin, CSVResponseMixin, FilterView):
     """
     Listing respondents as a facilitator.
     """
@@ -47,7 +34,7 @@ class RespondentListView(LoginRequiredMixin, PageMixin, FilterView):
     def get_queryset(self):
         return self.model.objects\
             .filter(survey__project__facilitators=self.request.user)\
-            .select_related('survey', 'gender')\
+            .select_related('survey', 'survey__project', 'gender')\
             .with_status()
 
     def get_rows(self):
@@ -59,23 +46,13 @@ class RespondentListView(LoginRequiredMixin, PageMixin, FilterView):
             yield (obj.id, obj.email, obj.first_name, obj.last_name, gender, obj.registered,
                    obj.survey.name, obj.survey.id, obj.survey.project.name, obj.survey.project.id, obj.status)
 
-    def render_csv(self):
+    def get_filename(self):
+        return f'respondents-{str(timezone.now().date())}.csv'
 
-        writer = csv.writer(PseudoBuffer())
-
-        response = StreamingHttpResponse(
-            [writer.writerow(row) for row in self.get_rows()],
-            content_type="text/csv"
-        )
-
-        response['Content-Disposition'] = 'attachment; filename="respondents-{str(timezone.now().date())}.csv"'
-        return response
-
-    def render_to_response(self, context, **response_kwargs):
+    def get_renderer(self):
+        # When `format=csv` in URL query string return csv
         if self.request.GET.get('format') == 'csv':
-            return self.render_csv()
-
-        return super().render_to_response(context, **response_kwargs)
+            return 'csv'
 
 
 class RespondentConsentView(PageMixin, RespondentSurveyMixin, FormView):

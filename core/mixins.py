@@ -1,7 +1,11 @@
+import csv
 import json
 
+from django.http import StreamingHttpResponse
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
+
+from .utils import PseudoBuffer
 
 
 class PageTitleMixin:
@@ -135,3 +139,47 @@ class PopupDeleteMixin(PopupTemplateMixin):
             )
 
         return super().delete(request, *args, **kwargs)
+
+
+class CSVResponseMixin:
+    """
+    A mixin for Streaming CSV response.
+
+    To use this mixin you should define :meth:`~get_rows()` method
+    """
+    filename = 'export.csv'
+
+    def get_filename(self):
+        """
+        Returns filename for the generated download.
+
+        Override this to customize file name. By default this returns :attr:`~filename`
+        """
+        return self.filename
+
+    def get_rows(self):
+        """
+        Override this method to yield list of values which will be considered as rows.
+        """
+        raise NotImplementedError
+
+    def get_renderer(self):
+        """This should return 'csv' for CSV response."""
+        return 'csv'
+
+    def render_csv(self):
+
+        writer = csv.writer(PseudoBuffer())
+
+        response = StreamingHttpResponse(
+            [writer.writerow(row) for row in self.get_rows()],
+            content_type="text/csv"
+        )
+
+        response['Content-Disposition'] = f'attachment; filename="{self.get_filename()}"'
+        return response
+
+    def render_to_response(self, context, **response_kwargs):
+        if self.get_renderer() == 'csv':
+            return self.render_csv()
+        return super().render_to_response(context, **response_kwargs)
