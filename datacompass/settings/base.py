@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'active_link',
     'django_summernote',
     'bootstrap_pagination',
+    'invitations',
     # Custom apps
     'core',
     'apps.users.apps.UsersConfig',
@@ -174,6 +175,10 @@ ACCOUNT_USERNAME_REQUIRED = env.bool('ACCOUNT_USERNAME_REQUIRED', default=False)
 ACCOUNT_EMAIL_VERIFICATION = env('ACCOUNT_EMAIL_VERIFICATION', default='none')
 
 LOGIN_REDIRECT_URL = env('LOGIN_REDIRECT_URL', default='users:profile-detail')
+
+# Django Invitations Allauth Integration
+# https://github.com/bee-keeper/django-invitations
+ACCOUNT_ADAPTER = 'invitations.models.InvitationsAdapter'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/

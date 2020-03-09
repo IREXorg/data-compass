@@ -1,0 +1,71 @@
+{% extends 'surveys/base.html' %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{# Start: Page header #}
+{% block page_header %}
+<div class="page-header">
+  <div class="row align-items-center">
+
+    {# Start: Page title #}
+    <div class="col">
+      <h1 class="page-title">
+        {% block page_title %}{{ page_title }}{% endblock %}
+      </h1>
+    </div>
+    {# End: Page title #}
+
+    {# Start: Page actions #}
+    <div class="col-auto ml-auto d-print-none">
+      <div class="row">
+        &nbsp;
+      </div>
+    </div>
+    {# End: Page actions #}
+
+  </div>
+</div>
+{% endblock %}
+{# End: Page header #}
+
+{# Start: Page content #}
+{% block content %}
+<div class="row justify-content-md-center">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+        <p class="text-muted">
+          {% blocktrans trimmed %}
+          Provide some basic information about your invitees.
+          {% endblocktrans %}
+        </p>
+
+        <hr>
+
+        <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form|crispy }}
+
+          <hr>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary">
+                  {% trans 'Send invite' %}
+                </button>
+
+                <a href={% url 'projects:project-list' %} class="btn btn-secondary">
+                  {% trans 'Cancel' %}
+                </a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{# End: Page content #}
