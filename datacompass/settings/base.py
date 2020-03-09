@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'django_filters',
     'active_link',
     'django_select2',
+    'bootstrap_pagination',
     # Custom apps
     'core',
     'apps.users.apps.UsersConfig',

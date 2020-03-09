@@ -7,7 +7,7 @@
 {% block content_master %}
   <h2>{% trans 'Filter respondents' %}</h2>
 
-  <form id="respondent-filter" method="GET">
+  <form id="master-filter" method="GET">
     {{ filter.form|crispy }}
     <div class="my-4">
       <button type="submit" class="btn btn-success btn-sm">{% trans 'Apply filters' %}</button>
@@ -36,7 +36,7 @@
                  name="q"
                  value="{{ request.GET.q }}"
                  class="form-control d-inline-block w-9 mr-3"
-                 placeholder="{% trans 'Search projects…' %}"/>
+                 placeholder="{% trans 'Search respondents…' %}"/>
         </div>
 
       </form>
@@ -86,8 +86,10 @@
 {% block extra_js %}
   {# FIXME: move this to js files #}
   <script>
+    $('#div_id_q').hide();
+
     $('#export-csv').click(function() {
-      var form = '#respondent-filter'
+      var form = '#master-filter'
       $("<input />").attr("type", "hidden")
         .attr("name", "format")
         .attr("value", "csv")
