@@ -45,3 +45,4 @@ django-bootstrap-pagination
 
 # Debuging
 django-debug-toolbar
+django-extensions
