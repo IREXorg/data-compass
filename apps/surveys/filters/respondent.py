@@ -9,6 +9,7 @@ from apps.users.models import Gender
 
 from ..mixins import SearchVectorFilterMixin
 from ..models import Respondent
+from .base import facilitator_projects, facilitator_surveys
 
 
 class RespondentFilter(SearchVectorFilterMixin, django_filters.FilterSet):
@@ -23,7 +24,6 @@ class RespondentFilter(SearchVectorFilterMixin, django_filters.FilterSet):
     q = django_filters.CharFilter(
         label=_('Search text'),
         method='filter_search_vector',
-        widget=forms.HiddenInput,
     )
 
     gender = django_filters.ModelMultipleChoiceFilter(
@@ -44,8 +44,19 @@ class RespondentFilter(SearchVectorFilterMixin, django_filters.FilterSet):
         coerce=strtobool
     )
 
+    project = django_filters.ModelChoiceFilter(
+        field_name='survey__project',
+        queryset=facilitator_projects,
+        label=_('Project'),
+    )
+
+    survey = django_filters.ModelChoiceFilter(
+        field_name='survey',
+        queryset=facilitator_surveys,
+    )
+
     search_vector_fields = ['first_name', 'last_name', 'email']
 
     class Meta:
         model = Respondent
-        fields = ['q', 'gender', 'status', 'registered', 'survey__project', 'survey']
+        fields = ['q', 'gender', 'status', 'registered', 'project', 'survey']

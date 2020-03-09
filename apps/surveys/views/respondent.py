@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import redirect_to_login
 from django.shortcuts import redirect
 from django.urls import reverse
@@ -13,11 +12,11 @@ from core.mixins import CSVResponseMixin, PageMixin
 
 from ..filters import RespondentFilter
 from ..forms import RespondentConsentForm, RespondentForm
-from ..mixins import ConsentCheckMixin, RespondentSurveyMixin
+from ..mixins import ConsentCheckMixin, FacilitatorMixin, RespondentSurveyMixin
 from ..models import Respondent
 
 
-class RespondentListView(LoginRequiredMixin, PageMixin, CSVResponseMixin, FilterView):
+class RespondentListView(FacilitatorMixin, PageMixin, CSVResponseMixin, FilterView):
     """
     Listing respondents as a facilitator.
     """
