@@ -120,6 +120,13 @@ class SurveyDetailMixin:
         if self.object:
             return self.object.topics.all()
 
+    def get_datasets(self):
+        """
+        Get datasets associated with the survey
+        """
+        if self.object:
+            return self.object.datasets.all()
+
     def get_dataset_storages(self):
         """
         Get dataset storages associated with the survey
@@ -132,10 +139,13 @@ class SurveyDetailMixin:
         Add survey releated objects context data
         """
         context = super().get_context_data(**kwargs)
-        dataset_storages = self.get_dataset_storages()
         topics = self.get_topics()
-        if dataset_storages:
-            context['dataset_storages'] = dataset_storages
+        datasets = self.get_datasets()
+        dataset_storages = self.get_dataset_storages()
         if topics:
             context['topics'] = topics
+        if datasets:
+            context['datasets'] = datasets
+        if dataset_storages:
+            context['dataset_storages'] = dataset_storages
         return context

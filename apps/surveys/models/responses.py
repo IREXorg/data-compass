@@ -3,6 +3,7 @@ import uuid
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django.db import models
+from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 
 from core.models import TimeStampedModel

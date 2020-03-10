@@ -238,7 +238,7 @@ class SurveyEditStepTwoView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetail
         return reverse('surveys:survey-edit-step-three', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepThreeView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
+class SurveyEditStepThreeView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
     """
     Edit survey step three view.
 
@@ -263,7 +263,7 @@ class SurveyEditStepThreeView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleM
         return reverse('surveys:survey-edit-step-four', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepFourView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
+class SurveyEditStepFourView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
     """
     Edit survey step four view.
 
@@ -313,7 +313,7 @@ class SurveyEditStepFiveView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetai
         return reverse('surveys:survey-edit-step-six', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepSixView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
+class SurveyEditStepSixView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
     """
     Edit survey step five view.
 
