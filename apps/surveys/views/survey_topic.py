@@ -1,16 +1,59 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic.edit import DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from core.mixins import PageTitleMixin, PopupDeleteMixin
 
-from ..forms import TopicUpdateForm
-from ..mixins import CreatorMixin, TopicPopupModelFormMixin
-from ..models import Topic
+from ..forms import TopicCreateForm, TopicUpdateForm
+from ..mixins import BasePopupModelFormMixin, CreatorMixin
+from ..models import Survey, Topic
 
 
-class TopicUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, TopicPopupModelFormMixin, UpdateView):
+class TopicCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, CreateView):
+    """
+    Create survey topic view.
+
+    Allow current signin user to create a new survey and
+    redirect to survey topic edit page.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        POST  /surveys/1234567890/create-topic
+    """
+
+    # Translators: This is survey topic create page title
+    page_title = _('Create a survey topic')
+    template_name = 'surveys/survey_topic_create.html'
+    context_object_name = 'topic'
+    model = Topic
+    form_class = TopicCreateForm
+
+    def get_survey(self):
+        """
+        Get survey to associate a survey with from url parameters
+        """
+        survey_pk = self.kwargs.get('survey_pk', None)
+        if survey_pk:
+            return Survey.objects.get(pk=survey_pk)
+
+    def get_form_kwargs(self):
+        """
+        Add survey to form class initialization arguments
+        """
+        form_kwargs = super().get_form_kwargs()
+        survey = self.get_survey()
+        if survey:
+            form_kwargs['survey'] = survey
+        return form_kwargs
+
+    def get_success_url(self):
+        return reverse('surveys:edit-step-two', kwargs={'pk': self.object.survey.pk})
+
+
+class TopicUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey topic view.
 

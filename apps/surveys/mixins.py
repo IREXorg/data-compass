@@ -15,12 +15,12 @@ class CreatorMixin:
     """
     CBV mixin which puts the user from the request as creator in
     form instance if not exist.
+
     Note: Using this mixin requires `LoginRequiredMixin`.
     """
     def form_valid(self, form):
         if not form.instance.creator_id:
             form.instance.creator = self.request.user
-        form.save()
         return super().form_valid(form)
 
 
@@ -28,12 +28,12 @@ class SurveyCreatorMixin:
     """
     CBV mixin which puts the user from the request as survey creator in
     form instance if not exist.
+
     Note: Using this mixin requires `LoginRequiredMixin`.
     """
     def form_valid(self, form):
         if not form.instance.creator_id:
             form.instance.creator = self.request.user
-        form.save()
         return super().form_valid(form)
 
 
@@ -165,7 +165,7 @@ class SurveyDetailMixin:
         return context
 
 
-class TopicPopupModelFormMixin(PopupModelFormMixin):
+class BasePopupModelFormMixin(PopupModelFormMixin):
 
     def get_popup_response_data(self):
         return {
