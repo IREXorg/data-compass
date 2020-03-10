@@ -6,6 +6,7 @@ from dateutil.parser import ParserError as DateTimeParserError
 from dateutil.parser import parse as parse_datetime
 
 from core.exceptions import NotAuthenticated
+from core.mixins import PopupModelFormMixin
 
 from .models import Survey
 
@@ -162,3 +163,14 @@ class SurveyDetailMixin:
         if dataset_storages:
             context['dataset_storages'] = dataset_storages
         return context
+
+
+class TopicPopupModelFormMixin(PopupModelFormMixin):
+
+    def get_popup_response_data(self):
+        return {
+            'action': 'change_object',
+            'value': str(self.object.pk),
+            'obj': str(self.object),
+            'new_value': str(self.object.pk),
+        }

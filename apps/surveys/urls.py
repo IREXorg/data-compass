@@ -20,9 +20,9 @@ urlpatterns = [
     path('<int:pk>/edit-finish/', views.SurveyEditFinishView.as_view(), name='survey-edit-finish'),
     path('<int:pk>/consent/', views.RespondentConsentView.as_view(), name='respondent-consent'),
     path('<int:pk>/respondent/update/', views.RespondentUpdateView.as_view(), name='respondent-update'),
-    path('<int:survey_pk>/create-topic/', views.SurveyTopicDeleteView.as_view(), name='survey-create-topic'),
-    path('<int:pk>/delete-topic/', views.SurveyTopicDeleteView.as_view(), name='survey-delete-topic'),
-    path('<int:pk>/update-topic/', views.SurveyTopicDeleteView.as_view(), name='survey-update-topic'),
+    path('<int:survey_pk>/create-topic/', views.TopicDeleteView.as_view(), name='survey-create-topic'),
+    path('<int:pk>/delete-topic/', views.TopicDeleteView.as_view(), name='survey-delete-topic'),
+    path('<int:pk>/update-topic/', views.TopicUpdateView.as_view(), name='survey-update-topic'),
     path(
         '<int:pk>/select-datasets/',
         views.DatasetResponseListCreateView.as_view(),
