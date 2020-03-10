@@ -16,6 +16,10 @@ try {
   require('bootstrap');
 
   require('select2')($);
+
+  require('./related-objects.js');
+  require('./popup-response.js');
+
 } catch (e) {
   console.log(e);
 }

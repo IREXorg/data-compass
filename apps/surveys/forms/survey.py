@@ -7,7 +7,6 @@ from ..models import Survey
 # from django_summernote.widgets import SummernoteInplaceWidget
 
 
-
 class SurveyCreateForm(ModelForm):
     """
     Basic Survey create form
