@@ -9,20 +9,18 @@ window._ = require('lodash');
  * Include the Popper.js library, since Boostrap 4 requires it.
  */
 try {
-  var $ = require('jquery');
+  // window.$ = window.jQuery = require('jquery');
 
   window.Popper = require('popper.js').default;
 
   require('bootstrap');
 
-  require('select2')($);
+  // require('select2')(window.$);
 
   require('./related-objects.js');
   require('./popup-response.js');
 
-} catch (e) {
-  console.log(e);
-}
+} catch (e) {}
 
 /**
  * We'll load the theme's javascript.

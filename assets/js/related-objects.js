@@ -1,5 +1,3 @@
-var $ = require('jquery');
-
 /* eslint-disable */
 function id_to_windowname(text) {
   text = text.replace(/\./g, '__dot__');

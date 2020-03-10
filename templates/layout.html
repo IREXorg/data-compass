@@ -2,7 +2,9 @@
 
 {% block body %}
     <div class="page">
-      {% include 'includes/nav_primary.html' %}
+      {% block nav_primary %}
+        {% include 'includes/nav_primary.html' %}
+      {% endblock %}
 
       <div class="content">
         <main class="{% block content_container %}container{% endblock %}">
