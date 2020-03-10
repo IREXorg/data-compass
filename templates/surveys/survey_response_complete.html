@@ -12,11 +12,13 @@
 
 
 {% block form_buttons %}
-  <a href="{{ back_url_path }}" class="btn btn-outline-secondary">
-    <i class="fas fa-arrow-left"></i> {% trans 'Back' %}
-  </a>
+  <div class="form-group my-3">
+    <a href="{{ back_url_path }}" class="btn btn-warning">
+      « {% trans 'Back' %}
+    </a>
 
-  <button class="btn btn-success" type="submit">
-    {% trans 'Save and Complete your response' %} <i class="fas fa-arrow-right"></i>
-  </button>
+    <button class="btn btn-success float-right" type="submit">
+      {% trans 'Save and Complete your response' %} »
+    </button>
+  </div>
 {% endblock form_buttons %}
