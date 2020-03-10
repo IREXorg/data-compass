@@ -51,7 +51,7 @@ class Survey(TimeStampedModel):
         on_delete=models.CASCADE
     )
 
-    #: User who created a survey.
+    #: User who created(or owning) a survey
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('creator'),
@@ -208,16 +208,6 @@ class Survey(TimeStampedModel):
         help_text=_('Is published'),
         blank=True,
         default=True
-    )
-
-    #: User who created(or owning) a survey
-    creator = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        verbose_name=_('creator'),
-        blank=True,
-        related_name='created_surveys',
-        related_query_name='created_survey',
-        on_delete=models.CASCADE
     )
 
     #: Extra survey fields.
