@@ -33,7 +33,7 @@ class TopicCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopu
 
     def get_survey(self):
         """
-        Get survey to associate a survey with from url parameters
+        Get survey to associate a topic with from url parameters
         """
         survey_pk = self.kwargs.get('survey_pk', None)
         if survey_pk:

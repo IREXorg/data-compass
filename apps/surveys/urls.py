@@ -33,6 +33,24 @@ urlpatterns = [
     path('<int:pk>/update-dataset/', views.DatasetUpdateView.as_view(), name='survey-update-dataset'),
     # end: survey dataset paths
 
+    # start: survey dataset-storage paths
+    path(
+        '<int:survey_pk>/create-dataset-storage/',
+        views.DatasetStorageCreateView.as_view(),
+        name='survey-create-dataset-storage'
+    ),
+    path(
+        '<int:pk>/delete-dataset-storage/',
+        views.DatasetStorageDeleteView.as_view(),
+        name='survey-delete-dataset-storage'
+    ),
+    path(
+        '<int:pk>/update-dataset-storage/',
+        views.DatasetStorageUpdateView.as_view(),
+        name='survey-update-dataset-storage'
+    ),
+    # end: survey dataset-storage paths
+
     path(
         '<int:pk>/select-datasets/',
         views.DatasetResponseListCreateView.as_view(),

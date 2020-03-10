@@ -97,6 +97,7 @@ class DatasetStorage(TimeStampedModel):
         unique=True
     )
     name = models.CharField(_('name'), max_length=255)
+    # TODO: creator
 
     class Meta:
         verbose_name = _('Dataset Storage')
