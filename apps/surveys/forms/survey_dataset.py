@@ -1,16 +1,16 @@
 from django import forms
 from django.forms import ModelForm
 
-from ..models import Topic
+from ..models import Dataset
 
 
-class TopicCreateForm(ModelForm):
+class DatasetCreateForm(ModelForm):
     """
-    Basic Topic create form
+    Basic Dataset create form
     """
 
     class Meta:
-        model = Topic
+        model = Dataset
         fields = ['survey', 'name', 'description']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 2}),
@@ -23,12 +23,12 @@ class TopicCreateForm(ModelForm):
             self.initial['survey'] = survey
 
 
-class TopicUpdateForm(ModelForm):
+class DatasetUpdateForm(ModelForm):
     """
-    Basic Topic update form
+    Basic Dataset update form
     """
     class Meta:
-        model = Topic
+        model = Dataset
         fields = ['name', 'description']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 2})
