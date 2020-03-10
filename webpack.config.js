@@ -28,15 +28,14 @@ module.exports = {
     },
   },
   plugins: [
-    new BundleTracker({filename: './webpack-stats.json'}),
+    new BundleTracker({ filename: './webpack-stats.json' }),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
     }),
   ],
   module: {
-    rules: [
-      {
+    rules: [{
         enforce: 'pre',
         test: /\.js$/,
         exclude: /node_modules/,
@@ -49,8 +48,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [
-          {
+        use: [{
             loader: MiniCssExtractPlugin.loader,
             options: {
               hmr: process.env.NODE_ENV === 'development',
@@ -63,16 +61,24 @@ module.exports = {
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/'
-            }
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'fonts/'
           }
-        ]
+        }]
       },
+      { // See: https://webpack.js.org/loaders/expose-loader/
+        test: require.resolve('jquery'),
+        use: [{
+          loader: 'expose-loader',
+          options: 'jQuery'
+        }, {
+          loader: 'expose-loader',
+          options: '$'
+        }]
+      }
     ],
   }
 }

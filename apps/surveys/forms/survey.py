@@ -4,6 +4,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from ..models import Survey
 
+# from django_summernote.widgets import SummernoteInplaceWidget
+
+
 
 class SurveyCreateForm(ModelForm):
     """
