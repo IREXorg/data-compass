@@ -15,8 +15,13 @@ h2 {
   font-weight: $h2-font-weight;
 }
 
+.smaller {
+  font-size: $smaller-font-size;
+}
+
 .btn {
   font-weight: $btn-font-weight;
+  min-height: $btn-min-height;
 }
 
 .page-title {
@@ -63,6 +68,10 @@ h2 {
   font-size: $navbar-font-size;
 }
 
+.nav-item > .btn {
+  margin: $nav-item-btn-margin-y $nav-item-btn-margin-x;
+}
+
 .footer {
   position: fixed;
   left: 0;
@@ -85,6 +94,13 @@ h2 {
     box-sizing: border-box;
     vertical-align: middle;
   }
+}
+
+.form-group {
+  margin-top: $form-group-margin-top;
+  margin-left: $form-group-margin-left;
+  margin-right: $form-group-margin-right;
+  margin-bottom: $form-group-margin-bottom; 
 }
 
 .form-control {
