@@ -104,6 +104,10 @@ class DatasetStorage(TimeStampedModel):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        """Obtain dataset storage absolute url."""
+        return reverse('surveys:survey-detail', kwargs={'pk': self.pk})
+
 
 class DatasetAccess(TimeStampedModel):
     """How dataset can be accessible"""

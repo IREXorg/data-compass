@@ -113,6 +113,13 @@ class SurveyDetailMixin:
 
     Note: Using this mixin requires `LoginRequiredMixin`.
     """
+    def get_topics(self):
+        """
+        Get topics associated with the survey
+        """
+        if self.object:
+            return self.object.topics.all()
+
     def get_dataset_storages(self):
         """
         Get dataset storages associated with the survey
@@ -126,6 +133,9 @@ class SurveyDetailMixin:
         """
         context = super().get_context_data(**kwargs)
         dataset_storages = self.get_dataset_storages()
+        topics = self.get_topics()
         if dataset_storages:
             context['dataset_storages'] = dataset_storages
+        if topics:
+            context['topics'] = topics
         return context

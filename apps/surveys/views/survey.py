@@ -213,7 +213,7 @@ class SurveyEditStepOneView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMix
         return reverse('surveys:survey-edit-step-two', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepTwoView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
+class SurveyEditStepTwoView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
     """
     Edit survey step two view.
 
