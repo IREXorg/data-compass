@@ -92,6 +92,13 @@ h2 {
   }
 }
 
+.form-group {
+  margin-top: $form-group-margin-top;
+  margin-left: $form-group-margin-left;
+  margin-right: $form-group-margin-right;
+  margin-bottom: $form-group-margin-bottom; 
+}
+
 .form-control {
   margin-top: $input-margin-top;
   margin-bottom: $input-margin-bottom;
