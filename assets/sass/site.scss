@@ -17,6 +17,7 @@ h2 {
 
 .btn {
   font-weight: $btn-font-weight;
+  min-height: $btn-min-height;
 }
 
 .page-title {
@@ -61,6 +62,10 @@ h2 {
 
 .navbar{
   font-size: $navbar-font-size;
+}
+
+.nav-item > .btn {
+  margin: $nav-item-btn-margin-y $nav-item-btn-margin-x;
 }
 
 .footer {
