@@ -119,3 +119,9 @@ h2 {
   color: $warning;
   font-size: $font-size-lg;
 }
+
+form.login {
+  label {
+    text-transform: uppercase;
+  }
+}
