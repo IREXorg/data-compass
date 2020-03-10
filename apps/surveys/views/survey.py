@@ -11,7 +11,7 @@ from core.mixins import PageTitleMixin
 from ..filters import SurveyListFilter
 from ..forms import (SurveyCreateForm, SurveyEditStepFiveForm, SurveyEditStepFourForm, SurveyEditStepOneForm,
                      SurveyEditStepSixForm, SurveyEditStepThreeForm, SurveyEditStepTwoForm, SurveyUpdateForm)
-from ..mixins import SurveyCreatorMixin
+from ..mixins import SurveyCreatorMixin, SurveyDetailMixin
 from ..models import Survey
 
 
@@ -288,7 +288,7 @@ class SurveyEditStepFourView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMi
         return reverse('surveys:survey-edit-step-five', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepFiveView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
+class SurveyEditStepFiveView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
     """
     Edit survey step five view.
 

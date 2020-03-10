@@ -105,3 +105,27 @@ class ConsentCheckMixin:
             return latest_response.consented_at
 
         return None
+
+
+class SurveyDetailMixin:
+    """
+    CBV mixin which puts releated survey objects into context data.
+
+    Note: Using this mixin requires `LoginRequiredMixin`.
+    """
+    def get_dataset_storages(self):
+        """
+        Get dataset storages associated with the survey
+        """
+        if self.object:
+            return self.object.dataset_storages.all()
+
+    def get_context_data(self, **kwargs):
+        """
+        Add survey releated objects context data
+        """
+        context = super().get_context_data(**kwargs)
+        dataset_storages = self.get_dataset_storages()
+        if dataset_storages:
+            context['dataset_storages'] = dataset_storages
+        return context
