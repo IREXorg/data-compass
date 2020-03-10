@@ -41,14 +41,13 @@
 
       {% if user.user_type %}
         <div>
-          {% trans 'User type' %}: {{ user.user_type }}
+          {% trans 'User type' %}: <span class="text-capitalize">{{ user.user_type }}</span>
         </div>
       {% endif %}
     </div>
   </div>
 
   <div class="row">
-
     <div class="col-sm-2"></div>
 
     <div class="col-sm-7">
@@ -64,23 +63,26 @@
     </div>
 
     <div class="col-sm-3 border-left">
-      <h2>
+      <h2 class="smaller">
         {% trans 'Account Settings' %}
       </h2>
 
-      <div>
-        <p>
+      <div class="smaller">
+        <p class="text-nowrap">
           <span class="font-weight-bold">{% trans "Email" %}</span>:<br>
           {{ user.email }}
           <a href="{% url 'users:profile-update' %}" class="ml-2">{% trans 'Edit' %}</a>
         </p>
-        <p>
+        <p class="text-nowrap">
           <span class="font-weight-bold">{% trans "Phone number" %}</span>:<br>
           {{ user.phone_number|default:'Not added yet' }}
           <a href="{% url 'users:profile-update' %}" class="ml-2">{% trans 'Edit' %}</a>
         </p>
-        <p><a href="{% url 'account_change_password' %}" class="btn btn-primary">{% trans 'Change password' %}</a></p>
       </div>
+
+      <p class="small">
+        <a href="{% url 'account_change_password' %}" class="btn btn-secondary btn-sm">{% trans 'Change password' %}</a>
+      </p>
     </div>
 
   </div>
