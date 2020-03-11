@@ -6,13 +6,11 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from core.mixins import PageTitleMixin, PopupDeleteMixin
 
 from ..forms import DatasetStorageCreateForm, DatasetStorageUpdateForm
-from ..mixins import BasePopupModelFormMixin
+from ..mixins import BasePopupModelFormMixin, CreatorMixin
 from ..models import DatasetStorage, Survey
 
-# TODO: CreatorMixin
 
-
-class DatasetStorageCreateView(LoginRequiredMixin, PageTitleMixin, BasePopupModelFormMixin, CreateView):
+class DatasetStorageCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, CreateView):
     """
     Create survey dataset storage view.
 
@@ -55,7 +53,7 @@ class DatasetStorageCreateView(LoginRequiredMixin, PageTitleMixin, BasePopupMode
         return reverse('surveys:edit-step-five', kwargs={'pk': self.object.survey.pk})
 
 
-class DatasetStorageUpdateView(LoginRequiredMixin, PageTitleMixin, BasePopupModelFormMixin, UpdateView):
+class DatasetStorageUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey dataset storage view.
 
