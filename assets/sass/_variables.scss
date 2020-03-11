@@ -1,7 +1,8 @@
 // Body
 
 $body-bg: #ffffff;
-$body-badding-bottom: 100px;
+$body-padding-bottom: 100px;
+$body-color: #0a2c2d;
 
 // Colors
 
@@ -16,7 +17,8 @@ $secondary: #9ba7a7;
 $font-family-sans-serif: 'Source Sans Pro', sans-serif;
 $font-family-base: 'Source Sans Pro', sans-seri;
 
-// $font-size-base: 1.2rem;
+$font-size-base: 1.1rem;
+$smaller-font-size: 0.75em;
 
 $link-color: #d76427;
 
@@ -61,11 +63,25 @@ $input-btn-padding-x: 1rem;
 $input-focus-border-color: none;
 $input-focus-box-shadow:  none;
 
+$input-margin-top: 0;
+$input-margin-bottom: 0;
+
+$label-margin-bottom: 0;
+
+$form-group-margin-top: 20px;
+$form-group-margin-left: 10px;
+$form-group-margin-right: 10px;
+$form-group-margin-bottom: 15px;
+
 // Buttons
 
 $btn-font-weight: 400;
+$btn-min-height: auto;
 
 $btn-border-width: 0;
+
+$input-btn-padding-y-sm: 4px;
+$input-btn-padding-x-sm:  11px;
 
 // Nav
 
@@ -79,3 +95,14 @@ $navbar-brand-letter-spacing: 1px;
 
 $navbar-light-brand-color: #075254;
 $navbar-light-brand-hover-color: $navbar-light-brand-color;
+
+$navbar-font-size: 0.9rem;
+
+$nav-item-btn-margin-y: 0;
+$nav-item-btn-margin-x: 10px;
+
+// Page
+
+$page-master-margin-top: 1px;
+$page-master-padding-top: 30px;
+$page-master-font-size: 0.9rem;

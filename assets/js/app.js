@@ -19,10 +19,12 @@ try {
 
   require('./related-objects.js');
   require('./popup-response.js');
-
 } catch (e) {}
 
 /**
  * We'll load the theme's javascript.
  */
-require('./theme/tabler.min');
+
+/** FIXME: It seems tabler js also includes bootstrap's js. Therefore we have to choose one
+ * require('./theme/tabler.min');
+*/

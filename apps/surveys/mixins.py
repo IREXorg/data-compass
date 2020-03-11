@@ -1,3 +1,5 @@
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.postgres.search import SearchVector
 from django.core.exceptions import PermissionDenied
 from django.http import Http404
 from django.utils.translation import ugettext_lazy as _
@@ -35,6 +37,20 @@ class SurveyCreatorMixin:
         if not form.instance.creator_id:
             form.instance.creator = self.request.user
         return super().form_valid(form)
+
+
+class FacilitatorMixin(LoginRequiredMixin, UserPassesTestMixin):
+    """
+    CBV mixin which makes sure user is a facilitator.
+    """
+
+    def test_func(self):
+        """
+        Ensure user is a facilitator.
+
+        Returns true if user is facilitator.
+        """
+        return self.request.user.is_facilitator
 
 
 class RespondentSurveyMixin:
@@ -196,7 +212,9 @@ class SurveyDetailMixin:
 
 
 class BasePopupModelFormMixin(PopupModelFormMixin):
-
+    """
+    CBV mixin to allow popup model form on edits.
+    """
     def get_popup_response_data(self):
         return {
             'action': 'change_object',
@@ -204,3 +222,18 @@ class BasePopupModelFormMixin(PopupModelFormMixin):
             'obj': str(self.object),
             'new_value': str(self.object.pk),
         }
+
+
+class SearchVectorFilterMixin:
+    """FilterSet Mixin for text seach using Postgresql full text search."""
+
+    def filter_search_vector(self, queryset, name, value):
+        # NOTE: Ideally this should have a DB Index to avoid performance issues
+        # https://docs.djangoproject.com/en/3.0/ref/contrib/postgres/search/#performance
+
+        if not value:
+            return queryset
+
+        return queryset.annotate(
+            search_vector=SearchVector(*self.search_vector_fields)
+        ).filter(search_vector=value)

@@ -48,7 +48,7 @@ class User(AbstractUser):
         unique=True
     )
     avatar = models.ImageField(
-        _('avatar'),
+        _('profile picture'),
         blank=True,
         null=True,
         upload_to='users/avatars'

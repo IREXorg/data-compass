@@ -2,17 +2,59 @@ from django.contrib.auth.views import redirect_to_login
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView, UpdateView
 
-from core.exceptions import NotAuthenticated
-from core.mixins import PageTitleMixin
+from django_filters.views import FilterView
 
+from core.exceptions import NotAuthenticated
+from core.mixins import CSVResponseMixin, PageMixin
+
+from ..filters import RespondentFilter
 from ..forms import RespondentConsentForm, RespondentForm
-from ..mixins import ConsentCheckMixin, RespondentSurveyMixin
+from ..mixins import ConsentCheckMixin, FacilitatorMixin, RespondentSurveyMixin
 from ..models import Respondent
 
 
-class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
+class RespondentListView(FacilitatorMixin, PageMixin, CSVResponseMixin, FilterView):
+    """
+    Listing respondents as a facilitator.
+    """
+
+    # Translators: This is respondents list page title
+    page_title = _('Manage respondents')
+    template_name = 'surveys/respondent_list.html'
+    context_object_name = 'respondents'
+    model = Respondent
+    filterset_class = RespondentFilter
+    ordering = ['-created_at']
+    paginate_by = 30
+
+    def get_queryset(self):
+        return self.model.objects\
+            .filter(survey__project__facilitators=self.request.user)\
+            .select_related('survey', 'survey__project', 'gender')\
+            .with_status()
+
+    def get_rows(self):
+        yield ('id', 'email', 'first_name', 'last_name', 'gender', 'registered',
+               'survey', 'survey_id', 'project', 'project_id', 'status')
+
+        for obj in self.object_list:
+            gender = obj.gender.name if obj.gender else ''
+            yield (obj.id, obj.email, obj.first_name, obj.last_name, gender, obj.registered,
+                   obj.survey.name, obj.survey.id, obj.survey.project.name, obj.survey.project.id, obj.status)
+
+    def get_filename(self):
+        return f'respondents-{str(timezone.now().date())}.csv'
+
+    def get_renderer(self):
+        # When `format=csv` in URL query string return csv
+        if self.request.GET.get('format') == 'csv':
+            return 'csv'
+
+
+class RespondentConsentView(PageMixin, RespondentSurveyMixin, FormView):
     """
     Asks respondent for consent and saves consent data in user's session.
 
@@ -86,7 +128,7 @@ class RespondentConsentView(PageTitleMixin, RespondentSurveyMixin, FormView):
         return {'user': user, 'email': email}
 
 
-class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, ConsentCheckMixin, UpdateView):
+class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, UpdateView):
     """
     Prompts respondents to update their basic data for the survey.
 
@@ -161,3 +203,6 @@ class RespondentUpdateView(PageTitleMixin, RespondentSurveyMixin, ConsentCheckMi
 
     def get_success_url(self):
         return reverse('surveys:dataset-response-list-create', kwargs={'pk': self.survey_response.pk})
+
+    def get_back_url_path(self):
+        return reverse('surveys:respondent-consent', kwargs={'pk': self.survey.pk})

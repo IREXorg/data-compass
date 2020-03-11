@@ -69,6 +69,7 @@ urlpatterns = [
     path('<int:pk>/update-logo/', views.LogoUpdateView.as_view(), name='survey-update-logo'),
     # end: survey logo paths
 
+    path('respondents/', views.RespondentListView.as_view(), name='respondent-list'),
     path(
         '<int:pk>/select-datasets/',
         views.DatasetResponseListCreateView.as_view(),
@@ -103,6 +104,11 @@ urlpatterns = [
         '<int:pk>/response-complete/',
         views.SurveyResponseCompleteView.as_view(),
         name='survey-response-complete'
+    ),
+    path(
+        'responses/',
+        views.SurveyResponseListView.as_view(),
+        name='survey-response-list'
     ),
     path(
         'responses/<int:pk>/',

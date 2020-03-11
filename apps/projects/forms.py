@@ -51,6 +51,9 @@ class ProjectCreateForm(ModelForm):
         (``{'levels': levels, 'tree': tree}``).
         """
         hierarchy_file = self.cleaned_data['hierarchy_file']
+        if not hierarchy_file:
+            return None
+
         try:
             book = xlrd.open_workbook(file_contents=hierarchy_file.read())
         except xlrd.XLRDError:
@@ -123,8 +126,12 @@ class ProjectCreateForm(ModelForm):
     def save_hierarchy(self):
         project = self.instance
         creator = self.get_hierarchy_creator()
-        self.pre_save_hierarchy()
+
         hierarchy_data = self.cleaned_data.get('hierarchy_file', {})
+        if not hierarchy_data:
+            return
+
+        self.pre_save_hierarchy()
         hierarchy_tree = hierarchy_data.get('tree')
         hierarchy_levels = hierarchy_data.get('levels')
         hierarchy_lookup = {}

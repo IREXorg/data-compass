@@ -1,6 +1,6 @@
 import django_filters
 
-from .models import Survey
+from ..models import Survey
 
 
 class SurveyListFilter(django_filters.FilterSet):

@@ -18,7 +18,7 @@
     <meta name="HandheldFriendly" content="True"/>
     <meta name="MobileOptimized" content="320"/>
     <meta name="robots" content="noindex,nofollow,noarchive"/>
-    <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
     <link href="{% static 'main.css' %}" rel="stylesheet">
   </head>
@@ -27,6 +27,8 @@
       {% block body %}{% endblock %}
 
       <script src="{% static 'main.js' %}"></script>
+      <script src="{% static 'js/site.js' %}"></script>\
+
       {{ form.media.js }} {# Select2 js #}
       <script type="text/javascript">
         // initSummernote()
@@ -36,5 +38,6 @@
       <script type="text/javascript">
         // Place google analytics scripts here.
       </script>
+      {% block extra_js %}{% endblock %}
   </body>
 </html>

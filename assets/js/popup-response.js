@@ -1,5 +1,17 @@
 /* eslint-disable */
 
+function interpolate(fmt, obj, named) {
+  if (named) {
+    return fmt.replace(/%\(\w+\)s/g, function(match) {
+      return String(obj[match.slice(2, -2)]);
+    });
+  } else {
+    return fmt.replace(/%s/g, function(match) {
+      return String(obj.shift());
+    });
+  }
+}
+
 function windowname_to_id(text) {
   text = text.replace(/__dot__/g, '.');
   text = text.replace(/__dash__/g, '-');
@@ -47,7 +59,6 @@ function dismissDeleteRelatedObjectPopup(win, objId) {
 }
 
 /*global opener */
-// (function() {
 $(document).ready(function() {
 
   var response = document.getElementById('popup-response-constants');
@@ -76,6 +87,5 @@ $(document).ready(function() {
     opener.$('body').trigger('related-objects:dismiss');
   }
 });
-// })();
 
 /* eslint-enable */

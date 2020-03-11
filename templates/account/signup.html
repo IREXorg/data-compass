@@ -14,7 +14,7 @@
     </p>
   </div>
 
-  <div class="col-md-4 mx-auto">
+  <div class="col-md-6 mx-auto">
     <form class="login" method="POST" action="{% url 'account_signup' %}">
       {% csrf_token %}
       {{ form|crispy }}
@@ -22,7 +22,7 @@
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
       {% endif %}
 
-      <div class="">
+      <div class="form-group">
           <button class="btn btn-primary" type="submit">{% trans "Sign Up" %}</button>
       </div>
     </form>

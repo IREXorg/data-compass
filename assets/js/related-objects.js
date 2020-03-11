@@ -1,4 +1,16 @@
 /* eslint-disable */
+function interpolate(fmt, obj, named) {
+  if (named) {
+    return fmt.replace(/%\(\w+\)s/g, function(match) {
+      return String(obj[match.slice(2, -2)]);
+    });
+  } else {
+    return fmt.replace(/%s/g, function(match) {
+      return String(obj.shift());
+    });
+  }
+}
+
 function id_to_windowname(text) {
   text = text.replace(/\./g, '__dot__');
   text = text.replace(/\-/g, '__dash__');

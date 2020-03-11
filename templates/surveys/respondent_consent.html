@@ -5,20 +5,27 @@
 
 
 {% block content %}
-  <div class="overflow-auto bg-light border col-sm-8 mb-3" style="height: 200px">
+  <div class="overflow-auto bg-light border col-md-8 mb-3" style="height: 200px">
     {{ survey.description|linebreaks }}
   </div>
 
-  <form method="POST" action="">
-    {% csrf_token %}
-    {{ form|crispy }}
+  <div class="row no-gutters">
+    <div class="col-md-8">
+      <form method="POST" action="">
+        {% csrf_token %}
+        {{ form|crispy }}
 
-    <a href="{% url 'users:profile-detail' %}" class="btn btn-outline-secondary">
-      {% trans 'Quit' %} <i class="fas fa-arrow-left"></i>
-    </a>
+        <div class="form-group my-3">
+          <a href="{% url 'users:profile-detail' %}" class="btn btn-warning">
+            « {% trans 'Quit' %}
+          </a>
 
-    <button class="btn btn-primary" type="submit">
-      {% trans 'Continue' %} <i class="fas fa-arrow-right"></i>
-    </button>
-  </form>
+          <button class="btn btn-success float-sm-right" type="submit">
+            {% trans 'Continue' %} »
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 {% endblock %}

@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'active_link',
     'django_select2',
     'django_summernote',
+    'bootstrap_pagination',
     # Custom apps
     'core',
     'apps.users.apps.UsersConfig',

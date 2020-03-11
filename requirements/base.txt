@@ -41,5 +41,8 @@ treelib
 # file storage
 django-storages
 
+# pagination
+django-bootstrap-pagination
+
 # Debuging
 django-debug-toolbar
