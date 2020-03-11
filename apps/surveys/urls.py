@@ -21,6 +21,12 @@ urlpatterns = [
     path('<int:pk>/consent/', views.RespondentConsentView.as_view(), name='respondent-consent'),
     path('<int:pk>/respondent/update/', views.RespondentUpdateView.as_view(), name='respondent-update'),
 
+    # start: survey role paths
+    path('<int:survey_pk>/create-role/', views.RoleCreateView.as_view(), name='survey-create-role'),
+    path('<int:pk>/delete-role/', views.RoleDeleteView.as_view(), name='survey-delete-role'),
+    path('<int:pk>/update-role/', views.RoleUpdateView.as_view(), name='survey-update-role'),
+    # end: survey role paths
+
     # start: survey topic paths
     path('<int:survey_pk>/create-topic/', views.TopicCreateView.as_view(), name='survey-create-topic'),
     path('<int:pk>/delete-topic/', views.TopicDeleteView.as_view(), name='survey-delete-topic'),

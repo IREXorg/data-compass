@@ -155,6 +155,13 @@ class SurveyDetailMixin:
         if self.object:
             return self.object.entities.all()
 
+    def get_roles(self):
+        """
+        Get roles associated with the survey
+        """
+        if self.object:
+            return self.object.roles.all()
+
     def get_context_data(self, **kwargs):
         """
         Add survey releated objects context data
@@ -164,6 +171,7 @@ class SurveyDetailMixin:
         datasets = self.get_datasets()
         dataset_storages = self.get_dataset_storages()
         entities = self.get_entities()
+        roles = self.get_roles()
         if topics:
             context['topics'] = topics
         if datasets:
@@ -172,6 +180,8 @@ class SurveyDetailMixin:
             context['dataset_storages'] = dataset_storages
         if entities:
             context['entities'] = entities
+        if roles:
+            context['roles'] = roles
         return context
 
 

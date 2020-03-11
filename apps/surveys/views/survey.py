@@ -188,7 +188,7 @@ class SurveyEditStartView(LoginRequiredMixin, PageTitleMixin, DetailView):
     model = Survey
 
 
-class SurveyEditStepOneView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
+class SurveyEditStepOneView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
     """
     Update survey step one view.
 

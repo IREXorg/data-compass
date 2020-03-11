@@ -69,6 +69,14 @@ class Role(TimeStampedModel):
         unique=True
     )
     name = models.CharField(_('name'), max_length=255)
+    survey = models.ForeignKey(
+        'survey',
+        related_name='roles',
+        related_query_name='role',
+        verbose_name=_('survey'),
+        on_delete=models.CASCADE,
+        null=True,  # TODO: remove this.
+    )
     hierarchy = models.ForeignKey(
         'surveys.DataflowHierarchy',
         verbose_name=_('hierarchy'),
