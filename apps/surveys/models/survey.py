@@ -3,6 +3,7 @@ import uuid
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django.core.exceptions import PermissionDenied
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.urls import reverse_lazy as reverse
 from django.utils.text import slugify
@@ -31,6 +32,10 @@ class Survey(TimeStampedModel):
     Currently this only registered users can be invitees by being pre-added
     to the respondent list but this will change in future.
     """
+    YES_NO_CHOICES = (
+        (True, _('Yes')),
+        (False, _('No'))
+    )
 
     #: Global unique identifier for a survey.
     uuid = models.UUIDField(
@@ -49,7 +54,7 @@ class Survey(TimeStampedModel):
         on_delete=models.CASCADE
     )
 
-    #: User who created a survey.
+    #: User who created(or owning) a survey
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('creator'),
@@ -107,9 +112,10 @@ class Survey(TimeStampedModel):
     #: Flag whether survey respondents must login.
     login_required = models.BooleanField(
         _('login required'),
-        help_text=_('Do you want users to login before responding to the survey?'),
+        help_text=_("If no, they won't be able to save and return to their results, or view previous results."),  # noqa: E501
         blank=True,
-        default=True
+        default=True,
+        choices=YES_NO_CHOICES
     )
 
     #: Flag whether survey respondents must be envited.
@@ -123,17 +129,80 @@ class Survey(TimeStampedModel):
     #: Flag wether respondent can see others responses.
     respondent_can_aggregate = models.BooleanField(
         _('respondent can aggregate'),
-        help_text=_("Do you want repondents to see visualizations or aggregates of other users' responses?"),
+        help_text=_("'Yes', will update their networ visual with all users' responses in realtime. 'No' will not."),  # noqa: E501
         blank=True,
-        default=True
+        default=True,
+        choices=YES_NO_CHOICES
     )
 
     #: Flag wether respondent can invite others.
     respondent_can_invite = models.BooleanField(
         _('respondent can suggest others'),
-        help_text=_('Do you want users to share email addresses of other potential respondents?'),
+        help_text=_('If Yes, the survey will include question collecting email address. Respondents are responsible for ensuring consent.'),  # noqa: E501
         blank=True,
-        default=True
+        default=True,
+        choices=YES_NO_CHOICES
+    )
+
+    #: Flag whether respondents can add their own topics.
+    allow_respondent_topics = models.BooleanField(
+        _('allow respondent topics'),
+        help_text=_('If Yes, respondents will be able to add their own topics.'),  # noqa: E501
+        blank=True,
+        default=False,
+        choices=YES_NO_CHOICES
+    )
+
+    #: Number of topics respondent have to complete for a survey
+    respondent_topic_number = models.PositiveSmallIntegerField(
+        _('respondent topic number'),
+        help_text=_('Up to 10 topics are allowed'),
+        blank=False,
+        default=10,
+        validators=[MinValueValidator(1), MaxValueValidator(10)]
+    )
+
+    #: Flag whether respondents can add their own datasets.
+    allow_respondent_datasets = models.BooleanField(
+        _('allow respondent datasets'),
+        help_text=_('If Yes, respondents will be able to add their own datasets.'),  # noqa: E501
+        blank=True,
+        default=False,
+        choices=YES_NO_CHOICES
+    )
+
+    #: Flag whether respondents can add their own entities.
+    allow_respondent_entities = models.BooleanField(
+        _('allow respondent entities'),
+        help_text=_('If Yes, respondents will be able to add their own entities.'),  # noqa: E501
+        blank=True,
+        default=False,
+        choices=YES_NO_CHOICES
+    )
+
+    #: Flag whether respondents can add their own storages.
+    allow_respondent_storages = models.BooleanField(
+        _('allow respondent storages'),
+        help_text=_('If Yes, respondents will be able to add their own storages.'),  # noqa: E501
+        blank=True,
+        default=False,
+        choices=YES_NO_CHOICES
+    )
+
+    #: Human readable, header(introductory information) of survey.
+    introduction_text = models.TextField(
+        _('introduction text'),
+        help_text=_('What text do you want to appear when a respondent begins the survey?'),  # noqa: E501
+        blank=False,
+        default=''
+    )
+
+    #: Human readable, footer(closing information) of survey.
+    closing_text = models.TextField(
+        _('closing text'),
+        help_text=_('What text do you want to appear when a respondent ends the survey?'),  # noqa: E501
+        blank=False,
+        default=''
     )
 
     #: Flag is survey is published.
@@ -142,15 +211,6 @@ class Survey(TimeStampedModel):
         help_text=_('Is published'),
         blank=True,
         default=True
-    )
-
-    creator = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        verbose_name=_('creator'),
-        blank=True,
-        related_name='created_surveys',
-        related_query_name='created_survey',
-        on_delete=models.CASCADE
     )
 
     #: Extra survey fields.

@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'django_filters',
     'active_link',
     'django_select2',
+    'django_summernote',
     'bootstrap_pagination',
     # Custom apps
     'core',
@@ -228,6 +229,17 @@ ACTIVE_LINK_STRICT = True
 SELECT2_JS = ''
 
 SELECT2_CSS = ''
+
+# Summernote
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+SUMMERNOTE_THEME = 'bs4'
+
+SUMMERNOTE_CONFIG = {
+    'iframe': False,
+    'disable_attachment': True,
+    'lazy': True,
+}
 
 # Site
 

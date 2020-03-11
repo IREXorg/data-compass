@@ -3,6 +3,7 @@ import uuid
 from django.conf import settings
 from django.contrib.postgres.fields import JSONField
 from django.db import models
+from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 
 from core.models import TimeStampedModel
@@ -26,6 +27,14 @@ class Entity(TimeStampedModel):
         related_query_name='entity',
         null=True,  # TODO: remove this.
     )
+    survey = models.ForeignKey(
+        'surveys.Survey',
+        related_name='entities',
+        related_query_name='entity',
+        verbose_name=_('survey'),
+        on_delete=models.CASCADE,
+        null=True,  # TODO: remove this.
+    )
     name = models.CharField(_('name'), max_length=255)
     hierarchy = models.ForeignKey(
         'surveys.DataflowHierarchy',
@@ -33,7 +42,6 @@ class Entity(TimeStampedModel):
         related_query_name='entity',
         on_delete=models.CASCADE,
         null=True,
-        blank=True,
         verbose_name=_('hierarchy'),
     )
     description = models.TextField(_('description'), blank=True)
@@ -96,6 +104,15 @@ class DatasetStorage(TimeStampedModel):
         unique=True
     )
     name = models.CharField(_('name'), max_length=255)
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_('creator'),
+        blank=True,
+        null=True,  # TODO: remove this
+        related_name='created_survey_dataset_storages',
+        related_query_name='created_survey_dataset_storage',
+        on_delete=models.CASCADE
+    )
 
     class Meta:
         verbose_name = _('Dataset Storage')
@@ -103,6 +120,10 @@ class DatasetStorage(TimeStampedModel):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        """Obtain dataset storage absolute url."""
+        return reverse('surveys:survey-detail', kwargs={'pk': self.pk})
 
 
 class DatasetAccess(TimeStampedModel):

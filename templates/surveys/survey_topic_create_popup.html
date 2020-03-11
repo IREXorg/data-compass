@@ -1,0 +1,68 @@
+{% extends 'surveys/base.html' %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{# Start: Nav primary #}
+{% block nav_primary %}
+<nav>&nbsp;</nav>
+{% endblock %}
+{# End: Footer #}
+
+{# Start: Breadcrumbs #}
+{% block breadcrumbs %}
+<ol class="breadcrumb" aria-label="breadcrumbs">
+   &nbsp;
+</ol>
+{% endblock %}
+{# End: Breadcrumbs #}
+
+{# Start: Page header #}
+{% block page_header %}
+<div class="page-header">&nbsp;</div>
+{% endblock %}
+{# End: Page header #}
+
+{# Start: Content #}
+{% block content %}
+<div class="row justify-content-md-center">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-body">
+
+        <p class="text-muted">
+          {% blocktrans trimmed %}
+          Create survey topic.
+          {% endblocktrans %}
+        </p>
+
+        <hr>
+
+        <form method="POST" action="" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form|crispy }}
+
+          <hr>
+
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary">
+                  {% trans 'Save Topic' %}
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{# End: Content #}
+
+{# Start: Footer #}
+{% block footer %}
+<footer>&nbsp;</footer>
+{% endblock %}
+{# End: Footer #}

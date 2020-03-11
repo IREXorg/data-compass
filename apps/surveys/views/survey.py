@@ -9,8 +9,9 @@ from apps.projects.models import Project
 from core.mixins import PageTitleMixin
 
 from ..filters import SurveyListFilter
-from ..forms import SurveyCreateForm, SurveyUpdateForm
-from ..mixins import SurveyCreatorMixin
+from ..forms import (SurveyCreateForm, SurveyEditStepFiveForm, SurveyEditStepFourForm, SurveyEditStepOneForm,
+                     SurveyEditStepSixForm, SurveyEditStepThreeForm, SurveyEditStepTwoForm, SurveyUpdateForm)
+from ..mixins import SurveyCreatorMixin, SurveyDetailMixin
 from ..models import Survey
 
 
@@ -165,3 +166,193 @@ class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
 
     def get_success_url(self):
         return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
+
+
+class SurveyEditStartView(LoginRequiredMixin, PageTitleMixin, DetailView):
+    """
+    View survey edit start view.
+
+    Allow current signin user to start edit survey details.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        GET  /surveys/1234567890/edit-start
+    """
+
+    # Translators: This is survey view page title
+    page_title = _('Edit new survey')
+    template_name = 'surveys/survey_edit_start.html'
+    context_object_name = 'survey'
+    model = Survey
+
+
+class SurveyEditStepOneView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
+    """
+    Update survey step one view.
+
+    Allow current signin user to update existing survey details and
+    redirect to survey edit step two page.
+
+    **Example request**:
+
+    .. code-block::
+
+        PUT  /surveys/1234567890/edit-step-one
+    """
+
+    # Translators: This is survey update page title
+    page_title = _('Edit new survey')
+    template_name = 'surveys/survey_edit_step_one.html'
+    context_object_name = 'survey'
+    model = Survey
+    form_class = SurveyEditStepOneForm
+
+    def get_success_url(self):
+        return reverse('surveys:survey-edit-step-two', kwargs={'pk': self.object.pk})
+
+
+class SurveyEditStepTwoView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
+    """
+    Edit survey step two view.
+
+    Allow current signin user to update existing survey details and
+    redirect to survey edit step three page.
+
+    **Example request**:
+
+    .. code-block::
+
+        PUT  /surveys/1234567890/edit-step-two
+    """
+
+    # Translators: This is survey update page title
+    page_title = _('Edit new survey')
+    template_name = 'surveys/survey_edit_step_two.html'
+    context_object_name = 'survey'
+    model = Survey
+    form_class = SurveyEditStepTwoForm
+
+    def get_success_url(self):
+        return reverse('surveys:survey-edit-step-three', kwargs={'pk': self.object.pk})
+
+
+class SurveyEditStepThreeView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
+    """
+    Edit survey step three view.
+
+    Allow current signin user to update existing survey details and
+    redirect to survey edit step four page.
+
+    **Example request**:
+
+    .. code-block::
+
+        PUT  /surveys/1234567890/edit-step-three
+    """
+
+    # Translators: This is survey update page title
+    page_title = _('Edit new survey')
+    template_name = 'surveys/survey_edit_step_three.html'
+    context_object_name = 'survey'
+    model = Survey
+    form_class = SurveyEditStepThreeForm
+
+    def get_success_url(self):
+        return reverse('surveys:survey-edit-step-four', kwargs={'pk': self.object.pk})
+
+
+class SurveyEditStepFourView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
+    """
+    Edit survey step four view.
+
+    Allow current signin user to update existing survey details and
+    redirect to survey edit step five page.
+
+    **Example request**:
+
+    .. code-block::
+
+        PUT  /surveys/1234567890/edit-step-four
+    """
+
+    # Translators: This is survey update page title
+    page_title = _('Edit new survey')
+    template_name = 'surveys/survey_edit_step_four.html'
+    context_object_name = 'survey'
+    model = Survey
+    form_class = SurveyEditStepFourForm
+
+    def get_success_url(self):
+        return reverse('surveys:survey-edit-step-five', kwargs={'pk': self.object.pk})
+
+
+class SurveyEditStepFiveView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
+    """
+    Edit survey step five view.
+
+    Allow current signin user to update existing survey details and
+    redirect to survey edit step six page.
+
+    **Example request**:
+
+    .. code-block::
+
+        PUT  /surveys/1234567890/edit-step-five
+    """
+
+    # Translators: This is survey update page title
+    page_title = _('Edit new survey')
+    template_name = 'surveys/survey_edit_step_five.html'
+    context_object_name = 'survey'
+    model = Survey
+    form_class = SurveyEditStepFiveForm
+
+    def get_success_url(self):
+        return reverse('surveys:survey-edit-step-six', kwargs={'pk': self.object.pk})
+
+
+class SurveyEditStepSixView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
+    """
+    Edit survey step five view.
+
+    Allow current signin user to update existing survey details and
+    redirect to survey edit step six page.
+
+    **Example request**:
+
+    .. code-block::
+
+        PUT  /surveys/1234567890/edit-step-six
+    """
+
+    # Translators: This is survey update page title
+    page_title = _('Edit new survey')
+    template_name = 'surveys/survey_edit_step_six.html'
+    context_object_name = 'survey'
+    model = Survey
+    form_class = SurveyEditStepSixForm
+
+    def get_success_url(self):
+        return reverse('surveys:survey-edit-finish', kwargs={'pk': self.object.pk})
+
+
+class SurveyEditFinishView(LoginRequiredMixin, PageTitleMixin, DetailView):
+    """
+    View survey edit start view.
+
+    Allow current signin user to finish edit survey details.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        GET  /surveys/1234567890/edit-finish
+    """
+
+    # Translators: This is survey view page title
+    page_title = _('Edit new survey')
+    template_name = 'surveys/survey_edit_finish.html'
+    context_object_name = 'survey'
+    model = Survey
