@@ -1,19 +1,18 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
-from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.list import ListView
 
-from apps.projects.models import Project
 from core.mixins import PageMixin
 from invitations.utils import get_invitation_model
 from invitations.views import SendInvite
 
 Invitation = get_invitation_model()
 
-class SendInviteView(PageMixin, SendInvite, ListView):
+
+class SendInviteView(LoginRequiredMixin, PageMixin, SendInvite, ListView):
     template_name = 'invitations/send_invite.html'
-    page_title = 'Send Invite'
+    page_title = _('Send Invite')
     context_object_name = 'respondents'
     queryset = Invitation.objects.all()
 
