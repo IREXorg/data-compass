@@ -139,7 +139,7 @@ function dismissDeleteRelatedObjectPopup(win, objId) {
 }
 
 function dismissChangeObjectPopup(win) {
-  location.reload(true);
+  win.opener.location.reload(true);
   win.close();
 }
 

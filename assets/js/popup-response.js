@@ -42,7 +42,7 @@ function dismissChangeRelatedObjectPopup(win, objId, newRepr, newId) {
 }
 
 function dismissChangeObjectPopup(win) {
-  location.reload(true);
+  win.opener.location.reload(true);
   win.close();
 }
 
@@ -84,7 +84,7 @@ $(document).ready(function() {
         break;
     }
 
-    opener.$('body').trigger('related-objects:dismiss');
+    window.opener.$('body').trigger('related-objects:dismiss');
   }
 });
 
