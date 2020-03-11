@@ -1,6 +1,7 @@
 import csv
 import json
 
+from django.contrib.postgres.search import SearchVector
 from django.http import StreamingHttpResponse
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
@@ -183,3 +184,31 @@ class CSVResponseMixin:
         if self.get_renderer() == 'csv':
             return self.render_csv()
         return super().render_to_response(context, **response_kwargs)
+
+
+class CreatorAdminMixin:
+    """
+    Django admin mixin automatically assigns object creator and adds
+    id, uuid, created_at and updated_at as read only fields.
+    """
+    readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
+
+    def save_model(self, request, obj, form, change):
+        if not obj.pk:
+            obj.creator = request.user
+        super().save_model(request, obj, form, change)
+
+
+class SearchVectorFilterMixin:
+    """FilterSet Mixin for text seach using Postgresql full text search."""
+
+    def filter_search_vector(self, queryset, name, value):
+        # NOTE: Ideally this should have a DB Index to avoid performance issues
+        # https://docs.djangoproject.com/en/3.0/ref/contrib/postgres/search/#performance
+
+        if not value:
+            return queryset
+
+        return queryset.annotate(
+            search_vector=SearchVector(*self.search_vector_fields)
+        ).filter(search_vector=value)

@@ -1,0 +1,87 @@
+{% extends 'layout_master_detail.html' %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load bootstrap_pagination %}
+
+
+{% block content_master %}
+  <h2>{% trans 'Filter responses' %}</h2>
+
+  <form id="master-filter" method="GET">
+    {{ filter.form|crispy }}
+    <div class="form-group mb-4">
+      <button type="submit" class="btn btn-success btn-sm">{% trans 'Apply filters' %}</button>
+      <a href="{% url 'responses:survey-response-list' %}" class="btn btn-secondary btn-sm">{% trans 'Reset filters' %}</a>
+    </div>
+  </form>
+{% endblock %}
+
+
+{% block content_detail %}
+
+  {% if survey_responses %}
+    <div class="row my-4">
+      <div class="col-sm">
+      </div>
+
+      <div class="col-sm-auto pr-3">
+        <a id="export-csv" class="btn btn-warning btn-sm mx-3" href="#">{% trans 'Export responses' %}</a>
+
+        <span class="badge badge-pill badge-secondary">
+          {% blocktrans with count=paginator.count %}{{ count }} responses{% endblocktrans %}
+        </span>
+
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered small">
+        <thead>
+            <tr>
+              <th>{% trans 'ID' %}</th>
+              <th>{% trans 'Email' %}</th>
+              <th>{% trans 'Survey' %}</th>
+              <th>{% trans 'project' %}</th>
+              <th>{% trans 'Status' %}</th>
+              <th class="text-center">{% trans 'Consent time' %}</th>
+              <th class="text-center">{% trans 'Completion time' %}</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for response in survey_responses %}
+            <tr>
+              <td>{{ response.id }}</td>
+              <td>{{ response.respondent.email }}</td>
+              <td>{{ response.survey.name }}</td>
+              <td>{{ response.survey.project.name }}</td>
+              <td>{{ response.status }}</td>
+              <td class="text-center">{{ response.consented_at|default:'-' }}</td>
+              <td class="text-center">{{ response.completed_at|default:'-' }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div>{% bootstrap_paginate page_obj extra_pagination_classes='justify-content-center' %}</div>
+  {% else %}
+    <h4 class="display text-muted">{% trans 'No response found.' %}</h4>
+  {% endif %}
+  
+
+{% endblock content_detail %}
+
+{% block extra_js %}
+  {# FIXME: move this to js files #}
+  <script>
+    $('#export-csv').click(function() {
+      var form = '#master-filter'
+      $("<input />").attr("type", "hidden")
+        .attr("name", "format")
+        .attr("value", "csv")
+        .appendTo(form);
+      $(form).submit();
+    });
+  </script>
+{% endblock extra_js %}

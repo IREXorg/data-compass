@@ -18,8 +18,6 @@ urlpatterns = [
     path('<int:pk>/edit-step-five/', views.SurveyEditStepFiveView.as_view(), name='survey-edit-step-five'),
     path('<int:pk>/edit-step-six/', views.SurveyEditStepSixView.as_view(), name='survey-edit-step-six'),
     path('<int:pk>/edit-finish/', views.SurveyEditFinishView.as_view(), name='survey-edit-finish'),
-    path('<int:pk>/consent/', views.RespondentConsentView.as_view(), name='respondent-consent'),
-    path('<int:pk>/respondent/update/', views.RespondentUpdateView.as_view(), name='respondent-update'),
 
     # start: survey role paths
     path('<int:survey_pk>/create-role/', views.RoleCreateView.as_view(), name='survey-create-role'),
@@ -68,51 +66,4 @@ urlpatterns = [
     path('<int:pk>/delete-logo/', views.LogoDeleteView.as_view(), name='survey-delete-logo'),
     path('<int:pk>/update-logo/', views.LogoUpdateView.as_view(), name='survey-update-logo'),
     # end: survey logo paths
-
-    path('respondents/', views.RespondentListView.as_view(), name='respondent-list'),
-    path(
-        '<int:pk>/select-datasets/',
-        views.DatasetResponseListCreateView.as_view(),
-        name='dataset-response-list-create'
-    ),
-    path(
-        'dataset-response/<int:pk>/update-frequency/',
-        views.DatasetResponseUpdateFrequencyView.as_view(),
-        name='dataset-response-update-frequency'
-    ),
-    path(
-        'dataset-topic-response/<int:pk>/update/',
-        views.DatasetTopicResponseUpdateView.as_view(),
-        name='dataset-topic-response-update'
-    ),
-    path(
-        'dataset-response/<int:pk>/update-shared/',
-        views.DatasetTopicSharedUpdateView.as_view(),
-        name='dataset-response-update-shared'
-    ),
-    path(
-        'dataset-response/<int:pk>/update-received/',
-        views.DatasetTopicReceivedUpdateView.as_view(),
-        name='dataset-response-update-received'
-    ),
-    path(
-        '<int:pk>/response-resume/',
-        views.SurveyResponseResumeView.as_view(),
-        name='survey-response-resume'
-    ),
-    path(
-        '<int:pk>/response-complete/',
-        views.SurveyResponseCompleteView.as_view(),
-        name='survey-response-complete'
-    ),
-    path(
-        'responses/',
-        views.SurveyResponseListView.as_view(),
-        name='survey-response-list'
-    ),
-    path(
-        'responses/<int:pk>/',
-        views.SurveyResponseDetailView.as_view(),
-        name='survey-response-detail'
-    ),
 ]
