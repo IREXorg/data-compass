@@ -2,13 +2,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
-
-from invitations.utils import get_invitation_model
-from invitations.views import SendInvite
+from django.views.generic.list import ListView
 
 from apps.projects.models import Project
 from core.mixins import PageMixin
-from django.views.generic.list import ListView
+from invitations.utils import get_invitation_model
+from invitations.views import SendInvite
 
 Invitation = get_invitation_model()
 
