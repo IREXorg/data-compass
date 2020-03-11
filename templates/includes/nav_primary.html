@@ -2,7 +2,7 @@
 
 {% load active_link_tags %}
 
-<nav class="navbar navbar-expand-lg navbar-primary navbar-light bg-light {{ navbar_primary_class }}" id="navbar-primary">
+<nav class="navbar navbar-expand-md navbar-primary navbar-light bg-light {{ navbar_primary_class }}" id="navbar-primary">
   <div class="container">
     <a href="{% url 'home' %}" class="navbar-brand">
       <svg class="logo-icon mr-2" width="18" height="18"
@@ -14,46 +14,49 @@
       Data Compass
     </a>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse"
+    <button class="navbar-toggler border-0" type="button" data-toggle="collapse"
             data-target="#nav-primary-collapsible" aria-controls="nav-primary-collapsible"
             aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="nav-primary-collapsible" class="collapse navbar-collapse">
+    <div class="collapse navbar-collapse" id="nav-primary-collapsible">
       <div class="navbar-nav ml-auto">
-      <ul class="navbar-nav ml-auto">
+
         {% if user.is_authenticated %}
 
-        {% if user.is_facilitator %}
+          {% if user.is_facilitator %}
+            <div class="nav-item">
+              <a href="{% url 'projects:project-list' %}" class="btn btn-sm btn-outline-primary {% active_link 'projects:project-list' %}">
+                {% trans 'My Projects' %}
+              </a>
+            </div>
+          {% endif %}
+  
           <div class="nav-item">
-            <a href="{% url 'projects:project-list' %}" class="btn btn-sm btn-outline-primary {% active_link 'projects:project-list' %}">
-              {% trans 'My Projects' %}
+            <a href="{% url 'users:profile-detail' %}" class="btn btn-sm btn-outline-primary {% active_link 'users:profile-detail' %}">
+              {% trans 'My Profile' %}
             </a>
           </div>
-        {% endif %}
-  
-        <li class="nav-item">
-          <a href="{% url 'users:profile-detail' %}" class="btn btn-sm btn-outline-primary {% active_link 'users:profile-detail' %}">
-            {% trans 'My Profile' %}
-          </a>
-        </li>
 
-        <li class="nav-item">
-          <a href="{% url 'account_logout' %}" class="btn btn-sm btn-outline-primary {% active_link 'account_logout' %}">
-            {% trans 'Sign out' %}
-          </a>
-        </li>
+          <div class="nav-item">
+            <a href="{% url 'account_logout' %}" class="btn btn-sm btn-outline-primary {% active_link 'account_logout' %}">
+              {% trans 'Sign out' %}
+            </a>
+          </div>
 
         {% else %}
-        <li class="nav-item">
-          <a href="{% url 'account_login' %}" class="btn btn-sm btn-outline-primary {% active_link 'account_login' %}" >
-            {% trans 'Sign In' %}
-          </a>
-        </li>
+
+          <div class="nav-item">
+            <a href="{% url 'account_login' %}" class="btn btn-sm btn-outline-primary {% active_link 'account_login' %}" >
+              {% trans 'Sign In' %}
+            </a>
+          </div>
+
         {% endif %}
-      </ul>
+
       </div>
     </div>
+
   </div>
 </nav>

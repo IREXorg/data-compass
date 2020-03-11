@@ -27,21 +27,28 @@
       <div class="form-row">
 
         <div class="col-auto">
-          <div class="form-check">
-            {{ form.selected|add_class:"form-check-input" }}
+          <div class="form-group">
+            <div class="form-check">
+              {{ form.selected|add_class:"form-check-input" }}
+            </div>
           </div>
         </div>
 
         <div class="col-sm-2">
-          {% include 'bootstrap4/layout/field_errors_block.html' with field=form.selected %}
-          {% include 'bootstrap4/layout/field_errors_block.html' with field=form.errors %}
-          {{ form.storage|add_class:'d-none' }}
-          {{ form.storage_name }}
+          <div class="form-group">
+            {% include 'bootstrap4/layout/field_errors_block.html' with field=form.selected %}
+            {% include 'bootstrap4/layout/field_errors_block.html' with field=form.errors %}
+            {{ form.storage|add_class:'d-none' }}
+            {{ form.storage_name }}
+          </div>
+
         </div>
 
         <div class="col-auto">
-          {% include 'bootstrap4/layout/field_errors_block.html' with field=form.access %}
-          {{ form.access|add_class:'form-control' }}
+          <div class="form-group">
+            {% include 'bootstrap4/layout/field_errors_block.html' with field=form.access %}
+            {{ form.access|add_class:'form-control' }}
+          </div>
         </div>
       </div>
 

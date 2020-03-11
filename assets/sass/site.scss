@@ -114,3 +114,14 @@ h2 {
     margin-bottom: $input-margin-bottom / 2;
   }
 }
+
+.asteriskField {
+  color: $warning;
+  font-size: $font-size-lg;
+}
+
+form.login {
+  label {
+    text-transform: uppercase;
+  }
+}

@@ -5,23 +5,29 @@
 
 
 {% block content %}
-  <form method="POST" action="">
-    {% csrf_token %}
+  <div class="row no-gutters">
+    <div class="col-md-8">
 
-    {% block form_intro %}{% endblock %}
+      <form method="POST" action="">
+        {% csrf_token %}
 
-    {% block form_fields %}{{ form|crispy }}{% endblock %}
+        {% block form_intro %}{% endblock %}
 
-    {% block form_buttons %}
-      <div class="my-3">
-        <a href="{{ back_url_path }}" class="btn btn-warning">
-          «« {% trans 'Back' %}
-        </a>
+        {% block form_fields %}{{ form|crispy }}{% endblock %}
 
-        <button class="btn btn-success" type="submit">
-          {% trans 'Save and Continue' %} »
-        </button>
-      </div>
-    {% endblock form_buttons %}
-  </form>
+        {% block form_buttons %}
+          <div class="form-group my-3">
+            <a href="{{ back_url_path }}" class="btn btn-warning">
+              « {% trans 'Back' %}
+            </a>
+
+            <button class="btn btn-success float-right" type="submit">
+              {% trans 'Save and continue' %} »
+            </button>
+          </div>
+        {% endblock form_buttons %}
+      </form>
+
+    </div>
+  </div>
 {% endblock %}
