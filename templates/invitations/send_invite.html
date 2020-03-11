@@ -36,10 +36,50 @@
     <div class="card">
       <div class="card-body">
         <p class="text-muted">
-          {% blocktrans trimmed %}
-          Provide some basic information about your invitees.
-          {% endblocktrans %}
+        {% blocktrans trimmed %}
+        Whom will you invite to take your survey?
+        {% endblocktrans %}
         </p>
+
+        {% if respondents %}
+        <p class="mt-4">
+        {% blocktrans %}
+        Provide some basic information about your respondents.
+        {% endblocktrans %}
+        </p>
+
+        <div class="row">
+          {% for respondent in respondents %}
+          <div class="table-responsive">
+            <table class="table card-table table-vcenter">
+              <tbody>
+                <tr>
+                  <td class="w-1 pr-0">
+                    <label class="form-check m-0">
+                      <input type="checkbox" class="form-check-input" checked="">
+                      <span class="form-check-label"></span>
+                    </label>
+                  </td>
+                  <td class="w-100">
+                    <a href="#" class="text-reset">{{ respondent }}</a>
+                  </td>
+                  <td>
+                    <span
+                      class="avatar
+                      avatar-sm"
+                      style="background-image:
+                      url(./static/avatars/000m.jpg)"></span>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+          {% endfor %}
+        </div>
+        {# End: respondents list #}
+
+        {% endif %}
 
         <hr>
 
@@ -56,7 +96,7 @@
                   {% trans 'Send invite' %}
                 </button>
 
-                <a href={% url 'projects:project-list' %} class="btn btn-secondary">
+                <a href="#" class="btn btn-secondary">
                   {% trans 'Cancel' %}
                 </a>
               </div>
