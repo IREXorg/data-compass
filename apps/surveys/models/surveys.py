@@ -335,8 +335,8 @@ class Logo(TimeStampedModel):
         on_delete=models.CASCADE
     )
     name = models.CharField(_('name'), max_length=255)
-    logo = models.ImageField(
-        _('logo'),
+    image = models.ImageField(
+        _('image'),
         blank=True,
         null=True,
         upload_to='surveys/logos'

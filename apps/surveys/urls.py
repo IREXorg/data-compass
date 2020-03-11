@@ -63,6 +63,12 @@ urlpatterns = [
     path('<int:pk>/update-entity/', views.EntityUpdateView.as_view(), name='survey-update-entity'),
     # end: survey entity paths
 
+    # start: survey logo paths
+    path('<int:survey_pk>/create-logo/', views.LogoCreateView.as_view(), name='survey-create-logo'),
+    path('<int:pk>/delete-logo/', views.LogoDeleteView.as_view(), name='survey-delete-logo'),
+    path('<int:pk>/update-logo/', views.LogoUpdateView.as_view(), name='survey-update-logo'),
+    # end: survey logo paths
+
     path(
         '<int:pk>/select-datasets/',
         views.DatasetResponseListCreateView.as_view(),
