@@ -27,6 +27,14 @@ class Entity(TimeStampedModel):
         related_query_name='entity',
         null=True,  # TODO: remove this.
     )
+    survey = models.ForeignKey(
+        'surveys.Survey',
+        related_name='entities',
+        related_query_name='entity',
+        verbose_name=_('survey'),
+        on_delete=models.CASCADE,
+        null=True,  # TODO: remove this.
+    )
     name = models.CharField(_('name'), max_length=255)
     hierarchy = models.ForeignKey(
         'surveys.DataflowHierarchy',
@@ -34,7 +42,7 @@ class Entity(TimeStampedModel):
         related_query_name='entity',
         on_delete=models.CASCADE,
         null=True,
-        blank=True,
+        blank=False,
         verbose_name=_('hierarchy'),
     )
     description = models.TextField(_('description'), blank=True)

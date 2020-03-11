@@ -51,6 +51,12 @@ urlpatterns = [
     ),
     # end: survey dataset-storage paths
 
+    # start: survey entity paths
+    path('<int:survey_pk>/create-entity/', views.EntityCreateView.as_view(), name='survey-create-entity'),
+    path('<int:pk>/delete-entity/', views.EntityDeleteView.as_view(), name='survey-delete-entity'),
+    path('<int:pk>/update-entity/', views.EntityUpdateView.as_view(), name='survey-update-entity'),
+    # end: survey entity paths
+
     path(
         '<int:pk>/select-datasets/',
         views.DatasetResponseListCreateView.as_view(),

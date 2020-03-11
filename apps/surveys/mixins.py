@@ -148,6 +148,13 @@ class SurveyDetailMixin:
         if self.object:
             return self.object.dataset_storages.all()
 
+    def get_entities(self):
+        """
+        Get entities associated with the survey
+        """
+        if self.object:
+            return self.object.entities.all()
+
     def get_context_data(self, **kwargs):
         """
         Add survey releated objects context data
@@ -156,12 +163,15 @@ class SurveyDetailMixin:
         topics = self.get_topics()
         datasets = self.get_datasets()
         dataset_storages = self.get_dataset_storages()
+        entities = self.get_entities()
         if topics:
             context['topics'] = topics
         if datasets:
             context['datasets'] = datasets
         if dataset_storages:
             context['dataset_storages'] = dataset_storages
+        if entities:
+            context['entities'] = entities
         return context
 
 
