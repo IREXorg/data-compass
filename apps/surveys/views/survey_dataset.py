@@ -50,7 +50,7 @@ class DatasetCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePo
         return form_kwargs
 
     def get_success_url(self):
-        return reverse('surveys:edit-step-two', kwargs={'pk': self.object.survey.pk})
+        return reverse('surveys:edit-step-three', kwargs={'pk': self.object.survey.pk})
 
 
 class DatasetUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, UpdateView):
@@ -75,7 +75,7 @@ class DatasetUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePo
     form_class = DatasetUpdateForm
 
     def get_success_url(self):
-        return reverse('surveys:edit-step-two', kwargs={'pk': self.object.survey.pk})
+        return reverse('surveys:edit-step-three', kwargs={'pk': self.object.survey.pk})
 
 
 class DatasetDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, DeleteView):
@@ -99,4 +99,4 @@ class DatasetDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, De
     model = Dataset
 
     def get_success_url(self):
-        return reverse('surveys:edit-step-two', kwargs={'pk': self.object.survey.pk})
+        return reverse('surveys:edit-step-three', kwargs={'pk': self.object.survey.pk})

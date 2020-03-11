@@ -52,7 +52,7 @@ class DatasetStorageCreateView(LoginRequiredMixin, PageTitleMixin, BasePopupMode
         return form_kwargs
 
     def get_success_url(self):
-        return reverse('surveys:edit-step-two', kwargs={'pk': self.object.survey.pk})
+        return reverse('surveys:edit-step-five', kwargs={'pk': self.object.survey.pk})
 
 
 class DatasetStorageUpdateView(LoginRequiredMixin, PageTitleMixin, BasePopupModelFormMixin, UpdateView):
@@ -77,7 +77,7 @@ class DatasetStorageUpdateView(LoginRequiredMixin, PageTitleMixin, BasePopupMode
     form_class = DatasetStorageUpdateForm
 
     def get_success_url(self):
-        return reverse('surveys:edit-step-two', kwargs={'pk': self.object.survey.pk})
+        return reverse('surveys:edit-step-five', kwargs={'pk': self.object.survey.pk})
 
 
 class DatasetStorageDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, DeleteView):
@@ -101,4 +101,4 @@ class DatasetStorageDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMi
     model = DatasetStorage
 
     def get_success_url(self):
-        return reverse('surveys:edit-step-two', kwargs={'pk': self.object.survey.pk})
+        return reverse('surveys:edit-step-five', kwargs={'pk': self.object.survey.pk})
