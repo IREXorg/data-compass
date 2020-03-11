@@ -8,23 +8,29 @@ window._ = require('lodash');
  * code may be modified to fit the specific needs of your application.
  * Include the Popper.js library, since Boostrap 4 requires it.
  */
-try {
-  // window.$ = window.jQuery = require('jquery');
 
-  window.Popper = require('popper.js').default;
+window.Popper = require('popper.js').default;
 
-  require('bootstrap');
+require('bootstrap');
 
-  // require('select2')(window.$);
+var select2 = require('select2');
 
-  require('./related-objects.js');
-  require('./popup-response.js');
-} catch (e) {}
+require('./related-objects.js');
+require('./popup-response.js');
 
-/**
- * We'll load the theme's javascript.
- */
 
-/** FIXME: It seems tabler js also includes bootstrap's js. Therefore we have to choose one
- * require('./theme/tabler.min');
-*/
+// initialize once dom ready
+$(document).ready(function() {
+
+  // wire boostrap tooltip
+  $('[data-toggle="tooltip"]').tooltip();
+
+  // wire boostrap popover
+  $('[data-toggle="popover"]').popover();
+
+  // wire boostrap dropdown
+  $('.dropdown-toggle').dropdown();
+
+  // wire select2
+  select2(window.$);
+});
