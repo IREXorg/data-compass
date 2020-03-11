@@ -111,13 +111,13 @@
       <div class="form-group">
         <div class="row">
           <div class="col-sm-6">
-            <button type="submit" class="btn btn-primary">
-              {% trans 'Save Survey Changes' %}
-            </button>
-
             <a href="{% url 'surveys:survey-detail' survey.pk %}" class="btn btn-secondary">
               {% trans 'Cancel' %}
             </a>
+
+            <button type="submit" class="btn btn-success">
+              {% trans 'Save and continue' %} »
+            </button>
           </div>
         </div>
       </div>

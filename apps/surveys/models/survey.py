@@ -32,7 +32,10 @@ class Survey(TimeStampedModel):
     Currently this only registered users can be invitees by being pre-added
     to the respondent list but this will change in future.
     """
-    YES_NO_CHOICES = ((True, _('Yes')), (False, _('No')))
+    YES_NO_CHOICES = (
+        (True, _('Yes')),
+        (False, _('No'))
+    )
 
     #: Global unique identifier for a survey.
     uuid = models.UUIDField(

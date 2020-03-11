@@ -42,7 +42,6 @@ class Entity(TimeStampedModel):
         related_query_name='entity',
         on_delete=models.CASCADE,
         null=True,
-        blank=False,
         verbose_name=_('hierarchy'),
     )
     description = models.TextField(_('description'), blank=True)
