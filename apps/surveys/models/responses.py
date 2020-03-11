@@ -105,7 +105,15 @@ class DatasetStorage(TimeStampedModel):
         unique=True
     )
     name = models.CharField(_('name'), max_length=255)
-    # TODO: creator
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_('creator'),
+        blank=True,
+        null=True,  # TODO: remove this
+        related_name='created_survey_dataset_storages',
+        related_query_name='created_survey_dataset_storage',
+        on_delete=models.CASCADE
+    )
 
     class Meta:
         verbose_name = _('Dataset Storage')
