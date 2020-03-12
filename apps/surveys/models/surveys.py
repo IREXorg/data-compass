@@ -250,12 +250,14 @@ class Question(TimeStampedModel):
         verbose_name=_('survey'),
         on_delete=models.CASCADE
     )
-    group = models.ForeignKey(
+    group = models.ForeignKey(  # TODO: remove this.
         'surveys.QuestionGroup',
         related_name='questions',
         related_query_name='question',
         verbose_name=_('group'),
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
     )
     name = models.SlugField(_('field name'), blank=True)
     label = models.CharField(
