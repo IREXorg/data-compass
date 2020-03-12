@@ -3,9 +3,10 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.list import ListView
 
-from core.mixins import PageMixin
 from invitations.utils import get_invitation_model
 from invitations.views import SendInvite
+
+from core.mixins import PageMixin
 
 Invitation = get_invitation_model()
 

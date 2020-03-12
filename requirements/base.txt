@@ -11,6 +11,9 @@ django-imagekit
 # Authentication
 django-allauth
 
+# Invitations
+django-invitations
+
 # Country field
 django-countries
 
