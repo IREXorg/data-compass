@@ -53,7 +53,12 @@
       <a href="{% url 'surveys:survey-delete' survey.pk %}" class="btn btn-danger">{% trans 'Delete Survey' %}</a>
     </div>
     <div class="btn-list mt-5">
+      {# TODO: urls; unpublish, publish, duplicate, report, preview #}
+      {% if survey.is_active %}
+      <a href="#" class="btn btn-success">{% trans 'Unpublish Survey' %}</a>
+      {% else %}
       <a href="#" class="btn btn-success">{% trans 'Publish Survey' %}</a>
+      {% endif %}
       <a href="#" class="btn btn-primary">{% trans 'Translate Survey' %}</a>
       <a href="#" class="btn btn-secondary">{% trans 'Report Survey' %}</a>
     </div>

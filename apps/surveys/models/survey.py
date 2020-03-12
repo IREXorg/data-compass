@@ -210,7 +210,7 @@ class Survey(TimeStampedModel):
         _('is active'),
         help_text=_('Is published'),
         blank=True,
-        default=True
+        default=True  # TODO: default to False
     )
 
     #: Extra survey fields.

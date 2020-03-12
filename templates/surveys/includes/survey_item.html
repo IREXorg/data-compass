@@ -6,9 +6,9 @@
       <div class="row row-sm align-items-center">
         <div class="col lh-1 align-self-start">
           {% if survey.is_active %}
-          <span class="badge bg-gray-lt">{% trans 'Un-published' %}</span>
-          {% else %}
           <span class="badge bg-green-lt">{% trans 'Published' %}</span>
+          {% else %}
+          <span class="badge bg-gray-lt">{% trans 'Un-published' %}</span>
           {% endif %}
         </div>
       </div>
