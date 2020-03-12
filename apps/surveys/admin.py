@@ -3,7 +3,7 @@ from django.contrib import admin
 from mptt.admin import DraggableMPTTAdmin
 
 from .models import (Choice, DataflowHierarchy, Dataset, DatasetAccess, DatasetFrequency, DatasetStorage, Entity,
-                     Question, QuestionGroup, Role, Survey, Topic)
+                     HierarchyLevel, Question, QuestionGroup, Role, Survey, Topic)
 
 
 class CreatorAdminMixin:
@@ -27,6 +27,12 @@ class SurveyAdmin(CreatorAdmin):
     list_filter = ['is_active', 'created_at']
     autocomplete_fields = ['creator', 'project']
     prepopulated_fields = {'code': ['name']}
+
+
+@admin.register(HierarchyLevel)
+class HierarchyLevelAdmin(CreatorAdminMixin, DraggableMPTTAdmin):
+    list_display = ['tree_actions', 'indented_title', 'project', 'pk']
+    list_select_related = ['project']
 
 
 @admin.register(DataflowHierarchy)
