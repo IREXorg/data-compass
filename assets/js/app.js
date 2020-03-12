@@ -32,5 +32,8 @@ $(document).ready(function() {
   $('.dropdown-toggle').dropdown();
 
   // wire select2
-  select2(window.$);
+  // select2(window.$);
+  $("select:visible[name='country']").select2({theme: 'bootstrap4'});
 });
+
+
