@@ -19,7 +19,7 @@ class LogoCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopup
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         POST  /surveys/1234567890/create-logo
     """
@@ -87,7 +87,7 @@ class LogoDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, Delet
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         DELETE  /surveys/1234567890/delete-logo
     """

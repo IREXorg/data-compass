@@ -19,7 +19,7 @@ class RoleCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopup
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         POST  /surveys/1234567890/create-role
     """
@@ -87,7 +87,7 @@ class RoleDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, Delet
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         DELETE  /surveys/1234567890/delete-role
     """

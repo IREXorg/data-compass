@@ -1,7 +1,7 @@
-apps.surveys.managers
+apps.responses.models
 =====================
 
-.. automodule:: apps.surveys.managers.survey
+.. automodule:: apps.responses.models
    :members:
    :undoc-members:
    :show-inheritance:

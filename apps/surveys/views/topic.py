@@ -19,7 +19,7 @@ class TopicCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopu
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         POST  /surveys/1234567890/create-topic
     """
@@ -87,7 +87,7 @@ class TopicDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, Dele
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         DELETE  /surveys/1234567890/delete-topic
     """

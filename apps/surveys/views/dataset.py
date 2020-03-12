@@ -19,7 +19,7 @@ class DatasetCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePo
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         POST  /surveys/1234567890/create-dataset
     """
@@ -87,7 +87,7 @@ class DatasetDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, De
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         DELETE  /surveys/1234567890/delete-dataset
     """

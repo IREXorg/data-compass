@@ -19,7 +19,7 @@ class DatasetStorageCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin,
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         POST  /surveys/1234567890/create-dataset-storage
     """
@@ -87,7 +87,7 @@ class DatasetStorageDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMi
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         DELETE  /surveys/1234567890/delete-dataset-storage
     """

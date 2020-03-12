@@ -19,7 +19,7 @@ class EntityCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePop
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         POST  /surveys/1234567890/create-entity
     """
@@ -87,7 +87,7 @@ class EntityDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, Del
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         DELETE  /surveys/1234567890/delete-entity
     """
