@@ -185,6 +185,13 @@ class SurveyDetailMixin:
         if self.object:
             return self.object.logos.all()
 
+    def get_respondents(self):
+        """
+        Get respondents associated with the survey
+        """
+        if self.object:
+            return self.object.respondents.all()
+
     def get_context_data(self, **kwargs):
         """
         Add survey releated objects context data
@@ -196,6 +203,7 @@ class SurveyDetailMixin:
         entities = self.get_entities()
         roles = self.get_roles()
         logos = self.get_logos()
+        respondents = self.get_respondents()
         if topics:
             context['topics'] = topics
         if datasets:
@@ -208,6 +216,8 @@ class SurveyDetailMixin:
             context['roles'] = roles
         if logos:
             context['logos'] = logos
+        if respondents:
+            context['respondents'] = respondents
         return context
 
 
