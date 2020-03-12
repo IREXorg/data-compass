@@ -24,7 +24,6 @@ Including another URLconf
 
 """
 from django.conf import settings
-from django.conf.urls import url
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
@@ -34,10 +33,12 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('surveys/', include('apps.surveys.urls', namespace='surveys')),
     path('users/', include('apps.users.urls', namespace='users')),
     path('projects/', include('apps.projects.urls', namespace='projects')),
-    url(r'^summernote/', include('django_summernote.urls')),
+    path('surveys/', include('apps.surveys.urls', namespace='surveys')),
+    path('respondents/', include('apps.respondents.urls', namespace='respondents')),
+    path('responses/', include('apps.responses.urls', namespace='responses')),
+    path('summernote/', include('django_summernote.urls')),
 ]
 
 if settings.DEBUG:
