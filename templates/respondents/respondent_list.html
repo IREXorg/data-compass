@@ -56,6 +56,12 @@
     <table class="table table-bordered small">
       <thead>
           <tr>
+            <th>
+              <label class="form-check m-0">
+                <input type="checkbox" class="form-check-input" checked="">
+                <span class="form-check-label"></span>
+              </label>
+            </th>
             <th>{% trans 'ID' %}</th>
             <th>{% trans 'Email' %}</th>
             <th>{% trans 'First name' %}</th>
@@ -68,6 +74,12 @@
       <tbody>
         {% for respondent in respondents %}
           <tr>
+            <td>
+              <label class="form-check m-0">
+                <input type="checkbox" class="form-check-input" checked="">
+                <span class="form-check-label"></span>
+              </label>
+            </td>
             <td>{{ respondent.id }}</td>
             <td>{{ respondent.email }}</td>
             <td>{{ respondent.first_name }}</td>
