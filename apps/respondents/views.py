@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import FormView, UpdateView
+from django.views.generic.list import ListView
 
 from django_filters.views import FilterView
 
@@ -16,6 +17,10 @@ from .forms import RespondentConsentForm, ResponseRespondentForm
 from .mixins import RespondentFacilitatorMixin
 from .models import Respondent
 
+from invitations.utils import get_invitation_model
+from invitations.views import SendInvite
+
+Invitation = get_invitation_model()
 
 class RespondentListView(RespondentFacilitatorMixin, PageMixin, CSVResponseMixin, FilterView):
     """
@@ -219,3 +224,15 @@ class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, 
         context['hierarchy_levels'] = self.survey.project.hierarchy_levels.values('id', 'level', 'name')
         context['hierarchies'] = self.survey.project.hierarchies.values('id', 'level', 'name', 'parent')
         return context
+
+class SendInviteView(FacilitatorMixin, PageMixin, SendInvite, ListView):
+    template_name = 'invitations/send_invite.html'
+    page_title = _('Send Invite')
+    context_object_name = 'respondents'
+    queryset = Invitation.objects.all()
+
+    def form_valid(self, form):
+        invite = Invitation.create(form.cleaned_data['email'], inviter=self.request.user)
+        invite.send_invitation(self.request)
+
+        return redirect('/invitations/send-invite')
