@@ -229,7 +229,7 @@ class SendInviteView(FacilitatorMixin, PageMixin, SendInvite, ListView):
     template_name = 'invitations/send_invite.html'
     page_title = _('Send Invite')
     context_object_name = 'respondents'
-    queryset = Invitation.objects.all()
+    queryset = Respondent.objects.all()
 
     def form_valid(self, form):
         invite = Invitation.create(form.cleaned_data['email'], inviter=self.request.user)
