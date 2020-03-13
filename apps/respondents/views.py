@@ -231,6 +231,8 @@ class SendInviteView(FacilitatorMixin, PageMixin, SendInvite, ListView):
     context_object_name = 'respondents'
     queryset = Respondent.objects.all()
 
+    # TODO: add respondent filters
+
     def form_valid(self, form):
         invite = Invitation.create(form.cleaned_data['email'], inviter=self.request.user)
         invite.send_invitation(self.request)
