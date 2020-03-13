@@ -22,6 +22,12 @@ class Gender(TimeStampedModel):
     )
     name = models.CharField(_('name'), max_length=50)
     code = models.SlugField(_('code'), max_length=255, blank=True, unique=True)
+    is_primary = models.BooleanField(
+        _('is primary'),
+        default=False,
+        blank=True,
+        help_text=_('Shared system wide. Not for specific project or survey only.')
+    )
 
     class Meta:
         verbose_name = _('Gender')
