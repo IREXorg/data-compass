@@ -56,9 +56,14 @@ class SurveyEditStepOneForm(ModelForm):
         }
         labels = {
             'login_required': _('Do you want the survey to be taken by invited users only?'),
-            'respondent_can_aggregate':
-                _("Do you want repondents to see visualizations or aggregates of other users' responses?"),
-            'respondent_can_invite': _('Do you want users to share email addresses of other potential respondents?'),
+            'respondent_can_aggregate': _(
+                "Do you want repondents to see visualizations or aggregates "
+                "of other users' responses?"
+            ),
+            'respondent_can_invite': _(
+                'Do you want users to share email '
+                'addresses of other potential respondents?'
+            ),
         }
 
 
@@ -74,7 +79,10 @@ class SurveyEditStepTwoForm(ModelForm):
         }
         labels = {
             'allow_respondent_topics': _('Allow respondents to enter their own value here'),
-            'respondent_topic_number': _('How many topics would you like Respondents to select?. They will complete the entire survey for each topic.'),  # noqa: E501
+            'respondent_topic_number': _(
+                'How many topics would you like Respondents to select?. '
+                'They will complete the entire survey for each topic.'
+            ),
         }
 
 
