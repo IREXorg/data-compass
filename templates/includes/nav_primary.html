@@ -25,10 +25,10 @@
 
         {% if user.is_authenticated %}
 
-          {% if user.is_facilitator %}
+          {% if user.is_staff %}
             <div class="nav-item">
-              <a href="{% url 'projects:project-list' %}" class="btn btn-sm btn-outline-primary {% active_link 'projects:project-list' %}">
-                {% trans 'My Projects' %}
+              <a href="{% url 'admin:index' %}" class="btn btn-sm btn-outline-primary" target="_blank">
+                {% trans 'Administration' %}
               </a>
             </div>
           {% endif %}
