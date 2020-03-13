@@ -199,7 +199,6 @@ class Survey(TimeStampedModel):
     introduction_text = models.TextField(
         _('introduction text'),
         help_text=_('What text do you want to appear when a respondent begins the survey?'),
-        blank=False,
         default=''
     )
 
@@ -207,7 +206,6 @@ class Survey(TimeStampedModel):
     closing_text = models.TextField(
         _('closing text'),
         help_text=_('What text do you want to appear when a respondent ends the survey?'),
-        blank=False,
         default=''
     )
 
@@ -217,6 +215,21 @@ class Survey(TimeStampedModel):
         help_text=_('Is published'),
         blank=True,
         default=True
+    )
+
+    #: Gender used in various parts of the survey.
+    #
+    #: ``post_save`` signal is used to automatially add primary genders on new
+    #: instances with no pre-assigned genders.
+    #: Users (`facilitators`) could be allowed to add or remove primary genders
+    #: on a survey but shouldn't be allowed to modify attributes
+    #: of an individual primary gender.
+    genders = models.ManyToManyField(
+        'users.Gender',
+        verbose_name=_('genders'),
+        related_name='surveys',
+        related_query_name='survey',
+        blank=True,
     )
 
     #: Extra survey fields.
@@ -239,7 +252,8 @@ class Survey(TimeStampedModel):
         return self.display_name
 
     def save(self, *args, **kwargs):
-        """Save the survey"""
+        """Save the survey."""
+
         if not self.code:
             self.code = slugify(self.name[:50])
         if not self.display_name:

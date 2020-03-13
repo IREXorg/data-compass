@@ -12,6 +12,8 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 from core.models import TimeStampedModel
 
+from .managers import GenderManager
+
 
 class Gender(TimeStampedModel):
     uuid = models.UUIDField(
@@ -28,6 +30,8 @@ class Gender(TimeStampedModel):
         blank=True,
         help_text=_('Shared system wide. Not for specific project or survey only.')
     )
+
+    objects = GenderManager()
 
     class Meta:
         verbose_name = _('Gender')

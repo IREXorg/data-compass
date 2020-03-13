@@ -9,6 +9,16 @@ apps.users.models
    :undoc-members:
    :show-inheritance:
 
+
+apps.users.managers
+-------------------
+
+.. automodule:: apps.users.managers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
 apps.users.forms
 ----------------
 
@@ -17,6 +27,7 @@ apps.users.forms
    :undoc-members:
    :show-inheritance:
 
+
 apps.users.views
 ----------------
 
@@ -24,6 +35,7 @@ apps.users.views
    :members:
    :undoc-members:
    :show-inheritance:
+
 
 apps.users.urls
 ---------------

@@ -7,7 +7,19 @@ apps.surveys.models
    :show-inheritance:
 
 
-.. automodule:: apps.surveys.models.hierarchies
+.. automodule:: apps.surveys.models.hierarchy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. automodule:: apps.surveys.models.entity
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+
+.. automodule:: apps.surveys.models.role
    :members:
    :undoc-members:
    :show-inheritance:
