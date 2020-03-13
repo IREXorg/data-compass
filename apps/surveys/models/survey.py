@@ -79,7 +79,8 @@ class Survey(TimeStampedModel):
     #: Human readable, survey alternative name for respondents.
     display_name = models.CharField(
         _('alternative name'),
-        help_text=_('Use this optional field to provide the survey name as Respondents will see it.'),
+        help_text=_('Use this optional field to provide the survey name as '
+                    'Respondents will see it.'),
         max_length=255,
         blank=True
     )
@@ -87,7 +88,8 @@ class Survey(TimeStampedModel):
     #: Accompanies survey research questions.
     research_question = models.CharField(
         _('research question'),
-        help_text=_('Every Data Compass survey must have a specific research question. What is yours?'),
+        help_text=_('Every Data Compass survey must have a specific research '
+                    'question. What is yours?'),
         max_length=255
     )
 
@@ -112,7 +114,8 @@ class Survey(TimeStampedModel):
     #: Flag whether survey respondents must login.
     login_required = models.BooleanField(
         _('login required'),
-        help_text=_("If no, they won't be able to save and return to their results, or view previous results."),  # noqa: E501
+        help_text=_("If no, they won't be able to save and return to their "
+                    "results, or view previous results."),
         blank=True,
         default=True,
         choices=YES_NO_CHOICES
@@ -129,7 +132,8 @@ class Survey(TimeStampedModel):
     #: Flag wether respondent can see others responses.
     respondent_can_aggregate = models.BooleanField(
         _('respondent can aggregate'),
-        help_text=_("'Yes', will update their networ visual with all users' responses in realtime. 'No' will not."),  # noqa: E501
+        help_text=_("'Yes', will update their networ visual with all users' "
+                    "responses in realtime. 'No' will not."),
         blank=True,
         default=True,
         choices=YES_NO_CHOICES
@@ -138,7 +142,9 @@ class Survey(TimeStampedModel):
     #: Flag wether respondent can invite others.
     respondent_can_invite = models.BooleanField(
         _('respondent can suggest others'),
-        help_text=_('If Yes, the survey will include question collecting email address. Respondents are responsible for ensuring consent.'),  # noqa: E501
+        help_text=_('If Yes, the survey will include question collecting '
+                    'email address. Respondents are responsible for '
+                    'ensuring consent.'),
         blank=True,
         default=True,
         choices=YES_NO_CHOICES
@@ -147,7 +153,7 @@ class Survey(TimeStampedModel):
     #: Flag whether respondents can add their own topics.
     allow_respondent_topics = models.BooleanField(
         _('allow respondent topics'),
-        help_text=_('If Yes, respondents will be able to add their own topics.'),  # noqa: E501
+        help_text=_('If Yes, respondents will be able to add their own topics.'),
         blank=True,
         default=False,
         choices=YES_NO_CHOICES
@@ -165,7 +171,7 @@ class Survey(TimeStampedModel):
     #: Flag whether respondents can add their own datasets.
     allow_respondent_datasets = models.BooleanField(
         _('allow respondent datasets'),
-        help_text=_('If Yes, respondents will be able to add their own datasets.'),  # noqa: E501
+        help_text=_('If Yes, respondents will be able to add their own datasets.'),
         blank=True,
         default=False,
         choices=YES_NO_CHOICES
@@ -174,7 +180,7 @@ class Survey(TimeStampedModel):
     #: Flag whether respondents can add their own entities.
     allow_respondent_entities = models.BooleanField(
         _('allow respondent entities'),
-        help_text=_('If Yes, respondents will be able to add their own entities.'),  # noqa: E501
+        help_text=_('If Yes, respondents will be able to add their own entities.'),
         blank=True,
         default=False,
         choices=YES_NO_CHOICES
@@ -183,7 +189,7 @@ class Survey(TimeStampedModel):
     #: Flag whether respondents can add their own storages.
     allow_respondent_storages = models.BooleanField(
         _('allow respondent storages'),
-        help_text=_('If Yes, respondents will be able to add their own storages.'),  # noqa: E501
+        help_text=_('If Yes, respondents will be able to add their own storages.'),
         blank=True,
         default=False,
         choices=YES_NO_CHOICES
@@ -192,7 +198,7 @@ class Survey(TimeStampedModel):
     #: Human readable, header(introductory information) of survey.
     introduction_text = models.TextField(
         _('introduction text'),
-        help_text=_('What text do you want to appear when a respondent begins the survey?'),  # noqa: E501
+        help_text=_('What text do you want to appear when a respondent begins the survey?'),
         blank=False,
         default=''
     )
@@ -200,7 +206,7 @@ class Survey(TimeStampedModel):
     #: Human readable, footer(closing information) of survey.
     closing_text = models.TextField(
         _('closing text'),
-        help_text=_('What text do you want to appear when a respondent ends the survey?'),  # noqa: E501
+        help_text=_('What text do you want to appear when a respondent ends the survey?'),
         blank=False,
         default=''
     )
