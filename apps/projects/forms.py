@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 
@@ -14,13 +15,15 @@ class ProjectCreateForm(ModelForm):
     Project create form
     """
 
+    hierarchy_file_help_text = _(
+        'You will issue one or more surveys to actors in the system encompassed '
+        'by this project. In order to be able to aggregate results well, '
+        'please upload the dataflow hierarchy. '
+        '<a href="%(template_url)s" download>Click here for data flow hierarchy template</a>.'
+    ) % {'template_url': settings.STATIC_URL + 'files/templates/data-flow-hierarchy.xlsx'}
+
     hierarchy_file = forms.FileField(
-        label=_('Dataflow hierarchy'),
-        help_text=_(
-            'You will issue one or more surveys to actors in the system encompassed '
-            'by this project. In order to be able to aggregate results well, '
-            'please upload the dataflow hierarchy.'
-        )
+        label=_('Data flow hierarchy'),
     )
 
     _delimiter = '::'
@@ -40,10 +43,17 @@ class ProjectCreateForm(ModelForm):
         labels = {
             'email': _('Contact information')
         }
+        required = ['name', 'description', 'email', 'countries', 'hierarchy_file']
 
     def __init__(self, user=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.user = user
+
+        self.fields['hierarchy_file'].help_text = self.hierarchy_file_help_text
+
+        _required = getattr(self.Meta, 'required', [])
+        for field in _required:
+            self.fields[field].required = True
 
     def clean_hierarchy_file(self):
         """
@@ -162,12 +172,7 @@ class ProjectUpdateForm(ProjectCreateForm):
     """
 
     hierarchy_file = forms.FileField(
-        label=_('Dataflow hierarchy'),
-        help_text=_(
-            'You will issue one or more surveys to actors in the system encompassed '
-            'by this project. In order to be able to aggregate results well, '
-            'please upload the dataflow hierarchy.'
-        ),
+        label=_('Data flow hierarchy'),
         required=False
     )
 
@@ -178,6 +183,7 @@ class ProjectUpdateForm(ProjectCreateForm):
             'description': forms.Textarea(attrs={'rows': 2}),
             'countries': Select2MultipleWidget
         }
+        required = ['name', 'description', 'email', 'countries']
 
     def get_hierarchy_creator(self):
         return self.user
