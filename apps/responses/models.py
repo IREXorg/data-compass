@@ -24,9 +24,9 @@ class SurveyResponse(TimeStampedModel):
     COMPLETED = 'completed'
 
     STATUS_CHOICES = (
-        (NOT_STARTED, _('not yet started')),
-        (IN_PROGRESS, _('not completed')),
-        (COMPLETED, _('completed')),
+        (NOT_STARTED, _('Not yet started')),
+        (IN_PROGRESS, _('In progress')),
+        (COMPLETED, _('Completed')),
     )
 
     #: Response UUID.

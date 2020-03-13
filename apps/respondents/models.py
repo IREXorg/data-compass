@@ -24,9 +24,9 @@ class Respondent(TimeStampedModel):
     COMPLETED = 'completed'
 
     STATUS_CHOICES = (
-        (NOT_STARTED, _('not yet started')),
-        (IN_PROGRESS, _('started but not completed')),
-        (COMPLETED, _('completed')),
+        (NOT_STARTED, _('Not yet started')),
+        (IN_PROGRESS, _('In progess')),
+        (COMPLETED, _('Completed')),
     )
 
     #: Respondent's UUID.
