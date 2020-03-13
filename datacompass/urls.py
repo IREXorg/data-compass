@@ -29,7 +29,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 
-from apps.respondents.views import SendInviteView
+# from apps.respondents.views import SendInviteView
 
 urlpatterns = [
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
@@ -41,7 +41,7 @@ urlpatterns = [
     path('respondents/', include('apps.respondents.urls', namespace='respondents')),
     path('responses/', include('apps.responses.urls', namespace='responses')),
     path('summernote/', include('django_summernote.urls')),
-    path('invitations/send-invite/', SendInviteView.as_view()),
+    # path('invitations/send-invite/', SendInviteView.as_view()),
     path('invitations/', include('invitations.urls', namespace='invitations')),
 ]
 

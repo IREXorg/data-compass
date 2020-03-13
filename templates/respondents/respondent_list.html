@@ -44,6 +44,8 @@
 
     <div class="col-sm-auto pr-3">
       <a class="btn btn-warning btn-sm action-export-csv mx-3" href="#">{% trans 'Export table' %}</a>
+      <a id="export-csv" class="btn btn-warning btn-sm mx-3" href="#">{% trans 'Export table' %}</a>
+      <a id="invite-respondent" class="btn btn-primary btn-sm mx-3" href="#">{% trans 'Invite respondents' %}</a>
 
       <span class="text-muted">
         {% trans 'Respondents found' %}:
@@ -52,46 +54,50 @@
     </div>
   </div>
 
-  <div class="table-responsive">
-    <table class="table table-bordered small">
-      <thead>
-          <tr>
-            <th>
-              <label class="form-check m-0">
-                <input type="checkbox" class="form-check-input" checked="">
-                <span class="form-check-label"></span>
-              </label>
-            </th>
-            <th>{% trans 'ID' %}</th>
-            <th>{% trans 'Email' %}</th>
-            <th>{% trans 'First name' %}</th>
-            <th>{% trans 'Last name' %}</th>
-            <th>{% trans 'Gender' %}</th>
-            <th>{% trans 'Survey' %}</th>
-            <th>{% trans 'Status' %}</th>
-          </tr>
-      </thead>
-      <tbody>
-        {% for respondent in respondents %}
-          <tr>
-            <td>
-              <label class="form-check m-0">
-                <input type="checkbox" class="form-check-input" checked="">
-                <span class="form-check-label"></span>
-              </label>
-            </td>
-            <td>{{ respondent.id }}</td>
-            <td>{{ respondent.email }}</td>
-            <td>{{ respondent.first_name }}</td>
-            <td>{{ respondent.last_name }}</td>
-            <td>{{ respondent.gender.code }}</td>
-            <td>{{ respondent.survey.name }}</td>
-            <td>{{ respondent.status }}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
+  <form method="POST" action="{% url 'respondents:respondent-invite' %}" id="invite-respondent-form">
+    {% csrf_token %}
+
+    <div class="table-responsive">
+      <table class="table table-bordered small">
+        <thead>
+            <tr>
+              <th>
+                <label class="form-check m-0">
+                  <input type="checkbox" class="form-check-input" checked="">
+                  <span class="form-check-label"></span>
+                </label>
+              </th>
+              <th>{% trans 'ID' %}</th>
+              <th>{% trans 'Email' %}</th>
+              <th>{% trans 'First name' %}</th>
+              <th>{% trans 'Last name' %}</th>
+              <th>{% trans 'Gender' %}</th>
+              <th>{% trans 'Survey' %}</th>
+              <th>{% trans 'Status' %}</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for respondent in respondents %}
+            <tr>
+              <td>
+                <label class="form-check m-0">
+                  <input type="checkbox" class="form-check-input" checked="" name="respondent" value="{{ respondent.id }}">
+                  <span class="form-check-label"></span>
+                </label>
+              </td>
+              <td>{{ respondent.id }}</td>
+              <td>{{ respondent.email }}</td>
+              <td>{{ respondent.first_name }}</td>
+              <td>{{ respondent.last_name }}</td>
+              <td>{{ respondent.gender.code }}</td>
+              <td>{{ respondent.survey.name }}</td>
+              <td>{{ respondent.status }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </form>
 {% endblock content_detail %}
 
 
@@ -99,5 +105,19 @@
   {# FIXME: move this to js files #}
   <script>
     $('#div_id_q').hide();
+
+    $('#export-csv').click(function() {
+      var form = '#master-filter'
+      $("<input />").attr("type", "hidden")
+        .attr("name", "format")
+        .attr("value", "csv")
+        .appendTo(form);
+      $(form).submit();
+    });
+
+    $('#invite-respondent').click(function() {
+      var form = '#invite-respondent-form'
+      $(form).submit();
+    });
   </script>
 {% endblock extra_js %}

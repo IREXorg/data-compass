@@ -41,6 +41,7 @@ class RespondentForm(forms.ModelForm):
             raise ValueError(_(f'Project or Survey must be specified to initialize {self.__class__.__name__}'))
 
         super().__init__(*args, **kwargs)
+
         if 'hierarchy_level' in self.fields:
             self.fields['hierarchy_level'].queryset = project.hierarchy_levels.all()
         if 'hierarchy' in self.fields:
@@ -82,3 +83,10 @@ class ResponseRespondentForm(RespondentForm):
 
         if not survey.allow_collect_gender:
             self.fields.pop('gender', None)
+
+        self.fields['hierarchy'].queryset = project.hierarchies.all()
+
+class RespondentInviteForm(forms.ModelForm):
+    class Meta:
+        model = Respondent
+        fields = ['first_name', 'last_name', 'email', 'gender']

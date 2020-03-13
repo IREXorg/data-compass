@@ -15,6 +15,7 @@ from core.mixins import CSVResponseMixin, PageMixin
 from .filters import RespondentFilter
 from .forms import RespondentConsentForm, ResponseRespondentForm
 from .mixins import RespondentFacilitatorMixin
+from .forms import RespondentInviteForm, RespondentConsentForm, RespondentForm
 from .models import Respondent
 
 from invitations.utils import get_invitation_model
@@ -225,16 +226,22 @@ class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, 
         context['hierarchies'] = self.survey.project.hierarchies.values('id', 'level', 'name', 'parent')
         return context
 
-class SendInviteView(FacilitatorMixin, PageMixin, SendInvite, ListView):
+class RespondentInviteView(FacilitatorMixin, PageMixin, SendInvite):
     template_name = 'invitations/send_invite.html'
     page_title = _('Send Invite')
     context_object_name = 'respondents'
     queryset = Respondent.objects.all()
+    form_class= RespondentInviteForm
 
     # TODO: add respondent filters
 
-    def form_valid(self, form):
-        invite = Invitation.create(form.cleaned_data['email'], inviter=self.request.user)
-        invite.send_invitation(self.request)
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
 
-        return redirect('/invitations/send-invite')
+        print(f'---------------{request.POST}---------------')
+
+        if form.is_valid():
+            # <process form cleaned data>
+            return redirect('/respondents/invite')
+
+        return render(request, self.template_name, {'form': form})
