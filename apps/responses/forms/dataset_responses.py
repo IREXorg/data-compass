@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from apps.surveys.models import Role
+from apps.surveys.models import Role, Topic
 
 from ..models import (DatasetResponse, DatasetTopicReceived, DatasetTopicResponse, DatasetTopicShared,
                       DatasetTopicStorageAccess)
@@ -17,7 +17,7 @@ class DatasetSelectForm(forms.Form):
     def __init__(self, survey=None, survey_response=None, *args, **kwargs):
         self.survey_response = survey_response
 
-        # get project inorder to limit hierarchy choices
+        # get survey in order to limit hierarchy choices
         if not survey:
             raise ValueError(_(f'Survey must be specified to initialize {self.__class__.__name__}'))
 
@@ -77,7 +77,7 @@ class DatasetTopicResponseForm(forms.ModelForm):
         model = DatasetTopicResponse
         fields = ['percieved_owner']
 
-    def __init__(self, project=None, *args, **kwargs):
+    def __init__(self, survey=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         if self.instance.pk:
@@ -90,10 +90,10 @@ class DatasetTopicResponseForm(forms.ModelForm):
                 'topic': self.instance.topic.name
             }
 
-        if not project and self.instance:
-            project = self.instance.dataset_response.response.survey.project
+        if not survey and self.instance:
+            survey = self.instance.dataset_response.response.survey
 
-        self.fields['percieved_owner'].queryset = Role.objects.filter(hierarchy__project=project)
+        self.fields['percieved_owner'].queryset = Role.objects.filter(survey=survey)
 
 
 class DatasetTopicStorageAccessForm(forms.ModelForm):
@@ -133,6 +133,7 @@ class BaseDatasetTopicStorageAccessFormSet(forms.BaseModelFormSet):
 
         if self.instance:
             self.queryset = self.instance.storages.all()
+            self.form_kwargs['survey'] = self.instance.dataset_response.response.survey
 
             storages = self.instance.dataset_response.response.survey.dataset_storages.all()
 
@@ -185,7 +186,7 @@ class DatasetTopicSharedForm(forms.ModelForm):
         model = DatasetTopicShared
         fields = ['selected', 'entity', 'topic']
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, survey=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.entity_name = None
@@ -197,6 +198,11 @@ class DatasetTopicSharedForm(forms.ModelForm):
 
         self.fields['topic'].required = False
 
+        if survey:
+            self.fields['topic'].queryset = survey.topics.all()
+        else:
+            self.fields['topic'].queryset = Topic.objects.none()
+
     def clean(self):
         super().clean()
         if self.cleaned_data['selected']:
@@ -206,7 +212,7 @@ class DatasetTopicSharedForm(forms.ModelForm):
 
 class BaseDatasetTopicSharedFormSet(forms.BaseModelFormSet):
 
-    def __init__(self, instance=None, project=None, *args, **kwargs):
+    def __init__(self, instance=None, survey=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.queryset = None
         self.can_delete = False
@@ -215,8 +221,10 @@ class BaseDatasetTopicSharedFormSet(forms.BaseModelFormSet):
         if self.instance:
             self.queryset = self._get_queryset()
 
-            project = project or self.instance.dataset_response.response.survey.project
-            entities = project.entities.all()
+            survey = survey or self.instance.dataset_response.response.survey
+            entities = survey.entities.all()
+
+            self.form_kwargs['survey'] = survey
 
             # set number of forms equal to entity options
             self.extra = self.max_num = len(entities)

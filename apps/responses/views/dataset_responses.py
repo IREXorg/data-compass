@@ -216,7 +216,7 @@ class DatasetTopicSharedUpdateView(PageMixin, RespondentSurveyMixin, ConsentChec
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         kwargs['instance'] = self.dataset_response
-        kwargs['project'] = self.project
+        kwargs['survey'] = self.survey
         return kwargs
 
     def form_valid(self, form):

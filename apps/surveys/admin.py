@@ -43,16 +43,18 @@ class DataflowHierarchyAdmin(CreatorAdminMixin, DraggableMPTTAdmin):
 
 @admin.register(Role)
 class RoleAdmin(CreatorAdmin):
-    list_display = ['pk', 'name', 'hierarchy']
-    list_filter = ['hierarchy__project']
-    list_select_related = ['hierarchy']
+    list_display = ['pk', 'name', 'hierarchy', 'survey']
+    list_display_links = ['pk', 'name']
+    list_filter = ['hierarchy__project', 'survey']
+    list_select_related = ['hierarchy', 'survey']
 
 
 @admin.register(Entity)
 class EntityAdmin(CreatorAdmin):
-    list_display = ['pk', 'name', 'hierarchy']
-    list_select_related = ['hierarchy']
-    list_filter = ['project']
+    list_display = ['pk', 'name', 'hierarchy', 'survey']
+    list_display_links = ['pk', 'name']
+    list_select_related = ['hierarchy', 'survey']
+    list_filter = ['hierarchy__project', 'survey']
 
 
 @admin.register(Topic)
@@ -64,8 +66,9 @@ class TopicAdmin(CreatorAdmin):
 
 @admin.register(Dataset)
 class DatasetAdmin(CreatorAdmin):
-    list_display = ['pk', 'name']
+    list_display = ['pk', 'name', 'survey']
     list_display_links = ['pk', 'name']
+    list_select_related = ['survey']
 
 
 @admin.register(DatasetStorage)
