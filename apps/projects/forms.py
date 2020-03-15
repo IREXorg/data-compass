@@ -19,7 +19,7 @@ class ProjectCreateForm(ModelForm):
         'You will issue one or more surveys to actors in the system encompassed '
         'by this project. In order to be able to aggregate results well, '
         'please upload the dataflow hierarchy. '
-        '<a href="%(template_url)s" download>Click here for data flow hierarchy template</a>.'
+        '<a href="%(template_url)s" download>Click here for data flow hierarchy file template</a>.'
     ) % {'template_url': settings.STATIC_URL + 'files/templates/data-flow-hierarchy.xlsx'}
 
     hierarchy_file = forms.FileField(
@@ -67,7 +67,9 @@ class ProjectCreateForm(ModelForm):
         try:
             book = xlrd.open_workbook(file_contents=hierarchy_file.read())
         except xlrd.XLRDError:
-            raise forms.ValidationError(_('Invalid file format'))
+            raise forms.ValidationError(
+                _('Invalid file format. It must be an excel file with a sheet called hierarchy.')
+            )
         try:
             sheet = book.sheet_by_name('hierarchy')
         except xlrd.XLRDError:
