@@ -17,6 +17,7 @@ var select2 = require('select2');
 
 require('./related-objects.js');
 require('./popup-response.js');
+require('./export-utils.js');
 
 
 // initialize once dom ready
