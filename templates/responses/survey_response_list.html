@@ -26,7 +26,7 @@
       </div>
 
       <div class="col-sm-auto pr-3">
-        <a id="export-csv" class="btn btn-warning btn-sm mx-3" href="#">{% trans 'Export table' %}</a>
+        <a class="btn btn-warning btn-sm btn-export-csv mx-3" href="#">{% trans 'Export table' %}</a>
 
         <span class="badge badge-pill badge-secondary">
           {% blocktrans with count=paginator.count %}{{ count }} responses{% endblocktrans %}
@@ -64,24 +64,14 @@
       </table>
     </div>
 
-    <div>{% bootstrap_paginate page_obj extra_pagination_classes='justify-content-center' %}</div>
+    {% if paginator.num_pages > 1 %}
+      <div>
+        {% bootstrap_paginate page_obj extra_pagination_classes='justify-content-center' %}
+      </div>
+    {% endif %}
+
   {% else %}
     <h4 class="display text-muted">{% trans 'No response found.' %}</h4>
   {% endif %}
-  
 
 {% endblock content_detail %}
-
-{% block extra_js %}
-  {# FIXME: move this to js files #}
-  <script>
-    $('#export-csv').click(function() {
-      var form = '#master-filter'
-      $("<input />").attr("type", "hidden")
-        .attr("name", "format")
-        .attr("value", "csv")
-        .appendTo(form);
-      $(form).submit();
-    });
-  </script>
-{% endblock extra_js %}
