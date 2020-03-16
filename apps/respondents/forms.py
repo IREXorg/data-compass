@@ -25,15 +25,19 @@ class RespondentForm(forms.ModelForm):
 
     class Meta:
         model = Respondent
-        fields = ['first_name', 'last_name', 'email', 'gender', 'hierarchy']
+        fields = ['first_name', 'last_name', 'email', 'gender', 'hierarchy', 'role']
 
     def __init__(self, survey=None, project=None, *args, **kwargs):
 
+        if not survey:
+            raise ValueError(_(f'Survey must be specified to initialize {self.__class__.__name__}'))
+
         # get project inorder to limit hierarchy choices
-        if not project and survey:
+        if not project:
             project = survey.project
         elif not project:
             raise ValueError(_(f'Project or Survey must be specified to initialize {self.__class__.__name__}'))
 
         super().__init__(*args, **kwargs)
         self.fields['hierarchy'].queryset = project.hierarchies.all()
+        self.fields['role'].queryset = survey.roles.all()

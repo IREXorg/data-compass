@@ -78,7 +78,18 @@ class Respondent(TimeStampedModel):
         verbose_name=_('gender')
     )
 
-    #: Hierarchy of the respondent in data flow
+    #: Role of the respondent.
+    role = models.ForeignKey(
+        'surveys.Role',
+        verbose_name=_('role'),
+        related_name='respondents',
+        related_query_name='respondent',
+        blank=True,
+        null=True,
+        on_delete=models.SET_NULL
+    )
+
+    #: Hierarchy of the respondent in data flow.
     hierarchy = models.ForeignKey(
         'surveys.DataflowHierarchy',
         verbose_name=_('hierarchy'),
