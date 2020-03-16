@@ -129,6 +129,11 @@ class BaseDatasetResponseUpdateView(PageMixin, RespondentSurveyMixin, ConsentChe
 
         return super().dispatch(*args, **kwargs)
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['survey'] = self.survey
+        return kwargs
+
     def form_valid(self, form):
         self.survey_response.set_resume_path(self.request.get_full_path())
         return super().form_valid(form)
@@ -149,9 +154,12 @@ class DatasetResponseUpdateFrequencyView(BaseDatasetResponseUpdateView):
             return super().get_object(queryset)
 
     def get_back_url_path(self):
-        if self.object.is_first_in_response():
+        _previous = self.object.get_previous_in_response()
+        _previous = self.object.get_previous_in_response()
+        if _previous:
+            return reverse('responses:dataset-response-update-received', kwargs={'pk': _previous.pk})
+        else:
             return reverse('responses:dataset-response-list-create', kwargs={'pk': self.survey_response.pk})
-        return super().get_back_url_path()
 
     def get_success_url(self):
         topic_response = self.object.topic_responses.first()
