@@ -178,7 +178,7 @@ class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, 
         https://docs.djangoproject.com/en/3.0/ref/class-based-views/mixins-editing/#django.views.generic.edit.FormMixin.get_form_kwargs
         """
         kwargs = super().get_form_kwargs()
-        kwargs['project'] = self.survey.project
+        kwargs['survey'] = self.survey
         return kwargs
 
     def get_page_title(self):

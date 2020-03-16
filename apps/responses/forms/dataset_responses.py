@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from apps.surveys.models import Role, Topic
+from apps.surveys.models import DatasetFrequency, Role, Topic
 
 from ..models import (DatasetResponse, DatasetTopicReceived, DatasetTopicResponse, DatasetTopicShared,
                       DatasetTopicStorageAccess)
@@ -47,6 +47,8 @@ class DatasetResponseForm(forms.ModelForm):
             self.fields['dataset_frequency'].queryset = survey.dataset_frequencies.all()
         elif self.instance:
             self.fields['dataset_frequency'].queryset = self.instance.response.survey.dataset_frequencies.all()
+        else:
+            self.fields['dataset_frequency'].queryset = DatasetFrequency.objects.none()
 
 
 class DatasetResponseFrequencyForm(DatasetResponseForm):
@@ -56,7 +58,7 @@ class DatasetResponseFrequencyForm(DatasetResponseForm):
         fields = ['dataset_frequency']
 
     def __init__(self, survey=None, survey_response=None, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(survey=survey, *args, **kwargs)
         if self.instance:
             self.fields['dataset_frequency'].label = _(
                 'How often do you produce, access or share information '
@@ -103,7 +105,7 @@ class DatasetTopicStorageAccessForm(forms.ModelForm):
         model = DatasetTopicStorageAccess
         fields = ['selected', 'storage', 'access']
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, survey=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
         self.storage_name = None
@@ -114,6 +116,8 @@ class DatasetTopicStorageAccessForm(forms.ModelForm):
                 self.storage_name = storage.name
 
         self.fields['access'].required = False
+        self.fields['storage'].queryset = survey.dataset_storages.all()
+        self.fields['access'].queryset = survey.dataset_access.all()
 
     def clean(self):
         super().clean()

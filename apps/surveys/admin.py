@@ -73,22 +73,25 @@ class DatasetAdmin(CreatorAdmin):
 
 @admin.register(DatasetStorage)
 class DatasetStorageAdmin(admin.ModelAdmin):
-    list_display = ['pk', 'name']
+    list_display = ['pk', 'name', 'survey']
     list_display_links = ['pk', 'name']
+    list_select_related = ['survey']
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
 
 
 @admin.register(DatasetAccess)
 class DatasetAccessAdmin(admin.ModelAdmin):
-    list_display = ['pk', 'name']
+    list_display = ['pk', 'name', 'survey']
     list_display_links = ['pk', 'name']
+    list_select_related = ['survey']
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
 
 
 @admin.register(DatasetFrequency)
 class DatasetFrequencyAdmin(admin.ModelAdmin):
-    list_display = ['pk', 'name']
+    list_display = ['pk', 'name', 'survey']
     list_display_links = ['pk', 'name']
+    list_select_related = ['survey']
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
 
 
