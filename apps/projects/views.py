@@ -2,7 +2,8 @@ from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.views.generic.list import ListView
+
+from django_filters.views import FilterView
 
 from apps.surveys.models import Survey
 from core.mixins import PageMixin
@@ -13,7 +14,7 @@ from .mixins import ProjectCreatorMixin, ProjectFacilitatorMixin
 from .models import Project
 
 
-class ProjectListView(ProjectFacilitatorMixin, PageMixin, ListView):
+class ProjectListView(ProjectFacilitatorMixin, PageMixin, FilterView):
     """
     List projects view.
 
