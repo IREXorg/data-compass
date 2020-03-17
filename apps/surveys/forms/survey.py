@@ -70,7 +70,8 @@ class SurveyEditStepOneForm(ModelForm):
         model = Survey
         fields = [
             'allow_respondent_hierarchy_levels', 'dont_link_hierarchy_levels',
-            'login_required', 'respondent_can_aggregate', 'respondent_can_invite'
+            'default_hierarchy', 'login_required', 'respondent_can_aggregate',
+            'respondent_can_invite'
         ]
         widgets = {
             'allow_respondent_hierarchy_levels': forms.RadioSelect(),
@@ -82,6 +83,7 @@ class SurveyEditStepOneForm(ModelForm):
         labels = {
             'allow_respondent_hierarchy_levels': _('Allow respondents to add to Lists?'),
             'dont_link_hierarchy_levels': _('Do not link respondents with system hierarchy levels?'),
+            'default_hierarchy': _('Apply one system hierarchy level to all respondents'),
             'login_required': _('Do you want the survey to be taken by invited users only?'),
             'respondent_can_aggregate': _(
                 "Do you want repondents to see visualizations or aggregates "
