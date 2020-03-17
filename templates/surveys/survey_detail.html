@@ -48,10 +48,10 @@
       <p>{% trans 'What would you like to do with the survey' %}</p>
     </div>
     <div class="btn-list mt-5">
-      {# TODO: urls; unpublish, publish, duplicate, report, preview #}
+      {# TODO: urls; publish #}
       <a href="{% url 'surveys:survey-edit-start' survey.pk %}" class="btn btn-primary">{% trans 'Edit Survey' %}</a>
       {% if survey.is_active %}
-      <a href="#" class="btn btn-secondary">{% trans 'Unpublish Survey' %}</a>
+      <a href="{% url 'surveys:survey-unpublish' survey.pk %}" class="btn btn-secondary">{% trans 'Unpublish Survey' %}</a>
       {% else %}
       <a href="#" class="btn btn-success">{% trans 'Publish Survey' %}</a>
       {% endif %}

@@ -10,7 +10,8 @@ from core.mixins import PageTitleMixin
 
 from ..filters import SurveyListFilter
 from ..forms import (SurveyCreateForm, SurveyEditStepFiveForm, SurveyEditStepFourForm, SurveyEditStepOneForm,
-                     SurveyEditStepSixForm, SurveyEditStepThreeForm, SurveyEditStepTwoForm, SurveyUpdateForm)
+                     SurveyEditStepSixForm, SurveyEditStepThreeForm, SurveyEditStepTwoForm, SurveyUnpublishForm,
+                     SurveyUpdateForm)
 from ..mixins import SurveyCreatorMixin, SurveyDetailMixin
 from ..models import Survey
 
@@ -163,6 +164,43 @@ class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
     template_name = 'surveys/survey_delete.html'
     context_object_name = 'survey'
     model = Survey
+
+    def get_success_url(self):
+        return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
+
+
+class SurveyUnpublishView(LoginRequiredMixin, PageTitleMixin, UpdateView):
+    """
+    Unpublish survey details
+
+    Allow current signin user to unpublish existing survey and
+    redirect to project survey list page.
+
+    **Example request**:
+
+    .. code-block::
+
+        DELETE  /surveys/1234567890/unpublish
+    """
+
+    # Translators: This is survey unpublish page title
+    page_title = _('Unpublish a survey')
+    template_name = 'surveys/survey_unpublish.html'
+    context_object_name = 'survey'
+    model = Survey
+    form_class = SurveyUnpublishForm
+
+    # def get_form_kwargs(self):
+    #     """
+    #     Set is_active to false to form class initialization arguments
+    #     """
+    #     form_kwargs = super().get_form_kwargs()
+    #     form_kwargs['is_active'] = False
+    #     return form_kwargs
+
+    def form_valid(self, form):
+        form.instance.is_active = False
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})

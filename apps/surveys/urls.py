@@ -10,6 +10,7 @@ urlpatterns = [
     path('<int:pk>/', views.SurveyDetailView.as_view(), name='survey-detail'),
     path('<int:pk>/update/', views.SurveyUpdateView.as_view(), name='survey-update'),
     path('<int:pk>/delete/', views.SurveyDeleteView.as_view(), name='survey-delete'),
+    path('<int:pk>/unpublish/', views.SurveyUnpublishView.as_view(), name='survey-unpublish'),
     path('<int:pk>/edit-start/', views.SurveyEditStartView.as_view(), name='survey-edit-start'),
     path('<int:pk>/edit-step-one/', views.SurveyEditStepOneView.as_view(), name='survey-edit-step-one'),
     path('<int:pk>/edit-step-two/', views.SurveyEditStepTwoView.as_view(), name='survey-edit-step-two'),
