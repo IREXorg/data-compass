@@ -1,3 +1,4 @@
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
@@ -39,7 +40,7 @@ class ProjectListView(ProjectFacilitatorMixin, PageMixin, FilterView):
     paginate_by = 10
 
 
-class ProjectCreateView(ProjectFacilitatorMixin, ProjectCreatorMixin, PageMixin, CreateView):
+class ProjectCreateView(SuccessMessageMixin, ProjectFacilitatorMixin, ProjectCreatorMixin, PageMixin, CreateView):
     """
     Create project view.
 
@@ -59,6 +60,7 @@ class ProjectCreateView(ProjectFacilitatorMixin, ProjectCreatorMixin, PageMixin,
     context_object_name = 'project'
     model = Project
     form_class = ProjectCreateForm
+    success_message = _('Project was created successfully')
 
     def get_success_url(self):
         """
@@ -105,7 +107,7 @@ class ProjectDetailView(ProjectFacilitatorMixin, PageMixin, DetailView):
         return self.object.name
 
 
-class ProjectUpdateView(ProjectFacilitatorMixin, PageMixin, UpdateView):
+class ProjectUpdateView(SuccessMessageMixin, ProjectFacilitatorMixin, PageMixin, UpdateView):
     """
     Update project details view.
 
@@ -126,6 +128,7 @@ class ProjectUpdateView(ProjectFacilitatorMixin, PageMixin, UpdateView):
     model = Project
     form_class = ProjectUpdateForm
     success_url = reverse('projects:project-list')
+    success_message = _('Project was updated successfully')
 
     def get_form_kwargs(self):
         """
@@ -141,7 +144,7 @@ class ProjectUpdateView(ProjectFacilitatorMixin, PageMixin, UpdateView):
         return context
 
 
-class ProjectDeleteView(ProjectFacilitatorMixin, PageMixin, DeleteView):
+class ProjectDeleteView(SuccessMessageMixin, ProjectFacilitatorMixin, PageMixin, DeleteView):
     """
     Delete project details
 
@@ -160,4 +163,5 @@ class ProjectDeleteView(ProjectFacilitatorMixin, PageMixin, DeleteView):
     template_name = 'projects/project_delete.html'
     context_object_name = 'project'
     model = Project
+    success_message = _('Project was deleted successfully')
     success_url = reverse('projects:project-list')
