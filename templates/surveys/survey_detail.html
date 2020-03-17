@@ -55,7 +55,7 @@
       {% else %}
       <a href="{% url 'surveys:survey-publish' survey.pk %}" class="btn btn-success">{% trans 'Publish Survey' %}</a>
       {% endif %}
-      <a href="{% url 'surveys:survey-delete' survey.pk %}" class="btn btn-danger">{% trans 'Delete Survey' %}</a>
+      <a href="{% url 'surveys:survey-delete' survey.pk %}" class="btn btn-warning">{% trans 'Delete Survey' %}</a>
     </div>
   </div>
 </div>
