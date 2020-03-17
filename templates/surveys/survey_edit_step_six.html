@@ -45,8 +45,12 @@
 <div class="row">
   <div class="col">
     <div class="text-wrap">
-      <p>{% trans 'This survey is part of' %} {{survey.project.name}} project. {% trans 'More detail about it are written heres' %}. {% trans 'Use the buttons in the sidebar to change version.' %}</p>
-      <p>{% trans 'Complete the fields below in English to configure your survey for your audience. Once complete this fields, you will be asked to translate terms to your Survey language.' %}</p>
+      <p>
+        {% trans 'This survey is part of' %} {{survey.project.name}}. {% trans 'You can edit its information' %} <a href="{% url 'surveys:survey-update' survey.pk %}">{% trans 'here' %}.</a>
+      </p>
+      <p>
+        {% trans 'Your research question is:' %} {{ survey.research_question }}
+      </p>
     </div>
   </div>
 </div>
@@ -55,7 +59,7 @@
     <a href="{% url 'surveys:survey-edit-step-five' survey.pk %}" class="btn btn-light btn-sm btn-icon" aria-label="Back">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="15 18 9 12 15 6"></polyline></svg>
     </a>
-    <p class="h2 pt-1 ml-3 mr-3">6. {% trans 'Additional information?' %}</p>
+    <p class="h2 pt-1 ml-3 mr-3">6. {% trans 'Additional information' %}</p>
     <a href="{% url 'surveys:survey-edit-finish' survey.pk %}" class="btn btn-light btn-sm btn-icon" aria-label="Next">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="9 18 15 12 9 6"></polyline></svg>
     </a>
@@ -88,7 +92,7 @@
                 <a href="{% url 'surveys:survey-update-question' question.pk %}?_popup=1" class="btn btn-light btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Edit Question' %}" title="{% trans 'Edit Question' %}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                 </a>
-                <a href="{% url 'surveys:survey-delete-question' question.pk %}?_popup=1" class="btn btn-danger btn-sm btn-icon related-widget-wrapper-link change-related" aria-label="{% trans 'Delete Question' %}" title="{% trans 'Delete Question' %}" id="id_delete_question_{{ question.pk }}_">
+                <a href="{% url 'surveys:survey-delete-question' question.pk %}?_popup=1" class="btn btn-warning btn-sm btn-icon related-widget-wrapper-link change-related" aria-label="{% trans 'Delete Question' %}" title="{% trans 'Delete Question' %}" id="id_delete_question_{{ question.pk }}_">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                 </a>
               </td>
@@ -134,7 +138,7 @@
                 <a href="{% url 'surveys:survey-update-logo' logo.pk %}?_popup=1" class="btn btn-light btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Edit Logo' %}" title="{% trans 'Edit Logo' %}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                 </a>
-                <a href="{% url 'surveys:survey-delete-logo' logo.pk %}?_popup=1" class="btn btn-danger btn-sm btn-icon related-widget-wrapper-link change-related" aria-label="{% trans 'Delete Logo' %}" title="{% trans 'Delete Logo' %}" id="id_delete_logo_{{ logo.pk }}_">
+                <a href="{% url 'surveys:survey-delete-logo' logo.pk %}?_popup=1" class="btn btn-warning btn-sm btn-icon related-widget-wrapper-link change-related" aria-label="{% trans 'Delete Logo' %}" title="{% trans 'Delete Logo' %}" id="id_delete_logo_{{ logo.pk }}_">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                 </a>
               </td>

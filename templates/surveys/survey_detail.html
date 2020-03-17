@@ -44,18 +44,20 @@
 <div class="row">
   <div class="col">
     <div class="text-wrap">
-      <p>{% trans 'This survey is part of' %} {{survey.project.name}} project. {% trans 'More detail about it are written heres' %}.</p>
-      <p>{% trans 'What would you like to do with the survey' %}</p>
+      <p>{% trans 'This survey is part of' %} {{survey.project.name}} project. {% trans "Here's the description:" %}</p>
+      <p>{{ survey.description }}</p>
+      <p>{% trans 'Please select an option:' %}</p>
     </div>
     <div class="btn-list mt-5">
       {# TODO: urls; publish #}
       <a href="{% url 'surveys:survey-edit-start' survey.pk %}" class="btn btn-primary">{% trans 'Edit Survey' %}</a>
       {% if survey.is_active %}
       <a href="{% url 'surveys:survey-unpublish' survey.pk %}" class="btn btn-secondary">{% trans 'Unpublish Survey' %}</a>
+      <a href="{% url 'respondents:respondent-list' %}?survey={{survey.pk}}" class="btn btn-info">{% trans 'Share Survey' %}</a>
       {% else %}
       <a href="{% url 'surveys:survey-publish' survey.pk %}" class="btn btn-success">{% trans 'Publish Survey' %}</a>
       {% endif %}
-      <a href="{% url 'surveys:survey-delete' survey.pk %}" class="btn btn-danger">{% trans 'Delete Survey' %}</a>
+      <a href="{% url 'surveys:survey-delete' survey.pk %}" class="btn btn-warning">{% trans 'Delete Survey' %}</a>
     </div>
   </div>
 </div>

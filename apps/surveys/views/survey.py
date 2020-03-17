@@ -247,6 +247,9 @@ class SurveyEditStartView(LoginRequiredMixin, PageTitleMixin, DetailView):
     context_object_name = 'survey'
     model = Survey
 
+    def get_page_title(self):
+        return _('Edit') +' '+ self.object.name
+
 
 class SurveyEditStepOneView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
     """
@@ -268,6 +271,9 @@ class SurveyEditStepOneView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetail
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyEditStepOneForm
+
+    def get_page_title(self):
+        return _('Edit') +' '+ self.object.name
 
     def get_success_url(self):
         return reverse('surveys:survey-edit-step-two', kwargs={'pk': self.object.pk})
@@ -294,6 +300,9 @@ class SurveyEditStepTwoView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetail
     model = Survey
     form_class = SurveyEditStepTwoForm
 
+    def get_page_title(self):
+        return _('Edit') +' '+ self.object.name
+
     def get_success_url(self):
         return reverse('surveys:survey-edit-step-three', kwargs={'pk': self.object.pk})
 
@@ -318,6 +327,9 @@ class SurveyEditStepThreeView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDeta
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyEditStepThreeForm
+
+    def get_page_title(self):
+        return _('Edit') +' '+ self.object.name
 
     def get_success_url(self):
         return reverse('surveys:survey-edit-step-four', kwargs={'pk': self.object.pk})
@@ -344,6 +356,9 @@ class SurveyEditStepFourView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetai
     model = Survey
     form_class = SurveyEditStepFourForm
 
+    def get_page_title(self):
+        return _('Edit') +' '+ self.object.name
+
     def get_success_url(self):
         return reverse('surveys:survey-edit-step-five', kwargs={'pk': self.object.pk})
 
@@ -368,6 +383,9 @@ class SurveyEditStepFiveView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetai
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyEditStepFiveForm
+
+    def get_page_title(self):
+        return _('Edit') +' '+ self.object.name
 
     def get_success_url(self):
         return reverse('surveys:survey-edit-step-six', kwargs={'pk': self.object.pk})
@@ -394,6 +412,9 @@ class SurveyEditStepSixView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetail
     model = Survey
     form_class = SurveyEditStepSixForm
 
+    def get_page_title(self):
+        return _('Edit') +' '+ self.object.name
+
     def get_success_url(self):
         return reverse('surveys:survey-edit-finish', kwargs={'pk': self.object.pk})
 
@@ -416,3 +437,6 @@ class SurveyEditFinishView(LoginRequiredMixin, PageTitleMixin, DetailView):
     template_name = 'surveys/survey_edit_finish.html'
     context_object_name = 'survey'
     model = Survey
+
+    def get_page_title(self):
+        return _('Edit') +' '+ self.object.name

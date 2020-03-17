@@ -72,8 +72,7 @@ class Survey(TimeStampedModel):
 
     #: Human readable, brief details about survey.
     description = models.TextField(
-        _('description'),
-        blank=True
+        _('description')
     )
 
     #: Human readable, survey alternative name for respondents.
@@ -99,6 +98,9 @@ class Survey(TimeStampedModel):
             max_length=5,
             choices=settings.LANGUAGES,
             ),
+        help_text=_('By default, all surveys have an English version. '
+                    'If your survey will be in other languages, select or '
+                    'add them here. You will provide translations later.'),
         verbose_name=_('languages'),
         blank=False
     )
@@ -149,7 +151,7 @@ class Survey(TimeStampedModel):
     login_required = models.BooleanField(
         _('login required'),
         help_text=_("If no, they won't be able to save and return to their "
-                    "results, or view previous results."),
+                    "responses, or view previous responses."),
         blank=True,
         default=True,
         choices=YES_NO_CHOICES
@@ -205,7 +207,7 @@ class Survey(TimeStampedModel):
     #: Flag whether respondents can add their own datasets.
     allow_respondent_datasets = models.BooleanField(
         _('allow respondent datasets'),
-        help_text=_('If Yes, respondents will be able to add their own datasets.'),
+        help_text=_('If Yes, respondents will be able to add their own datasets. This is not recommended.'),
         blank=True,
         default=False,
         choices=YES_NO_CHOICES

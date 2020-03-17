@@ -45,8 +45,12 @@
 <div class="row">
   <div class="col">
     <div class="text-wrap">
-      <p>{% trans 'This survey is part of' %} {{survey.project.name}} project. {% trans 'More detail about it are written heres' %}. {% trans 'Use the buttons in the sidebar to change version.' %}</p>
-      <p>{% trans 'Complete the fields below in English to configure your survey for your audience. Once complete this fields, you will be asked to translate terms to your Survey language.' %}</p>
+      <p>
+        {% trans 'This survey is part of' %} {{survey.project.name}}. {% trans 'You can edit its information' %} <a href="{% url 'surveys:survey-update' survey.pk %}">{% trans 'here' %}.</a>
+      </p>
+      <p>
+        {% trans 'Your research question is:' %} {{ survey.research_question }}
+      </p>
     </div>
   </div>
 </div>
@@ -68,8 +72,13 @@
       {# Start: Survey entities crud #}
       <div class="form-group">
         <label for="id_entities">
-          {% trans 'What entities do you want respondents to be able to select when they take survey?. Entities are people, organizations, or teams--any person or group who might have or share information.' %}
+          {% trans 'What entities do you want respondents to be able to select when they take survey?' %}
         </label>
+        <div>
+          <small id="hint_id_entities" class="form-text text-muted">
+            {% trans 'Entities are people, organizations, or teams—any person or group who might have, receive, or share information.' %}
+          </small>
+        </div>
         <table class="table table-borderless table-nowrap">
           <tbody>
             {% if entities|length > 0 %}
@@ -84,7 +93,7 @@
                 <a href="{% url 'surveys:survey-update-entity' entity.pk %}?_popup=1" class="btn btn-light btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Edit Entity' %}" title="{% trans 'Edit Entity' %}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
                 </a>
-                <a href="{% url 'surveys:survey-delete-entity' entity.pk %}?_popup=1" class="btn btn-danger btn-sm btn-icon related-widget-wrapper-link change-related" aria-label="{% trans 'Delete Entity' %}" title="{% trans 'Delete Entity' %}" id="id_delete_entity_{{ entity.pk }}_">
+                <a href="{% url 'surveys:survey-delete-entity' entity.pk %}?_popup=1" class="btn btn-warning btn-sm btn-icon related-widget-wrapper-link change-related" aria-label="{% trans 'Delete Entity' %}" title="{% trans 'Delete Entity' %}" id="id_delete_entity_{{ entity.pk }}_">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
                 </a>
               </td>
