@@ -22,7 +22,7 @@
     {# Start: Page title #}
     <div class="col">
       <h1 class="page-title">
-        {% block page_title %}{{ survey.name }}{% endblock %}
+        {% block page_title %}{% trans 'Edit' %} {{ survey.name }}{% endblock %}
       </h1>
     </div>
     {# End: Page title #}
@@ -49,7 +49,7 @@
       <p>{% trans 'Complete the fields below in English to configure your survey for your audience. Once complete this fields, you will be asked to translate terms to your Survey language.' %}</p>
     </div>
     <div class="btn-list mt-6 justify-content-center">
-      <a href="{% url 'surveys:survey-edit-step-one' survey.pk %}" class="btn btn-primary">{% trans 'Start Edit Survey' %}</a>
+      <a href="{% url 'surveys:survey-edit-step-one' survey.pk %}" class="btn btn-primary">{% trans 'Start editing survey' %}</a>
     </div>
   </div>
 </div>
