@@ -45,8 +45,12 @@
 <div class="row">
   <div class="col">
     <div class="text-wrap">
-      <p>{% trans 'This survey is part of' %} {{survey.project.name}} project. {% trans 'More detail about it are written heres' %}. {% trans 'Use the buttons in the sidebar to change version.' %}</p>
-      <p>{% trans 'Complete the fields below in English to configure your survey for your audience. Once complete this fields, you will be asked to translate terms to your Survey language.' %}</p>
+      <p>
+        {% trans 'This survey is part of' %} {{survey.project.name}}. {% trans 'You can edit its information' %} <a href="{% url 'surveys:survey-update' survey.pk %}">{% trans 'here' %}.</a>
+      </p>
+      <p>
+        {% trans 'Your research question is:' %} {{ survey.research_question }}
+      </p>
     </div>
   </div>
 </div>
