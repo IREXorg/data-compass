@@ -7,6 +7,21 @@ from dateutil.parser import parse as parse_datetime
 
 from apps.surveys.models import Survey
 from core.exceptions import NotAuthenticated
+from core.mixins import FacilitatorMixin
+
+
+class ResponseFacilitatorMixin(FacilitatorMixin):
+    """
+    CBV mixin which makes sure user is a facilitator and limits response
+    queryset to only objects where the user is among the respective
+    project facilitators.
+    """
+
+    def get_queryset(self):
+        """
+        Returns queryset of responses where user is among facilitators.
+        """
+        return self.model.objects.filter(survey__project__facilitators=self.request.user)
 
 
 class ConsentCheckMixin:

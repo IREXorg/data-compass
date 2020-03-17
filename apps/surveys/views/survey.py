@@ -13,11 +13,11 @@ from ..filters import SurveyListFilter
 from ..forms import (SurveyCreateForm, SurveyEditStepFiveForm, SurveyEditStepFourForm, SurveyEditStepOneForm,
                      SurveyEditStepSixForm, SurveyEditStepThreeForm, SurveyEditStepTwoForm, SurveyPublishForm,
                      SurveyUnpublishForm, SurveyUpdateForm)
-from ..mixins import SurveyCreatorMixin, SurveyDetailMixin
+from ..mixins import SurveyCreatorMixin, SurveyDetailMixin, SurveyFacilitatorMixin
 from ..models import Survey
 
 
-class SurveyListView(LoginRequiredMixin, PageTitleMixin, ListView):
+class SurveyListView(SurveyFacilitatorMixin, PageTitleMixin, ListView):
     """
     List surveys view.
 
@@ -102,7 +102,7 @@ class SurveyCreateView(SuccessMessageMixin, LoginRequiredMixin, SurveyCreatorMix
         return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
 
 
-class SurveyDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
+class SurveyDetailView(SurveyFacilitatorMixin, PageTitleMixin, DetailView):
     """
     View survey details view.
 
@@ -122,7 +122,7 @@ class SurveyDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
     model = Survey
 
 
-class SurveyUpdateView(SuccessMessageMixin, LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
+class SurveyUpdateView(SuccessMessageMixin, SurveyFacilitatorMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
     """
     Update survey details view.
 
@@ -148,7 +148,7 @@ class SurveyUpdateView(SuccessMessageMixin, LoginRequiredMixin, SurveyCreatorMix
         return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
 
 
-class SurveyDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin, DeleteView):
+class SurveyDeleteView(SuccessMessageMixin, SurveyFacilitatorMixin, PageTitleMixin, DeleteView):
     """
     Delete survey details
 
@@ -173,7 +173,7 @@ class SurveyDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin, 
         return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
 
 
-class SurveyUnpublishView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin, UpdateView):
+class SurveyUnpublishView(SuccessMessageMixin, SurveyFacilitatorMixin, PageTitleMixin, UpdateView):
     """
     Unpublish survey details
 
