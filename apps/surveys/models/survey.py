@@ -98,6 +98,9 @@ class Survey(TimeStampedModel):
             max_length=5,
             choices=settings.LANGUAGES,
             ),
+        help_text=_('By default, all surveys have an English version. '
+                    'If your survey will be in other languages, select or '
+                    'add them here. You will provide translations later.'),
         verbose_name=_('languages'),
         blank=False
     )
