@@ -43,7 +43,7 @@
     </div>
 
     <div class="col-sm-auto pr-3">
-      <a id="export-csv" class="btn btn-warning btn-sm mx-3" href="#">{% trans 'Export table' %}</a>
+      <a class="btn btn-warning btn-sm btn-export-csv mx-3" href="#">{% trans 'Export table' %}</a>
 
       <span class="text-muted">
         {% trans 'Respondents found' %}:
@@ -87,14 +87,5 @@
   {# FIXME: move this to js files #}
   <script>
     $('#div_id_q').hide();
-
-    $('#export-csv').click(function() {
-      var form = '#master-filter'
-      $("<input />").attr("type", "hidden")
-        .attr("name", "format")
-        .attr("value", "csv")
-        .appendTo(form);
-      $(form).submit();
-    });
   </script>
 {% endblock extra_js %}
