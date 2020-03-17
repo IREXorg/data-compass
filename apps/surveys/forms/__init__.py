@@ -1,11 +1,9 @@
-from .dataset_response import *  # noqa
-from .response import *  # noqa
+from .dataset import *  # noqa
+from .dataset_storage import *  # noqa
+from .entity import *  # noqa
+from .logo import *  # noqa
+from .role import *  # noqa
 from .survey import *  # noqa
-from .survey_dataset import *  # noqa
-from .survey_dataset_storage import *  # noqa
-from .survey_entity import *  # noqa
-from .survey_logo import *  # noqa
 from .survey_question import *  # noqa
 from .survey_respondent import *  # noqa
-from .survey_role import *  # noqa
-from .survey_topic import *  # noqa
+from .topic import *  # noqa

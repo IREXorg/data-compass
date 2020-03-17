@@ -4,7 +4,7 @@
 {% load i18n %}
 {% load crispy_forms_tags %}
 
-{# Start: Breadcrumbs #}
+
 {% block breadcrumbs %}
   <ol class="breadcrumb" aria-label="breadcrumbs">
      <li class="breadcrumb-item">
@@ -16,10 +16,9 @@
       <a href="#">{{project.name}}</a>
      </li>
   </ol>
-{% endblock %}
-{# End: Breadcrumbs #}
+{% endblock breadcrumbs %}
 
-{# Start: Page content #}
+
 {% block content %}
 
   {# Start: Page info #}
@@ -27,7 +26,8 @@
     <div class="col">
       <p>
         {% blocktrans trimmed %}
-        This project contains {% endblocktrans %} {{ surveys.count }} {% blocktrans trimmed %} surveys. Select one you would like to edit from the list below, or create new one.
+        This project contains {% endblocktrans %} {{ surveys.count }} {% blocktrans trimmed %} surveys.
+        Select one you would like to edit from the list below, or create a new one.
         {% endblocktrans %}
       </p>
     </div>
@@ -38,19 +38,20 @@
   {% if surveys|length > 0 %}
     {# Start: Surveys list actions #}
     <div class="row my-4">
-      <div class="col">
+      <div class="col-md-8">
         <form>
           <div class="input-icon">
             <span class="input-icon-addon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <i class="fas fa-search"></i>
             </span>
-            <input type="search" class="form-control d-inline-block w-9 mr-3" placeholder="{% trans 'Search surveys…' %}"/>
+            <input type="search" class="form-control d-inline-block mr-3" placeholder="{% trans 'Search surveys…' %}"/>
           </div>
         </form>
       </div>
 
-      <div class="col-auto pr-3">
-        <a href="{% url 'projects:project-create-survey' project=project.pk %}" class="btn btn-warning ml-3 d-none d-sm-inline-block">
+      <div class="col pr-3">
+        <a href="{% url 'projects:project-create-survey' project=project.pk %}"
+           class="btn btn-success ml-3 d-none d-sm-inline-block float-md-right">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
             {% trans 'New Survey' %}
         </a>
@@ -72,7 +73,7 @@
     <div class="container text-center">
       <p class="h2 mb-3 mt-5">{{project.name}} {% trans 'project has no surveys.' %}</p>
       <p class="h4 text-muted font-weight-normal mb-5">{% trans 'Start by creating new survey.' %}</p>
-      <a href="{% url 'projects:project-create-survey' project=project.pk %}" class="btn btn-primary">
+      <a href="{% url 'projects:project-create-survey' project=project.pk %}" class="btn btn-success">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
          {% trans 'New Survey' %}
       </a>
@@ -80,5 +81,4 @@
   {% endif %}
   {# End: Empty Surveys state #}
 
-{% endblock %}
-{# End: Page content #}
+{% endblock content %}

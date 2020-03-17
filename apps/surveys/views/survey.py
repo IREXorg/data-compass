@@ -23,7 +23,7 @@ class SurveyListView(LoginRequiredMixin, PageTitleMixin, ListView):
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         GET  /surveys/
     """
@@ -49,13 +49,13 @@ class SurveyCreateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, C
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         POST  /surveys/create
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         POST  /projects/1234567890/create-survey
     """
@@ -107,7 +107,7 @@ class SurveyDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         GET  /surveys/1234567890
     """
@@ -153,7 +153,7 @@ class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         DELETE  /surveys/1234567890/delete
     """
@@ -176,7 +176,7 @@ class SurveyEditStartView(LoginRequiredMixin, PageTitleMixin, DetailView):
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         GET  /surveys/1234567890/edit-start
     """
@@ -346,7 +346,7 @@ class SurveyEditFinishView(LoginRequiredMixin, PageTitleMixin, DetailView):
 
     **Example request**:
 
-    .. code-block:: http
+    .. code-block::
 
         GET  /surveys/1234567890/edit-finish
     """

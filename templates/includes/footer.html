@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+
 
 <footer class="footer">
     <div class="container">
@@ -15,6 +17,11 @@
           </a>
         </div>
       </div>
-      <div class="text-center">Source code: <a href="https://github.com/IREXorg/data-compass" target='blank_'>here</a></div>
+      <div class="text-center smaller">
+        {% blocktrans trimmed %}
+        This software is available under an <a href="#">open source license</a>. Find the source code:
+        <a href="https://github.com/IREXorg/data-compass" target='blank_'>here</a>
+        {% endblocktrans %}
+      </div>
     </div>
 </footer>

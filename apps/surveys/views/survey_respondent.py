@@ -3,11 +3,12 @@ from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
+from apps.respondents.models import Respondent
 from core.mixins import PageTitleMixin, PopupDeleteMixin
 
 from ..forms import RespondentCreateForm, RespondentUpdateForm
 from ..mixins import BasePopupModelFormMixin, CreatorMixin
-from ..models import Respondent, Survey
+from ..models import Survey
 
 
 class RespondentCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, CreateView):

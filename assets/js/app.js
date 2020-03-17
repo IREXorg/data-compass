@@ -17,6 +17,7 @@ var select2 = require('select2');
 
 require('./related-objects.js');
 require('./popup-response.js');
+require('./export-utils.js');
 
 
 // initialize once dom ready
@@ -32,5 +33,8 @@ $(document).ready(function() {
   $('.dropdown-toggle').dropdown();
 
   // wire select2
-  select2(window.$);
+  // select2(window.$);
+  $("select:visible[name='country']").select2({theme: 'bootstrap4'});
 });
+
+

@@ -26,21 +26,21 @@
     </p>
 
     <div class="row my-4">
-      <div class="col">
+      <div class="col-md-8">
         <form>
           <div class="input-icon">
             <span class="input-icon-addon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <i class="fas fa-search"></i>
             </span>
-            <input type="search" class="form-control d-inline-block w-9 mr-3" placeholder="{% trans 'Search projects…' %}"/>
+            <input type="search" class="form-control d-inline-block mr-3" placeholder="{% trans 'Search projects…' %}"/>
           </div>
         </form>
       </div>
 
-      <div class="col-auto pr-3">
-        <a href="{% url 'projects:project-create' %}" class="btn btn-warning ml-3 d-none d-sm-inline-block">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-            {% trans 'New Project' %}
+      <div class="col pr-3">
+        <a href="{% url 'projects:project-create' %}" class="btn btn-success ml-3 d-none d-sm-inline-block float-md-right">
+          <i class="fas fa-plus"></i>
+          {% trans 'New Project' %}
         </a>
       </div>
     </div>

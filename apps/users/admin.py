@@ -6,8 +6,9 @@ from .models import Gender, User
 
 @admin.register(Gender)
 class GenderAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'name', 'code')
+    list_display = ('pk', 'name', 'code', 'is_primary')
     list_display_link = ('pk', 'name')
+    list_filter = ('is_primary',)
     readonly_fields = ('id', 'uuid', 'created_at', 'modified_at')
     prepopulated_fields = {'code': ('name',)}
 
