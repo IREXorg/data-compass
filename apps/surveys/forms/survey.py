@@ -109,8 +109,9 @@ class SurveyEditStepTwoForm(ModelForm):
         labels = {
             'allow_respondent_topics': _('Allow respondents to enter their own value here'),
             'respondent_topic_number': _(
-                'How many topics would you like Respondents to select?. '
-                'They will complete the entire survey for each topic.'
+                'What is the maximum number of topics you would like '
+                'Respondents to select? They will complete the entire '
+                'survey for each topic they select.'
             ),
         }
 
