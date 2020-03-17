@@ -84,7 +84,7 @@ class DatasetTopicResponseForm(forms.ModelForm):
 
         if self.instance.pk:
             self.fields['percieved_owner'].label = _(
-                'Who at %(hierarchy)s do you believe knows most '
+                'Who at %(hierarchy)s do you believe knows <u>the most</u> '
                 'about %(topic)s regarding %(dataset)s?'
             ) % {
                 'dataset': self.instance.dataset_response.dataset.name,
