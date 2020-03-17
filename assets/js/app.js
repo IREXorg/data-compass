@@ -37,8 +37,8 @@ $(document).ready(function() {
   $("select:visible[name='country']").select2({theme: 'bootstrap4'});
 
   // Alerts
-  $(".alert").fadeTo(2000, 500).slideUp(500, function(){
-      $(".alert").slideUp(500);
+  $(".page-messages .alert").fadeTo(2000, 500).slideUp(500, function(){
+      $(".page-messages .alert").slideUp(500);
   });
 });
 
