@@ -151,7 +151,7 @@ class Survey(TimeStampedModel):
     login_required = models.BooleanField(
         _('login required'),
         help_text=_("If no, they won't be able to save and return to their "
-                    "results, or view previous results."),
+                    "responses, or view previous responses."),
         blank=True,
         default=True,
         choices=YES_NO_CHOICES
