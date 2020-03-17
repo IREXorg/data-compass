@@ -26,13 +26,16 @@
     </p>
 
     <div class="row my-4">
-      <div class="col-md-8">
+      <div class="col-md-7">
         <form>
           <div class="input-icon">
             <span class="input-icon-addon">
               <i class="fas fa-search"></i>
             </span>
-            <input type="search" class="form-control d-inline-block mr-3" placeholder="{% trans 'Search projects…' %}"/>
+            <input type="search" name="q" value="{{ request.GET.q }}" class="form-control d-inline-block mr-3" placeholder="{% trans 'Search projects…' %}"/>
+            <span class="input-icon-addon">
+              <i class="fas fa-cancel"></i>
+            </span>
           </div>
         </form>
       </div>
@@ -42,6 +45,11 @@
           <i class="fas fa-plus"></i>
           {% trans 'New Project' %}
         </a>
+        {% if request.GET.q %}
+        <a href="{% url 'projects:project-list' %}" class="btn btn-warning">
+           {% trans 'Clear Search' %}
+        </a>
+        {% endif %}
       </div>
     </div>
 
@@ -60,10 +68,17 @@
       </p>
 
       <p class="h4 text-muted font-weight-normal mb-5">{% trans 'Start by creating new project.' %}</p>
-      <a href="{% url 'projects:project-create' %}" class="btn btn-primary">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
-         {% trans 'New Project' %}
-      </a>
+      <div>
+        <a href="{% url 'projects:project-create' %}" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+           {% trans 'New Project' %}
+        </a>
+        {% if request.GET.q %}
+          <a href="{% url 'projects:project-list' %}" class="btn btn-warning">
+             {% trans 'Clear Search' %}
+          </a>
+        {% endif %}
+      </div>
     </div>
   {% endif %}
   {# End: Empty Projects state #}

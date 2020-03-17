@@ -111,6 +111,40 @@ class Survey(TimeStampedModel):
         unique=True
     )
 
+    #: Flag whether respondents should not be linked with system hierachy levels.
+    dont_link_hierarchy_levels = models.BooleanField(
+        _('do not link respondents with system hierarchy levels'),
+        help_text=_('This can be easier in some contexts, but will limit aggregate or comparative analyses.'),
+        blank=True,
+        default=False,
+        choices=YES_NO_CHOICES
+    )
+
+    #: Flag whether respondents can add their own hierarchy level.
+    allow_respondent_hierarchy_levels = models.BooleanField(
+        _('allow respondent hierarchy levels'),
+        help_text=_("Respondents will select from the List you provided "
+                    "for each level. If they can't find theirs, they can "
+                    "add their own?"),
+        blank=True,
+        default=False,
+        choices=YES_NO_CHOICES
+    )
+
+    #: Default data flow hierarchy level to be applied to all respondents
+    #
+    #: This is applicable when user(`facilitator`) explicitly apply
+    #: one system hierarchy level to all respondents.
+    default_hierarchy = models.ForeignKey(
+        'surveys.DataflowHierarchy',
+        verbose_name=_('default hierarchy'),
+        related_name='default_hierarchies',
+        related_query_name='default_hierarchy',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+
     #: Flag whether survey respondents must login.
     login_required = models.BooleanField(
         _('login required'),
@@ -214,7 +248,7 @@ class Survey(TimeStampedModel):
         _('is active'),
         help_text=_('Is published'),
         blank=True,
-        default=True
+        default=True  # TODO: default to False
     )
 
     #: Gender used in various parts of the survey.

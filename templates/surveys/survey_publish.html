@@ -1,0 +1,35 @@
+{% extends 'surveys/base.html' %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{# Start: Breadcrumbs #}
+{% block breadcrumbs %}
+<ol class="breadcrumb" aria-label="breadcrumbs">
+   <li class="breadcrumb-item"><a href="{% url 'projects:project-list' %}">{% trans 'My Projects' %}</a></li>
+   <li class="breadcrumb-item"><a href="{% url 'projects:project-detail' survey.project.pk %}">{{survey.project.name}}</a></li>
+   <li class="breadcrumb-item active" aria-current="page"><a href="#">{{page_title}}</a></li>
+</ol>
+{% endblock %}
+{# End: Breadcrumbs #}
+
+{# Start: Page header #}
+{% block page_header %}
+<div class="page-header">&nbsp;</div>
+{% endblock %}
+{# End: Page header #}
+
+{# Start: Content #}
+{% block content %}
+<div class="container text-center">
+  <p class="h2 mb-3 mt-5">{% trans 'Publish a survey' %}</p>
+
+  <p class="h4 text-muted font-weight-normal mb-5">{% trans 'Are you sure you want to publish this survey?' %}</p>
+
+  <form method="POST" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      <button class="btn btn-success" type="submit">{% trans 'Publish Survey' %}</button>
+  </form>
+</div>
+{% endblock %}
+{# End: Content #}

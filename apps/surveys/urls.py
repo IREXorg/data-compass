@@ -10,6 +10,8 @@ urlpatterns = [
     path('<int:pk>/', views.SurveyDetailView.as_view(), name='survey-detail'),
     path('<int:pk>/update/', views.SurveyUpdateView.as_view(), name='survey-update'),
     path('<int:pk>/delete/', views.SurveyDeleteView.as_view(), name='survey-delete'),
+    path('<int:pk>/unpublish/', views.SurveyUnpublishView.as_view(), name='survey-unpublish'),
+    path('<int:pk>/publish/', views.SurveyPublishView.as_view(), name='survey-publish'),
     path('<int:pk>/edit-start/', views.SurveyEditStartView.as_view(), name='survey-edit-start'),
     path('<int:pk>/edit-step-one/', views.SurveyEditStepOneView.as_view(), name='survey-edit-step-one'),
     path('<int:pk>/edit-step-two/', views.SurveyEditStepTwoView.as_view(), name='survey-edit-step-two'),
@@ -18,6 +20,12 @@ urlpatterns = [
     path('<int:pk>/edit-step-five/', views.SurveyEditStepFiveView.as_view(), name='survey-edit-step-five'),
     path('<int:pk>/edit-step-six/', views.SurveyEditStepSixView.as_view(), name='survey-edit-step-six'),
     path('<int:pk>/edit-finish/', views.SurveyEditFinishView.as_view(), name='survey-edit-finish'),
+
+    # start: survey respondent paths
+    path('<int:survey_pk>/create-respondent/', views.RespondentCreateView.as_view(), name='survey-create-respondent'),
+    path('<int:pk>/delete-respondent/', views.RespondentDeleteView.as_view(), name='survey-delete-respondent'),
+    path('<int:pk>/update-respondent/', views.RespondentUpdateView.as_view(), name='survey-update-respondent'),
+    # end: survey respondent paths
 
     # start: survey role paths
     path('<int:survey_pk>/create-role/', views.RoleCreateView.as_view(), name='survey-create-role'),
@@ -60,6 +68,12 @@ urlpatterns = [
     path('<int:pk>/delete-entity/', views.EntityDeleteView.as_view(), name='survey-delete-entity'),
     path('<int:pk>/update-entity/', views.EntityUpdateView.as_view(), name='survey-update-entity'),
     # end: survey entity paths
+
+    # start: survey question paths
+    path('<int:survey_pk>/create-question/', views.QuestionCreateView.as_view(), name='survey-create-question'),
+    path('<int:pk>/delete-question/', views.QuestionDeleteView.as_view(), name='survey-delete-question'),
+    path('<int:pk>/update-question/', views.QuestionUpdateView.as_view(), name='survey-update-question'),
+    # end: survey question paths
 
     # start: survey logo paths
     path('<int:survey_pk>/create-logo/', views.LogoCreateView.as_view(), name='survey-create-logo'),
