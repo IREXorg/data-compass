@@ -52,6 +52,16 @@ class SurveyUnpublishForm(ModelForm):
         widgets = {}
 
 
+class SurveyPublishForm(ModelForm):
+    """
+    Basic Survey publish form
+    """
+    class Meta:
+        model = Survey
+        fields = []
+        widgets = {}
+
+
 class SurveyEditStepOneForm(ModelForm):
     """
     Survey edit step one form

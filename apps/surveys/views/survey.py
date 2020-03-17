@@ -10,8 +10,8 @@ from core.mixins import PageTitleMixin
 
 from ..filters import SurveyListFilter
 from ..forms import (SurveyCreateForm, SurveyEditStepFiveForm, SurveyEditStepFourForm, SurveyEditStepOneForm,
-                     SurveyEditStepSixForm, SurveyEditStepThreeForm, SurveyEditStepTwoForm, SurveyUnpublishForm,
-                     SurveyUpdateForm)
+                     SurveyEditStepSixForm, SurveyEditStepThreeForm, SurveyEditStepTwoForm, SurveyPublishForm,
+                     SurveyUnpublishForm, SurveyUpdateForm)
 from ..mixins import SurveyCreatorMixin, SurveyDetailMixin
 from ..models import Survey
 
@@ -190,16 +190,38 @@ class SurveyUnpublishView(LoginRequiredMixin, PageTitleMixin, UpdateView):
     model = Survey
     form_class = SurveyUnpublishForm
 
-    # def get_form_kwargs(self):
-    #     """
-    #     Set is_active to false to form class initialization arguments
-    #     """
-    #     form_kwargs = super().get_form_kwargs()
-    #     form_kwargs['is_active'] = False
-    #     return form_kwargs
-
     def form_valid(self, form):
         form.instance.is_active = False
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
+
+
+class SurveyPublishView(LoginRequiredMixin, PageTitleMixin, UpdateView):
+    """
+    Publish survey details
+
+    Allow current signin user to publish existing survey and
+    redirect to project survey list page.
+
+    **Example request**:
+
+    .. code-block::
+
+        DELETE  /surveys/1234567890/publish
+    """
+
+    # Translators: This is survey publish page title
+    page_title = _('Publish a survey')
+    template_name = 'surveys/survey_publish.html'
+    context_object_name = 'survey'
+    model = Survey
+    form_class = SurveyPublishForm
+
+    def form_valid(self, form):
+        # TODO: check all required conditions and redirect accordingly
+        form.instance.is_active = True
         return super().form_valid(form)
 
     def get_success_url(self):
