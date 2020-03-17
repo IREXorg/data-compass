@@ -217,6 +217,15 @@ class Survey(TimeStampedModel):
         default=True  # TODO: default to False
     )
 
+    #: Flag whether respondents should not be linked with system hierachy levels.
+    dont_link_hierarchy_levels = models.BooleanField(
+        _('do not link respondents with system hierarchy levels'),
+        help_text=_('This can be easier in some contexts, but will limit aggregate or comparative analyses.'),
+        blank=True,
+        default=False,
+        choices=YES_NO_CHOICES
+    )
+
     #: Gender used in various parts of the survey.
     #
     #: ``post_save`` signal is used to automatially add primary genders on new

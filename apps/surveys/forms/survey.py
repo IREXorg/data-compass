@@ -68,13 +68,15 @@ class SurveyEditStepOneForm(ModelForm):
     """
     class Meta:
         model = Survey
-        fields = ['login_required', 'respondent_can_aggregate', 'respondent_can_invite']
+        fields = ['dont_link_hierarchy_levels', 'login_required', 'respondent_can_aggregate', 'respondent_can_invite']
         widgets = {
+            'dont_link_hierarchy_levels': forms.RadioSelect(),
             'login_required': forms.RadioSelect(),
             'respondent_can_aggregate': forms.RadioSelect(),
             'respondent_can_invite': forms.RadioSelect()
         }
         labels = {
+            'dont_link_hierarchy_levels': _('Do not link respondents with system hierarchy levels?'),
             'login_required': _('Do you want the survey to be taken by invited users only?'),
             'respondent_can_aggregate': _(
                 "Do you want repondents to see visualizations or aggregates "
