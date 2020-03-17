@@ -3,11 +3,7 @@
 {% load i18n %}
 
 {% block form_intro %}
-<div class="mb-4">
-  {% blocktrans trimmed with dataset_name=dataset.name %}
-  Save form and complete the survey.
-  {% endblocktrans %}
-</div>
+{{ survey_response.survey.closing_text }}
 {% endblock form_intro %}
 
 
@@ -18,7 +14,7 @@
     </a>
 
     <button class="btn btn-success float-right" type="submit">
-      {% trans 'Save and complete your response' %} »
+      {% trans 'Submit your response' %} »
     </button>
   </div>
 {% endblock form_buttons %}

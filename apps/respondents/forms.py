@@ -9,7 +9,9 @@ from .models import Respondent
 class RespondentConsentForm(forms.Form):
     consented = forms.BooleanField(
         label=_('I have read and understand the information above.'),
-        required=True
+        required=True,
+        initial=True,
+        widget=forms.HiddenInput()
     )
 
     def clean_consented(self):

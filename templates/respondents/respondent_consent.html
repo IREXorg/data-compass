@@ -5,8 +5,8 @@
 
 
 {% block content %}
-  <div class="overflow-auto bg-light border col-md-8 mb-3" style="height: 200px">
-    {{ survey.description|linebreaks }}
+  <div class="overflow-auto bg-light border col-md-8 mb-3">
+    {{ survey.introduction_text|linebreaks }}
   </div>
 
   <div class="row no-gutters">
@@ -21,7 +21,7 @@
           </a>
 
           <button class="btn btn-success float-sm-right" type="submit">
-            {% trans 'Continue' %} »
+            {% trans 'Agree and continue' %} »
           </button>
         </div>
       </form>
