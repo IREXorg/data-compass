@@ -157,7 +157,7 @@ class SurveyEditStepFiveForm(ModelForm):
             'allow_respondent_storages': forms.RadioSelect(),
         }
         labels = {
-            'allow_respondent_storages': _('Allow users to enter their own value here'),
+            'allow_respondent_storages': _('Allow users to enter their own value here?'),
         }
 
 

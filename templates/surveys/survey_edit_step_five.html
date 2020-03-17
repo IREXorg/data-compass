@@ -67,8 +67,13 @@
       {# Start: Dataset Storages crud #}
       <div class="form-group">
         <label for="id_storages">
-          {% trans 'What information systems do you want respondents to be able to select when they take survey?. Information systems are places that store information.' %}
+          {% trans 'What information systems do you want respondents to be able to select when they take survey?' %}
         </label>
+        <div>
+          <small id="hint_id_entities" class="form-text text-muted">
+            {% trans 'Information systems are places that store information.' %}
+          </small>
+        </div>
         <table class="table table-borderless table-nowrap">
           <tbody>
             {% if dataset_storages|length > 0 %}
