@@ -207,7 +207,7 @@ class Survey(TimeStampedModel):
     #: Flag whether respondents can add their own datasets.
     allow_respondent_datasets = models.BooleanField(
         _('allow respondent datasets'),
-        help_text=_('If Yes, respondents will be able to add their own datasets.'),
+        help_text=_('If Yes, respondents will be able to add their own datasets. This is not recommended.'),
         blank=True,
         default=False,
         choices=YES_NO_CHOICES

@@ -127,7 +127,7 @@ class SurveyEditStepThreeForm(ModelForm):
             'allow_respondent_datasets': forms.RadioSelect(),
         }
         labels = {
-            'allow_respondent_datasets': _('Allow users to add their own options(not recommended)'),
+            'allow_respondent_datasets': _('Allow users to add their own options?'),
         }
 
 
