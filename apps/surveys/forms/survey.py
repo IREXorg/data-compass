@@ -107,7 +107,7 @@ class SurveyEditStepTwoForm(ModelForm):
             'allow_respondent_topics': forms.RadioSelect(),
         }
         labels = {
-            'allow_respondent_topics': _('Allow respondents to enter their own value here'),
+            'allow_respondent_topics': _('Allow respondents to enter their own value here?'),
             'respondent_topic_number': _(
                 'What is the maximum number of topics you would like '
                 'Respondents to select? They will complete the entire '
@@ -142,7 +142,7 @@ class SurveyEditStepFourForm(ModelForm):
             'allow_respondent_entities': forms.RadioSelect(),
         }
         labels = {
-            'allow_respondent_entities': _('Allow respondents to enter their own value here'),
+            'allow_respondent_entities': _('Allow respondents to enter their own value here?'),
         }
 
 

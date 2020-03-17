@@ -68,8 +68,13 @@
       {# Start: Survey entities crud #}
       <div class="form-group">
         <label for="id_entities">
-          {% trans 'What entities do you want respondents to be able to select when they take survey?. Entities are people, organizations, or teams--any person or group who might have or share information.' %}
+          {% trans 'What entities do you want respondents to be able to select when they take survey?' %}
         </label>
+        <div>
+          <small id="hint_id_entities" class="form-text text-muted">
+            {% trans 'Entities are people, organizations, or teams—any person or group who might have, receive, or share information.' %}
+          </small>
+        </div>
         <table class="table table-borderless table-nowrap">
           <tbody>
             {% if entities|length > 0 %}
