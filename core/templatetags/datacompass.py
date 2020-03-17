@@ -20,3 +20,19 @@ def bgclass(value):
     }
 
     return lookup.get(value, '')
+
+
+@register.filter
+@stringfilter
+def alert_class(value):
+    """
+    Returns a arert class based on the value.
+
+    The alert classes are based on Bootstrap 4 alerts.
+    """
+    # using simple lookup table
+    lookup = {
+        'error': 'danger',
+    }
+
+    return lookup.get(value, value)

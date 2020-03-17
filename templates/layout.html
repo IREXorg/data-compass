@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 
 {% block body %}
-    <div class="page">
+  <div class="page">
+    {% block messages %}
+      {% include 'includes/site_messages.html' %}
+    {% endblock messages %}
+
     {% block nav_primary %}
       {% include 'includes/nav_primary.html' %}
     {% endblock %}

@@ -6,6 +6,10 @@
   <div class="page">
     {% include 'includes/nav_primary.html' with navbar_primary_class="fixed-top" %}
 
+    {% block messages %}
+      {% include 'includes/site_messages.html' %}
+    {% endblock messages %}
+
     {% block content_wrapper %}
 
       <div class="container-fluid">

@@ -1,0 +1,29 @@
+{% load datacompass %}
+
+{% if messages %}
+  <div class="messages page-messages fixed-top">
+
+    {% for message in messages %}
+      <div class="alert alert-{{ message.tags|alert_class }} alert-dismissible fade show" role="alert">
+        <div class="container text-center">
+
+          <div class="row no-gutters">
+            <div class="col-xs-auto">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <i class="far fa-times-circle"></i>
+              </button>
+            </div>
+
+            <div class="col">
+              <div class="text-center">
+                {{ message }}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    {% endfor %}
+
+  </div>
+{% endif %}

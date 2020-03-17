@@ -72,6 +72,21 @@ h2 {
   margin: $nav-item-btn-margin-y $nav-item-btn-margin-x;
 }
 
+.page-messages {
+  .alert-dismissible {
+    .close {
+      position: static;
+      padding: 0;
+    }
+  }
+}
+
+.alert {
+  .close:hover {
+    color: $white;
+  }
+}
+
 .footer {
   position: fixed;
   left: 0;

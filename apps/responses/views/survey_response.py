@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import redirect_to_login
 from django.shortcuts import redirect
@@ -142,6 +143,11 @@ class SurveyResponseCompleteView(PageMixin, RespondentSurveyMixin, ConsentCheckM
         Set response completion time.
         """
         form.instance.completed_at = timezone.now()
+        messages.success(
+            self.request,
+            _('Your response has been submitted. You may access '
+              'your surveys and responses in your Profile page.')
+        )
         return super().form_valid(form)
 
     def get_success_url(self):
