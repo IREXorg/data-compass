@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
@@ -41,7 +42,7 @@ class SurveyListView(LoginRequiredMixin, PageTitleMixin, ListView):
     paginate_by = 10
 
 
-class SurveyCreateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, CreateView):
+class SurveyCreateView(SuccessMessageMixin, LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, CreateView):
     """
     Create survey view.
 
@@ -67,6 +68,7 @@ class SurveyCreateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, C
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyCreateForm
+    success_message = _('Survey was created successfully')
 
     def get_project(self):
         """
@@ -120,7 +122,7 @@ class SurveyDetailView(LoginRequiredMixin, PageTitleMixin, DetailView):
     model = Survey
 
 
-class SurveyUpdateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
+class SurveyUpdateView(SuccessMessageMixin, LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
     """
     Update survey details view.
 
@@ -140,12 +142,13 @@ class SurveyUpdateView(LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, U
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyUpdateForm
+    success_message = _('Survey was updated successfully')
 
     def get_success_url(self):
         return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
 
 
-class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
+class SurveyDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin, DeleteView):
     """
     Delete survey details
 
@@ -164,12 +167,13 @@ class SurveyDeleteView(LoginRequiredMixin, PageTitleMixin, DeleteView):
     template_name = 'surveys/survey_delete.html'
     context_object_name = 'survey'
     model = Survey
+    success_message = _('Survey was deleted successfully')
 
     def get_success_url(self):
         return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
 
 
-class SurveyUnpublishView(LoginRequiredMixin, PageTitleMixin, UpdateView):
+class SurveyUnpublishView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin, UpdateView):
     """
     Unpublish survey details
 
@@ -189,6 +193,7 @@ class SurveyUnpublishView(LoginRequiredMixin, PageTitleMixin, UpdateView):
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyUnpublishForm
+    success_message = _('Survey was unpublished successfully')
 
     def form_valid(self, form):
         form.instance.is_active = False
@@ -198,7 +203,7 @@ class SurveyUnpublishView(LoginRequiredMixin, PageTitleMixin, UpdateView):
         return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
 
 
-class SurveyPublishView(LoginRequiredMixin, PageTitleMixin, UpdateView):
+class SurveyPublishView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin, UpdateView):
     """
     Publish survey details
 
@@ -218,6 +223,7 @@ class SurveyPublishView(LoginRequiredMixin, PageTitleMixin, UpdateView):
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyPublishForm
+    success_message = _('Survey was published successfully')
 
     def form_valid(self, form):
         # TODO: check all required conditions and redirect accordingly
@@ -248,7 +254,7 @@ class SurveyEditStartView(LoginRequiredMixin, PageTitleMixin, DetailView):
     model = Survey
 
     def get_page_title(self):
-        return _('Edit') +' '+ self.object.name
+        return _('Edit') + ' ' + self.object.name
 
 
 class SurveyEditStepOneView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
@@ -273,7 +279,7 @@ class SurveyEditStepOneView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetail
     form_class = SurveyEditStepOneForm
 
     def get_page_title(self):
-        return _('Edit') +' '+ self.object.name
+        return _('Edit') + ' ' + self.object.name
 
     def get_success_url(self):
         return reverse('surveys:survey-edit-step-two', kwargs={'pk': self.object.pk})
@@ -301,7 +307,7 @@ class SurveyEditStepTwoView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetail
     form_class = SurveyEditStepTwoForm
 
     def get_page_title(self):
-        return _('Edit') +' '+ self.object.name
+        return _('Edit') + ' ' + self.object.name
 
     def get_success_url(self):
         return reverse('surveys:survey-edit-step-three', kwargs={'pk': self.object.pk})
@@ -329,7 +335,7 @@ class SurveyEditStepThreeView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDeta
     form_class = SurveyEditStepThreeForm
 
     def get_page_title(self):
-        return _('Edit') +' '+ self.object.name
+        return _('Edit') + ' ' + self.object.name
 
     def get_success_url(self):
         return reverse('surveys:survey-edit-step-four', kwargs={'pk': self.object.pk})
@@ -357,7 +363,7 @@ class SurveyEditStepFourView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetai
     form_class = SurveyEditStepFourForm
 
     def get_page_title(self):
-        return _('Edit') +' '+ self.object.name
+        return _('Edit') + ' ' + self.object.name
 
     def get_success_url(self):
         return reverse('surveys:survey-edit-step-five', kwargs={'pk': self.object.pk})
@@ -385,7 +391,7 @@ class SurveyEditStepFiveView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetai
     form_class = SurveyEditStepFiveForm
 
     def get_page_title(self):
-        return _('Edit') +' '+ self.object.name
+        return _('Edit') + ' ' + self.object.name
 
     def get_success_url(self):
         return reverse('surveys:survey-edit-step-six', kwargs={'pk': self.object.pk})
@@ -413,7 +419,7 @@ class SurveyEditStepSixView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetail
     form_class = SurveyEditStepSixForm
 
     def get_page_title(self):
-        return _('Edit') +' '+ self.object.name
+        return _('Edit') + ' ' + self.object.name
 
     def get_success_url(self):
         return reverse('surveys:survey-edit-finish', kwargs={'pk': self.object.pk})
@@ -439,4 +445,4 @@ class SurveyEditFinishView(LoginRequiredMixin, PageTitleMixin, DetailView):
     model = Survey
 
     def get_page_title(self):
-        return _('Edit') +' '+ self.object.name
+        return _('Edit') + ' ' + self.object.name
