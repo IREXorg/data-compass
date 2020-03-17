@@ -65,6 +65,8 @@
   <div class="col">
     <form method="POST" action="" enctype="multipart/form-data">
 
+      {% csrf_token %}
+
       {# Start: Survey respondents crud #}
       <div class="form-group">
         <label for="id_respondents">
@@ -118,6 +120,14 @@
       </div>
       {# End: Survey respondents crud #}
 
+      <div class="form-group">
+        {{ form.dont_link_hierarchy_levels|as_crispy_field }}
+      </div>
+
+      <div class="form-group">
+        {{ form.allow_respondent_hierarchy_levels|as_crispy_field }}
+      </div>
+
       {# Start: Survey roles crud #}
       <div class="form-group">
         <label for="id_roles">
@@ -158,8 +168,21 @@
       </div>
       {# End: Survey roles crud #}
 
-      {% csrf_token %}
-      {{ form|crispy }}
+      <div class="form-group">
+        {{ form.default_hierarchy|as_crispy_field }}
+      </div>
+
+      <div class="form-group">
+        {{ form.login_required|as_crispy_field }}
+      </div>
+
+      <div class="form-group">
+        {{ form.respondent_can_aggregate|as_crispy_field }}
+      </div>
+
+      <div class="form-group">
+        {{ form.respondent_can_invite|as_crispy_field }}
+      </div>
 
       <hr>
 
