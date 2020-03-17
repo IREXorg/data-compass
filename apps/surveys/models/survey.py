@@ -72,8 +72,7 @@ class Survey(TimeStampedModel):
 
     #: Human readable, brief details about survey.
     description = models.TextField(
-        _('description'),
-        blank=True
+        _('description')
     )
 
     #: Human readable, survey alternative name for respondents.
