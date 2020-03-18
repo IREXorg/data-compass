@@ -41,5 +41,24 @@ class RespondentForm(forms.ModelForm):
             raise ValueError(_(f'Project or Survey must be specified to initialize {self.__class__.__name__}'))
 
         super().__init__(*args, **kwargs)
-        self.fields['hierarchy_level'].queryset = project.hierarchy_levels.all()
+        if 'hierarchy_level' in self.fields:
+            self.fields['hierarchy_level'].queryset = project.hierarchy_levels.all()
+        if 'hierarchy' in self.fields:
+            self.fields['hierarchy'].queryset = project.hierarchies.all()
         self.fields['role'].queryset = survey.roles.all()
+
+
+class ResponseRespondentForm(RespondentForm):
+
+    hierarchy = TreeNodeChoiceField(queryset=None)
+
+    class Meta:
+        model = Respondent
+        fields = ['first_name', 'last_name', 'email', 'gender', 'role', 'hierarchy']
+
+    def __init__(self, survey=None, project=None, *args, **kwargs):
+        super().__init__(survey=survey, project=project, *args, **kwargs)
+        self.fields.pop('hierarchy_level', None)
+
+        for field_name, field in self.fields.items():
+            field.required = True
