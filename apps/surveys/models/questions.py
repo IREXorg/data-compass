@@ -43,6 +43,15 @@ class QuestionGroup(TimeStampedModel):
 
 
 class Question(TimeStampedModel):
+    """
+    Survey Question model class
+
+    Defines extra question(s) to collect relevant information from
+    respondent(s) in survey context.
+
+    Once added, survey will prompt Respondent(s) with the added questions.
+    """
+
     INTEGER = 'integer'
     DECIMAL = 'decimal'
     TEXT = 'text'
@@ -67,12 +76,15 @@ class Question(TimeStampedModel):
         (FILE, _('file'))
     )
 
+    #: Global unique identifier for a question.
     uuid = models.UUIDField(
         _('UUID'),
         default=uuid.uuid4,
         editable=False,
         unique=True
     )
+
+    #: Survey under which a question belongs to.
     survey = models.ForeignKey(
         'surveys.Survey',
         related_name='questions',
@@ -80,6 +92,8 @@ class Question(TimeStampedModel):
         verbose_name=_('survey'),
         on_delete=models.CASCADE
     )
+
+    #: Question group under which a question belongs to.
     group = models.ForeignKey(
         'surveys.QuestionGroup',
         related_name='questions',
@@ -87,13 +101,21 @@ class Question(TimeStampedModel):
         verbose_name=_('group'),
         on_delete=models.CASCADE
     )
+
+    #: System processable variable name of a question.
     name = models.SlugField(_('field name'), blank=True)
+
+    #: Human readable label of a question.
     label = models.CharField(
         _('label'),
         max_length=255,
         help_text=_('this will be displayed to user'),
     )
+
+    #: Prompt(input type) of a question.
     type = models.CharField(_('type'), max_length=50, choices=TYPE_CHOICES)
+
+    #: User who created(or owning) a question
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('creator'),
@@ -102,6 +124,8 @@ class Question(TimeStampedModel):
         related_query_name='created_question',
         on_delete=models.CASCADE
     )
+
+    #: Possible choices(select options) of a question.
     options = JSONField(_('options'), blank=True, default=dict)
 
     class Meta:
@@ -110,6 +134,7 @@ class Question(TimeStampedModel):
         unique_together = ['survey', 'name']
 
     def __str__(self):
+        """Returns string representation of a question"""
         return self.label
 
 
