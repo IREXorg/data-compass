@@ -36,13 +36,14 @@ class Role(TimeStampedModel):
         null=True,  # TODO: remove this.
     )
 
-    #: Hierarchy under which a role belongs to.
-    hierarchy = models.ForeignKey(
-        'surveys.DataflowHierarchy',
-        verbose_name=_('hierarchy'),
+    #: Hierarchy level under which a role belongs to.
+    hierarchy_level = models.ForeignKey(
+        'surveys.HierarchyLevel',
+        verbose_name=_('hierarchy level'),
         related_name='roles',
         related_query_name='role',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,  # TODO: remove this.
     )
 
     #: Human readable name of a role.
