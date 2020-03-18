@@ -101,7 +101,7 @@ class DatasetDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
     template_name = 'surveys/survey_dataset_delete.html'
     context_object_name = 'dataset'
     model = Dataset
-    success_message = _('Survey was removed successfully')
+    success_message = _('Survey was deleted successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-three', kwargs={'pk': self.object.survey.pk})

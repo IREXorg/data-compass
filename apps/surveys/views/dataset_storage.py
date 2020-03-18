@@ -3,14 +3,16 @@ from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from core.mixins import PageTitleMixin, PopupDeleteMixin
+from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import DatasetStorageCreateForm, DatasetStorageUpdateForm
 from ..mixins import BasePopupModelFormMixin, CreatorMixin
 from ..models import DatasetStorage, Survey
 
 
-class DatasetStorageCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, CreateView):
+class DatasetStorageCreateView(SuccessMessageMixin, LoginRequiredMixin,
+                               CreatorMixin, PageTitleMixin,
+                               BasePopupModelFormMixin, CreateView):
     """
     Create survey dataset storage view.
 
@@ -30,6 +32,7 @@ class DatasetStorageCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin,
     context_object_name = 'dataset'
     model = DatasetStorage
     form_class = DatasetStorageCreateForm
+    success_message = _('Dataset storage was created successfully')
 
     def get_survey(self):
         """
@@ -53,7 +56,9 @@ class DatasetStorageCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin,
         return reverse('surveys:edit-step-five', kwargs={'pk': self.object.survey.pk})
 
 
-class DatasetStorageUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, UpdateView):
+class DatasetStorageUpdateView(SuccessMessageMixin, LoginRequiredMixin,
+                               CreatorMixin, PageTitleMixin,
+                               BasePopupModelFormMixin, UpdateView):
     """
     Update survey dataset storage view.
 
@@ -73,12 +78,14 @@ class DatasetStorageUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin,
     context_object_name = 'dataset'
     model = DatasetStorage
     form_class = DatasetStorageUpdateForm
+    success_message = _('Dataset storage was updated successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-five', kwargs={'pk': self.object.survey.pk})
 
 
-class DatasetStorageDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, DeleteView):
+class DatasetStorageDeleteView(SuccessMessageMixin, LoginRequiredMixin,
+                               PageTitleMixin, PopupDeleteMixin, DeleteView):
     """
     Delete survey dataset storage view
 
@@ -97,6 +104,7 @@ class DatasetStorageDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMi
     template_name = 'surveys/survey_dataset_storage_delete.html'
     context_object_name = 'dataset'
     model = DatasetStorage
+    success_message = _('Dataset storage was deleted successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-five', kwargs={'pk': self.object.survey.pk})
