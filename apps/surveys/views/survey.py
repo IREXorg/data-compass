@@ -42,7 +42,8 @@ class SurveyListView(SurveyFacilitatorMixin, PageTitleMixin, ListView):
     paginate_by = 10
 
 
-class SurveyCreateView(SuccessMessageMixin, LoginRequiredMixin, SurveyCreatorMixin, PageTitleMixin, CreateView):
+class SurveyCreateView(SuccessMessageMixin, LoginRequiredMixin,
+                       SurveyCreatorMixin, PageTitleMixin, CreateView):
     """
     Create survey view.
 
@@ -122,7 +123,8 @@ class SurveyDetailView(SurveyFacilitatorMixin, PageTitleMixin, DetailView):
     model = Survey
 
 
-class SurveyUpdateView(SuccessMessageMixin, SurveyFacilitatorMixin, SurveyCreatorMixin, PageTitleMixin, UpdateView):
+class SurveyUpdateView(SuccessMessageMixin, SurveyFacilitatorMixin,
+                       SurveyCreatorMixin, PageTitleMixin, UpdateView):
     """
     Update survey details view.
 
@@ -148,7 +150,8 @@ class SurveyUpdateView(SuccessMessageMixin, SurveyFacilitatorMixin, SurveyCreato
         return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
 
 
-class SurveyDeleteView(SuccessMessageMixin, SurveyFacilitatorMixin, PageTitleMixin, DeleteView):
+class SurveyDeleteView(SuccessMessageMixin, SurveyFacilitatorMixin,
+                       PageTitleMixin, DeleteView):
     """
     Delete survey details
 
@@ -173,7 +176,8 @@ class SurveyDeleteView(SuccessMessageMixin, SurveyFacilitatorMixin, PageTitleMix
         return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
 
 
-class SurveyUnpublishView(SuccessMessageMixin, SurveyFacilitatorMixin, PageTitleMixin, UpdateView):
+class SurveyUnpublishView(SuccessMessageMixin, SurveyFacilitatorMixin,
+                          PageTitleMixin, UpdateView):
     """
     Unpublish survey details
 
@@ -203,7 +207,8 @@ class SurveyUnpublishView(SuccessMessageMixin, SurveyFacilitatorMixin, PageTitle
         return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
 
 
-class SurveyPublishView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin, UpdateView):
+class SurveyPublishView(SuccessMessageMixin, LoginRequiredMixin,
+                        PageTitleMixin, UpdateView):
     """
     Publish survey details
 
@@ -257,7 +262,9 @@ class SurveyEditStartView(LoginRequiredMixin, PageTitleMixin, DetailView):
         return _('Edit') + ' ' + self.object.name
 
 
-class SurveyEditStepOneView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
+class SurveyEditStepOneView(SuccessMessageMixin, LoginRequiredMixin,
+                            SurveyCreatorMixin, SurveyDetailMixin,
+                            PageTitleMixin, UpdateView):
     """
     Update survey step one view.
 
@@ -277,6 +284,7 @@ class SurveyEditStepOneView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetail
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyEditStepOneForm
+    success_message = _('Survey was updated successfully')
 
     def get_page_title(self):
         return _('Edit') + ' ' + self.object.name
@@ -285,7 +293,9 @@ class SurveyEditStepOneView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetail
         return reverse('surveys:survey-edit-step-two', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepTwoView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
+class SurveyEditStepTwoView(SuccessMessageMixin, LoginRequiredMixin,
+                            SurveyCreatorMixin, SurveyDetailMixin,
+                            PageTitleMixin, UpdateView):
     """
     Edit survey step two view.
 
@@ -305,6 +315,7 @@ class SurveyEditStepTwoView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetail
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyEditStepTwoForm
+    success_message = _('Survey was updated successfully')
 
     def get_page_title(self):
         return _('Edit') + ' ' + self.object.name
@@ -313,7 +324,9 @@ class SurveyEditStepTwoView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetail
         return reverse('surveys:survey-edit-step-three', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepThreeView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
+class SurveyEditStepThreeView(SuccessMessageMixin, LoginRequiredMixin,
+                              SurveyCreatorMixin, SurveyDetailMixin,
+                              PageTitleMixin, UpdateView):
     """
     Edit survey step three view.
 
@@ -333,6 +346,7 @@ class SurveyEditStepThreeView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDeta
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyEditStepThreeForm
+    success_message = _('Survey was updated successfully')
 
     def get_page_title(self):
         return _('Edit') + ' ' + self.object.name
@@ -341,7 +355,9 @@ class SurveyEditStepThreeView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDeta
         return reverse('surveys:survey-edit-step-four', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepFourView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
+class SurveyEditStepFourView(SuccessMessageMixin, LoginRequiredMixin,
+                             SurveyCreatorMixin, SurveyDetailMixin,
+                             PageTitleMixin, UpdateView):
     """
     Edit survey step four view.
 
@@ -361,6 +377,7 @@ class SurveyEditStepFourView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetai
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyEditStepFourForm
+    success_message = _('Survey was updated successfully')
 
     def get_page_title(self):
         return _('Edit') + ' ' + self.object.name
@@ -369,7 +386,9 @@ class SurveyEditStepFourView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetai
         return reverse('surveys:survey-edit-step-five', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepFiveView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
+class SurveyEditStepFiveView(SuccessMessageMixin, LoginRequiredMixin,
+                             SurveyCreatorMixin, SurveyDetailMixin,
+                             PageTitleMixin, UpdateView):
     """
     Edit survey step five view.
 
@@ -389,6 +408,7 @@ class SurveyEditStepFiveView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetai
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyEditStepFiveForm
+    success_message = _('Survey was updated successfully')
 
     def get_page_title(self):
         return _('Edit') + ' ' + self.object.name
@@ -397,7 +417,9 @@ class SurveyEditStepFiveView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetai
         return reverse('surveys:survey-edit-step-six', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepSixView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, PageTitleMixin, UpdateView):
+class SurveyEditStepSixView(SuccessMessageMixin, LoginRequiredMixin,
+                            SurveyCreatorMixin, SurveyDetailMixin,
+                            PageTitleMixin, UpdateView):
     """
     Edit survey step five view.
 
@@ -417,6 +439,7 @@ class SurveyEditStepSixView(LoginRequiredMixin, SurveyCreatorMixin, SurveyDetail
     context_object_name = 'survey'
     model = Survey
     form_class = SurveyEditStepSixForm
+    success_message = _('Survey was updated successfully')
 
     def get_page_title(self):
         return _('Edit') + ' ' + self.object.name
