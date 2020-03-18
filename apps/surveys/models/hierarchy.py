@@ -10,12 +10,24 @@ from core.models import TimeStampedModel
 
 
 class HierarchyLevel(TimeStampedModel, MPTTModel):
+    """
+    Survey Dataflow Hierarchy Level model class
+
+    Defines level(s) of dataflow hierarchy in survey context.
+
+    Once added, survey will ask Respondent(s) will be prompted with questions
+    to collect information of each hierarchy level.
+    """
+
+    #: Global unique identifier for a hierarchy level.
     uuid = models.UUIDField(
         _('UUID'),
         default=uuid.uuid4,
         editable=False,
         unique=True
     )
+
+    #: Project under which a hierarchy level belongs to.
     project = models.ForeignKey(
         'projects.Project',
         blank=True,
@@ -24,6 +36,8 @@ class HierarchyLevel(TimeStampedModel, MPTTModel):
         related_name='hierarchy_levels',
         related_query_name='hierarchy_level'
     )
+
+    #: Top hierarchy(parent) under which a hierarchy level belongs to.
     parent = TreeForeignKey(
         'self',
         on_delete=models.CASCADE,
@@ -33,8 +47,13 @@ class HierarchyLevel(TimeStampedModel, MPTTModel):
         verbose_name=_('parent')
     )
 
+    #: Human readable name of a hierarchy level.
     name = models.CharField(_('name'), max_length=128)
+
+    #: Human readable, brief details about a hierarchy level.
     description = models.TextField(_('description'), blank=True)
+
+    #: User who created(or owning) a hierarchy level.
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('creator'),
@@ -52,6 +71,7 @@ class HierarchyLevel(TimeStampedModel, MPTTModel):
         verbose_name_plural = _('Hierarchy Levels')
 
     def __str__(self):
+        """Returns string representation of a hierarchy level"""
         return self.name
 
     def save(self, *args, **kwargs):
@@ -62,7 +82,7 @@ class HierarchyLevel(TimeStampedModel, MPTTModel):
 
 class DataflowHierarchy(TimeStampedModel, MPTTModel):
     """
-    Project Dataflow Hierarchy model class
+    Survey Dataflow Hierarchy model class
 
     Defines how data is flowing among different actors in survey context.
 
@@ -106,6 +126,8 @@ class DataflowHierarchy(TimeStampedModel, MPTTModel):
         related_name='hierarchies',
         related_query_name='hierarchy',
     )
+
+    #: Human readable name of a dataflow hierarchy level.
     level_name = models.CharField(_('level name'), max_length=128)
 
     #: Human readable name of a dataflow hierarchy.
