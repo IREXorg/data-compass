@@ -23,23 +23,23 @@ class RespondentConsentForm(forms.Form):
 
 
 class RespondentForm(forms.ModelForm):
-    hierarchy = TreeNodeChoiceField(queryset=None)
+    hierarchy_level = TreeNodeChoiceField(queryset=None)
 
     class Meta:
         model = Respondent
-        fields = ['first_name', 'last_name', 'email', 'gender', 'hierarchy', 'role']
+        fields = ['first_name', 'last_name', 'email', 'gender', 'hierarchy_level', 'role']
 
     def __init__(self, survey=None, project=None, *args, **kwargs):
 
         if not survey:
             raise ValueError(_(f'Survey must be specified to initialize {self.__class__.__name__}'))
 
-        # get project inorder to limit hierarchy choices
+        # get project inorder to limit hierarchy_level choices
         if not project:
             project = survey.project
         elif not project:
             raise ValueError(_(f'Project or Survey must be specified to initialize {self.__class__.__name__}'))
 
         super().__init__(*args, **kwargs)
-        self.fields['hierarchy'].queryset = project.hierarchies.all()
+        self.fields['hierarchy_level'].queryset = project.hierarchy_levels.all()
         self.fields['role'].queryset = survey.roles.all()

@@ -89,10 +89,10 @@ class Respondent(TimeStampedModel):
         on_delete=models.SET_NULL
     )
 
-    #: Hierarchy of the respondent in data flow.
-    hierarchy = models.ForeignKey(
-        'surveys.DataflowHierarchy',
-        verbose_name=_('hierarchy'),
+    #: Hierarchy level under which a respondent belongs to.
+    hierarchy_level = models.ForeignKey(
+        'surveys.HierarchyLevel',
+        verbose_name=_('hierarchy level'),
         related_name='respondents',
         related_query_name='respondent',
         blank=True,

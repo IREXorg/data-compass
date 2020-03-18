@@ -87,7 +87,7 @@
             {% for respondent in respondents %}
             <tr>
               <td class="pt-3">{{respondent.email}}</td>
-              <td class="pt-3">{{respondent.hierarchy.name}}</td>
+              <td class="pt-3">{{respondent.hierarchy_level.name}}</td>
               <td>
                 <a href="{% url 'surveys:survey-create-respondent' survey.pk %}?_popup=1" class="btn btn-primary btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Add New Respondent' %}" title="{% trans 'Add New Respondent' %}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
@@ -143,7 +143,7 @@
             {% for role in roles %}
             <tr>
               <td class="pt-3">{{role.name}}</td>
-              <td class="pt-3">{{role.hierarchy.name}}</td>
+              <td class="pt-3">{{role.hierarchy_level.name}}</td>
               <td>
                 <a href="{% url 'surveys:survey-create-role' survey.pk %}?_popup=1" class="btn btn-primary btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Add New Role' %}" title="{% trans 'Add New Role' %}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
