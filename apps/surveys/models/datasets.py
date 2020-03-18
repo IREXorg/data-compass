@@ -57,8 +57,8 @@ class Topic(TimeStampedModel):
     extras = JSONField(_('extras'), blank=True, default=dict)
 
     class Meta:
-        verbose_name = _('Topic')
-        verbose_name_plural = _('Topics')
+        verbose_name = _('Dataset')
+        verbose_name_plural = _('Datasets')
 
     def __str__(self):
         """Returns string representation of a topic"""
@@ -123,8 +123,8 @@ class Dataset(TimeStampedModel):
     extras = JSONField(_('extras'), blank=True, default=dict)
 
     class Meta:
-        verbose_name = _('Dataset')
-        verbose_name_plural = _('Datasets')
+        verbose_name = _('Topic')
+        verbose_name_plural = _('Topics')
 
     def __str__(self):
         """Returns string representation of a dataset"""

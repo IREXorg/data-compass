@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='respondent',
             name='hierarchy',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='respondents', related_query_name='respondent', to='surveys.DataflowHierarchy', verbose_name='hierarchy'),
+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='respondents', related_query_name='respondent', to='surveys.DataflowHierarchy', verbose_name='hierarchy'),
         ),
     ]
