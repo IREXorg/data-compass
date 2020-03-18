@@ -4,18 +4,19 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from apps.respondents.models import Respondent
-from core.mixins import PageTitleMixin, PopupDeleteMixin
+from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import RespondentCreateForm, RespondentUpdateForm
 from ..mixins import BasePopupModelFormMixin, CreatorMixin
 from ..models import Survey
 
 
-class RespondentCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, CreateView):
+class RespondentCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                           PageTitleMixin, BasePopupModelFormMixin, CreateView):
     """
     Create survey respondent view.
 
-    Allow current signin user to create a new survey and
+    Allow current signin user to create a new survey respondent and
     redirect to survey respondent edit page.
 
     **Example request**:
@@ -31,6 +32,7 @@ class RespondentCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, Bas
     context_object_name = 'respondent'
     model = Respondent
     form_class = RespondentCreateForm
+    success_message = _('Respondent was created successfully')
 
     def get_survey(self):
         """
@@ -54,7 +56,8 @@ class RespondentCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, Bas
         return reverse('surveys:edit-step-one', kwargs={'pk': self.object.survey.pk})
 
 
-class RespondentUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, UpdateView):
+class RespondentUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                           PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey respondent view.
 
@@ -74,12 +77,14 @@ class RespondentUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, Bas
     context_object_name = 'respondent'
     model = Respondent
     form_class = RespondentUpdateForm
+    success_message = _('Respondent was updated successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-one', kwargs={'pk': self.object.survey.pk})
 
 
-class RespondentDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, DeleteView):
+class RespondentDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
+                           PopupDeleteMixin, DeleteView):
     """
     Delete survey respondent view
 
@@ -98,6 +103,7 @@ class RespondentDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin,
     template_name = 'surveys/survey_respondent_delete.html'
     context_object_name = 'respondent'
     model = Respondent
+    success_message = _('Respondent was deleted successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-one', kwargs={'pk': self.object.survey.pk})

@@ -12,7 +12,7 @@ from core.exceptions import NotAuthenticated
 from core.mixins import CSVResponseMixin, PageMixin
 
 from .filters import RespondentFilter
-from .forms import RespondentConsentForm, RespondentForm
+from .forms import RespondentConsentForm, ResponseRespondentForm
 from .mixins import RespondentFacilitatorMixin
 from .models import Respondent
 
@@ -135,7 +135,7 @@ class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, 
     if consent hasn't been provided yet, user will be redirected to consent page.
     """
     model = Respondent
-    form_class = RespondentForm
+    form_class = ResponseRespondentForm
     context_object_name = 'respondent'
     template_name = 'respondents/respondent_update.html'
 

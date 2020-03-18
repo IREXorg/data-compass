@@ -52,13 +52,12 @@
 
             {% block form_buttons %}
               <div class="form-group">
+                <a href={% url 'projects:project-list' %} class="btn btn-warning">
+                  {% trans 'Cancel' %}
+                </a>
                 <button type="submit" class="btn btn-success">
                   {% trans 'Save project' %}
                 </button>
-
-                <a href={% url 'projects:project-list' %} class="btn btn-secondary">
-                  {% trans 'Cancel' %}
-                </a>
               </div>
             {% endblock form_buttons %}
           </form>

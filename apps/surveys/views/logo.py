@@ -3,18 +3,19 @@ from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from core.mixins import PageTitleMixin, PopupDeleteMixin
+from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import LogoCreateForm, LogoUpdateForm
 from ..mixins import BasePopupModelFormMixin, CreatorMixin
 from ..models import Logo, Survey
 
 
-class LogoCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, CreateView):
+class LogoCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                     PageTitleMixin, BasePopupModelFormMixin, CreateView):
     """
     Create survey logo view.
 
-    Allow current signin user to create a new survey and
+    Allow current signin user to create a new survey logo and
     redirect to survey logo edit page.
 
     **Example request**:
@@ -30,6 +31,7 @@ class LogoCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopup
     context_object_name = 'logo'
     model = Logo
     form_class = LogoCreateForm
+    success_message = _('Logo was created successfully')
 
     def get_survey(self):
         """
@@ -53,7 +55,8 @@ class LogoCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopup
         return reverse('surveys:edit-step-six', kwargs={'pk': self.object.survey.pk})
 
 
-class LogoUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, UpdateView):
+class LogoUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                     PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey logo view.
 
@@ -73,12 +76,14 @@ class LogoUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopup
     context_object_name = 'logo'
     model = Logo
     form_class = LogoUpdateForm
+    success_message = _('Logo was updated successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-six', kwargs={'pk': self.object.survey.pk})
 
 
-class LogoDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, DeleteView):
+class LogoDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
+                     PopupDeleteMixin, DeleteView):
     """
     Delete survey logo view
 
@@ -97,6 +102,7 @@ class LogoDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, Delet
     template_name = 'surveys/survey_logo_delete.html'
     context_object_name = 'logo'
     model = Logo
+    success_message = _('Logo was deleted successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-six', kwargs={'pk': self.object.survey.pk})

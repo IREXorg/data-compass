@@ -87,7 +87,7 @@
             {% for respondent in respondents %}
             <tr>
               <td class="pt-3">{{respondent.email}}</td>
-              <td class="pt-3">{{respondent.hierarchy.name}}</td>
+              <td class="pt-3">{{respondent.hierarchy_level.name}}</td>
               <td>
                 <a href="{% url 'surveys:survey-create-respondent' survey.pk %}?_popup=1" class="btn btn-primary btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Add New Respondent' %}" title="{% trans 'Add New Respondent' %}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
@@ -124,13 +124,9 @@
       </div>
       {# End: Survey respondents crud #}
 
-      <div class="form-group">
-        {{ form.dont_link_hierarchy_levels|as_crispy_field }}
-      </div>
+      {{ form.dont_link_hierarchy_levels|as_crispy_field }}
 
-      <div class="form-group">
-        {{ form.allow_respondent_hierarchy_levels|as_crispy_field }}
-      </div>
+      {{ form.allow_respondent_hierarchy_levels|as_crispy_field }}
 
       {# Start: Survey roles crud #}
       <div class="form-group">
@@ -143,7 +139,7 @@
             {% for role in roles %}
             <tr>
               <td class="pt-3">{{role.name}}</td>
-              <td class="pt-3">{{role.hierarchy.name}}</td>
+              <td class="pt-3">{{role.hierarchy_level.name}}</td>
               <td>
                 <a href="{% url 'surveys:survey-create-role' survey.pk %}?_popup=1" class="btn btn-primary btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Add New Role' %}" title="{% trans 'Add New Role' %}">
                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
@@ -172,28 +168,22 @@
       </div>
       {# End: Survey roles crud #}
 
-      <div class="form-group">
-        {{ form.default_hierarchy|as_crispy_field }}
-      </div>
+      {{ form.default_hierarchy|as_crispy_field }}
 
-      <div class="form-group">
-        {{ form.login_required|as_crispy_field }}
-      </div>
+      {{ form.login_required|as_crispy_field }}
 
-      <div class="form-group">
-        {{ form.respondent_can_aggregate|as_crispy_field }}
-      </div>
+      {{ form.invitation_required|as_crispy_field }}
 
-      <div class="form-group">
-        {{ form.respondent_can_invite|as_crispy_field }}
-      </div>
+      {{ form.respondent_can_aggregate|as_crispy_field }}
+
+      {{ form.respondent_can_invite|as_crispy_field }}
 
       <hr>
 
       <div class="form-group">
         <div class="row">
           <div class="col-sm-6">
-            <a href="{% url 'surveys:survey-detail' survey.pk %}" class="btn btn-secondary">
+            <a href="{% url 'surveys:survey-detail' survey.pk %}" class="btn btn-warning">
               {% trans 'Cancel' %}
             </a>
 

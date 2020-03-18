@@ -43,18 +43,18 @@ class DataflowHierarchyAdmin(CreatorAdminMixin, DraggableMPTTAdmin):
 
 @admin.register(Role)
 class RoleAdmin(CreatorAdmin):
-    list_display = ['pk', 'name', 'hierarchy', 'survey']
+    list_display = ['pk', 'name', 'hierarchy_level', 'survey']
     list_display_links = ['pk', 'name']
-    list_filter = ['hierarchy__project', 'survey']
-    list_select_related = ['hierarchy', 'survey']
+    list_filter = ['hierarchy_level__project', 'survey']
+    list_select_related = ['hierarchy_level', 'survey']
 
 
 @admin.register(Entity)
 class EntityAdmin(CreatorAdmin):
-    list_display = ['pk', 'name', 'hierarchy', 'survey']
+    list_display = ['pk', 'name', 'hierarchy_level', 'survey']
     list_display_links = ['pk', 'name']
-    list_select_related = ['hierarchy', 'survey']
-    list_filter = ['hierarchy__project', 'survey']
+    list_select_related = ['hierarchy_level', 'survey']
+    list_filter = ['hierarchy_level__project', 'survey']
 
 
 @admin.register(Topic)

@@ -61,13 +61,12 @@
           <div class="form-group">
             <div class="row">
               <div class="col-sm-6">
-                <button type="submit" class="btn btn-primary">
-                  {% trans 'Save Survey' %}
-                </button>
-
-                <a href="{% url 'projects:project-detail' project.pk %}" class="btn btn-secondary">
+                <a href="{% url 'projects:project-detail' project.pk %}" class="btn btn-warning">
                   {% trans 'Cancel' %}
                 </a>
+                <button type="submit" class="btn btn-success">
+                  {% trans 'Save Survey' %}
+                </button>
               </div>
             </div>
           </div>

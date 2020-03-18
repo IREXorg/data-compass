@@ -12,19 +12,20 @@ class RoleCreateForm(ModelForm):
 
     class Meta:
         model = Role
-        fields = ['survey', 'name', 'hierarchy']
+        fields = ['survey', 'name', 'hierarchy_level']
         widgets = {
             'survey': forms.HiddenInput(),
         }
         labels = {
             'name': _('Role Name'),
-            'hierarchy': _('System Hierarchy Level'),
+            'hierarchy_level': _('System Hierarchy Level'),
         }
 
     def __init__(self, survey=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if survey:
             self.initial['survey'] = survey
+            self.fields['hierarchy_level'].queryset = survey.project.hierarchy_levels.all()
 
 
 class RoleUpdateForm(ModelForm):
@@ -33,9 +34,13 @@ class RoleUpdateForm(ModelForm):
     """
     class Meta:
         model = Role
-        fields = ['name', 'hierarchy']
+        fields = ['name', 'hierarchy_level']
         widgets = {}
         labels = {
             'name': _('Role Name'),
-            'hierarchy': _('System Hierarchy Level'),
+            'hierarchy_level': _('System Hierarchy Level'),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['hierarchy_level'].queryset = self.instance.survey.project.hierarchy_levels.all()

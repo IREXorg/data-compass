@@ -3,18 +3,19 @@ from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from core.mixins import PageTitleMixin, PopupDeleteMixin
+from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import EntityCreateForm, EntityUpdateForm
 from ..mixins import BasePopupModelFormMixin, CreatorMixin
 from ..models import Entity, Survey
 
 
-class EntityCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, CreateView):
+class EntityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                       PageTitleMixin, BasePopupModelFormMixin, CreateView):
     """
     Create survey entity view.
 
-    Allow current signin user to create a new survey and
+    Allow current signin user to create a new survey entity and
     redirect to survey entity edit page.
 
     **Example request**:
@@ -30,6 +31,7 @@ class EntityCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePop
     context_object_name = 'entity'
     model = Entity
     form_class = EntityCreateForm
+    success_message = _('Entity was created successfully')
 
     def get_survey(self):
         """
@@ -53,7 +55,8 @@ class EntityCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePop
         return reverse('surveys:edit-step-four', kwargs={'pk': self.object.survey.pk})
 
 
-class EntityUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, UpdateView):
+class EntityUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                       PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey entity view.
 
@@ -73,12 +76,14 @@ class EntityUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePop
     context_object_name = 'entity'
     model = Entity
     form_class = EntityUpdateForm
+    success_message = _('Entity was updated successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-four', kwargs={'pk': self.object.survey.pk})
 
 
-class EntityDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, DeleteView):
+class EntityDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
+                       PopupDeleteMixin, DeleteView):
     """
     Delete survey entity view
 
@@ -97,6 +102,7 @@ class EntityDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, Del
     template_name = 'surveys/survey_entity_delete.html'
     context_object_name = 'entity'
     model = Entity
+    success_message = _('Entity was deleted successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-four', kwargs={'pk': self.object.survey.pk})

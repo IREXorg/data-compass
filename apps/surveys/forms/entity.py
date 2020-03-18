@@ -12,19 +12,20 @@ class EntityCreateForm(ModelForm):
 
     class Meta:
         model = Entity
-        fields = ['survey', 'name', 'hierarchy']
+        fields = ['survey', 'name', 'hierarchy_level']
         widgets = {
             'survey': forms.HiddenInput(),
         }
         labels = {
             'name': _('Entity Name'),
-            'hierarchy': _('System Hierarchy Level'),
+            'hierarchy_level': _('System Hierarchy Level'),
         }
 
     def __init__(self, survey=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if survey:
             self.initial['survey'] = survey
+            self.fields['hierarchy_level'].queryset = survey.project.hierarchy_levels.all()
 
 
 class EntityUpdateForm(ModelForm):
@@ -33,9 +34,13 @@ class EntityUpdateForm(ModelForm):
     """
     class Meta:
         model = Entity
-        fields = ['name', 'hierarchy']
+        fields = ['name', 'hierarchy_level']
         widgets = {}
         labels = {
             'name': _('Entity Name'),
-            'hierarchy': _('System Hierarchy Level'),
+            'hierarchy_level': _('System Hierarchy Level'),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['hierarchy_level'].queryset = self.instance.survey.project.hierarchy_levels.all()

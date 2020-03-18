@@ -1,6 +1,7 @@
 import csv
 import json
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.postgres.search import SearchVector
 from django.http import StreamingHttpResponse
@@ -227,3 +228,36 @@ class SearchVectorFilterMixin:
         return queryset.annotate(
             search_vector=SearchVector(*self.search_vector_fields)
         ).filter(search_vector=value)
+
+
+class SuccessMessageMixin:
+    """
+    Adds a success message on successful form submission.
+    Altered to:
+        1. Work with delete views.
+        2. Pass currect object to success message
+    """
+    success_message = ''
+
+    def form_valid(self, form):
+        # Source: django/contrib/messages/views.py
+        response = super().form_valid(form)
+        success_message = self.get_success_message(form.cleaned_data)
+        if success_message:
+            messages.success(self.request, success_message)
+        return response
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(
+            cleaned_data,
+            object=self.object,
+        )
+
+    def post(self, *args, **kwargs):
+        response = super().post(*args, **kwargs)
+        if not getattr(self, 'form_class', None):
+            # assume this is DeleteView without form
+            success_message = self.get_success_message({})
+            if success_message:
+                messages.success(self.request, success_message)
+        return response

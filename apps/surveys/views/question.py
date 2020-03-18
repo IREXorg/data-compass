@@ -3,18 +3,19 @@ from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from core.mixins import PageTitleMixin, PopupDeleteMixin
+from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import QuestionCreateForm, QuestionUpdateForm
 from ..mixins import BasePopupModelFormMixin, CreatorMixin
 from ..models import Question, Survey
 
 
-class QuestionCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, CreateView):
+class QuestionCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                         PageTitleMixin, BasePopupModelFormMixin, CreateView):
     """
     Create survey question view.
 
-    Allow current signin user to create a new survey and
+    Allow current signin user to create a new survey question and
     redirect to survey question edit page.
 
     **Example request**:
@@ -30,6 +31,7 @@ class QuestionCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BaseP
     context_object_name = 'question'
     model = Question
     form_class = QuestionCreateForm
+    success_message = _('Question was created successfully')
 
     def get_survey(self):
         """
@@ -53,7 +55,8 @@ class QuestionCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BaseP
         return reverse('surveys:edit-step-six', kwargs={'pk': self.object.survey.pk})
 
 
-class QuestionUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, UpdateView):
+class QuestionUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                         PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey question view.
 
@@ -73,12 +76,14 @@ class QuestionUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BaseP
     context_object_name = 'question'
     model = Question
     form_class = QuestionUpdateForm
+    success_message = _('Question was updated successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-six', kwargs={'pk': self.object.survey.pk})
 
 
-class QuestionDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, DeleteView):
+class QuestionDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
+                         PopupDeleteMixin, DeleteView):
     """
     Delete survey question view
 
@@ -97,6 +102,7 @@ class QuestionDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, D
     template_name = 'surveys/survey_question_delete.html'
     context_object_name = 'question'
     model = Question
+    success_message = _('Question was deleted successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-six', kwargs={'pk': self.object.survey.pk})

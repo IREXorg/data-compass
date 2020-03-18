@@ -160,9 +160,10 @@ class Survey(TimeStampedModel):
     #: Flag whether survey respondents must be envited.
     invitation_required = models.BooleanField(
         _('invitation required'),
-        help_text=_('Do you want the survey to be taken by invited users only?'),
+        help_text=_("If no, anyone with the survey link can respond to it."),
         blank=True,
-        default=True
+        default=True,
+        choices=YES_NO_CHOICES
     )
 
     #: Flag wether respondent can see others responses.
@@ -250,7 +251,7 @@ class Survey(TimeStampedModel):
         _('is active'),
         help_text=_('Is published'),
         blank=True,
-        default=True  # TODO: default to False
+        default=False
     )
 
     #: Gender used in various parts of the survey.
@@ -266,6 +267,24 @@ class Survey(TimeStampedModel):
         related_name='surveys',
         related_query_name='survey',
         blank=True,
+    )
+
+    #: Flag whether survey collect respondent(s) email address.
+    allow_collect_email = models.BooleanField(
+        _('email address'),
+        default=True
+    )
+
+    #: Flag whether survey collect respondent(s) name.
+    allow_collect_name = models.BooleanField(
+        _('name'),
+        default=True
+    )
+
+    #: Flag whether survey collect respondent(s) gender.
+    allow_collect_gender = models.BooleanField(
+        _('gender'),
+        default=True
     )
 
     #: Extra survey fields.

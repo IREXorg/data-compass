@@ -9,13 +9,24 @@ from core.models import TimeStampedModel
 
 
 class Role(TimeStampedModel):
+    """
+    Survey Role model class
+
+    Defines all possible role(s) of respondent(s) in survey context.
+
+    Once added, survey will ask Respondent(s) what is his/her role.
+    They will choose that role from a list of options provided by a survey.
+    """
+
+    #: Global unique identifier for a role.
     uuid = models.UUIDField(
         _('UUID'),
         default=uuid.uuid4,
         editable=False,
         unique=True
     )
-    name = models.CharField(_('name'), max_length=255)
+
+    #: Survey under which a role belongs to.
     survey = models.ForeignKey(
         'survey',
         related_name='roles',
@@ -24,14 +35,24 @@ class Role(TimeStampedModel):
         on_delete=models.CASCADE,
         null=True,  # TODO: remove this.
     )
-    hierarchy = models.ForeignKey(
-        'surveys.DataflowHierarchy',
-        verbose_name=_('hierarchy'),
+
+    #: Hierarchy level under which a role belongs to.
+    hierarchy_level = models.ForeignKey(
+        'surveys.HierarchyLevel',
+        verbose_name=_('hierarchy level'),
         related_name='roles',
         related_query_name='role',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True,  # TODO: remove this.
     )
+
+    #: Human readable name of a role.
+    name = models.CharField(_('name'), max_length=255)
+
+    #: Human readable, brief details about a role.
     description = models.TextField(_('description'), blank=True)
+
+    #: User who created(or owning) a role
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('creator'),
@@ -40,6 +61,8 @@ class Role(TimeStampedModel):
         related_query_name='created_survey_role',
         on_delete=models.CASCADE
     )
+
+    #: Extra role fields.
     extras = JSONField(_('extras'), blank=True, default=dict)
 
     class Meta:
@@ -47,4 +70,5 @@ class Role(TimeStampedModel):
         verbose_name_plural = _('Roles')
 
     def __str__(self):
+        """Returns string representation of a role"""
         return self.name
