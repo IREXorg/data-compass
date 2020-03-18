@@ -1,6 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
-from core.mixins import PopupModelFormMixin
+from core.mixins import FacilitatorMixin, PopupModelFormMixin
 
 
 class CreatorMixin:
@@ -29,18 +27,17 @@ class SurveyCreatorMixin:
         return super().form_valid(form)
 
 
-class FacilitatorMixin(LoginRequiredMixin, UserPassesTestMixin):
+class SurveyFacilitatorMixin(FacilitatorMixin):
     """
-    CBV mixin which makes sure user is a facilitator.
+    CBV mixin which makes sure user is a facilitator and limits survey
+    queryset to only objects where the user is among the project facilitators.
     """
 
-    def test_func(self):
+    def get_queryset(self):
         """
-        Ensure user is a facilitator.
-
-        Returns true if user is facilitator.
+        Returns queryset of surveys where user is project facilitators.
         """
-        return self.request.user.is_facilitator
+        return self.model.objects.filter(project__facilitators=self.request.user)
 
 
 class SurveyDetailMixin:

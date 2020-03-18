@@ -1,6 +1,7 @@
 import csv
 import json
 
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.postgres.search import SearchVector
 from django.http import StreamingHttpResponse
 from django.shortcuts import redirect
@@ -49,6 +50,20 @@ class PageMixin(PageTitleMixin):
         ctx = super().get_context_data(**kwargs)
         ctx.setdefault('back_url_path', self.get_back_url_path())
         return ctx
+
+
+class FacilitatorMixin(LoginRequiredMixin, UserPassesTestMixin):
+    """
+    CBV mixin which makes sure user is a facilitator.
+    """
+
+    def test_func(self):
+        """
+        Ensure user is a facilitator.
+
+        Returns true if user is facilitator.
+        """
+        return self.request.user.is_facilitator
 
 
 class InlineFormsetMixin:

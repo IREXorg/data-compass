@@ -8,16 +8,16 @@ from django.views.generic import FormView, UpdateView
 from django_filters.views import FilterView
 
 from apps.responses.mixins import ConsentCheckMixin, RespondentSurveyMixin
-from apps.surveys.mixins import FacilitatorMixin
 from core.exceptions import NotAuthenticated
 from core.mixins import CSVResponseMixin, PageMixin
 
 from .filters import RespondentFilter
 from .forms import RespondentConsentForm, RespondentForm
+from .mixins import RespondentFacilitatorMixin
 from .models import Respondent
 
 
-class RespondentListView(FacilitatorMixin, PageMixin, CSVResponseMixin, FilterView):
+class RespondentListView(RespondentFacilitatorMixin, PageMixin, CSVResponseMixin, FilterView):
     """
     Listing respondents as a facilitator.
     """
@@ -32,8 +32,7 @@ class RespondentListView(FacilitatorMixin, PageMixin, CSVResponseMixin, FilterVi
     paginate_by = 30
 
     def get_queryset(self):
-        return self.model.objects\
-            .filter(survey__project__facilitators=self.request.user)\
+        return super().get_queryset()\
             .select_related('survey', 'survey__project', 'gender')\
             .with_status()
 
