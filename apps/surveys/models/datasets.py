@@ -168,6 +168,7 @@ class DatasetFrequency(TimeStampedModel):
     class Meta:
         verbose_name = _('Dataset frequency')
         verbose_name_plural = _('Dataset Frequencies')
+        ordering = ['id']
 
     def __str__(self):
         """Returns string representation of a dataset frequency"""
@@ -220,6 +221,7 @@ class DatasetStorage(TimeStampedModel):
     class Meta:
         verbose_name = _('Dataset Storage')
         verbose_name_plural = _('Dataset Storage')
+        ordering = ['id']
 
     def __str__(self):
         """Returns string representation of a dataset storage"""
@@ -267,6 +269,7 @@ class DatasetAccess(TimeStampedModel):
     class Meta:
         verbose_name = _('Dataset Access')
         verbose_name_plural = _('Dataset Access')
+        ordering = ['id']
 
     def __str__(self):
         """Returns string representation of a dataset access"""
