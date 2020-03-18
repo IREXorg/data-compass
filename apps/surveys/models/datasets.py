@@ -72,7 +72,7 @@ class Dataset(TimeStampedModel):
     Defines kind of data that respondent(s) dealt with in survey context
     about each topic.
 
-    Once added, Respondents will share how they use or share specific
+    Once added, Respondents will share how they use or share a specific
     kind of data about each topic. They will choose that dataset from
     a list of options provided by a survey.
     """
@@ -137,6 +137,10 @@ class DatasetFrequency(TimeStampedModel):
 
     Defines how often a dataset can be produced, accessed or shared in
     survey context.
+
+    Once added, Respondents will share how often they produce, access or
+    share a specific dataset. They will choose that dataset frequency from
+    a list of options provided by a survey.
     """
 
     #: Global unique identifier for a dataset frequency.
@@ -171,7 +175,26 @@ class DatasetFrequency(TimeStampedModel):
 
 
 class DatasetStorage(TimeStampedModel):
-    """How dataset can be stored"""
+    """
+    Survey Dataset Storage model class
+
+    Defines where data can be stored(or kept) in survey context.
+    This can either be an information system, cabinet etc.
+
+    Once added, Respondents will share how often they store a
+    specific dataset. They will choose that dataset frequency from
+    a list of options provided by a survey.
+    """
+
+    #: Global unique identifier for a dataset storage.
+    uuid = models.UUIDField(
+        _('UUID'),
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
+    )
+
+    #: Survey under which a dataset storage belongs to.
     survey = models.ForeignKey(
         'surveys.Survey',
         related_name='dataset_storages',
@@ -179,13 +202,11 @@ class DatasetStorage(TimeStampedModel):
         verbose_name=_('survey'),
         on_delete=models.CASCADE
     )
-    uuid = models.UUIDField(
-        _('UUID'),
-        default=uuid.uuid4,
-        editable=False,
-        unique=True
-    )
+
+    #: Human readable name of a dataset storage.
     name = models.CharField(_('name'), max_length=255)
+
+    #: User who created(or owning) a dataset storage
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('creator'),
@@ -201,10 +222,12 @@ class DatasetStorage(TimeStampedModel):
         verbose_name_plural = _('Dataset Storage')
 
     def __str__(self):
+        """Returns string representation of a dataset storage"""
         return self.name
 
     def get_absolute_url(self):
         """Obtain dataset storage absolute url."""
+        # TODO remove if no use
         return reverse('surveys:survey-detail', kwargs={'pk': self.pk})
 
 
