@@ -38,7 +38,7 @@ class Entity(TimeStampedModel):
         null=True,  # TODO: remove this.
     )
 
-    #: Survey under which an enetity belongs to.
+    #: Survey under which an entity belongs to.
     survey = models.ForeignKey(
         'surveys.Survey',
         related_name='entities',
