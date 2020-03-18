@@ -34,7 +34,7 @@
           </div>
         </div>
 
-        <div class="col-sm-2">
+        <div class="col-sm-4">
           <div class="form-group">
             {% include 'bootstrap4/layout/field_errors_block.html' with field=form.selected %}
             {% include 'bootstrap4/layout/field_errors_block.html' with field=form.errors %}
@@ -44,7 +44,7 @@
 
         </div>
 
-        <div class="col-auto">
+        <div class="col">
           <div class="form-group">
             {% include 'bootstrap4/layout/field_errors_block.html' with field=form.access %}
             {{ form.access|add_class:'form-control' }}
