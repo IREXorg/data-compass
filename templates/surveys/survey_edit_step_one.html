@@ -124,13 +124,9 @@
       </div>
       {# End: Survey respondents crud #}
 
-      <div class="form-group">
-        {{ form.dont_link_hierarchy_levels|as_crispy_field }}
-      </div>
+      {{ form.dont_link_hierarchy_levels|as_crispy_field }}
 
-      <div class="form-group">
-        {{ form.allow_respondent_hierarchy_levels|as_crispy_field }}
-      </div>
+      {{ form.allow_respondent_hierarchy_levels|as_crispy_field }}
 
       {# Start: Survey roles crud #}
       <div class="form-group">
@@ -172,21 +168,13 @@
       </div>
       {# End: Survey roles crud #}
 
-      <div class="form-group">
-        {{ form.default_hierarchy|as_crispy_field }}
-      </div>
+      {{ form.default_hierarchy|as_crispy_field }}
 
-      <div class="form-group">
-        {{ form.login_required|as_crispy_field }}
-      </div>
+      {{ form.login_required|as_crispy_field }}
 
-      <div class="form-group">
-        {{ form.respondent_can_aggregate|as_crispy_field }}
-      </div>
+      {{ form.respondent_can_aggregate|as_crispy_field }}
 
-      <div class="form-group">
-        {{ form.respondent_can_invite|as_crispy_field }}
-      </div>
+      {{ form.respondent_can_invite|as_crispy_field }}
 
       <hr>
 

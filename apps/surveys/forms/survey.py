@@ -167,7 +167,10 @@ class SurveyEditStepSixForm(ModelForm):
     """
     class Meta:
         model = Survey
-        fields = ['introduction_text', 'closing_text']
+        fields = [
+            'allow_collect_email', 'allow_collect_name',
+            'allow_collect_gender', 'introduction_text', 'closing_text'
+        ]
         widgets = {
             'introduction_text': forms.Textarea(attrs={'rows': 2}),
             'closing_text': forms.Textarea(attrs={'rows': 2}),
