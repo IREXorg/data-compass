@@ -132,7 +132,22 @@ class Dataset(TimeStampedModel):
 
 
 class DatasetFrequency(TimeStampedModel):
-    """How often a dataset can be producd, accessed or shared."""
+    """
+    Survey Dataset Frequency model class
+
+    Defines how often a dataset can be produced, accessed or shared in
+    survey context.
+    """
+
+    #: Global unique identifier for a dataset frequency.
+    uuid = models.UUIDField(
+        _('UUID'),
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
+    )
+
+    #: Survey under which a dataset frequency belongs to.
     survey = models.ForeignKey(
         'surveys.Survey',
         related_name='dataset_frequencies',
@@ -140,19 +155,18 @@ class DatasetFrequency(TimeStampedModel):
         verbose_name=_('survey'),
         on_delete=models.CASCADE
     )
-    uuid = models.UUIDField(
-        _('UUID'),
-        default=uuid.uuid4,
-        editable=False,
-        unique=True
-    )
+
+    #: Human readable name of a dataset frequency.
     name = models.CharField(_('frequency'), max_length=255)
+
+    # TODO: add creator, extras etc.
 
     class Meta:
         verbose_name = _('Dataset frequency')
         verbose_name_plural = _('Dataset Frequencies')
 
     def __str__(self):
+        """Returns string representation of a dataset frequency"""
         return self.name
 
 
