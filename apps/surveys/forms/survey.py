@@ -70,13 +70,14 @@ class SurveyEditStepOneForm(ModelForm):
         model = Survey
         fields = [
             'allow_respondent_hierarchy_levels', 'dont_link_hierarchy_levels',
-            'default_hierarchy', 'login_required', 'respondent_can_aggregate',
-            'respondent_can_invite'
+            'default_hierarchy', 'login_required', 'invitation_required',
+            'respondent_can_aggregate', 'respondent_can_invite'
         ]
         widgets = {
             'allow_respondent_hierarchy_levels': forms.RadioSelect(),
             'dont_link_hierarchy_levels': forms.RadioSelect(),
             'login_required': forms.RadioSelect(),
+            'invitation_required': forms.RadioSelect(),
             'respondent_can_aggregate': forms.RadioSelect(),
             'respondent_can_invite': forms.RadioSelect()
         }
@@ -84,7 +85,8 @@ class SurveyEditStepOneForm(ModelForm):
             'allow_respondent_hierarchy_levels': _('Allow respondents to add to Lists?'),
             'dont_link_hierarchy_levels': _('Do not link respondents with system hierarchy levels?'),
             'default_hierarchy': _('Apply one system hierarchy level to all respondents'),
-            'login_required': _('Do you want the survey to be taken by invited users only?'),
+            'login_required': _('Do you want these users to log in before responding to the survey?'),
+            'invitation_required': _('Do you want the survey to be taken by invited users only?'),
             'respondent_can_aggregate': _(
                 "Do you want repondents to see visualizations or aggregates "
                 "of other users' responses?"
@@ -167,7 +169,10 @@ class SurveyEditStepSixForm(ModelForm):
     """
     class Meta:
         model = Survey
-        fields = ['introduction_text', 'closing_text']
+        fields = [
+            'allow_collect_email', 'allow_collect_name',
+            'allow_collect_gender', 'introduction_text', 'closing_text'
+        ]
         widgets = {
             'introduction_text': forms.Textarea(attrs={'rows': 2}),
             'closing_text': forms.Textarea(attrs={'rows': 2}),
