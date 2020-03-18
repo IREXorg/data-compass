@@ -10,12 +10,25 @@ from core.models import TimeStampedModel
 
 
 class Topic(TimeStampedModel):
+    """
+    Survey Topic model class
+
+    Defines data subject(s) that respondent(s) dealt with in survey context.
+
+    Once added, survey will ask Respondents how they work with data about a
+    specific topic. They will choose that topic from a drop-down list of
+    options provided by a survey.
+    """
+
+    #: Global unique identifier for a survey.
     uuid = models.UUIDField(
         _('UUID'),
         default=uuid.uuid4,
         editable=False,
         unique=True
     )
+
+    #: Survey under which a topic belongs to.
     survey = models.ForeignKey(
         'survey',
         related_name='topics',
@@ -23,8 +36,14 @@ class Topic(TimeStampedModel):
         verbose_name=_('survey'),
         on_delete=models.CASCADE
     )
+
+    #: Human readable name of a topic.
     name = models.CharField(_('name'), max_length=255)
+
+    #: Human readable, brief details about a topic.
     description = models.TextField(_('description'), blank=True)
+
+    #: User who created(or owning) a topic
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('creator'),
@@ -33,6 +52,8 @@ class Topic(TimeStampedModel):
         related_query_name='created_survey_topic',
         on_delete=models.CASCADE
     )
+
+    #: Extra topic fields.
     extras = JSONField(_('extras'), blank=True, default=dict)
 
     class Meta:
@@ -40,6 +61,7 @@ class Topic(TimeStampedModel):
         verbose_name_plural = _('Topics')
 
     def __str__(self):
+        """Returns string representation of a topic"""
         return self.name
 
 
