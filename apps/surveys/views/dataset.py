@@ -3,14 +3,15 @@ from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from core.mixins import PageTitleMixin, PopupDeleteMixin
+from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import DatasetCreateForm, DatasetUpdateForm
 from ..mixins import BasePopupModelFormMixin, CreatorMixin
 from ..models import Dataset, Survey
 
 
-class DatasetCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, CreateView):
+class DatasetCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                        PageTitleMixin, BasePopupModelFormMixin, CreateView):
     """
     Create survey dataset view.
 
@@ -30,6 +31,7 @@ class DatasetCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePo
     context_object_name = 'dataset'
     model = Dataset
     form_class = DatasetCreateForm
+    success_message = _('Dataset was created successfully')
 
     def get_survey(self):
         """
@@ -53,7 +55,8 @@ class DatasetCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePo
         return reverse('surveys:edit-step-three', kwargs={'pk': self.object.survey.pk})
 
 
-class DatasetUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, UpdateView):
+class DatasetUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                        PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey dataset view.
 
@@ -73,12 +76,13 @@ class DatasetUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePo
     context_object_name = 'dataset'
     model = Dataset
     form_class = DatasetUpdateForm
+    success_message = _('Dataset was updated successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-three', kwargs={'pk': self.object.survey.pk})
 
 
-class DatasetDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, DeleteView):
+class DatasetDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, DeleteView):
     """
     Delete survey dataset view
 
@@ -97,6 +101,7 @@ class DatasetDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, De
     template_name = 'surveys/survey_dataset_delete.html'
     context_object_name = 'dataset'
     model = Dataset
+    success_message = _('Survey was removed successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-three', kwargs={'pk': self.object.survey.pk})
