@@ -3,14 +3,15 @@ from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from core.mixins import PageTitleMixin, PopupDeleteMixin
+from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import RoleCreateForm, RoleUpdateForm
 from ..mixins import BasePopupModelFormMixin, CreatorMixin
 from ..models import Role, Survey
 
 
-class RoleCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, CreateView):
+class RoleCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                     PageTitleMixin, BasePopupModelFormMixin, CreateView):
     """
     Create survey role view.
 
@@ -30,6 +31,7 @@ class RoleCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopup
     context_object_name = 'role'
     model = Role
     form_class = RoleCreateForm
+    success_message = _('Role was created successfully')
 
     def get_survey(self):
         """
@@ -53,7 +55,8 @@ class RoleCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopup
         return reverse('surveys:edit-step-one', kwargs={'pk': self.object.survey.pk})
 
 
-class RoleUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, UpdateView):
+class RoleUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                     PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey role view.
 
@@ -73,12 +76,14 @@ class RoleUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopup
     context_object_name = 'role'
     model = Role
     form_class = RoleUpdateForm
+    success_message = _('Role was updated successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-one', kwargs={'pk': self.object.survey.pk})
 
 
-class RoleDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, DeleteView):
+class RoleDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
+                     PopupDeleteMixin, DeleteView):
     """
     Delete survey role view
 
@@ -97,6 +102,7 @@ class RoleDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, Delet
     template_name = 'surveys/survey_role_delete.html'
     context_object_name = 'role'
     model = Role
+    success_message = _('Role was deleted successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-one', kwargs={'pk': self.object.survey.pk})
