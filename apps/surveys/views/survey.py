@@ -99,7 +99,7 @@ class SurveyCreateView(SuccessMessageMixin, LoginRequiredMixin,
         return context
 
     def get_success_url(self):
-        return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
+        return reverse('surveys:survey-detail', kwargs={'pk': self.object.pk})
 
 
 class SurveyDetailView(SurveyFacilitatorMixin, PageTitleMixin, DetailView):
@@ -146,7 +146,7 @@ class SurveyUpdateView(SuccessMessageMixin, SurveyFacilitatorMixin,
     success_message = _('Survey was updated successfully')
 
     def get_success_url(self):
-        return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
+        return reverse('surveys:survey-detail', kwargs={'pk': self.object.pk})
 
 
 class SurveyDeleteView(SuccessMessageMixin, SurveyFacilitatorMixin,
@@ -203,7 +203,7 @@ class SurveyUnpublishView(SuccessMessageMixin, SurveyFacilitatorMixin,
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
+        return reverse('surveys:survey-detail', kwargs={'pk': self.object.pk})
 
 
 class SurveyPublishView(SuccessMessageMixin, LoginRequiredMixin,
@@ -235,7 +235,7 @@ class SurveyPublishView(SuccessMessageMixin, LoginRequiredMixin,
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('projects:project-detail', kwargs={'pk': self.object.project.pk})
+        return reverse('surveys:survey-detail', kwargs={'pk': self.object.pk})
 
 
 class SurveyEditStartView(LoginRequiredMixin, PageTitleMixin, DetailView):
