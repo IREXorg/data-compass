@@ -250,7 +250,7 @@ class Survey(TimeStampedModel):
         _('is active'),
         help_text=_('Is published'),
         blank=True,
-        default=True  # TODO: default to False
+        default=False
     )
 
     #: Gender used in various parts of the survey.
