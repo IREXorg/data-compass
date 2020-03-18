@@ -16,11 +16,11 @@ class Topic(TimeStampedModel):
     Defines data subject(s) that respondent(s) dealt with in survey context.
 
     Once added, survey will ask Respondents how they work with data about a
-    specific topic. They will choose that topic from a drop-down list of
+    specific topic. They will choose that topic from a list of
     options provided by a survey.
     """
 
-    #: Global unique identifier for a survey.
+    #: Global unique identifier for a topic.
     uuid = models.UUIDField(
         _('UUID'),
         default=uuid.uuid4,
@@ -66,12 +66,26 @@ class Topic(TimeStampedModel):
 
 
 class Dataset(TimeStampedModel):
+    """
+    Survey Dataset model class
+
+    Defines kind of data that respondent(s) dealt with in survey context
+    about each topic.
+
+    Once added, Respondents will share how they use or share specific
+    kind of data about each topic. They will choose that dataset from
+    a list of options provided by a survey.
+    """
+
+    #: Global unique identifier for a dataset.
     uuid = models.UUIDField(
         _('UUID'),
         default=uuid.uuid4,
         editable=False,
         unique=True
     )
+
+    #: Survey under which a dataset belongs to.
     survey = models.ForeignKey(
         'survey',
         related_name='datasets',
@@ -79,6 +93,8 @@ class Dataset(TimeStampedModel):
         verbose_name=_('survey'),
         on_delete=models.CASCADE
     )
+
+    #: Linked topic(s) which a dataset associated with.
     topics = models.ManyToManyField(
         'surveys.Topic',
         related_name='datasets',
@@ -86,8 +102,14 @@ class Dataset(TimeStampedModel):
         verbose_name=_('topics'),
         blank=True
     )
+
+    #: Human readable name of a dataset.
     name = models.CharField(_('name'), max_length=255)
+
+    #: Human readable, brief details about a dataset.
     description = models.TextField(_('description'), blank=True)
+
+    #: User who created(or owning) a dataset
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('creator'),
@@ -96,6 +118,8 @@ class Dataset(TimeStampedModel):
         related_query_name='created_survey_dataset',
         on_delete=models.CASCADE
     )
+
+    #: Extra dataset fields.
     extras = JSONField(_('extras'), blank=True, default=dict)
 
     class Meta:
@@ -103,6 +127,7 @@ class Dataset(TimeStampedModel):
         verbose_name_plural = _('Datasets')
 
     def __str__(self):
+        """Returns string representation of a dataset"""
         return self.name
 
 
