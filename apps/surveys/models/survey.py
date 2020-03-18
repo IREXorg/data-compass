@@ -160,9 +160,10 @@ class Survey(TimeStampedModel):
     #: Flag whether survey respondents must be envited.
     invitation_required = models.BooleanField(
         _('invitation required'),
-        help_text=_('Do you want the survey to be taken by invited users only?'),
+        help_text=_("If no, anyone with the survey link can respond to it."),
         blank=True,
-        default=True
+        default=True,
+        choices=YES_NO_CHOICES
     )
 
     #: Flag wether respondent can see others responses.
