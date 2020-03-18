@@ -145,20 +145,33 @@ class ProjectCreateForm(ModelForm):
 
         self.pre_save_hierarchy()
         hierarchy_tree = hierarchy_data.get('tree')
-        hierarchy_levels = hierarchy_data.get('levels')
+        hierarchy_levels = []
         hierarchy_lookup = {}
+
+        for i, level_name in enumerate(hierarchy_data.get('levels', [])):
+            parent = hierarchy_levels[i - 1] if i > 0 else None
+            level = project.hierarchy_levels.create(
+                name=level_name,
+                parent=parent,
+                creator=creator,
+            )
+            hierarchy_levels.append(level)
+
         if hierarchy_tree:
             for i in hierarchy_tree.expand_tree():
                 # skip artificial root node
                 if hierarchy_tree[i].is_root():
                     continue
 
-                hierarchy_level = hierarchy_tree.depth(hierarchy_tree[i]) - 1
+                level = hierarchy_tree.depth(hierarchy_tree[i]) - 1
+                hierarchy_level = hierarchy_levels[level]
+
                 hierarchy_lookup[i] = project.hierarchies.create(
                     name=hierarchy_tree[i].tag,
                     parent=hierarchy_lookup.get(hierarchy_tree.parent(i).identifier),
                     creator=creator,
-                    level_name=hierarchy_levels[hierarchy_level]
+                    level_name=hierarchy_level.name,
+                    hierarchy_level=hierarchy_level
                 )
 
     def get_hierarchy_creator(self):
@@ -193,3 +206,4 @@ class ProjectUpdateForm(ProjectCreateForm):
     def pre_save_hierarchy(self):
         """Clear the hierarchy"""
         self.instance.hierarchies.all().delete()
+        self.instance.hierarchy_levels.all().delete()
