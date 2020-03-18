@@ -16,7 +16,7 @@ class RespondentCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin
     """
     Create survey respondent view.
 
-    Allow current signin user to create a new survey and
+    Allow current signin user to create a new survey respondent and
     redirect to survey respondent edit page.
 
     **Example request**:

@@ -16,7 +16,7 @@ class DatasetStorageCreateView(SuccessMessageMixin, LoginRequiredMixin,
     """
     Create survey dataset storage view.
 
-    Allow current signin user to create a new survey and
+    Allow current signin user to create a new survey dataset storage and
     redirect to survey dataset storage edit page.
 
     **Example request**:

@@ -69,6 +69,12 @@ urlpatterns = [
     path('<int:pk>/update-entity/', views.EntityUpdateView.as_view(), name='survey-update-entity'),
     # end: survey entity paths
 
+    # start: survey gender paths
+    path('<int:survey_pk>/create-gender/', views.GenderCreateView.as_view(), name='survey-create-gender'),
+    path('<int:pk>/delete-gender/', views.GenderDeleteView.as_view(), name='survey-delete-gender'),
+    path('<int:pk>/update-gender/', views.GenderUpdateView.as_view(), name='survey-update-gender'),
+    # end: survey gender paths
+
     # start: survey question paths
     path('<int:survey_pk>/create-question/', views.QuestionCreateView.as_view(), name='survey-create-question'),
     path('<int:pk>/delete-question/', views.QuestionDeleteView.as_view(), name='survey-delete-question'),

@@ -102,6 +102,13 @@ class SurveyDetailMixin:
         if self.object:
             return self.object.questions.all()
 
+    def get_genders(self):
+        """
+        Get genders associated with the survey
+        """
+        if self.object:
+            return self.object.genders.all()
+
     def get_context_data(self, **kwargs):
         """
         Add survey releated objects context data
@@ -115,6 +122,7 @@ class SurveyDetailMixin:
         logos = self.get_logos()
         respondents = self.get_respondents()
         questions = self.get_questions()
+        genders = self.get_genders()
         if topics:
             context['topics'] = topics
         if datasets:
@@ -131,6 +139,8 @@ class SurveyDetailMixin:
             context['respondents'] = respondents
         if questions:
             context['questions'] = questions
+        if genders:
+            context['genders'] = genders
         return context
 
 

@@ -15,7 +15,7 @@ class LogoCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
     """
     Create survey logo view.
 
-    Allow current signin user to create a new survey and
+    Allow current signin user to create a new survey logo and
     redirect to survey logo edit page.
 
     **Example request**:

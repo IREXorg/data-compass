@@ -15,7 +15,7 @@ class DatasetCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
     """
     Create survey dataset view.
 
-    Allow current signin user to create a new survey and
+    Allow current signin user to create a new survey dataset and
     redirect to survey dataset edit page.
 
     **Example request**:

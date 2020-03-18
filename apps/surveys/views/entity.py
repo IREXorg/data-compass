@@ -15,7 +15,7 @@ class EntityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
     """
     Create survey entity view.
 
-    Allow current signin user to create a new survey and
+    Allow current signin user to create a new survey entity and
     redirect to survey entity edit page.
 
     **Example request**:

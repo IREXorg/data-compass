@@ -15,7 +15,7 @@ class QuestionCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
     """
     Create survey question view.
 
-    Allow current signin user to create a new survey and
+    Allow current signin user to create a new survey question and
     redirect to survey question edit page.
 
     **Example request**:

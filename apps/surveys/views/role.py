@@ -15,7 +15,7 @@ class RoleCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
     """
     Create survey role view.
 
-    Allow current signin user to create a new survey and
+    Allow current signin user to create a new survey role and
     redirect to survey role edit page.
 
     **Example request**:
