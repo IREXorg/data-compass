@@ -48,14 +48,14 @@ class Entity(TimeStampedModel):
         null=True,  # TODO: remove this.
     )
 
-    #: Hierarchy under which an entity belongs to.
-    hierarchy = models.ForeignKey(
-        'surveys.DataflowHierarchy',
+    #: Hierarchy level under which an entity belongs to.
+    hierarchy_level = models.ForeignKey(
+        'surveys.HierarchyLevel',
+        verbose_name=_('hierarchy level'),
         related_name='entities',
         related_query_name='entity',
         on_delete=models.CASCADE,
-        null=True,
-        verbose_name=_('hierarchy'),
+        null=True,  # TODO: remove this.
     )
 
     #: Human readable name of an entity.
