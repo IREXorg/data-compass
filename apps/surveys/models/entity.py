@@ -9,12 +9,26 @@ from core.models import TimeStampedModel
 
 
 class Entity(TimeStampedModel):
+    """
+    Survey Entity model class
+
+    Defines people, organizations, or teams—any person or group who
+    might have, receive, or share information in survey context.
+
+    Once added, survey will ask Respondents which entities
+    might have, receive, or share information. They will choose that entity
+    from a list of options provided by a survey.
+    """
+
+    #: Global unique identifier for an entity.
     uuid = models.UUIDField(
         _('UUID'),
         default=uuid.uuid4,
         editable=False,
         unique=True
     )
+
+    #: Project under which an entity belongs to.
     project = models.ForeignKey(
         'projects.Project',
         verbose_name=_('project'),
@@ -23,6 +37,8 @@ class Entity(TimeStampedModel):
         related_query_name='entity',
         null=True,  # TODO: remove this.
     )
+
+    #: Survey under which an enetity belongs to.
     survey = models.ForeignKey(
         'surveys.Survey',
         related_name='entities',
@@ -31,7 +47,8 @@ class Entity(TimeStampedModel):
         on_delete=models.CASCADE,
         null=True,  # TODO: remove this.
     )
-    name = models.CharField(_('name'), max_length=255)
+
+    #: Hierarchy under which an entity belongs to.
     hierarchy = models.ForeignKey(
         'surveys.DataflowHierarchy',
         related_name='entities',
@@ -40,7 +57,14 @@ class Entity(TimeStampedModel):
         null=True,
         verbose_name=_('hierarchy'),
     )
+
+    #: Human readable name of an entity.
+    name = models.CharField(_('name'), max_length=255)
+
+    #: Human readable, brief details about an entity.
     description = models.TextField(_('description'), blank=True)
+
+    #: User who created(or owning) an entity
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('creator'),
@@ -49,6 +73,8 @@ class Entity(TimeStampedModel):
         related_query_name='created_survey_entity',
         on_delete=models.CASCADE
     )
+
+    #: Extra entity fields.
     extras = JSONField(_('extras'), blank=True, default=dict)
 
     class Meta:
@@ -56,4 +82,5 @@ class Entity(TimeStampedModel):
         verbose_name_plural = _('Entities')
 
     def __str__(self):
+        """Returns string representation of an entity"""
         return self.name
