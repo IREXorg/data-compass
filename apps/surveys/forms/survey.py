@@ -84,7 +84,7 @@ class SurveyEditStepOneForm(ModelForm):
             'allow_respondent_hierarchy_levels': _('Allow respondents to add to Lists?'),
             'dont_link_hierarchy_levels': _('Do not link respondents with system hierarchy levels?'),
             'default_hierarchy': _('Apply one system hierarchy level to all respondents'),
-            'login_required': _('Do you want the survey to be taken by invited users only?'),
+            'login_required': _('Do you want these users to log in before responding to the survey?'),
             'respondent_can_aggregate': _(
                 "Do you want repondents to see visualizations or aggregates "
                 "of other users' responses?"
