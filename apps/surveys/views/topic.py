@@ -3,14 +3,15 @@ from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
-from core.mixins import PageTitleMixin, PopupDeleteMixin
+from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import TopicCreateForm, TopicUpdateForm
 from ..mixins import BasePopupModelFormMixin, CreatorMixin
 from ..models import Survey, Topic
 
 
-class TopicCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, CreateView):
+class TopicCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                      PageTitleMixin, BasePopupModelFormMixin, CreateView):
     """
     Create survey topic view.
 
@@ -30,6 +31,7 @@ class TopicCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopu
     context_object_name = 'topic'
     model = Topic
     form_class = TopicCreateForm
+    success_message = _('Topic was created successfully')
 
     def get_survey(self):
         """
@@ -53,7 +55,8 @@ class TopicCreateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopu
         return reverse('surveys:edit-step-two', kwargs={'pk': self.object.survey.pk})
 
 
-class TopicUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopupModelFormMixin, UpdateView):
+class TopicUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+                      PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey topic view.
 
@@ -73,12 +76,14 @@ class TopicUpdateView(LoginRequiredMixin, CreatorMixin, PageTitleMixin, BasePopu
     context_object_name = 'topic'
     model = Topic
     form_class = TopicUpdateForm
+    success_message = _('Topic was updated successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-two', kwargs={'pk': self.object.survey.pk})
 
 
-class TopicDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, DeleteView):
+class TopicDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
+                      PopupDeleteMixin, DeleteView):
     """
     Delete survey topic view
 
@@ -97,6 +102,7 @@ class TopicDeleteView(LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, Dele
     template_name = 'surveys/survey_topic_delete.html'
     context_object_name = 'topic'
     model = Topic
+    success_message = _('Topic was deleted successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-two', kwargs={'pk': self.object.survey.pk})
