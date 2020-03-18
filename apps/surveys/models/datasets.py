@@ -232,7 +232,25 @@ class DatasetStorage(TimeStampedModel):
 
 
 class DatasetAccess(TimeStampedModel):
-    """How dataset can be accessible"""
+    """
+    Survey Dataset Access model class
+
+    Defines how a dataset accessed(accessible) in survey context.
+
+    Once added, Respondents will share how often they access
+    a specific dataset. They will choose that dataset access from
+    a list of options provided by a survey.
+    """
+
+    #: Global unique identifier for a dataset access.
+    uuid = models.UUIDField(
+        _('UUID'),
+        default=uuid.uuid4,
+        editable=False,
+        unique=True
+    )
+
+    #: Survey under which a dataset access belongs to.
     survey = models.ForeignKey(
         'surveys.Survey',
         related_name='dataset_access',
@@ -240,17 +258,16 @@ class DatasetAccess(TimeStampedModel):
         verbose_name=_('survey'),
         on_delete=models.CASCADE
     )
-    uuid = models.UUIDField(
-        _('UUID'),
-        default=uuid.uuid4,
-        editable=False,
-        unique=True
-    )
+
+    #: Human readable name of a dataset access.
     name = models.CharField(_('name'), max_length=255)
+
+    # TODO: add creator, extras etc.
 
     class Meta:
         verbose_name = _('Dataset Access')
         verbose_name_plural = _('Dataset Access')
 
     def __str__(self):
+        """Returns string representation of a dataset access"""
         return self.name
