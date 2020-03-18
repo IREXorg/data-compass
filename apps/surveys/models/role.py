@@ -26,7 +26,7 @@ class Role(TimeStampedModel):
         unique=True
     )
 
-    #: Survey under which an enetity belongs to.
+    #: Survey under which an role belongs to.
     survey = models.ForeignKey(
         'survey',
         related_name='roles',
