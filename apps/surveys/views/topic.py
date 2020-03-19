@@ -7,7 +7,7 @@ from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import TopicCreateForm, TopicUpdateForm
 from ..mixins import BasePopupModelFormMixin, CreatorMixin
-from ..models import Survey, Topic
+from ..models import Dataset, Survey
 
 
 class TopicCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
@@ -29,7 +29,7 @@ class TopicCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
     page_title = _('Create a survey topic')
     template_name = 'surveys/survey_topic_create.html'
     context_object_name = 'topic'
-    model = Topic
+    model = Dataset  # TODO: restore to Topic
     form_class = TopicCreateForm
     success_message = _('Topic was created successfully')
 
@@ -74,7 +74,7 @@ class TopicUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
     page_title = _('Delete a survey topic')
     template_name = 'surveys/survey_topic_update.html'
     context_object_name = 'topic'
-    model = Topic
+    model = Dataset  # TODO: restore to Topic
     form_class = TopicUpdateForm
     success_message = _('Topic was updated successfully')
 
@@ -101,7 +101,7 @@ class TopicDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
     page_title = _('Delete a survey topic')
     template_name = 'surveys/survey_topic_delete.html'
     context_object_name = 'topic'
-    model = Topic
+    model = Dataset  # TODO: restore to Topic
     success_message = _('Topic was deleted successfully')
 
     def get_success_url(self):

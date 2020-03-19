@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from ..models import Topic
+from ..models import Dataset
 
 
 class TopicCreateForm(ModelForm):
@@ -10,7 +10,7 @@ class TopicCreateForm(ModelForm):
     """
 
     class Meta:
-        model = Topic
+        model = Dataset  # TODO: restore to Topic
         fields = ['survey', 'name', 'description']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 2}),
@@ -28,7 +28,7 @@ class TopicUpdateForm(ModelForm):
     Basic Topic update form
     """
     class Meta:
-        model = Topic
+        model = Dataset  # TODO: restore to Topic
         fields = ['name', 'description']
         widgets = {
             'description': forms.Textarea(attrs={'rows': 2})

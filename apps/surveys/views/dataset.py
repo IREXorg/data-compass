@@ -7,7 +7,7 @@ from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import DatasetCreateForm, DatasetUpdateForm
 from ..mixins import BasePopupModelFormMixin, CreatorMixin
-from ..models import Dataset, Survey
+from ..models import Survey, Topic
 
 
 class DatasetCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
@@ -29,7 +29,7 @@ class DatasetCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
     page_title = _('Create a survey dataset')
     template_name = 'surveys/survey_dataset_create.html'
     context_object_name = 'dataset'
-    model = Dataset
+    model = Topic  # TODO: restore to Dataset
     form_class = DatasetCreateForm
     success_message = _('Dataset was created successfully')
 
@@ -74,7 +74,7 @@ class DatasetUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
     page_title = _('Delete a survey dataset')
     template_name = 'surveys/survey_dataset_update.html'
     context_object_name = 'dataset'
-    model = Dataset
+    model = Topic  # TODO: restore to Dataset
     form_class = DatasetUpdateForm
     success_message = _('Dataset was updated successfully')
 
@@ -100,8 +100,8 @@ class DatasetDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
     page_title = _('Delete a survey dataset')
     template_name = 'surveys/survey_dataset_delete.html'
     context_object_name = 'dataset'
-    model = Dataset
-    success_message = _('Survey was deleted successfully')
+    model = Topic  # TODO: restore to Dataset
+    success_message = _('Dataset was deleted successfully')
 
     def get_success_url(self):
         return reverse('surveys:edit-step-three', kwargs={'pk': self.object.survey.pk})

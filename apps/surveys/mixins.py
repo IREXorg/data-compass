@@ -51,14 +51,16 @@ class SurveyDetailMixin:
         Get topics associated with the survey
         """
         if self.object:
-            return self.object.topics.all()
+            # TODO: restore to self.object.topics.all()
+            return self.object.datasets.all()
 
     def get_datasets(self):
         """
         Get datasets associated with the survey
         """
         if self.object:
-            return self.object.datasets.all()
+            # TODO: restore to self.object.datasets.all()
+            return self.object.topics.all()
 
     def get_dataset_storages(self):
         """
