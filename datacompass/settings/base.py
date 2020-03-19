@@ -361,6 +361,21 @@ LOGGING = {
     }
 }
 
+# Surveys
+
+SURVEYS_DEFAULT_DATASET_FREQUENCIES = env.list('SURVEYS_DEFAULT_DATASET_FREQUENCIES', default=[
+    'Every day',
+    'A few days a week',
+    'A few times a month',
+    'A few times a year',
+])
+
+SURVEYS_DEFAULT_DATASET_ACCESS = env.list('SURVEYS_DEFAULT_DATASET_ACCESS', default=[
+    'Only I or a few people can access',
+    'All staff can access',
+    'Everybody can access',
+])
+
 # Azure
 
 AZURE_ACCOUNT_NAME = env('AZURE_ACCOUNT_NAME', default=None)
