@@ -11,6 +11,8 @@ window._ = require('lodash');
 
 window.Popper = require('popper.js').default;
 
+var ClipboardJS = require('clipboard');
+
 require('bootstrap');
 
 var select2 = require('select2');
@@ -34,12 +36,43 @@ $(document).ready(function() {
 
   // wire select2
   // select2(window.$);
-  $("select:visible[name='country']").select2({theme: 'bootstrap4'});
+  $("select:visible[name='country']").select2({ theme: 'bootstrap4' });
 
   // Alerts
-  $(".page-messages .alert").fadeTo(2000, 500).slideUp(500, function(){
-      $(".page-messages .alert").slideUp(500);
+  $(".page-messages .alert").fadeTo(2000, 500).slideUp(500, function() {
+    $(".page-messages .alert").slideUp(500);
+  });
+
+  // Initialize ClipboardJS
+
+  // Wire clipboard tooltip Tooltip
+
+  $('.btn-copy').tooltip({
+    trigger: 'click',
+    placement: 'bottom'
+  });
+
+  function setTooltip(message) {
+    $('.btn-copy').tooltip('hide')
+      .attr('data-original-title', message)
+      .tooltip('show');
+  }
+
+  function hideTooltip() {
+    setTimeout(function() {
+      $('.btn-copy').tooltip('hide');
+    }, 1000);
+  }
+
+  var clipboard = new ClipboardJS('.btn-copy');
+
+  clipboard.on('success', function(e) {
+    setTooltip('Copied!');
+    hideTooltip();
+  });
+
+  clipboard.on('error', function(e) {
+    setTooltip('Failed!');
+    hideTooltip();
   });
 });
-
-

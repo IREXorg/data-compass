@@ -53,7 +53,7 @@
       <a href="{% url 'surveys:survey-edit-start' survey.pk %}" class="btn btn-primary">{% trans 'Edit Survey' %}</a>
       {% if survey.is_active %}
       <a href="{% url 'surveys:survey-unpublish' survey.pk %}" class="btn btn-secondary">{% trans 'Unpublish Survey' %}</a>
-      <a href="{% url 'respondents:respondent-list' %}?survey={{survey.pk}}" class="btn btn-info">{% trans 'Share Survey' %}</a>
+      <a href="{% url 'surveys:survey-share' survey.pk %}" class="btn btn-info">{% trans 'Share Survey' %}</a>
       {% else %}
       <a href="{% url 'surveys:survey-publish' survey.pk %}" class="btn btn-success">{% trans 'Publish Survey' %}</a>
       {% endif %}

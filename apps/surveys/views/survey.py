@@ -238,6 +238,29 @@ class SurveyPublishView(SuccessMessageMixin, LoginRequiredMixin,
         return reverse('surveys:survey-detail', kwargs={'pk': self.object.pk})
 
 
+class SurveyShareView(SurveyFacilitatorMixin, PageTitleMixin, DetailView):
+    """
+    Share survey view.
+
+    Allow current signin user to share survey ling.
+
+    **Example request**:
+
+    .. code-block::
+
+        GET  /surveys/1234567890/share
+    """
+
+    # Translators: This is survey share page title
+    page_title = _('Share Survey')
+    template_name = 'surveys/survey_share.html'
+    context_object_name = 'survey'
+    model = Survey
+
+    def get_page_title(self):
+        return _('Share') + ' ' + self.object.name
+
+
 class SurveyEditStartView(LoginRequiredMixin, PageTitleMixin, DetailView):
     """
     View survey edit start view.
