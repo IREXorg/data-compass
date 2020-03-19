@@ -100,7 +100,7 @@ Download the source code
 
 .. code:: bash
 
-    git clone https://github.com/IREXorg/data-compass.git
+    git clone https://github.com/tehamalab/datacompass.git
 
 
 Go to project root
