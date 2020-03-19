@@ -38,7 +38,7 @@ urlpatterns = [
     path('surveys/', include('apps.surveys.urls', namespace='surveys')),
     path('respondents/', include('apps.respondents.urls', namespace='respondents')),
     path('responses/', include('apps.responses.urls', namespace='responses')),
-    path('summernote/', include('django_summernote.urls')),
+    path('froala_editor/', include('froala_editor.urls')),
 ]
 
 if settings.DEBUG:
