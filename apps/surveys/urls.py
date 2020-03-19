@@ -25,6 +25,11 @@ urlpatterns = [
     path('<int:survey_pk>/create-respondent/', views.RespondentCreateView.as_view(), name='survey-create-respondent'),
     path('<int:pk>/delete-respondent/', views.RespondentDeleteView.as_view(), name='survey-delete-respondent'),
     path('<int:pk>/update-respondent/', views.RespondentUpdateView.as_view(), name='survey-update-respondent'),
+    path(
+        '<int:pk>/upload-respondents/',
+        views.RespondentsUploadView.as_view(),
+        name='survey-upload-respondents'
+    ),
     # end: survey respondent paths
 
     # start: survey role paths

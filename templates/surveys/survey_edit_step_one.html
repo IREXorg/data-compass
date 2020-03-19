@@ -115,7 +115,7 @@
         </table>
         {# Start: Upload and manage respondent link #}
         <div>
-          <a href="" class="btn btn-link">{% trans 'Bulk Upload' %}</a>
+          <a href="{% url 'surveys:survey-upload-respondents' survey.pk %}?_popup=1" class="btn btn-link related-widget-wrapper-link change-related" aria-label="{% trans 'Upload Respondents' %}" title="{% trans 'Upload Respondents' %}">{% trans 'Bulk Upload' %}</a>
         </div>
         <div>
           <a href="{% url 'respondents:respondent-list' %}?survey={{survey.pk}}" class="btn btn-link">{% trans 'Visit the Manage Respondents page' %}</a>
