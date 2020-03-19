@@ -34,8 +34,8 @@ class DatasetSharedListView(SingleObjectMixin, FacilitatorMixin, PageMixin, CSVR
                 'dataset_response__response__respondent',
                 'dataset_response__response__respondent__gender',
                 'dataset_response__response__respondent__hierarchy',
-                'dataset_response__response__respondent__hierarchy_level',
                 'dataset_response__response__respondent__role',
+                'dataset_response__response__respondent__role__hierarchy_level',
                 'dataset_response__response',
                 'dataset_response__response__survey',
                 'dataset_response__response__survey__project'
@@ -78,9 +78,20 @@ class DatasetSharedListView(SingleObjectMixin, FacilitatorMixin, PageMixin, CSVR
             if role:
                 role_name = role.name
                 role_id = role.id
+
+                # hierarchy level
+                hierarchy_level = role.hierarchy_level
+                if hierarchy_level:
+                    hierarchy_level_name = hierarchy_level.name
+                    hierarchy_level_id = hierarchy_level.id
+                else:
+                    hierarchy_level_name = ''
+                    hierarchy_level_id = None
             else:
                 role_name = ''
                 role_id = None
+                hierarchy_level_name = ''
+                hierarchy_level_id = None
 
             # hierarchy
             hierarchy = obj.dataset_response.response.respondent.hierarchy
@@ -90,15 +101,6 @@ class DatasetSharedListView(SingleObjectMixin, FacilitatorMixin, PageMixin, CSVR
             else:
                 hierarchy_name = ''
                 hierarchy_id = None
-
-            # hierarchy level
-            hierarchy_level = obj.dataset_response.response.respondent.hierarchy_level
-            if hierarchy_level:
-                hierarchy_level_name = hierarchy_level.name
-                hierarchy_level_id = hierarchy_level.id
-            else:
-                hierarchy_level_name = ''
-                hierarchy_level_id = None
 
             # entity hierarchy level
             entity_hierarchy_level = obj.entity.hierarchy_level
@@ -225,9 +227,20 @@ class DatasetStorageAccessListView(SingleObjectMixin, FacilitatorMixin, PageMixi
             if role:
                 role_name = role.name
                 role_id = role.id
+
+                # hierarchy level
+                hierarchy_level = role.hierarchy_level
+                if hierarchy_level:
+                    hierarchy_level_name = hierarchy_level.name
+                    hierarchy_level_id = hierarchy_level.id
+                else:
+                    hierarchy_level_name = ''
+                    hierarchy_level_id = None
             else:
                 role_name = ''
                 role_id = None
+                hierarchy_level_name = ''
+                hierarchy_level_id = None
 
             # hierarchy
             hierarchy = obj.response.dataset_response.response.respondent.hierarchy
@@ -237,15 +250,6 @@ class DatasetStorageAccessListView(SingleObjectMixin, FacilitatorMixin, PageMixi
             else:
                 hierarchy_name = ''
                 hierarchy_id = None
-
-            # hierarchy level
-            hierarchy_level = obj.response.dataset_response.response.respondent.hierarchy_level
-            if hierarchy_level:
-                hierarchy_level_name = hierarchy_level.name
-                hierarchy_level_id = hierarchy_level.id
-            else:
-                hierarchy_level_name = ''
-                hierarchy_level_id = None
 
             yield (
                 obj.id,
@@ -346,9 +350,20 @@ class DatasetResponseListView(SingleObjectMixin, FacilitatorMixin, PageMixin, CS
             if role:
                 role_name = role.name
                 role_id = role.id
+
+                # hierarchy level
+                hierarchy_level = role.hierarchy_level
+                if hierarchy_level:
+                    hierarchy_level_name = hierarchy_level.name
+                    hierarchy_level_id = hierarchy_level.id
+                else:
+                    hierarchy_level_name = ''
+                    hierarchy_level_id = None
             else:
                 role_name = ''
                 role_id = None
+                hierarchy_level_name = ''
+                hierarchy_level_id = None
 
             # hierarchy
             hierarchy = obj.response.respondent.hierarchy
@@ -358,15 +373,6 @@ class DatasetResponseListView(SingleObjectMixin, FacilitatorMixin, PageMixin, CS
             else:
                 hierarchy_name = ''
                 hierarchy_id = None
-
-            # hierarchy level
-            hierarchy_level = obj.response.respondent.hierarchy_level
-            if hierarchy_level:
-                hierarchy_level_name = hierarchy_level.name
-                hierarchy_level_id = hierarchy_level.id
-            else:
-                hierarchy_level_name = ''
-                hierarchy_level_id = None
 
             yield (
                 obj.id,
