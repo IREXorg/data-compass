@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from apps.respondents.models import Respondent
 from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
-from ..forms import RespondentCreateForm, RespondentUpdateForm
+from ..forms import RespondentCreateForm, RespondentsUploadForm, RespondentUpdateForm
 from ..mixins import BasePopupModelFormMixin, CreatorMixin
 from ..models import Survey
 
@@ -107,3 +107,41 @@ class RespondentDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMix
 
     def get_success_url(self):
         return reverse('surveys:edit-step-one', kwargs={'pk': self.object.survey.pk})
+
+
+class RespondentsUploadView(SuccessMessageMixin, LoginRequiredMixin,
+                            PageTitleMixin, BasePopupModelFormMixin, UpdateView):
+    """
+    Upload survey respondents view.
+
+    Allow current signin user to upload survey respondents and
+    redirect to survey respondents edit page.
+
+    **Example request**:
+
+    .. code-block:: http
+
+        POST  /surveys/1234567890/upload-respondents
+    """
+
+    # Translators: This is survey respondents upload page title
+    page_title = _('Upload survey respondents')
+    template_name = 'surveys/survey_respondent_upload.html'
+    context_object_name = 'survey'
+    model = Survey
+    form_class = RespondentsUploadForm
+    success_message = _('Respondents was uploaded successfully')
+
+    def get_form_kwargs(self):
+        """
+        Add current use to form class initialization arguments
+        """
+        form_kwargs = super().get_form_kwargs()
+        if self.request.user:
+            form_kwargs['creator'] = self.request.user
+        return form_kwargs
+
+    # TODO: ensure creator
+
+    def get_success_url(self):
+        return reverse('surveys:edit-step-one', kwargs={'pk': self.object.pk})
