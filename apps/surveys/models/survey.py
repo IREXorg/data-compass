@@ -133,20 +133,6 @@ class Survey(TimeStampedModel):
         choices=YES_NO_CHOICES
     )
 
-    #: Default data flow hierarchy level to be applied to all respondents
-    #
-    #: This is applicable when user(`facilitator`) explicitly apply
-    #: one system hierarchy level to all respondents.
-    default_hierarchy = models.ForeignKey(
-        'surveys.DataflowHierarchy',
-        verbose_name=_('default hierarchy'),
-        related_name='default_hierarchies',
-        related_query_name='default_hierarchy',
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
-
     #: Flag whether survey respondents must login.
     login_required = models.BooleanField(
         _('login required'),
