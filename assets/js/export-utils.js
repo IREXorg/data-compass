@@ -1,19 +1,34 @@
 /* eslint-disable */
 
-$('.btn-export-csv').click(function() {
+function exportFilteredCSV(el) {
   var form = '#master-filter';
-  var tmpInputId = '_tmp-input';
+  var tmpInputClass = '_tmp-input';
+  var exportType = $(el).data('exportType');
+  console.log(exportType);
 
   $("<input />")
     .attr("type", "hidden")
     .attr("name", "format")
     .attr("value", "csv")
-    .attr("id", tmpInputId)
+    .addClass(tmpInputClass)
     .appendTo(form);
 
-  $(form).submit();
-  $('#' + tmpInputId).remove();
+  if (exportType) {
+    $("<input />")
+      .attr("type", "hidden")
+      .attr("name", "export_type")
+      .attr("value", exportType)
+      .addClass(tmpInputClass)
+      .appendTo(form);
+  }
 
+  $(form).submit();
+  $('.' + tmpInputClass).remove();
+}
+
+
+$('.action-export-csv').click(function() {
+  exportFilteredCSV(this);
 });
 
 /* eslint-enable */
