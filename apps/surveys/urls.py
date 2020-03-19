@@ -12,6 +12,7 @@ urlpatterns = [
     path('<int:pk>/delete/', views.SurveyDeleteView.as_view(), name='survey-delete'),
     path('<int:pk>/unpublish/', views.SurveyUnpublishView.as_view(), name='survey-unpublish'),
     path('<int:pk>/publish/', views.SurveyPublishView.as_view(), name='survey-publish'),
+    path('<int:pk>/share/', views.SurveyShareView.as_view(), name='survey-share'),
     path('<int:pk>/edit-start/', views.SurveyEditStartView.as_view(), name='survey-edit-start'),
     path('<int:pk>/edit-step-one/', views.SurveyEditStepOneView.as_view(), name='survey-edit-step-one'),
     path('<int:pk>/edit-step-two/', views.SurveyEditStepTwoView.as_view(), name='survey-edit-step-two'),

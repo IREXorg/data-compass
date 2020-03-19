@@ -66,14 +66,7 @@ class Question(TimeStampedModel):
     TYPE_CHOICES = (
         (INTEGER, _('integer')),
         (DECIMAL, _('decimal')),
-        (TEXT, _('text')),
-        (SELECT_ONE, _('select one')),
-        (SELECT_MULTIPLE, _('select multiple')),
-        (DATE, _('date')),
-        (TIME, _('time')),
-        (DATETIME, _('date & time')),
-        (IMAGE, _('image')),
-        (FILE, _('file'))
+        (TEXT, _('text')),  # TODO: rename to Open ended
     )
 
     #: Global unique identifier for a question.
