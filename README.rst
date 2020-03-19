@@ -100,14 +100,14 @@ Download the source code
 
 .. code:: bash
 
-    git clone https://github.com/IREXorg/data-compass.git
+    git clone https://github.com/tehamalab/datacompass.git
 
 
 Go to project root
 
 .. code:: bash
 
-    cd data-compass
+    cd datacompass
 
 
 make sure your python virtual environment is active then use pip to install project requirements.
