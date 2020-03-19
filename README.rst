@@ -107,7 +107,7 @@ Go to project root
 
 .. code:: bash
 
-    cd datacompass
+    cd data-compass
 
 
 make sure your python virtual environment is active then use pip to install project requirements.
