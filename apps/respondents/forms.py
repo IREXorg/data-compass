@@ -54,7 +54,7 @@ class ResponseRespondentForm(RespondentForm):
 
     class Meta:
         model = Respondent
-        fields = ['first_name', 'last_name', 'email', 'gender', 'role', 'hierarchy']
+        fields = ['first_name', 'last_name', 'email', 'gender', 'hierarchy', 'role']
 
     def __init__(self, survey=None, project=None, *args, **kwargs):
         super().__init__(survey=survey, project=project, *args, **kwargs)
