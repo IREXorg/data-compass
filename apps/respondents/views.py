@@ -122,7 +122,7 @@ class RespondentConsentView(PageMixin, RespondentSurveyMixin, FormView):
         """
         user = self.request.user
         email = self.request.GET.get('email')
-        if user and not email:
+        if user.is_authenticated and not email:
             email = user.email
 
         return {'user': user, 'email': email}
