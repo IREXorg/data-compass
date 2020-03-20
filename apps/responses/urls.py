@@ -68,6 +68,11 @@ urlpatterns = [
         name='dataset-received-list'
     ),
     path(
+        '<int:survey>/datasets-shared-received',
+        views.DatasetSharedReceivedListView.as_view(),
+        name='dataset-shared-received-list'
+    ),
+    path(
         '<int:survey>/datasets-storage',
         views.DatasetStorageAccessListView.as_view(),
         name='dataset-storage-access-list'
