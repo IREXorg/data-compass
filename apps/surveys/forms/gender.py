@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm
+from django.utils.text import slugify
 from django.utils.translation import ugettext_lazy as _
 
 from apps.users.models import Gender
@@ -27,7 +28,14 @@ class GenderCreateForm(ModelForm):
             self.initial['survey'] = survey.pk
 
     def save(self, commit=True):
-        gender = super().save(commit=commit)
+        # check if already exists
+        name = self.cleaned_data.get('name')
+        code = slugify(name)
+        gender = Gender.objects.filter(code=code).first()
+
+        # create new gender
+        if not gender:
+            gender = super().save(commit=commit)
 
         # link gender to survey
         survey_pk = self.cleaned_data.get('survey')
