@@ -72,10 +72,11 @@
       {% csrf_token %}
 
       {# Start: Survey respondents crud #}
-      <div class="form-group">
-        <label for="id_respondents">
+      <div class="form-group" id="id_respondents">
+        <label for="id_respondents" class="requiredField">
           {% trans 'Who will you invite to take the survey?' %}
         </label>
+        <span class="asteriskField">*</span>
         <div>
           <small id="hint_id_respondents" class="form-text text-muted">
             {% trans 'To help you aggregate results later on, each respondent should be tagged to a System Hierarchy level. This hierarchy is pulled from your Project' %}
@@ -129,9 +130,10 @@
       {{ form.allow_respondent_hierarchy_levels|as_crispy_field }}
 
       {# Start: Survey roles crud #}
-      <div class="form-group">
-        <label for="id_roles">
+      <div class="form-group" id="id_roles">
+        <label for="id_roles" class="requiredField">
           {% trans 'What are all the possible roles of respondents?' %}
+          <span class="asteriskField">*</span>
         </label>
         <table class="table table-borderless table-nowrap">
           <tbody>

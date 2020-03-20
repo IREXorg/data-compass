@@ -69,9 +69,10 @@
   <div class="col">
     <form method="POST" action="" enctype="multipart/form-data">
       {# Start: Survey topics crud #}
-      <div class="form-group">
-        <label for="id_topics">
+      <div class="form-group" id="id_topics">
+        <label for="id_topics" class="requiredField">
           {% trans 'Your survey will ask Respondents how they work with data about a specific topic. They will choose that topic from a drop-down list of options that you specify here.' %}
+          <span class="asteriskField">*</span>
         </label>
         <table class="table table-borderless table-nowrap">
           <tbody>

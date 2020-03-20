@@ -1,4 +1,7 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+# from django.db.models import Count
+from django.shortcuts import redirect
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.detail import DetailView
@@ -187,7 +190,7 @@ class SurveyUnpublishView(SuccessMessageMixin, SurveyFacilitatorMixin,
 
     .. code-block::
 
-        DELETE  /surveys/1234567890/unpublish
+        PUT  /surveys/1234567890/unpublish
     """
 
     # Translators: This is survey unpublish page title
@@ -218,7 +221,7 @@ class SurveyPublishView(SuccessMessageMixin, LoginRequiredMixin,
 
     .. code-block::
 
-        DELETE  /surveys/1234567890/publish
+        PUT  /surveys/1234567890/publish
     """
 
     # Translators: This is survey publish page title
@@ -229,13 +232,83 @@ class SurveyPublishView(SuccessMessageMixin, LoginRequiredMixin,
     form_class = SurveyPublishForm
     success_message = _('Survey was published successfully')
 
-    def form_valid(self, form):
-        # TODO: check all required conditions and redirect accordingly
-        form.instance.is_active = True
-        return super().form_valid(form)
-
     def get_success_url(self):
         return reverse('surveys:survey-detail', kwargs={'pk': self.object.pk})
+
+    def show_error_message(self, message):
+        # notify why survey publish was not successful
+        messages.error(self.request, message)
+
+    def form_valid(self, form):
+        # Ensure survey has respondents before publishing
+        respondents_count = self.object.respondents.count()
+        if not respondents_count or respondents_count == 0:
+            message = _('Failed to publish a survey. '
+                        'Respondents are missing. Please add respondents to a survey.')
+            self.show_error_message(message)
+            to_url = '{}#id_respondents'.format(reverse('surveys:survey-edit-step-one', kwargs={'pk': self.object.pk}))
+            return redirect(to_url)
+
+        # Ensure survey has roles before publishing
+        roles_count = self.object.roles.count()
+        if not roles_count or roles_count == 0:
+            message = _('Failed to publish a survey. '
+                        'Roles are missing. Please add roles to a survey.')
+            self.show_error_message(message)
+            to_url = '{}#id_roles'.format(reverse('surveys:survey-edit-step-one', kwargs={'pk': self.object.pk}))
+            return redirect(to_url)
+
+        # Ensure survey has topics before publishing
+        topics_count = self.object.datasets.count()  # TODO: restore to Topic
+        if not topics_count or topics_count == 0:
+            message = _('Failed to publish a survey. '
+                        'Topics are missing. Please add topics to a survey.')
+            self.show_error_message(message)
+            to_url = '{}#id_topics'.format(reverse('surveys:survey-edit-step-two', kwargs={'pk': self.object.pk}))
+            return redirect(to_url)
+
+        # Ensure survey has datasets before publishing
+        datasets_count = self.object.topics.count()  # TODO: restore to Dataset
+        if not datasets_count or datasets_count == 0:
+            message = _('Failed to publish a survey. '
+                        'Datasets are missing. Please add datasets to a survey.')
+            self.show_error_message(message)
+            to_url = '{}#id_datasets'.format(reverse('surveys:survey-edit-step-three', kwargs={'pk': self.object.pk}))
+            return redirect(to_url)
+
+        # Ensure survey has entities before publishing
+        entities_count = self.object.entities.count()
+        if not entities_count or entities_count == 0:
+            message = _('Failed to publish a survey. '
+                        'Entities are missing. Please add entities to a survey.')
+            self.show_error_message(message)
+            to_url = '{}#id_entities'.format(reverse('surveys:survey-edit-step-four', kwargs={'pk': self.object.pk}))
+            return redirect(to_url)
+
+        # Ensure survey has dataset storages before publishing
+        dataset_storages_count = self.object.dataset_storages.count()
+        if not dataset_storages_count or dataset_storages_count == 0:
+            message = _('Failed to publish a survey. '
+                        'Dataset storages are missing. '
+                        'Please add dataset storages to a survey.')
+            self.show_error_message(message)
+            to_url = '{}#id_dataset_storages'.format(
+                reverse('surveys:survey-edit-step-five', kwargs={'pk': self.object.pk})
+            )
+            return redirect(to_url)
+
+        # Ensure survey has genders before publishing
+        genders_count = self.object.genders.count()
+        if not genders_count or genders_count == 0:
+            message = _('Failed to publish a survey. '
+                        'Genders are missing. Please add genders to a survey.')
+            self.show_error_message(message)
+            to_url = '{}#id_genders'.format(reverse('surveys:survey-edit-step-six', kwargs={'pk': self.object.pk}))
+            return redirect(to_url)
+
+        # publish survey
+        form.instance.is_active = True
+        return super().form_valid(form)
 
 
 class SurveyShareView(SurveyFacilitatorMixin, PageTitleMixin, DetailView):

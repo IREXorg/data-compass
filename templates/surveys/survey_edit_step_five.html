@@ -69,12 +69,13 @@
   <div class="col">
     <form method="POST" action="" enctype="multipart/form-data">
       {# Start: Dataset Storages crud #}
-      <div class="form-group">
-        <label for="id_storages">
+      <div class="form-group" id="id_dataset_storages">
+        <label for="id_dataset_storages" class="requiredField">
           {% trans 'What information systems do you want respondents to be able to select when they take survey?' %}
+          <span class="asteriskField">*</span>
         </label>
         <div>
-          <small id="hint_id_entities" class="form-text text-muted">
+          <small id="hint_id_dataset_storages" class="form-text text-muted">
             {% trans 'Information systems are places that store information.' %}
           </small>
         </div>

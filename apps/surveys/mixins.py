@@ -92,10 +92,10 @@ class SurveyDetailMixin:
 
     def get_respondents(self):
         """
-        Get respondents associated with the survey
+        Get respondents associated with the survey but limit to 5
         """
         if self.object:
-            return self.object.respondents.all()
+            return self.object.respondents.all()[:5]
 
     def get_questions(self):
         """

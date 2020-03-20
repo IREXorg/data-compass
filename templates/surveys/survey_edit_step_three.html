@@ -69,9 +69,10 @@
   <div class="col">
     <form method="POST" action="" enctype="multipart/form-data">
       {# Start: Survey datasets crud #}
-      <div class="form-group">
-        <label for="id_datasets">
+      <div class="form-group" id="id_datasets">
+        <label for="id_datasets" class="requiredField">
           {% trans 'Respondents will share how they use or share data about each topic. What specific kind of data do you want them to share about?' %}
+          <span class="asteriskField">*</span>
         </label>
         <table class="table table-borderless table-nowrap">
           <tbody>

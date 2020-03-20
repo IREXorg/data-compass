@@ -96,6 +96,12 @@ class SurveyEditStepOneForm(ModelForm):
             ),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.required = True
+
 
 class SurveyEditStepTwoForm(ModelForm):
     """
@@ -116,6 +122,12 @@ class SurveyEditStepTwoForm(ModelForm):
             ),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.required = True
+
 
 class SurveyEditStepThreeForm(ModelForm):
     """
@@ -130,6 +142,12 @@ class SurveyEditStepThreeForm(ModelForm):
         labels = {
             'allow_respondent_datasets': _('Allow users to add their own options?'),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.required = True
 
 
 class SurveyEditStepFourForm(ModelForm):
@@ -146,6 +164,12 @@ class SurveyEditStepFourForm(ModelForm):
             'allow_respondent_entities': _('Allow respondents to enter their own value here?'),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.required = True
+
 
 class SurveyEditStepFiveForm(ModelForm):
     """
@@ -160,6 +184,12 @@ class SurveyEditStepFiveForm(ModelForm):
         labels = {
             'allow_respondent_storages': _('Allow users to enter their own value here?'),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.required = True
 
 
 class SurveyEditStepSixForm(ModelForm):
