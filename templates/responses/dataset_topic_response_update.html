@@ -24,35 +24,44 @@
           {{ hidden_field }}
         {% endfor %}
 
-      <div class="form-row">
+        <div class="form-row">
 
-        <div class="col-auto">
-          <div class="form-group">
-            <div class="form-check">
-              {{ form.selected|add_class:"form-check-input" }}
+          <div class="col-auto">
+            <div class="form-group">
+              <div class="form-check">
+                {{ form.selected|add_class:"form-check-input" }}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              {% include 'bootstrap4/layout/field_errors_block.html' with field=form.selected %}
+              {% include 'bootstrap4/layout/field_errors_block.html' with field=form.errors %}
+              {{ form.storage|add_class:'d-none' }}
+              {{ form.storage_name }}
+            </div>
+
+          </div>
+
+          <div class="col">
+            <div class="form-group">
+              {% include 'bootstrap4/layout/field_errors_block.html' with field=form.access %}
+              {{ form.access|add_class:'form-control' }}
             </div>
           </div>
         </div>
-
-        <div class="col-sm-4">
-          <div class="form-group">
-            {% include 'bootstrap4/layout/field_errors_block.html' with field=form.selected %}
-            {% include 'bootstrap4/layout/field_errors_block.html' with field=form.errors %}
-            {{ form.storage|add_class:'d-none' }}
-            {{ form.storage_name }}
-          </div>
-
-        </div>
-
-        <div class="col">
-          <div class="form-group">
-            {% include 'bootstrap4/layout/field_errors_block.html' with field=form.access %}
-            {{ form.access|add_class:'form-control' }}
-          </div>
-        </div>
-      </div>
-
       {% endfor %}
+
+      {% if survey.allow_respondent_storages %}
+        <div class="form-group">
+          <a href="{% url 'responses:dataset-storage-create' survey.pk %}?_popup=1"
+             class="small related-widget-wrapper-link change-related">
+            <i class="fas fa-plus"></i> {% trans 'Somewhere else?' %}
+          </a>
+        </div>
+      {% endif %}
+
     </div>
   </div>
 {% endblock %}

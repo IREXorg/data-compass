@@ -1,0 +1,31 @@
+{% extends "layout_plain.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+  <div class="row no-gutters justify-content-md-center">
+    <div class="col-md-8">
+
+      <h1 class="text-center">{{ page_title }}</h1>
+
+      <form method="POST" action="">
+        {% csrf_token %}
+
+        {% block form_intro %}{% endblock %}
+
+        {% block form_fields %}{{ form|crispy }}{% endblock %}
+
+        {% block form_buttons %}
+          <div class="form-group my-3 text-center">
+            <button class="btn btn-success" type="submit">
+              {% trans 'Save' %}
+            </button>
+          </div>
+        {% endblock form_buttons %}
+      </form>
+
+    </div>
+  </div>
+{% endblock %}
