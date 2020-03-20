@@ -144,6 +144,7 @@ class Respondent(TimeStampedModel):
 
     def save(self, *args, **kwargs):
         self.autopopulate_from_user()
+        self.extras['hierarchy_dict'] = self.build_hierarchy_dict()
         super().save(*args, **kwargs)
 
     def autopopulate_from_user(self):
@@ -193,3 +194,16 @@ class Respondent(TimeStampedModel):
             response.save()
 
         return (response, created)
+
+    def build_hierarchy_dict(self):
+        """
+        Returns the hierarchy and ancestors as a dictionary of
+        project hierarchy levels as keys
+        """
+        levels = self.survey.project.hierarchy_levels.values_list('name', flat=True)
+        if not self.hierarchy:
+            return {level: None for level in levels}
+
+        tree = list(self.hierarchy.get_ancestors(include_self=True).values_list('name', flat=True))
+        tree += [None] * (len(levels) - len(tree))
+        return dict(zip(levels, tree))
