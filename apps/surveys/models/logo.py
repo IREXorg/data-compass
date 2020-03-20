@@ -5,6 +5,9 @@ from django.contrib.postgres.fields import JSONField
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFit
+
 from core.models import TimeStampedModel
 
 
@@ -43,6 +46,13 @@ class Logo(TimeStampedModel):
         blank=True,
         null=True,
         upload_to='surveys/logos'
+    )
+
+    image_thumbnail = ImageSpecField(
+        source='image',
+        processors=[ResizeToFit(100, 100)],
+        format='PNG',
+        options={'quality': 100}
     )
 
     #: User who created(or owning) a logo

@@ -96,6 +96,9 @@ class DatasetResponseListCreateView(PageMixin, RespondentSurveyMixin, ConsentChe
         context['survey_response'] = self.survey_response
         return context
 
+    def get_footer_logos(self):
+        return self.survey.logos.all()
+
 
 class BaseDatasetResponseUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, UpdateView):
     """
@@ -141,6 +144,9 @@ class BaseDatasetResponseUpdateView(PageMixin, RespondentSurveyMixin, ConsentChe
     def get_page_title(self):
         return self.survey.display_name
 
+    def get_footer_logos(self):
+        return self.survey.logos.all()
+
 
 class DatasetResponseUpdateFrequencyView(BaseDatasetResponseUpdateView):
     form_class = DatasetResponseFrequencyForm
@@ -166,6 +172,9 @@ class DatasetResponseUpdateFrequencyView(BaseDatasetResponseUpdateView):
         if topic_response:
             return reverse('responses:dataset-topic-response-update', kwargs={'pk': topic_response.pk})
         return self.request.get_full_path()
+
+    def get_footer_logos(self):
+        return self.survey.logos.all()
 
 
 class DatasetTopicSharedUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, FormView):
@@ -243,6 +252,9 @@ class DatasetTopicSharedUpdateView(PageMixin, RespondentSurveyMixin, ConsentChec
 
     def get_page_title(self):
         return self.survey.display_name
+
+    def get_footer_logos(self):
+        return self.survey.logos.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -342,6 +354,9 @@ class DatasetTopicResponseUpdateView(PageMixin, InlineFormsetMixin, RespondentSu
             return self.form_valid(form, formset)
         else:
             return self.form_invalid(form, formset)
+
+    def get_footer_logos(self):
+        return self.survey.logos.all()
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -42,14 +42,20 @@ class PageMixin(PageTitleMixin):
 
     #: Back URL path, for example when user clicks back button on a form.
     back_url_path = None
+    footer_logos = []
 
     def get_back_url_path(self):
         """Override this for dynamic back_path."""
         return self.back_url_path or self.request.META.get('HTTP_REFERER')
 
+    def get_footer_logos(self):
+        """Returns footer logos."""
+        return self.footer_logos
+
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
         ctx.setdefault('back_url_path', self.get_back_url_path())
+        ctx.setdefault('footer_logos', self.get_footer_logos())
         return ctx
 
 

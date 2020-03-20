@@ -127,6 +127,9 @@ class RespondentConsentView(PageMixin, RespondentSurveyMixin, FormView):
 
         return {'user': user, 'email': email}
 
+    def get_footer_logos(self):
+        return self.survey.logos.all()
+
 
 class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, UpdateView):
     """
@@ -206,3 +209,6 @@ class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, 
 
     def get_back_url_path(self):
         return reverse('respondents:respondent-consent', kwargs={'survey': self.survey.pk})
+
+    def get_footer_logos(self):
+        return self.survey.logos.all()
