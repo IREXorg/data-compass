@@ -103,6 +103,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.request',
+                'datacompass.context_processors.site',
             ],
         },
     },
@@ -387,3 +388,7 @@ AZURE_STATIC_LOCATION = env('AZURE_STATIC_LOCATION', default='static')
 AZURE_MEDIA_LOCATION = env('AZURE_MEDIA_LOCATION', default='media')
 
 AZURE_CUSTOM_DOMAIN = env('AZURE_CUSTOM_DOMAIN', default=None)
+
+# Google Analytics
+
+GOOGLE_ANALYTICS_TRACKING_ID = env('GOOGLE_ANALYTICS_TRACKING_ID', default='')
