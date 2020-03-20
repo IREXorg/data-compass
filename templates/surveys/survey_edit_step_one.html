@@ -72,7 +72,7 @@
       {% csrf_token %}
 
       {# Start: Survey respondents crud #}
-      <div class="form-group">
+      <div class="form-group" id="id_respondents">
         <label for="id_respondents">
           {% trans 'Who will you invite to take the survey?' %}
         </label>
@@ -129,7 +129,7 @@
       {{ form.allow_respondent_hierarchy_levels|as_crispy_field }}
 
       {# Start: Survey roles crud #}
-      <div class="form-group">
+      <div class="form-group" id="id_roles">
         <label for="id_roles">
           {% trans 'What are all the possible roles of respondents?' %}
         </label>
