@@ -71,8 +71,9 @@
       {% csrf_token %}
 
       <div class="form-group">
-        <label for="id_collects">
+        <label for="id_collects" class="requiredField">
           {% trans 'By default survey will collect:' %}
+          <span class="asteriskField">*</span>
         </label>
 
         {{ form.allow_collect_email|as_crispy_field }}
@@ -85,8 +86,9 @@
 
       {# Start: Survey genders crud #}
       <div class="form-group" id="id_genders">
-        <label for="id_genders">
+        <label for="id_genders" class="requiredField">
           {% trans 'What options should respondents select when asked about their gender?' %}
+          <span class="asteriskField">*</span>
         </label>
         <table class="table table-borderless table-nowrap">
           <tbody>

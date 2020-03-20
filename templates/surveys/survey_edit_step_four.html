@@ -71,8 +71,9 @@
 
       {# Start: Survey entities crud #}
       <div class="form-group" id="id_entities">
-        <label for="id_entities">
+        <label for="id_entities" class="requiredField">
           {% trans 'What entities do you want respondents to be able to select when they take survey?' %}
+          <span class="asteriskField">*</span>
         </label>
         <div>
           <small id="hint_id_entities" class="form-text text-muted">
