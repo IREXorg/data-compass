@@ -2,7 +2,15 @@
 Data Compass
 ============
 
-Data Flow Mapping.
+Thanks for your interest in using the Data Compass software, which is part of IREX's Data Compass tool.
+The Data Compass tool helps teams and organizations improve their strategic use of data.
+As part of that tool, this software helps them survey and analyze how data flows between actors in a system.
+This software source code is made available under an Affero General Public License, and you're invited
+to modify and use it for your needs.
+
+If you would like to use the software without deploying it yourself,
+please contact IREX for a license to use their readily available software.
+IREX is a global development and education organization. Please contact cali@irex.org with inquiries.
 
 
 Installation
