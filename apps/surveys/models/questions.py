@@ -86,15 +86,6 @@ class Question(TimeStampedModel):
         on_delete=models.CASCADE
     )
 
-    #: Question group under which a question belongs to.
-    group = models.ForeignKey(
-        'surveys.QuestionGroup',
-        related_name='questions',
-        related_query_name='question',
-        verbose_name=_('group'),
-        on_delete=models.CASCADE
-    )
-
     #: System processable variable name of a question.
     name = models.SlugField(_('field name'), blank=True)
 

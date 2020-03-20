@@ -1,10 +1,13 @@
+import json
+
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.template.response import TemplateResponse
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from apps.users.models import Gender
-from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
+from core.mixins import PageTitleMixin, PopupTemplateMixin, SuccessMessageMixin
 
 from ..forms import GenderCreateForm, GenderUpdateForm
 from ..mixins import BasePopupModelFormMixin
@@ -84,7 +87,7 @@ class GenderUpdateView(SuccessMessageMixin, LoginRequiredMixin,
 
 
 class GenderDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
-                       PopupDeleteMixin, DeleteView):
+                       PopupTemplateMixin, DeleteView):
     """
     Delete survey gender view
 
@@ -107,3 +110,38 @@ class GenderDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
 
     def get_success_url(self):
         return reverse('surveys:edit-step-six', kwargs={'pk': self.object.survey.pk})
+
+    def get_survey(self):
+        """
+        Get survey to diassociate a gender from url query parameters
+        """
+        survey_pk = self.request.GET.get('survey', None)
+        if survey_pk:
+            return Survey.objects.get(pk=survey_pk)
+
+    def delete(self, request, *args, **kwargs):
+
+        survey = self.get_survey()
+
+        if self.is_popup():
+            self.object = self.get_object()
+
+            if survey or self.object.is_primary:
+                # di-associate primary gender
+                # and prevent delete shared genders
+                survey.genders.remove(self.object)
+            else:
+                # delete non-primary and non-shared gender
+                self.object.delete()
+
+            popup_response_data = json.dumps({
+                'action': 'delete_object',
+            })
+
+            return TemplateResponse(
+                self.request,
+                'core/popup_response.html',
+                {'popup_response_data': popup_response_data}
+            )
+
+        return super().delete(request, *args, **kwargs)

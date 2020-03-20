@@ -21,6 +21,7 @@
     <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
     <link href="{% static 'main.css' %}" rel="stylesheet">
+    {{ form.media }} {# Froala Editor #}
   </head>
 
   <body class="antialiased {% block body_class %}{% endblock %}">
@@ -29,13 +30,10 @@
       <script src="{% static 'main.js' %}"></script>
 
       {{ form.media.js }} {# Select2 js #}
-      <script type="text/javascript">
-        // initSummernote()
-      </script>
 
-      <!-- Google analytics -->
+      {# Google analytics #}
       <script type="text/javascript">
-        // Place google analytics scripts here.
+         // Place google analytics scripts here.
       </script>
       {% block extra_js %}{% endblock %}
   </body>

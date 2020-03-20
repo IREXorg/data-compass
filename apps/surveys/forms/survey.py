@@ -2,9 +2,9 @@ from django import forms
 from django.forms import ModelForm
 from django.utils.translation import ugettext_lazy as _
 
-from ..models import Survey
+from froala_editor.widgets import FroalaEditor
 
-# from django_summernote.widgets import SummernoteInplaceWidget
+from ..models import Survey
 
 
 class SurveyCreateForm(ModelForm):
@@ -173,8 +173,8 @@ class SurveyEditStepSixForm(ModelForm):
             'allow_collect_gender', 'introduction_text', 'closing_text'
         ]
         widgets = {
-            'introduction_text': forms.Textarea(attrs={'rows': 2}),
-            'closing_text': forms.Textarea(attrs={'rows': 2}),
+            'introduction_text': FroalaEditor(),
+            'closing_text': FroalaEditor(),
         }
         labels = {
             'introduction_text': _('Introduction text:'),
