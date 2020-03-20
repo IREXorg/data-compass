@@ -129,9 +129,10 @@
       {# End: Survey genders crud #}
 
       {# Start: Survey questions crud #}
-      <div class="form-group">
-        <label for="id_logos">
+      <div class="form-group" id="id_questions">
+        <label for="id_questions" class="requiredField">
           {% trans 'Additionally, you can add up to three questions to collect relevant information about users.' %}
+          <span class="asteriskField">*</span>
         </label>
         <table class="table table-borderless table-nowrap">
           <tbody>
@@ -177,9 +178,10 @@
       {{ form.closing_text|as_crispy_field }}
 
       {# Start: Survey logos crud #}
-      <div class="form-group">
-        <label for="id_logos">
+      <div class="form-group" id="id_logos">
+        <label for="id_logos" class="requiredField">
           {% trans 'Add logos(s) to the survey footer' %}
+          <span class="asteriskField">*</span>
         </label>
         <table class="table table-borderless table-nowrap">
           <tbody>
