@@ -122,10 +122,13 @@ class RespondentConsentView(PageMixin, RespondentSurveyMixin, FormView):
         """
         user = self.request.user
         email = self.request.GET.get('email')
-        if user and not email:
+        if user.is_authenticated and not email:
             email = user.email
 
         return {'user': user, 'email': email}
+
+    def get_footer_logos(self):
+        return self.survey.logos.all()
 
 
 class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, UpdateView):
@@ -206,3 +209,6 @@ class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, 
 
     def get_back_url_path(self):
         return reverse('respondents:respondent-consent', kwargs={'survey': self.survey.pk})
+
+    def get_footer_logos(self):
+        return self.survey.logos.all()

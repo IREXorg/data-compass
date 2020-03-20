@@ -158,6 +158,9 @@ class SurveyResponseCompleteView(PageMixin, RespondentSurveyMixin, ConsentCheckM
 
         return '#'
 
+    def get_footer_logos(self):
+        return self.survey.logos.all()
+
 
 class SurveyResponseDetailView(LoginRequiredMixin, PageMixin, DetailView):
     template_name = 'responses/survey_response_detail.html'

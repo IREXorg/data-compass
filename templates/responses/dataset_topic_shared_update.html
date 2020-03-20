@@ -55,6 +55,15 @@
       </div>
 
       {% endfor %}
+
+      {% if survey.allow_respondent_entities %}
+        <div class="form-group">
+          <a href="{% url 'responses:entity-create' survey.pk %}?_popup=1"
+             class="small related-widget-wrapper-link change-related">
+            <i class="fas fa-plus"></i> {% trans 'Someone else?' %}
+          </a>
+        </div>
+      {% endif %}
     </div>
 
   </div>

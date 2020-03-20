@@ -64,6 +64,9 @@ class RespondentSurveyMixin:
     #: URL parameter to be used for to provide a survey lookup value
     survey_lookup_url_kwarg = 'survey'
 
+    def get_survey_queryset(self):
+        return Survey.objects.active()
+
     def get_survey(self, queryset=None):
         """
         Return survey object from queryset.
@@ -83,7 +86,7 @@ class RespondentSurveyMixin:
             )
 
         # get survey object matching the query
-        queryset = queryset or Survey.objects.active()
+        queryset = queryset or self.get_survey_queryset()
         try:
             survey = queryset.get(**{self.survey_lookup_field: slug})
         except Survey.DoesNotExist:
@@ -105,3 +108,14 @@ class RespondentSurveyMixin:
                 not self.request.user.is_authenticated
                 or not survey.respondents.filter(user=self.request.user).exists()):
             raise PermissionDenied(_('You are not allowed to take this survey'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        if hasattr(self, 'survey'):
+            survey = self.survey
+        else:
+            survey = self.get_survey()
+        context.setdefault('survey', survey)
+
+        return context

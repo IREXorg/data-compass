@@ -50,11 +50,21 @@ class RespondentForm(forms.ModelForm):
 
 class ResponseRespondentForm(RespondentForm):
 
-    hierarchy = TreeNodeChoiceField(queryset=None)
+    hierarchy = TreeNodeChoiceField(
+        label=_('What is your hierarchy?'),
+        queryset=None
+    )
 
     class Meta:
         model = Respondent
         fields = ['first_name', 'last_name', 'email', 'gender', 'hierarchy', 'role']
+        labels = {
+            'first_name': _('What is your first name?'),
+            'last_name': _('What is your last name?'),
+            'email': _('What is your email address?'),
+            'gender': _('What is your gender?'),
+            'role': _('What is your role at your organization?'),
+        }
 
     def __init__(self, survey=None, project=None, *args, **kwargs):
         super().__init__(survey=survey, project=project, *args, **kwargs)

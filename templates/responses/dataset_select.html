@@ -1,1 +1,15 @@
 {% extends 'responses/base_response_form.html' %}
+{% load crispy_forms_tags %}
+
+{% block form_fields %}
+  {{ form|crispy }}
+
+  {% if survey.allow_respondent_topics %}
+    <div class="form-group">
+      <a href="{% url 'responses:dataset-create' survey.pk %}?_popup=1"
+         class="small related-widget-wrapper-link change-related">
+        <i class="fas fa-plus"></i> Add another option
+      </a>
+    </div>
+  {% endif %}
+{% endblock %}

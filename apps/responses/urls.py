@@ -56,6 +56,23 @@ urlpatterns = [
         name='dataset-response-update-received'
     ),
 
+    # user options
+    path(
+        '<int:survey>/create-dataset',
+        views.DatasetCreateView.as_view(),
+        name='dataset-create'
+    ),
+    path(
+        '<int:survey>/create-entity',
+        views.EntityCreateView.as_view(),
+        name='entity-create'
+    ),
+    path(
+        '<int:survey>/create-storage',
+        views.DatasetStorageCreateView.as_view(),
+        name='dataset-storage-create'
+    ),
+
     # exports
     path(
         '<int:survey>/datasets-shared',

@@ -5,8 +5,8 @@
 
 
 {% block content %}
-  <div class="overflow-auto bg-light border col-md-8 mb-3">
-    {{ survey.introduction_text|linebreaks }}
+  <div class="overflow-auto bg-light border col-md-8 mb-3 p-4">
+    {{ survey.introduction_text|safe }}
   </div>
 
   <div class="row no-gutters">
