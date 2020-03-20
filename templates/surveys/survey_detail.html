@@ -67,6 +67,7 @@
             <div class="dropdown-menu">
               <a class="dropdown-item" href="{% url 'responses:dataset-shared-list' survey.pk %}">{% trans 'Entities & information shared to' %}</a>
               <a class="dropdown-item" href="{% url 'responses:dataset-received-list' survey.pk %}">{% trans 'Entities & information received from' %}</a>
+              <a class="dropdown-item" href="{% url 'responses:dataset-shared-received-list' survey.pk %}">{% trans 'Entities & information shared & received' %}</a>
               <a class="dropdown-item" href="{% url 'responses:dataset-storage-access-list' survey.pk %}">{% trans 'Information storage & access' %}</a>
               <a class="dropdown-item" href="{% url 'responses:dataset-response-list' survey.pk %}">{% trans 'Information encounter frequency' %}</a>
             </div>
