@@ -80,6 +80,7 @@ class User(AbstractUser):
         'users.Gender',
         blank=True,
         null=True,
+        limit_choices_to={'is_primary': True},
         related_name='users',
         related_query_name='user',
         on_delete=models.SET_NULL,
