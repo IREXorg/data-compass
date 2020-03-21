@@ -23,4 +23,5 @@ class UserAdmin(CoreUserAdmin):
     # add custom permission flags
     fieldsets[2][1]['fields'] += ('is_respondent', 'is_facilitator')
 
-    list_filter = CoreUserAdmin.list_filter + ('gender', )
+    list_filter = CoreUserAdmin.list_filter + ('gender',)
+    list_display = CoreUserAdmin.list_display + ('user_type',)
