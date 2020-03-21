@@ -24,9 +24,11 @@ class SurveyAdmin(CreatorAdmin):
     search_fields = ['id', 'uuid', 'name', 'code']
     readonly_fields = ['id', 'uuid', 'created_at', 'modified_at']
     list_display = ['pk', 'name', 'research_question', 'is_active']
+    list_display_links = ['pk', 'name']
     list_filter = ['is_active', 'created_at']
     autocomplete_fields = ['creator', 'project']
     prepopulated_fields = {'code': ['name']}
+    filter_horizontal = ['genders']
 
 
 @admin.register(HierarchyLevel)
