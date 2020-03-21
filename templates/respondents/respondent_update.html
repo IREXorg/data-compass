@@ -1,1 +1,70 @@
 {% extends 'responses/base_response_form.html' %}
+
+{% load i18n %}
+
+{% load crispy_forms_tags %}
+
+{% load datacompass %}
+
+
+{% block form_fields %}
+  {% for field in form %}
+
+    {% if field.name == 'hierarchy' %}
+      {{ field|as_crispy_field }}
+      <div class="hierarchy-selects">
+        {% include 'bootstrap4/layout/field_errors_block.html' %}
+        {% for level in hierarchy_levels %}
+          <div class="form-group">
+            <label for="hierarchy-level-{{ level.level }}">
+              {% blocktrans with level_name=level.name %}What is your {{ level_name }}?{% endblocktrans %}
+              {% if forloop.first %}<span class="asteriskField">*</span>{% endif %}
+            </label>
+            <select class="form-control" id="hierarchy-level-{{ level.level }}"
+                    data-level="{{ level.level }}"
+                    {% if forloop.first %}required{% endif %} >
+              <option value="">-- {% blocktrans with level_name=level.name %}Select {{ level_name }}{% endblocktrans %} --</option>
+              {% for hierarchy in hierarchies %}
+                {% if hierarchy.level == level.level %}
+                  <option value="{{ hierarchy.id }}"
+                      {% if respondent.extras.hierarchy_id_dict|lookup:level.name == hierarchy.id %}
+                        selected
+                      {% endif %}>
+                    {{ hierarchy.name }}
+                  </option>
+                {% endif %}
+              {% endfor %}
+            </select>
+          </div>
+        {% endfor %}
+      </div>
+
+    {% else %}
+
+      {{ field|as_crispy_field }}
+
+    {% endif %}
+
+  {% endfor %}
+{% endblock form_fields %}
+
+
+{% block extra_js %}
+  <script>
+    function updateHierarchy() {
+      var lowestHierarchy = null;
+      $('.hierarchy-selects select').each(function(index) {
+        var val = $(this).val();
+        if (val) {
+          lowestHierarchy = val;
+        }
+      });
+
+      $('#id_hierarchy').val(lowestHierarchy);
+    }
+
+    $('.hierarchy-selects select').change(function() {
+      updateHierarchy();
+    });
+  </script>
+{% endblock extra_js %}

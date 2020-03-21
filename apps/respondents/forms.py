@@ -52,11 +52,6 @@ class RespondentForm(forms.ModelForm):
 
 class ResponseRespondentForm(RespondentForm):
 
-    hierarchy = TreeNodeChoiceField(
-        label=_('What is your hierarchy?'),
-        queryset=None
-    )
-
     class Meta:
         model = Respondent
         fields = ['first_name', 'last_name', 'email', 'gender', 'hierarchy', 'role']
@@ -66,6 +61,9 @@ class ResponseRespondentForm(RespondentForm):
             'email': _('What is your email address?'),
             'gender': _('What is your gender?'),
             'role': _('What is your role at your organization?'),
+        }
+        widgets = {
+            'hierarchy': forms.HiddenInput
         }
 
     def __init__(self, survey=None, project=None, *args, **kwargs):

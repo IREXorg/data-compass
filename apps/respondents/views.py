@@ -212,3 +212,10 @@ class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, 
 
     def get_footer_logos(self):
         return self.survey.logos.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['hierarchy_levels'] = self.survey.project.hierarchy_levels.values('id', 'level', 'name')
+        context['hierarchies'] = self.survey.project.hierarchies.values('id', 'level', 'name', 'parent')
+        return context

@@ -36,3 +36,9 @@ def alert_class(value):
     }
 
     return lookup.get(value, value)
+
+
+@register.filter
+def lookup(value, key):
+    if value:
+        return value.get(key, None)
