@@ -45,6 +45,8 @@ class RespondentForm(forms.ModelForm):
             self.fields['hierarchy_level'].queryset = project.hierarchy_levels.all()
         if 'hierarchy' in self.fields:
             self.fields['hierarchy'].queryset = project.hierarchies.all()
+        if 'gender' in self.fields:
+            self.fields['gender'].queryset = survey.genders.all()
         self.fields['role'].queryset = survey.roles.all()
 
 
