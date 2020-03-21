@@ -7,6 +7,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from core.models import TimeStampedModel
 
+from .entity import Entity
+
 
 class Role(TimeStampedModel):
     """
@@ -72,3 +74,24 @@ class Role(TimeStampedModel):
     def __str__(self):
         """Returns string representation of a role"""
         return self.name
+
+    def save(self, *args, **kwargs):
+
+        # TODO: For some reasons it was suggested Roles should also be available
+        # as entities. Therefore as a temprary fix we are also saving new roles
+        # in  entity model.
+        # Potentially a better solution could be combining Role and Entity modes
+        # to a single model.
+
+        created = not bool(self.pk)
+        super().save(*args, **kwargs)
+
+        if created:
+            Entity(
+                name=self.name,
+                survey=self.survey,
+                hierarchy_level=self.hierarchy_level,
+                description=self.description,
+                creator=self.creator,
+                extras={'_source': 'role', 'role_id': self.pk}
+            ).save()
