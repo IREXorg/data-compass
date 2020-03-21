@@ -91,6 +91,13 @@ class User(AbstractUser):
     is_facilitator = models.BooleanField(_('is facilitator'), default=False)
     is_respondent = models.BooleanField(_('is respondent'), default=False)
 
+    def save(self, *args, **kwargs):
+
+        if not self.is_superuser and not self.is_staff and not self.is_facilitator:
+            self.is_respondent = True
+
+        super().save(*args, **kwargs)
+
     @property
     def user_type(self):
         titles = []
