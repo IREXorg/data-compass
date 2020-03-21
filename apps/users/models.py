@@ -23,7 +23,7 @@ class Gender(TimeStampedModel):
         unique=True
     )
     name = models.CharField(_('name'), max_length=50)
-    code = models.SlugField(_('code'), max_length=255, blank=True, unique=True)
+    code = models.SlugField(_('code'), max_length=255, blank=True)
     is_primary = models.BooleanField(
         _('is primary'),
         default=False,
