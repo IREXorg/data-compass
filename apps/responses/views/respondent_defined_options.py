@@ -9,6 +9,7 @@ from apps.surveys.models import Dataset, DatasetStorage, Entity, Survey
 from core.exceptions import NotAuthenticated
 from core.mixins import PageMixin
 
+from ..forms import EntityCreateForm
 from ..mixins import ConsentCheckMixin, RespondentSurveyMixin
 
 
@@ -87,4 +88,11 @@ class DatasetStorageCreateView(BaseCreateView):
 class EntityCreateView(BaseCreateView):
     page_title = _('Add entity')
     model = Entity
+    fields = None
+    form_class = EntityCreateForm
     allowed_by = 'allow_respondent_entities'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['survey'] = self.survey
+        return kwargs
