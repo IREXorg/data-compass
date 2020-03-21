@@ -105,12 +105,11 @@ class Survey(TimeStampedModel):
         blank=False
     )
 
-    #: Unique slug for the survey.
+    #: A slug for the survey.
     code = models.SlugField(
         _('code'),
         blank=True,
-        allow_unicode=True,
-        unique=True
+        allow_unicode=True
     )
 
     #: Flag whether respondents should not be linked with system hierachy levels.
