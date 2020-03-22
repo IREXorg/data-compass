@@ -71,6 +71,7 @@ class Logo(TimeStampedModel):
     class Meta:
         verbose_name = _('Logo')
         verbose_name_plural = _('Logos')
+        ordering = ['id']
 
     def __str__(self):
         """Returns string representation of a logo"""

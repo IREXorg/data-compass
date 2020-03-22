@@ -28,7 +28,6 @@ django-filter
 django-crispy-forms
 django-active-link
 django-widget-tweaks
-django_select2
 django-summernote
 
 # date parsing, Python < 3.7

@@ -24,7 +24,7 @@ def add_survey_dataset_frequencies(sender, instance, created, **kwargs):
 
     if created:
         for frequency in settings.SURVEYS_DEFAULT_DATASET_FREQUENCIES:
-            instance.dataset_frequencies.create(name=frequency)
+            instance.dataset_frequencies.create(name=frequency, creator=instance.creator)
 
 
 @receiver(post_save, sender=Survey)
@@ -35,4 +35,4 @@ def add_survey_dataset_access(sender, instance, created, **kwargs):
 
     if created:
         for access in settings.SURVEYS_DEFAULT_DATASET_ACCESS:
-            instance.dataset_access.create(name=access)
+            instance.dataset_access.create(name=access, creator=instance.creator)

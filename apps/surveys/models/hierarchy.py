@@ -122,7 +122,7 @@ class DataflowHierarchy(TimeStampedModel, MPTTModel):
     hierarchy_level = models.ForeignKey(
         'surveys.HierarchyLevel',
         on_delete=models.CASCADE,
-        null=True,  # TODO: should be False. Added temprarily for the sake of migrations
+        null=True,
         related_name='hierarchies',
         related_query_name='hierarchy',
     )

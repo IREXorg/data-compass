@@ -59,6 +59,7 @@ class Topic(TimeStampedModel):
     class Meta:
         verbose_name = _('Dataset')
         verbose_name_plural = _('Datasets')
+        ordering = ['id']
 
     def __str__(self):
         """Returns string representation of a topic"""
@@ -125,6 +126,7 @@ class Dataset(TimeStampedModel):
     class Meta:
         verbose_name = _('Topic')
         verbose_name_plural = _('Topics')
+        ordering = ['id']
 
     def __str__(self):
         """Returns string representation of a dataset"""
@@ -163,7 +165,18 @@ class DatasetFrequency(TimeStampedModel):
     #: Human readable name of a dataset frequency.
     name = models.CharField(_('frequency'), max_length=255)
 
-    # TODO: add creator, extras etc.
+    #: User who created a dataset frequency
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_('creator'),
+        blank=True,
+        related_name='created_survey_dataset_frequency',
+        related_query_name='created_survey_dataset_frequencies',
+        on_delete=models.CASCADE
+    )
+
+    #: Extra data.
+    extras = JSONField(_('extras'), blank=True, default=dict)
 
     class Meta:
         verbose_name = _('Dataset frequency')
@@ -207,16 +220,18 @@ class DatasetStorage(TimeStampedModel):
     #: Human readable name of a dataset storage.
     name = models.CharField(_('name'), max_length=255)
 
-    #: User who created(or owning) a dataset storage
+    #: User who created a dataset storage
     creator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name=_('creator'),
         blank=True,
-        null=True,  # TODO: remove this
         related_name='created_survey_dataset_storages',
         related_query_name='created_survey_dataset_storage',
         on_delete=models.CASCADE
     )
+
+    #: Extra data.
+    extras = JSONField(_('extras'), blank=True, default=dict)
 
     class Meta:
         verbose_name = _('Dataset Storage')
@@ -264,7 +279,18 @@ class DatasetAccess(TimeStampedModel):
     #: Human readable name of a dataset access.
     name = models.CharField(_('name'), max_length=255)
 
-    # TODO: add creator, extras etc.
+    #: User who created a dataset access
+    creator = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name=_('creator'),
+        blank=True,
+        related_name='created_survey_dataset_access',
+        related_query_name='created_survey_dataset_access',
+        on_delete=models.CASCADE
+    )
+
+    #: Extra data.
+    extras = JSONField(_('extras'), blank=True, default=dict)
 
     class Meta:
         verbose_name = _('Dataset Access')

@@ -131,7 +131,6 @@ class Respondent(TimeStampedModel):
     #: Extra data
     extras = JSONField(_('extras'), blank=True, default=dict)
 
-    #:
     objects = RespondentManager()
 
     class Meta:

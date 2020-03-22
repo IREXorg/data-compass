@@ -7,7 +7,7 @@
 
 {% block form_extra %}
   {% if dataflow_hierarchy %}
-    <div style="max-height: 200px" class="overflow-auto bg-light my-3">
+    <div style="max-height: 200px" class="overflow-auto bg-light my-3 rounded border">
       <h2 class="border-bottom p-3">{% trans 'Current Data flow hierarchy' %}</h2>
       <ul class="root">
         {% recursetree dataflow_hierarchy %}

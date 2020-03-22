@@ -61,7 +61,6 @@ INSTALLED_APPS = [
     'imagekit',
     'django_filters',
     'active_link',
-    'django_select2',
     'django_summernote',
     'bootstrap_pagination',
     # Custom apps

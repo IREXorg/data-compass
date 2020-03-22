@@ -28,16 +28,6 @@ class Entity(TimeStampedModel):
         unique=True
     )
 
-    #: Project under which an entity belongs to.
-    project = models.ForeignKey(
-        'projects.Project',
-        verbose_name=_('project'),
-        on_delete=models.CASCADE,
-        related_name='entities',
-        related_query_name='entity',
-        null=True,  # TODO: remove this.
-    )
-
     #: Survey under which an entity belongs to.
     survey = models.ForeignKey(
         'surveys.Survey',
@@ -45,7 +35,6 @@ class Entity(TimeStampedModel):
         related_query_name='entity',
         verbose_name=_('survey'),
         on_delete=models.CASCADE,
-        null=True,  # TODO: remove this.
     )
 
     #: Hierarchy level under which an entity belongs to.
@@ -55,7 +44,7 @@ class Entity(TimeStampedModel):
         related_name='entities',
         related_query_name='entity',
         on_delete=models.CASCADE,
-        null=True,  # TODO: remove this.
+        null=True
     )
 
     #: Human readable name of an entity.
@@ -80,6 +69,7 @@ class Entity(TimeStampedModel):
     class Meta:
         verbose_name = _('Entity')
         verbose_name_plural = _('Entities')
+        ordering = ['id']
 
     def __str__(self):
         """Returns string representation of an entity"""

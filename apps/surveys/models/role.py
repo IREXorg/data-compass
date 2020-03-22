@@ -35,7 +35,6 @@ class Role(TimeStampedModel):
         related_query_name='role',
         verbose_name=_('survey'),
         on_delete=models.CASCADE,
-        null=True,  # TODO: remove this.
     )
 
     #: Hierarchy level under which a role belongs to.
@@ -45,7 +44,7 @@ class Role(TimeStampedModel):
         related_name='roles',
         related_query_name='role',
         on_delete=models.CASCADE,
-        null=True,  # TODO: remove this.
+        null=True
     )
 
     #: Human readable name of a role.
@@ -70,6 +69,7 @@ class Role(TimeStampedModel):
     class Meta:
         verbose_name = _('Role')
         verbose_name_plural = _('Roles')
+        ordering = ['id']
 
     def __str__(self):
         """Returns string representation of a role"""

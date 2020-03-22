@@ -37,6 +37,7 @@ $(document).ready(function() {
   // wire select2
   // select2(window.$);
   $("select:visible[name='country']").select2({ theme: 'bootstrap4' });
+  $("select:visible[name='countries']").select2({ theme: 'bootstrap4' });
 
   // Alerts
   $(".page-messages .alert").fadeTo(2000, 500).slideUp(500, function() {

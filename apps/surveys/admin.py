@@ -56,7 +56,7 @@ class EntityAdmin(CreatorAdmin):
     list_display = ['pk', 'name', 'hierarchy_level', 'survey']
     list_display_links = ['pk', 'name']
     list_select_related = ['hierarchy_level', 'survey']
-    list_filter = ['hierarchy_level__project', 'survey']
+    list_filter = ['survey__project', 'survey']
 
 
 @admin.register(Topic)
@@ -74,7 +74,7 @@ class DatasetAdmin(CreatorAdmin):
 
 
 @admin.register(DatasetStorage)
-class DatasetStorageAdmin(admin.ModelAdmin):
+class DatasetStorageAdmin(CreatorAdmin):
     list_display = ['pk', 'name', 'survey']
     list_display_links = ['pk', 'name']
     list_select_related = ['survey']
@@ -82,7 +82,7 @@ class DatasetStorageAdmin(admin.ModelAdmin):
 
 
 @admin.register(DatasetAccess)
-class DatasetAccessAdmin(admin.ModelAdmin):
+class DatasetAccessAdmin(CreatorAdmin):
     list_display = ['pk', 'name', 'survey']
     list_display_links = ['pk', 'name']
     list_select_related = ['survey']
@@ -90,7 +90,7 @@ class DatasetAccessAdmin(admin.ModelAdmin):
 
 
 @admin.register(DatasetFrequency)
-class DatasetFrequencyAdmin(admin.ModelAdmin):
+class DatasetFrequencyAdmin(CreatorAdmin):
     list_display = ['pk', 'name', 'survey']
     list_display_links = ['pk', 'name']
     list_select_related = ['survey']

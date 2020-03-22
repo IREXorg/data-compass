@@ -285,7 +285,7 @@ class Survey(TimeStampedModel):
     class Meta:
         verbose_name = _('Survey')
         verbose_name_plural = _('Surveys')
-        ordering = ['created_at']
+        ordering = ['-created_at']
 
     def __str__(self):
         """Returns string representation of survey"""

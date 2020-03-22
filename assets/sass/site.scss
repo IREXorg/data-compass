@@ -139,3 +139,7 @@ form.login {
     text-transform: uppercase;
   }
 }
+
+.select2-container .select2-search--inline .select2-search__field {
+  background-color: $input-bg;
+}
