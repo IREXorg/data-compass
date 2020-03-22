@@ -102,7 +102,8 @@ class Survey(TimeStampedModel):
                     'If your survey will be in other languages, select or '
                     'add them here. You will provide translations later.'),
         verbose_name=_('languages'),
-        blank=False
+        blank=True,
+        default=list
     )
 
     #: A slug for the survey.

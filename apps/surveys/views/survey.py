@@ -1,6 +1,4 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
-# from django.db.models import Count
 from django.shortcuts import redirect
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
@@ -8,14 +6,13 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
-from apps.projects.models import Project
 from core.mixins import PageTitleMixin, SuccessMessageMixin
 
 from ..filters import SurveyListFilter
 from ..forms import (SurveyCreateForm, SurveyEditStepFiveForm, SurveyEditStepFourForm, SurveyEditStepOneForm,
                      SurveyEditStepSixForm, SurveyEditStepThreeForm, SurveyEditStepTwoForm, SurveyPublishForm,
                      SurveyUnpublishForm, SurveyUpdateForm)
-from ..mixins import SurveyCreatorMixin, SurveyDetailMixin, SurveyFacilitatorMixin
+from ..mixins import ProjectFacilitatorRequiredMixin, SurveyCreatorMixin, SurveyDetailMixin, SurveyFacilitatorMixin
 from ..models import Survey
 
 
@@ -44,7 +41,7 @@ class SurveyListView(SurveyFacilitatorMixin, PageTitleMixin, ListView):
     paginate_by = 10
 
 
-class SurveyCreateView(SuccessMessageMixin, LoginRequiredMixin,
+class SurveyCreateView(SuccessMessageMixin, ProjectFacilitatorRequiredMixin,
                        SurveyCreatorMixin, PageTitleMixin, CreateView):
     """
     Create survey view.
@@ -73,23 +70,12 @@ class SurveyCreateView(SuccessMessageMixin, LoginRequiredMixin,
     form_class = SurveyCreateForm
     success_message = _('Survey was created successfully')
 
-    def get_project(self):
+    def form_valid(self, form):
         """
-        Get project to associate a survey with from url parameters
+        Add project to survey instance the save the survey.
         """
-        project_pk = self.kwargs.get('project', None)
-        if project_pk:
-            return Project.objects.get(pk=project_pk)
-
-    def get_form_kwargs(self):
-        """
-        Add project to form class initialization arguments
-        """
-        form_kwargs = super().get_form_kwargs()
-        project = self.get_project()
-        if project:
-            form_kwargs['project'] = self.get_project()
-        return form_kwargs
+        form.instance.project = self.project
+        return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         """
@@ -209,7 +195,7 @@ class SurveyUnpublishView(SuccessMessageMixin, SurveyFacilitatorMixin,
         return reverse('surveys:survey-detail', kwargs={'pk': self.object.pk})
 
 
-class SurveyPublishView(SuccessMessageMixin, LoginRequiredMixin,
+class SurveyPublishView(SuccessMessageMixin, SurveyFacilitatorMixin,
                         PageTitleMixin, UpdateView):
     """
     Publish survey details
@@ -334,7 +320,7 @@ class SurveyShareView(SurveyFacilitatorMixin, PageTitleMixin, DetailView):
         return _('Share') + ' ' + self.object.name
 
 
-class SurveyEditStartView(LoginRequiredMixin, PageTitleMixin, DetailView):
+class SurveyEditStartView(SurveyFacilitatorMixin, PageTitleMixin, DetailView):
     """
     View survey edit start view.
 
@@ -357,7 +343,7 @@ class SurveyEditStartView(LoginRequiredMixin, PageTitleMixin, DetailView):
         return _('Edit') + ' ' + self.object.name
 
 
-class SurveyEditStepOneView(SuccessMessageMixin, LoginRequiredMixin,
+class SurveyEditStepOneView(SuccessMessageMixin, SurveyFacilitatorMixin,
                             SurveyCreatorMixin, SurveyDetailMixin,
                             PageTitleMixin, UpdateView):
     """
@@ -388,7 +374,7 @@ class SurveyEditStepOneView(SuccessMessageMixin, LoginRequiredMixin,
         return reverse('surveys:survey-edit-step-two', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepTwoView(SuccessMessageMixin, LoginRequiredMixin,
+class SurveyEditStepTwoView(SuccessMessageMixin, SurveyFacilitatorMixin,
                             SurveyCreatorMixin, SurveyDetailMixin,
                             PageTitleMixin, UpdateView):
     """
@@ -419,7 +405,7 @@ class SurveyEditStepTwoView(SuccessMessageMixin, LoginRequiredMixin,
         return reverse('surveys:survey-edit-step-three', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepThreeView(SuccessMessageMixin, LoginRequiredMixin,
+class SurveyEditStepThreeView(SuccessMessageMixin, SurveyFacilitatorMixin,
                               SurveyCreatorMixin, SurveyDetailMixin,
                               PageTitleMixin, UpdateView):
     """
@@ -450,7 +436,7 @@ class SurveyEditStepThreeView(SuccessMessageMixin, LoginRequiredMixin,
         return reverse('surveys:survey-edit-step-four', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepFourView(SuccessMessageMixin, LoginRequiredMixin,
+class SurveyEditStepFourView(SuccessMessageMixin, SurveyFacilitatorMixin,
                              SurveyCreatorMixin, SurveyDetailMixin,
                              PageTitleMixin, UpdateView):
     """
@@ -481,7 +467,7 @@ class SurveyEditStepFourView(SuccessMessageMixin, LoginRequiredMixin,
         return reverse('surveys:survey-edit-step-five', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepFiveView(SuccessMessageMixin, LoginRequiredMixin,
+class SurveyEditStepFiveView(SuccessMessageMixin, SurveyFacilitatorMixin,
                              SurveyCreatorMixin, SurveyDetailMixin,
                              PageTitleMixin, UpdateView):
     """
@@ -512,7 +498,7 @@ class SurveyEditStepFiveView(SuccessMessageMixin, LoginRequiredMixin,
         return reverse('surveys:survey-edit-step-six', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditStepSixView(SuccessMessageMixin, LoginRequiredMixin,
+class SurveyEditStepSixView(SuccessMessageMixin, SurveyFacilitatorMixin,
                             SurveyCreatorMixin, SurveyDetailMixin,
                             PageTitleMixin, UpdateView):
     """
@@ -543,7 +529,7 @@ class SurveyEditStepSixView(SuccessMessageMixin, LoginRequiredMixin,
         return reverse('surveys:survey-edit-finish', kwargs={'pk': self.object.pk})
 
 
-class SurveyEditFinishView(LoginRequiredMixin, PageTitleMixin, DetailView):
+class SurveyEditFinishView(SurveyFacilitatorMixin, PageTitleMixin, DetailView):
     """
     View survey edit start view.
 

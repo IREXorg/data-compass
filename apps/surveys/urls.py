@@ -6,7 +6,6 @@ app_name = 'surveys'
 
 urlpatterns = [
     path('', views.SurveyListView.as_view(), name='survey-list'),
-    path('create/', views.SurveyCreateView.as_view(), name='survey-create'),
     path('<int:pk>/', views.SurveyDetailView.as_view(), name='survey-detail'),
     path('<int:pk>/update/', views.SurveyUpdateView.as_view(), name='survey-update'),
     path('<int:pk>/delete/', views.SurveyDeleteView.as_view(), name='survey-delete'),

@@ -1,3 +1,8 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
+from django.http import Http404
+
+from apps.projects.models import Project
 from core.mixins import FacilitatorMixin, PopupModelFormMixin
 
 
@@ -38,6 +43,36 @@ class SurveyFacilitatorMixin(FacilitatorMixin):
         Returns queryset of surveys where user is project facilitators.
         """
         return self.model.objects.filter(project__facilitators=self.request.user)
+
+
+class ProjectFacilitatorRequiredMixin(LoginRequiredMixin):
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return self.handle_no_permission()
+
+        if not self.request.user.is_facilitator:
+            raise PermissionDenied()
+
+        self.project = self.get_project()
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_project_queryset(self):
+        return Project.objects.filter(facilitators=self.request.user)
+
+    def get_project(self):
+        project_pk = self.kwargs.get('project', None)
+        if not project_pk:
+            raise AttributeError(
+                "%s must be called with project in the URLconf."
+                % self.__class__.__name__
+            )
+
+        try:
+            return self.get_project_queryset().get(pk=project_pk)
+        except Project.DoesNotExist:
+            raise Http404()
 
 
 class SurveyDetailMixin:
