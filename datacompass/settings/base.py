@@ -163,6 +163,8 @@ PASSWORD_HASHERS = [
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
 ]
 
+ACCOUNT_ADAPTER = env('ACCOUNT_ADAPTER', default='apps.users.adapter.AccountAdapter')
+
 ACCOUNT_AUTHENTICATION_METHOD = env('ACCOUNT_AUTHENTICATION_METHOD', default='email')
 
 ACCOUNT_EMAIL_REQUIRED = env.bool('ACCOUNT_EMAIL_REQUIRED', default=True)
