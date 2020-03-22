@@ -62,7 +62,7 @@ INSTALLED_APPS = [
     'django_filters',
     'active_link',
     'django_select2',
-    'froala_editor',
+    'django_summernote',
     'bootstrap_pagination',
     # Custom apps
     'core',
@@ -298,6 +298,10 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = env.bool('SECURE_HSTS_INCLUDE_SUBDOMAINS', defa
 SECURE_HSTS_PRELOAD = env.bool('SECURE_HSTS_PRELOAD', default=False)
 
 
+# Security
+
+X_FRAME_OPTIONS = env('X_FRAME_OPTIONS', default='SAMEORIGIN')
+
 # Logging
 
 LOGGING = {
@@ -350,6 +354,15 @@ LOGGING = {
             'propagate': False,
         }
     }
+}
+
+# Summernote
+
+SUMMERNOTE_THEME = 'bs4'
+
+SUMMERNOTE_CONFIG = {
+    'width': '100%',
+    'height': '240'
 }
 
 # Surveys
