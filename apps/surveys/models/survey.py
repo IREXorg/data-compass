@@ -256,19 +256,19 @@ class Survey(TimeStampedModel):
 
     #: Flag whether survey collect respondent(s) email address.
     allow_collect_email = models.BooleanField(
-        _('email address'),
+        _('collect email address'),
         default=True
     )
 
     #: Flag whether survey collect respondent(s) name.
     allow_collect_name = models.BooleanField(
-        _('name'),
+        _('collect name'),
         default=True
     )
 
     #: Flag whether survey collect respondent(s) gender.
     allow_collect_gender = models.BooleanField(
-        _('gender'),
+        _('collect gender'),
         default=True
     )
 

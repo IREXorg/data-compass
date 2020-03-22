@@ -72,3 +72,13 @@ class ResponseRespondentForm(RespondentForm):
 
         for field_name, field in self.fields.items():
             field.required = True
+
+        if not survey.allow_collect_email:
+            self.fields.pop('email', None)
+
+        if not survey.allow_collect_name:
+            self.fields.pop('first_name', None)
+            self.fields.pop('last_name', None)
+
+        if not survey.allow_collect_gender:
+            self.fields.pop('gender', None)
