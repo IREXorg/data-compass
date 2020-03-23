@@ -175,3 +175,12 @@ form.login {
   -webkit-print-color-adjust: exact;
   color-adjust: exact;
 }
+
+select.select,
+select.form-select, {
+  background: #d8e6e6;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
