@@ -164,6 +164,9 @@
           </tbody>
         </table>
       </div>
+
+      {{ form.allow_respondent_roles|as_crispy_field }}
+  
       {# End: Survey roles crud #}
 
       {{ form.login_required|as_crispy_field }}
