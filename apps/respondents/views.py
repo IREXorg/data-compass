@@ -226,7 +226,7 @@ class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, 
         context['hierarchies'] = self.survey.project.hierarchies.values('id', 'level', 'name', 'parent')
         return context
 
-class RespondentInviteView(FacilitatorMixin, PageMixin, SendInvite):
+class RespondentInviteView(RespondentFacilitatorMixin, PageMixin, SendInvite):
     template_name = 'invitations/send_invite.html'
     page_title = _('Send Invite')
     context_object_name = 'respondents'
