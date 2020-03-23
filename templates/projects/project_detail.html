@@ -1,0 +1,84 @@
+{% extends 'projects/base.html' %}
+
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+
+{% block breadcrumbs %}
+  <ol class="breadcrumb" aria-label="breadcrumbs">
+     <li class="breadcrumb-item">
+        <a href="{% url 'projects:project-list' %}">
+          {% trans 'My Projects' %}
+        </a>
+     </li>
+     <li class="breadcrumb-item active" aria-current="page">
+      <a href="#">{{project.name}}</a>
+     </li>
+  </ol>
+{% endblock breadcrumbs %}
+
+
+{% block content %}
+
+  {# Start: Page info #}
+  <div class="row">
+    <div class="col">
+      <p>
+        {% blocktrans trimmed %}
+        This project contains {% endblocktrans %} {{ surveys.count }} {% blocktrans trimmed %} surveys.
+        Select one you would like to edit from the list below, or create a new one.
+        {% endblocktrans %}
+      </p>
+    </div>
+  </div>
+  {# End: Page info #}
+
+  {# Start: Surveys list #}
+  {% if surveys|length > 0 %}
+    {# Start: Surveys list actions #}
+    <div class="row my-4">
+      <div class="col-md-8">
+        <form>
+          <div class="input-icon">
+            <span class="input-icon-addon">
+              <i class="fas fa-search"></i>
+            </span>
+            <input type="search" name="q" class="form-control d-inline-block mr-3" placeholder="{% trans 'Search surveys…' %}"/>
+          </div>
+        </form>
+      </div>
+
+      <div class="col pr-3">
+        <a href="{% url 'projects:project-create-survey' project=project.pk %}"
+           class="btn btn-success ml-3 d-none d-sm-inline-block float-md-right">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            {% trans 'New Survey' %}
+        </a>
+      </div>
+    </div>
+    {# End: Surveys list actions #}
+
+    {# Start: Render Surveys list #}
+    <div class="row">
+      {% for survey in surveys %}
+        {% include 'surveys/includes/survey_item.html' %}
+      {% endfor %}
+    </div>
+    {# End: Render Surveys list #}
+  {# End: Surveys list #}
+
+  {# Start: Empty Surveys state #}
+  {% else %}
+    <div class="container text-center">
+      <p class="h2 mb-3 mt-5">{{project.name}} {% trans 'project has no surveys.' %}</p>
+      <p class="h4 text-muted font-weight-normal mb-5">{% trans 'Start by creating new survey.' %}</p>
+      <a href="{% url 'projects:project-create-survey' project=project.pk %}" class="btn btn-success">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+         {% trans 'New Survey' %}
+      </a>
+    </div>
+  {% endif %}
+  {# End: Empty Surveys state #}
+
+{% endblock content %}

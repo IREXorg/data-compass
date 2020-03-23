@@ -1,0 +1,109 @@
+@import "bootstrap/scss/functions";
+
+@import "tabler/variables";
+@import "tabler/utilities";
+@import "tabler/mixins";
+
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins";
+@import "bootstrap/scss/utilities";
+@import "tabler/mixins-override";
+
+@import "mixins";
+
+@import "bootstrap/scss/root";
+@import "bootstrap/scss/reboot";
+@import "bootstrap/scss/type";
+@import "bootstrap/scss/images";
+@import "bootstrap/scss/containers";
+@import "bootstrap/scss/grid";
+@import "bootstrap/scss/tables";
+@import "bootstrap/scss/forms";
+@import "bootstrap/scss/buttons";
+@import "bootstrap/scss/transitions";
+@import "bootstrap/scss/dropdown";
+@import "bootstrap/scss/button-group";
+@import "bootstrap/scss/nav";
+@import "bootstrap/scss/navbar";
+@import "bootstrap/scss/card";
+@import "bootstrap/scss/breadcrumb";
+@import "bootstrap/scss/pagination";
+@import "bootstrap/scss/badge";
+@import "bootstrap/scss/alert";
+@import "bootstrap/scss/progress";
+@import "bootstrap/scss/list-group";
+@import "bootstrap/scss/close";
+@import "bootstrap/scss/toasts";
+@import "bootstrap/scss/modal";
+@import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/popover";
+@import "bootstrap/scss/carousel";
+@import "bootstrap/scss/spinners";
+
+@import "bootstrap/scss/helpers";
+@import "bootstrap/scss/utilities/api";
+
+@import "tabler/fonts/webfonts";
+
+@import "tabler/layout/core";
+@import "tabler/layout/navbar";
+@import "tabler/layout/page";
+@import "tabler/layout/footer";
+
+@import "tabler/ui/alerts";
+@import "tabler/ui/avatars";
+@import "tabler/ui/badges";
+@import "tabler/ui/breadcrumbs";
+@import "tabler/ui/buttons";
+@import "tabler/ui/calendars";
+@import "tabler/ui/cards";
+@import "tabler/ui/close";
+@import "tabler/ui/dropdowns";
+@import "tabler/ui/empty";
+@import "tabler/ui/grid";
+@import "tabler/ui/icons";
+@import "tabler/ui/forms";
+@import "tabler/ui/forms/form-icon";
+@import "tabler/ui/forms/form-colorinput";
+@import "tabler/ui/forms/form-imagecheck";
+@import "tabler/ui/forms/form-selectgroup";
+@import "tabler/ui/forms/form-custom";
+@import "tabler/ui/forms/validation";
+@import "tabler/ui/legend";
+@import "tabler/ui/lists";
+@import "tabler/ui/loaders";
+@import "tabler/ui/login";
+@import "tabler/ui/modals";
+@import "tabler/ui/nav";
+@import "tabler/ui/stars";
+@import "tabler/ui/pagination";
+@import "tabler/ui/popovers";
+@import "tabler/ui/progress";
+@import "tabler/ui/ribbons";
+@import "tabler/ui/stamps";
+@import "tabler/ui/steps";
+@import "tabler/ui/tables";
+@import "tabler/ui/toasts";
+@import "tabler/ui/toolbar";
+@import "tabler/ui/type";
+@import "tabler/ui/markdown";
+@import "tabler/ui/charts";
+
+@import "tabler/utils/background";
+@import "tabler/utils/colors";
+@import "tabler/utils/scroll";
+@import "tabler/utils/sizing";
+@import "tabler/utils/opacity";
+@import "tabler/utils/shadow";
+
+@import "tabler/dark";
+@import "tabler/debug";
+
+@import "tabler/vendor/peity";
+@import "tabler/vendor/selectize";
+@import "tabler/vendor/jqvmap";
+@import "tabler/vendor/apexcharts";
+@import "tabler/vendor/fullcalendar";
+@import "tabler/vendor/flatpickr";
+@import "tabler/vendor/nouislider";

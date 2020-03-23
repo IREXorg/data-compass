@@ -2,11 +2,19 @@
 Data Compass
 ============
 
-Data Flow Mapping.
- 
+Thanks for your interest in using the Data Compass software, which is part of IREX's Data Compass tool.
+The Data Compass tool helps teams and organizations improve their strategic use of data.
+As part of that tool, this software helps them survey and analyze how data flows between actors in a system.
+This software source code is made available under an Affero General Public License, and you're invited
+to modify and use it for your needs.
 
-Development Installation
-=========================
+If you would like to use the software without deploying it yourself,
+please contact IREX for a license to use their readily available software.
+IREX is a global development and education organization. Please contact cali@irex.org with inquiries.
+
+
+Installation
+============
 
 Database Setup
 --------------
@@ -31,7 +39,7 @@ Login as  Postgresql admin user (`postgres`)
     sudo su -l postgres
 
 
-While logged in as `postgres` create the project database 
+While logged in as `postgres` create the project database
 
 .. code:: bash
 
@@ -42,7 +50,7 @@ Connect to the database shell
 
 .. code:: bash
 
-    psql data compass
+    psql datacompass
 
 
 While you are in the database shell create the database user and grant appropriate privileges to the user.
@@ -50,9 +58,17 @@ While you are in the database shell create the database user and grant appropria
 .. code:: sql
 
     CREATE USER datacompass WITH PASSWORD 'datacompass';
-    GRANT ALL PRIVILEGES ON DATABASE datacomapss TO datacompass;
+    GRANT ALL PRIVILEGES ON DATABASE datacompass TO datacompass;
     exit;
 
+When running tests locally against `postgresql` database, you should allow database user to have `CREATEDB` role.
+
+.. code:: sql
+
+    CREATE USER datacompass WITH PASSWORD 'datacompass';
+    GRANT ALL PRIVILEGES ON DATABASE datacompass TO datacompass;
+    ALTER USER datacompass CREATEDB;
+    exit;
 
 Logout as `postgres` user
 
@@ -71,7 +87,7 @@ Install Python development header files (python-dev) and Python package Installe
 
 .. code:: bash
 
-    sudo apt-get install python3-dev python3-pip
+    sudo apt install python3-dev python3-pip libz-dev libjpeg-dev libfreetype6-dev
 
 
 Setup a Python virtual environment
@@ -99,7 +115,7 @@ Go to project root
 
 .. code:: bash
 
-    cd datacompass
+    cd data-compass
 
 
 make sure your python virtual environment is active then use pip to install project requirements.
@@ -163,8 +179,40 @@ To start the development server go to your project root directory run
     ./manage.py runserver
 
 
+Working with frontend assets
+----------------------------
+The most frontend Javascript, CSS (SaSS) and static images for UI files are managed using Webpack.
+
+If you want to modify frontend assets; Install relevant dependancies using
+
+.. code:: bash
+
+    npm install
+
+To build static bundles which could be served in production run
+
+.. code:: bash
+
+    npm run build
+
+To build for development with live updates preview run
+
+.. code:: bash
+
+    npm run watch
+
+
 Running tests
 -------------
+
+To run unit tests make sure you database user has permission to
+create a database. On your database shell, You can give your user permission
+to create database executing something like:
+
+.. code:: sql
+
+    ALTER USER datacompass CREATEDB;
+
 
 To run all tests against multiple versions of Django and Python, use tox_
 
@@ -190,7 +238,26 @@ To automatically sort imports, use isort_
 
     isort -rc .
 
+Building Documentation
+----------------------
+The project uses Sphinx_ for managing and compiling documentation.
+
+To build the HTML documentation, Install documentation dependancies:
+
+.. code:: bash
+
+    pip install -r requirements/docs.txt
+
+Build the documentation:
+
+.. code:: bash
+
+    make docs
+
+The HTML docs will be created in ``docs/_build/html/`` folder
+
 
 .. _tox: https://tox.readthedocs.io/en/latest/
 .. _flake8: https://flake8.pycqa.org/en/latest/
 .. _isort: https://isort.readthedocs.io/en/latest/
+.. _Sphinx: https://www.sphinx-doc.org/en/master/

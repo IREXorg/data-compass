@@ -1,0 +1,73 @@
+.avatar {
+  position: relative;
+  display: inline-block;
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  font-size: .875rem;
+  font-weight: 400;
+  color: $text-muted;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: bottom;
+  user-select: none;
+  background: $gray-200 no-repeat center/cover;
+  border-radius: 50%;
+
+  .icon {
+    font-size: 1.25em;
+  }
+
+  .badge {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #fff;
+  }
+
+  @at-root a#{&} {
+    cursor: pointer;
+  }
+}
+
+@each $avatar-size, $size in $avatar-sizes {
+  .avatar-#{$avatar-size} {
+    width: $size;
+    height: $size;
+    font-size: $size / 2;
+    line-height: $size;
+  }
+}
+
+
+.avatar-list {
+  padding: 0;
+  margin: 0 0 -.5rem;
+  font-size: 0;
+
+  .avatar {
+    margin-bottom: .5rem;
+
+    &:not(:last-child) {
+      margin-right: .5rem;
+    }
+  }
+
+  a.avatar {
+    &:hover {
+      z-index: 1;
+    }
+  }
+}
+
+.avatar-list-stacked {
+  .avatar {
+    margin-right: -.5em !important;
+    box-shadow: 0 0 0 2px #fff;
+
+    @at-root .card-footer & {
+      box-shadow: 0 0 0 2px $card-cap-bg;
+    }
+  }
+}

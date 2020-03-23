@@ -1,0 +1,45 @@
+{% extends 'surveys/base.html' %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{# Start: Nav primary #}
+{% block nav_primary %}
+<nav>&nbsp;</nav>
+{% endblock %}
+{# End: Footer #}
+
+{# Start: Breadcrumbs #}
+{% block breadcrumbs %}
+<ol class="breadcrumb" aria-label="breadcrumbs">
+   &nbsp;
+</ol>
+{% endblock %}
+{# End: Breadcrumbs #}
+
+{# Start: Page header #}
+{% block page_header %}
+<div class="page-header">&nbsp;</div>
+{% endblock %}
+{# End: Page header #}
+
+{# Start: Content #}
+{% block content %}
+<div class="container text-center">
+  <p class="h2 mb-3 mt-5">{% trans 'Delete a gender' %}</p>
+
+  <p class="h4 text-muted font-weight-normal mb-5">{% trans 'Are you sure you want to delete this survey gender?' %}</p>
+
+  <form method="POST" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      <button class="btn btn-warning" type="submit">{% trans 'Delete' %}</button>
+  </form>
+</div>
+{% endblock %}
+{# End: Content #}
+
+{# Start: Footer #}
+{% block footer %}
+<footer>&nbsp;</footer>
+{% endblock %}
+{# End: Footer #}

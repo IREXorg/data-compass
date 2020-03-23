@@ -1,0 +1,72 @@
+{% extends 'surveys/base.html' %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{# Start: Breadcrumbs #}
+{% block breadcrumbs %}
+<ol class="breadcrumb" aria-label="breadcrumbs">
+   <li class="breadcrumb-item"><a href="{% url 'projects:project-list' %}">{% trans 'My Projects' %}</a></li>
+   <li class="breadcrumb-item"><a href="{% url 'projects:project-detail' survey.project.pk %}">{{survey.project.name}}</a></li>
+   <li class="breadcrumb-item"><a href="{% url 'surveys:survey-detail' survey.pk %}">{{survey.name}}</a></li>
+   <li class="breadcrumb-item active" aria-current="page"><a href="#">{{page_title}}</a></li>
+</ol>
+{% endblock %}
+{# End: Breadcrumbs #}
+
+{# Start: Page header #}
+{% block page_header %}
+<div class="page-header">
+  <div class="row align-items-center">
+
+    {# Start: Page title #}
+    <div class="col">
+      <h1 class="page-title">
+        {% block page_title %}{{ survey.name }}{% endblock %}
+      </h1>
+    </div>
+    {# End: Page title #}
+
+    {# Start: Page actions #}
+    <div class="col-auto ml-auto d-print-none">
+      <div class="row">
+        &nbsp;
+      </div>
+    </div>
+    {# End: Page actions #}
+
+  </div>
+</div>
+{% endblock %}
+{# End: Page header #}
+
+{# Start: Content #}
+{% block content %}
+<div class="row">
+  <div class="col">
+    <div class="text-wrap">
+      <p>
+        {% trans 'This survey is part of' %} {{survey.project.name}}. {% trans 'You can edit its information' %} <a href="{% url 'surveys:survey-update' survey.pk %}">{% trans 'here' %}.</a>
+      </p>
+      <p>
+        {% trans 'Your research question is:' %} {{ survey.research_question }}
+      </p>
+    </div>
+    <div class="justify-content-md-center mt-5">
+      <div class="btn-list justify-content-center">
+        <a href="{% url 'surveys:survey-edit-step-six' survey.pk %}" class="btn btn-light btn-sm btn-icon" aria-label="Back">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </a>
+        <p class="h2 pt-1 ml-3 mr-3">{% trans 'Done' %}</p>
+      </div>
+    </div>
+    <div class="text-wrap mt-4">
+    <p>{% trans 'Click button below to return to the' %} {{survey.name}} overview page.</p>
+    </div>
+    <div class="btn-list mt-4 justify-content-center">
+      <a href="{% url 'surveys:survey-detail' survey.pk %}" class="btn btn-success">{% trans 'Back to survey overview' %}</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{# End: Content #}

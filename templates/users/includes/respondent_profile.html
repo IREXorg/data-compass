@@ -1,0 +1,33 @@
+{% load i18n %}
+
+<div>
+  <p>
+    {% blocktrans trimmed %}
+    As a Respondent with an account, you can return to surveys in progress and view your previous survey responses.
+    {% endblocktrans %}
+  </p>
+
+  {% if respondent_surveys %}
+    <div class="mx-1">
+      <h1>{% trans 'My Surveys' %}</h1>
+
+      <div class="my-4">
+        {% for survey in respondent_surveys %}
+          {% include 'surveys/includes/user_survey_item.html' %}
+        {% endfor %}
+      </div>
+    </div>
+    <hr>
+  {% endif %}
+
+  {% if available_surveys %}
+    <div class="mx-1">
+
+      <h1>{% trans 'Other Surveys' %}</h1>
+
+      {% for survey in available_surveys %}
+        {% include 'surveys/includes/user_survey_item.html' %}
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

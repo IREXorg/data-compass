@@ -1,0 +1,244 @@
+{% extends 'surveys/base.html' %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{# Start: Breadcrumbs #}
+{% block breadcrumbs %}
+<ol class="breadcrumb" aria-label="breadcrumbs">
+   <li class="breadcrumb-item"><a href="{% url 'projects:project-list' %}">{% trans 'My Projects' %}</a></li>
+   <li class="breadcrumb-item"><a href="{% url 'projects:project-detail' survey.project.pk %}">{{survey.project.name}}</a></li>
+   <li class="breadcrumb-item"><a href="{% url 'surveys:survey-detail' survey.pk %}">{{survey.name}}</a></li>
+   <li class="breadcrumb-item active" aria-current="page"><a href="#">{{page_title}}</a></li>
+</ol>
+{% endblock %}
+{# End: Breadcrumbs #}
+
+{# Start: Page header #}
+{% block page_header %}
+<div class="page-header">
+  <div class="row align-items-center">
+
+    {# Start: Page title #}
+    <div class="col">
+      <h1 class="page-title">
+        {% block page_title %}{% trans 'Editing' %} {{ survey.name }}{% endblock %}
+      </h1>
+    </div>
+    {# End: Page title #}
+
+    {# Start: Page actions #}
+    <div class="col-auto ml-auto d-print-none">
+      <div class="row">
+        &nbsp;
+      </div>
+    </div>
+    {# End: Page actions #}
+
+  </div>
+</div>
+{% endblock %}
+{# End: Page header #}
+
+{# Start: Content #}
+{% block content %}
+<div class="row">
+  <div class="col">
+    <div class="text-wrap">
+      <p>
+        {% trans 'This survey is part of' %} {{survey.project.name}}. {% trans 'You can edit its information' %} <a href="{% url 'surveys:survey-update' survey.pk %}">{% trans 'here' %}.</a>
+      </p>
+      <p>
+        {% trans 'Your research question is:' %} {{ survey.research_question }}
+      </p>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-md-center mt-3">
+  <div class="btn-list justify-content-center">
+    <a href="{% url 'surveys:survey-edit-step-five' survey.pk %}" class="btn btn-light btn-sm btn-icon" aria-label="Back">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </a>
+    <p class="h2 pt-1 ml-3 mr-3">6. {% trans 'Additional information' %}</p>
+    <a href="{% url 'surveys:survey-edit-finish' survey.pk %}" class="btn btn-light btn-sm btn-icon" aria-label="Next">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </a>
+  </div>
+</div>
+<div class="row justify-content-md-center mt-5">
+  <div class="col">
+    <form method="POST" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="id_collects" class="requiredField">
+          {% trans 'By default survey will collect:' %}
+          <span class="asteriskField">*</span>
+        </label>
+
+        {{ form.allow_collect_email|as_crispy_field }}
+
+        {{ form.allow_collect_name|as_crispy_field }}
+
+        {{ form.allow_collect_gender|as_crispy_field }}
+
+      </div>
+
+      {# Start: Survey genders crud #}
+      <div class="form-group" id="id_genders">
+        <label for="id_genders" class="requiredField">
+          {% trans 'What options should respondents select when asked about their gender?' %}
+          <span class="asteriskField">*</span>
+        </label>
+        <table class="table table-borderless table-nowrap">
+          <tbody>
+            {% if genders|length > 0 %}
+            {% for gender in genders %}
+            <tr>
+              <td class="pt-3">
+                {{gender.name}}
+              </td>
+              <td>
+                <a href="{% url 'surveys:survey-create-gender' survey.pk %}?_popup=1" class="btn btn-primary btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Add New Gender' %}" title="{% trans 'Add New Gender' %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </a>
+                {% if not gender.is_primary %}
+                <a href="{% url 'surveys:survey-update-gender' gender.pk %}?_popup=1" class="btn btn-light btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Edit Gender' %}" title="{% trans 'Edit Gender' %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                </a>
+                {% endif %}
+                <a href="{% url 'surveys:survey-delete-gender' gender.pk %}?_popup=1&survey={{survey.pk}}" class="btn btn-warning btn-sm btn-icon related-widget-wrapper-link change-related" aria-label="{% trans 'Delete Gender' %}" title="{% trans 'Delete Gender' %}" id="id_delete_gender_{{ gender.pk }}_">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+              <td class="pt-3 text-muted">{% trans 'No genders.' %}</td>
+              <td>
+                <a href="{% url 'surveys:survey-create-gender' survey.pk %}?_popup=1" class="btn btn-primary btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Add New Gender' %}" title="{% trans 'Add New Gender' %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </a>
+              </td>
+            </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+      {# End: Survey genders crud #}
+
+      {# Start: Survey questions crud #}
+      <div class="form-group" id="id_questions">
+        <label for="id_questions" class="requiredField">
+          {% trans 'Additionally, you can add up to three questions to collect relevant information about users.' %}
+          <span class="asteriskField">*</span>
+        </label>
+        <table class="table table-borderless table-nowrap">
+          <tbody>
+            {% if questions|length > 0 %}
+            {% for question in questions %}
+            <tr>
+              <td class="pt-3">
+                {{question.label}}
+              </td>
+              <td class="pt-3">
+                {{question.type}}
+              </td>
+              <td>
+                <a href="{% url 'surveys:survey-create-question' survey.pk %}?_popup=1" class="btn btn-primary btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Add New Question' %}" title="{% trans 'Add New Question' %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </a>
+                <a href="{% url 'surveys:survey-update-question' question.pk %}?_popup=1" class="btn btn-light btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Edit Question' %}" title="{% trans 'Edit Question' %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                </a>
+                <a href="{% url 'surveys:survey-delete-question' question.pk %}?_popup=1" class="btn btn-warning btn-sm btn-icon related-widget-wrapper-link change-related" aria-label="{% trans 'Delete Question' %}" title="{% trans 'Delete Question' %}" id="id_delete_question_{{ question.pk }}_">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+              <td class="pt-3 text-muted">{% trans 'No questions.' %}</td>
+              <td>
+                <a href="{% url 'surveys:survey-create-question' survey.pk %}?_popup=1" class="btn btn-primary btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Add New Question' %}" title="{% trans 'Add New Question' %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </a>
+              </td>
+            </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+      {# End: Survey questions crud #}
+
+      {{ form.introduction_text|as_crispy_field }}
+
+      {{ form.closing_text|as_crispy_field }}
+
+      {# Start: Survey logos crud #}
+      <div class="form-group" id="id_logos">
+        <label for="id_logos" class="requiredField">
+          {% trans 'Add logos(s) to the survey footer' %}
+          <span class="asteriskField">*</span>
+        </label>
+        <table class="table table-borderless table-nowrap">
+          <tbody>
+            {% if logos|length > 0 %}
+            {% for logo in logos %}
+            <tr>
+              <td class="pt-3">
+                <a href="{{logo.image.url}}" target="_blank">
+                  {{logo.name}}
+                </a>
+              </td>
+              <td>
+                <a href="{% url 'surveys:survey-create-logo' survey.pk %}?_popup=1" class="btn btn-primary btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Add New Logo' %}" title="{% trans 'Add New Logo' %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </a>
+                <a href="{% url 'surveys:survey-update-logo' logo.pk %}?_popup=1" class="btn btn-light btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Edit Logo' %}" title="{% trans 'Edit Logo' %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit-2"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
+                </a>
+                <a href="{% url 'surveys:survey-delete-logo' logo.pk %}?_popup=1" class="btn btn-warning btn-sm btn-icon related-widget-wrapper-link change-related" aria-label="{% trans 'Delete Logo' %}" title="{% trans 'Delete Logo' %}" id="id_delete_logo_{{ logo.pk }}_">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-trash-2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                </a>
+              </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+              <td class="pt-3 text-muted">{% trans 'No logos.' %}</td>
+              <td>
+                <a href="{% url 'surveys:survey-create-logo' survey.pk %}?_popup=1" class="btn btn-primary btn-sm btn-icon  related-widget-wrapper-link change-related" aria-label="{% trans 'Add New Logo' %}" title="{% trans 'Add New Logo' %}">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                </a>
+              </td>
+            </tr>
+            {% endif %}
+          </tbody>
+        </table>
+      </div>
+      {# End: Survey logos crud #}
+
+      <hr>
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <a href="{% url 'surveys:survey-detail' survey.pk %}" class="btn btn-warning">
+              {% trans 'Cancel' %}
+            </a>
+
+            <button type="submit" class="btn btn-success">
+              {% trans 'Save Survey Changes' %} »
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}
+{# End: Content #}

@@ -1,0 +1,38 @@
+{% load i18n %}
+
+<div class="col-md-6 col-lg-4">
+  <div class="card">
+    <div class="card-body">
+      <div class="row row-sm align-items-center">
+        <div class="col lh-1 align-self-start">
+          {% if survey.is_active %}
+          <span class="badge bg-green-lt">{% trans 'Published' %}</span>
+          {% else %}
+          <span class="badge bg-gray-lt">{% trans 'Un-published' %}</span>
+          {% endif %}
+        </div>
+      </div>
+      <div class="row row-sm align-items-center mt-4 border-bottom border-success pb-3">
+        <div class="col">
+          <h2 class="mb-0"><a href="{% url 'surveys:survey-detail' survey.pk %}">{{ survey.name }}</a></h2>
+          <div class="text-muted text-h5">{{ survey.display_name }}</div>
+        </div>
+      </div>
+      <div class="row align-items-center mt-3">
+        <div class="col-auto">
+          <div class="btn-list text-right">
+            <a href="{% url 'surveys:survey-detail' survey.pk %}" class="btn btn-success btn-sm">
+            {% trans 'View' %}
+          </a>
+            <a href="{% url 'surveys:survey-update' survey.pk %}" class="btn btn-primary btn-sm">
+              {% trans 'Edit' %}
+            </a>
+            <a href="{% url 'surveys:survey-delete' survey.pk %}" class="btn btn-warning btn-sm">
+              {% trans 'Delete' %}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

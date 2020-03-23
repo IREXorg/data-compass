@@ -1,0 +1,145 @@
+body {
+  padding-bottom: $body-padding-bottom;
+}
+
+body.fixed-nav-primary {
+  padding-top: $navbar-height;
+}
+
+h1 {
+  color: $h1-color;
+}
+
+h2 {
+  color: $h2-color;
+  font-weight: $h2-font-weight;
+}
+
+.smaller {
+  font-size: $smaller-font-size;
+}
+
+.btn {
+  font-weight: $btn-font-weight;
+  min-height: $btn-min-height;
+}
+
+.page-title {
+  font-size: $h1-font-size;
+  font-weight: $headings-font-weight;
+  line-height: 1;
+  color: $h1-color;
+  padding-bottom: 0.25em;
+}
+
+.page-master {
+  margin-top: $page-master-margin-top;
+  @media (min-width: 768px) {
+    position: fixed;
+    top: $navbar-height;
+    left: 0;
+    padding-top: $page-master-padding-top;
+    height: calc(100% - 80px - #{$navbar-height});
+    font-size: $page-master-font-size;
+    overflow: auto;
+  }
+}
+
+.navbar-brand {
+  text-transform: uppercase;
+  font-weight: $navbar-brand-font-weight;
+  letter-spacing: $navbar-brand-letter-spacing;
+
+  .logo-icon {
+    fill: $navbar-light-brand-color;
+    vertical-align: middle;
+  }
+}
+
+#navbar-primary {
+  @media (min-width: 768px) {
+    .container {
+      max-width: 68%;
+    }
+  }
+}
+
+.navbar{
+  font-size: $navbar-font-size;
+}
+
+.nav-item > .btn {
+  margin: $nav-item-btn-margin-y $nav-item-btn-margin-x;
+}
+
+.page-messages {
+  .alert-dismissible {
+    .close {
+      position: static;
+      padding: 0;
+    }
+  }
+}
+
+.alert {
+  .close:hover {
+    color: $white;
+  }
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-color: #d8e6e6;
+  width: 100%;
+  border-top: 2px solid #99b83c;
+  text-align: center;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 300;
+  font-size: 0.83em;
+  color: #075254;
+  padding: $content-padding-y !important;
+
+  .logo {
+    max-height: 40px;
+    width: auto;
+    padding-left: 10px;
+    box-sizing: border-box;
+    vertical-align: middle;
+  }
+}
+
+.form-group {
+  margin-top: $form-group-margin-top;
+  margin-left: $form-group-margin-left;
+  margin-right: $form-group-margin-right;
+  margin-bottom: $form-group-margin-bottom; 
+}
+
+.form-control {
+  margin-top: $input-margin-top;
+  margin-bottom: $input-margin-bottom;
+}
+
+.form-row {
+  .form-control {
+    margin-top: $input-margin-top / 2;
+    margin-bottom: $input-margin-bottom / 2;
+  }
+}
+
+.asteriskField {
+  color: $warning;
+  font-size: $font-size-lg;
+}
+
+form.login {
+  label {
+    text-transform: uppercase;
+  }
+}
+
+.select2-container .select2-search--inline .select2-search__field {
+  background-color: $input-bg;
+}

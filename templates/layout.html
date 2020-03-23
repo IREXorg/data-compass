@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <div class="page">
+    {% block messages %}
+      {% include 'includes/site_messages.html' %}
+    {% endblock messages %}
+
+    {% block nav_primary %}
+      {% include 'includes/nav_primary.html' %}
+    {% endblock %}
+
+    {% block content_wrapper %}
+      <div class="content">
+
+        <main class="{% block content_container %}container{% endblock %}">
+
+          {% block breadcrumbs_container %}
+            <div class="row mt-2 mb-4">
+              <div class="col">
+              {% block breadcrumbs %}{% endblock %}
+              </div>
+            </div>
+          {% endblock breadcrumbs_container %}
+
+          {# Start: Page Header #}
+          {% block page_header %}
+            <div class="page-header">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h1 class="page-title">
+                    {% block page_title %}{{ page_title }}{% endblock %}
+                  </h1>
+                </div>
+
+                <div class="col-auto">{% block page_actions %}{% endblock %}</div>
+              </div>
+            </div>
+          {% endblock page_header %}
+          {# End: Page Header #}
+
+          {# Start: Main content #}
+          {% block content %}{% endblock %}
+          {# End: Main content #}
+
+          {% block footer %}{% include 'includes/footer.html' %}{% endblock %}
+        </main>
+
+      </div>
+    {% endblock content_wrapper %}
+
+  </div>
+{% endblock body %}

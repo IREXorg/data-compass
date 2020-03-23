@@ -1,7 +1,8 @@
 -r ./base.txt
+-r ./docs.txt
 
 ipython
 flake8
 isort
 tox
-Sphinx
+model_bakery

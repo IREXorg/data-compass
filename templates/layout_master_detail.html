@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block body_class %}fixed-nav-primary{% endblock %}
+
+{% block body %}
+  <div class="page">
+    {% include 'includes/nav_primary.html' with navbar_primary_class="fixed-top" %}
+
+    {% block messages %}
+      {% include 'includes/site_messages.html' %}
+    {% endblock messages %}
+
+    {% block content_wrapper %}
+
+      <div class="container-fluid">
+        <div class="row">
+          {% block content %}
+            <div class="col-sm-3 page-master">
+              {% block content_master %}{% endblock %}
+            </div>
+
+            <div class="col-sm-8 offset-sm-3">
+
+              {% block page_header %}
+                <div class="page-header my-4">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <h1 class="page-title">
+                        {% block page_title %}{{ page_title }}{% endblock %}
+                      </h1>
+                    </div>
+
+                    <div class="col-auto">{% block page_actions %}{% endblock %}</div>
+                  </div>
+                </div>
+              {% endblock page_header %}
+
+              {% block content_detail %}{% endblock %}
+            </div>
+          {% endblock content %}
+        </div>
+      </div>
+
+      {% block footer %}{% include 'includes/footer.html' %}{% endblock %}
+    {% endblock content_wrapper %}
+
+  </div>
+{% endblock body %}

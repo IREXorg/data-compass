@@ -1,0 +1,12 @@
+{% load i18n static %}
+<!DOCTYPE html>
+<html>
+  <head><title>{% trans 'Popup closing…' %}</title></head>
+  <body>
+    <script type="text/javascript"
+            id="popup-response-constants"
+            src="{% static 'main.js' %}"
+            data-popup-response="{{ popup_response_data }}">
+    </script>
+  </body>
+</html>

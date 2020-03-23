@@ -1,0 +1,26 @@
+{% extends 'projects/project_form.html' %}
+
+{% load i18n %}
+
+{% load mptt_tags %}
+
+
+{% block form_extra %}
+  {% if dataflow_hierarchy %}
+    <div style="max-height: 200px" class="overflow-auto bg-light my-3 rounded border">
+      <h2 class="border-bottom p-3">{% trans 'Current Data flow hierarchy' %}</h2>
+      <ul class="root">
+        {% recursetree dataflow_hierarchy %}
+          <li>
+            {{ node.name }} <small>({{ node.level_name }})</small>
+            {% if not node.is_leaf_node %}
+              <ul class="children">
+                {{ children }}
+              </ul>
+            {% endif %}
+          </li>
+        {% endrecursetree %}
+      </ul>
+    </div>
+  {% endif %}
+{% endblock form_extra %}

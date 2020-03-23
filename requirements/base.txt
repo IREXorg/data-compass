@@ -4,8 +4,44 @@ django-environ
 # Postgresql
 psycopg2 --no-binary psycopg2
 
-# Other
+# Image processing
+Pillow
+django-imagekit
+
+# Authentication
 django-allauth
+
+# Country field
+django-countries
+
+# Phone number field
+phonenumbers
+django-phonenumber-field
+
+# Tree/Hierachy data structure
+django-mptt
+
+# Django Filter
+django-filter
+
+# UI
+django-crispy-forms
+django-active-link
+django-widget-tweaks
+django-summernote
+
+# date parsing, Python < 3.7
+python-dateutil
+
+# processing hierarchy uploads
+xlrd
+treelib
+
+# file storage
+django-storages
+
+# pagination
+django-bootstrap-pagination
 
 # Debuging
 django-debug-toolbar

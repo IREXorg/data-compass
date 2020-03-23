@@ -1,0 +1,69 @@
+{% extends 'projects/base.html' %}
+
+{% load i18n %}
+
+{% load crispy_forms_tags %}
+
+{% block breadcrumbs %}
+<ol class="breadcrumb" aria-label="breadcrumbs">
+   <li class="breadcrumb-item"><a href="{% url 'projects:project-list' %}">{% trans 'My Projects' %}</a></li>
+   <li class="breadcrumb-item active" aria-current="page"><a href="#">{{page_title}}</a></li>
+</ol>
+{% endblock breadcrumbs %}
+
+
+{% block page_header %}
+  <div class="page-header">
+    <div class="row align-items-center">
+
+      <div class="col">
+        <h1 class="page-title">
+          {% block page_title %}{{ page_title }}{% endblock %}
+        </h1>
+      </div>
+
+    </div>
+  </div>
+{% endblock page_header %}
+
+
+{% block content %}
+  <div class="row justify-content-md-center">
+
+      <div class="card">
+        <div class="card-body">
+
+          <p class="text-muted">
+            {% blocktrans trimmed %}
+            Provide some basic information about this project.
+            {% endblocktrans %}
+          </p>
+
+          <hr>
+
+          <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {% block form_content %}{{ form|crispy }}{% endblock %}
+
+            {% block form_extra %}{% endblock %}
+
+            <hr>
+
+            {% block form_buttons %}
+              <div class="form-group">
+                <a href={% url 'projects:project-list' %} class="btn btn-warning">
+                  {% trans 'Cancel' %}
+                </a>
+                <button type="submit" class="btn btn-success">
+                  {% trans 'Save project' %}
+                </button>
+              </div>
+            {% endblock form_buttons %}
+          </form>
+
+      </div>
+    </div>
+
+  </div>
+{% endblock content %}

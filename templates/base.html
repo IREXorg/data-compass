@@ -1,0 +1,45 @@
+{% load i18n %}
+{% load static %}
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>{% trans 'Data Compass' %} · {% block head_title %}{{ page_title }}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <meta name="msapplication-TileColor" content="#206bc4"/>
+    <meta name="theme-color" content="#206bc4"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="HandheldFriendly" content="True"/>
+    <meta name="MobileOptimized" content="320"/>
+    <meta name="robots" content="noindex,nofollow,noarchive"/>
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon"/>
+    <link href="{% static 'main.css' %}" rel="stylesheet">
+    {{ form.media }} {# Froala Editor #}
+  </head>
+
+  <body class="antialiased {% block body_class %}{% endblock %}">
+      {% block body %}{% endblock %}
+
+      <script src="{% static 'main.js' %}"></script>
+
+      {% if GOOGLE_ANALYTICS_TRACKING_ID and not DEBUG %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ GOOGLE_ANALYTICS_TRACKING_ID }}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '{{ GOOGLE_ANALYTICS_TRACKING_ID }}');
+        </script>
+      {% endif %}
+
+      {% block extra_js %}{% endblock %}
+  </body>
+</html>
