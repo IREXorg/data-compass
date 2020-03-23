@@ -114,7 +114,7 @@ h2 {
   margin-top: $form-group-margin-top;
   margin-left: $form-group-margin-left;
   margin-right: $form-group-margin-right;
-  margin-bottom: $form-group-margin-bottom; 
+  margin-bottom: $form-group-margin-bottom;
 }
 
 .form-control {
@@ -142,4 +142,36 @@ form.login {
 
 .select2-container .select2-search--inline .select2-search__field {
   background-color: $input-bg;
+}
+
+.form-check-input[type=checkbox] {
+  border-radius: 0;
+}
+
+.form-check-input {
+  width: 1rem;
+  height: 1rem;
+  margin-top: .3rem;
+  vertical-align: top;
+  background-color: #d8e6e6;
+  border: 1px solid rgba(134,140,151,.24);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-print-color-adjust: exact;
+  color-adjust: exact;
+}
+
+.form-check-input:hover {
+  width: 1rem;
+  height: 1rem;
+  margin-top: .3rem;
+  vertical-align: top;
+  background-color: #9ba7a7;
+  border: 1px solid rgba(134,140,151,.24);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-print-color-adjust: exact;
+  color-adjust: exact;
 }
