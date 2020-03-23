@@ -30,7 +30,6 @@ class RespondentCreateForm(ModelForm):
     def __init__(self, survey=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['email'].required = True
-        self.fields['hierarchy_level'].required = True
         if survey:
             self.initial['survey'] = survey
             self.fields['hierarchy_level'].queryset = survey.project.hierarchy_levels.all()
