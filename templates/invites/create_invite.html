@@ -33,72 +33,68 @@
 {% block content %}
 <div class="row justify-content-md-center">
   <div class="col-sm-12">
-    <div class="card">
-      <div class="card-body">
-        <p class="text-muted">
-        {% blocktrans trimmed %}
-        Whom will you invite to take your survey?
-        {% endblocktrans %}
-        </p>
+    <p class="text-muted">
+    {% blocktrans trimmed %}
+    Whom will you invite to take your survey?
+    {% endblocktrans %}
+    </p>
 
-        {% if respondents %}
-        <p class="mt-4">
-        {% blocktrans %}
-          Confirm list of respondents or you can
-        {% endblocktrans %}
-          <a href="{% url 'respondents:respondent-list' %}">go back</a>.
-        </p>
+    {% if respondents %}
+    <p class="mt-4">
+    {% blocktrans %}
+    Confirm list of respondents or you can
+    {% endblocktrans %}
+    <a href="{% url 'respondents:respondent-list' %}">go back</a>.
+    </p>
 
-        <div class="row">
-          {% for respondent in respondents %}
-          <div class="table-responsive">
-            <table class="table card-table table-vcenter">
-              <tbody>
-                <tr>
-                  <td class="w-1 pr-0">
-                    <label class="form-check m-0">
-                      <input type="checkbox" class="form-check-input" checked="">
-                      <span class="form-check-label"></span>
-                    </label>
-                  </td>
-                  <td class="w-100">
-                    <a href="#" class="text-reset">
-                      {{ respondent.first_name }} {{ respondent.last_name }}
-                      &lang;{{ respondent.email }}&rang;
-                    </a>
-                  </td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
-          {% endfor %}
-        </div>
-        {# End: respondents list #}
-
-        {% endif %}
-
-        <hr>
-
-        <form method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
-
-          <div class="form-group">
-            <div class="row">
-              <div class="col-sm-6">
-                <button type="submit" class="btn btn-primary">
-                  {% trans 'Send invite' %}
-                </button>
-
-                <a href="#" class="btn btn-secondary">
-                  {% trans 'Cancel' %}
+    <div class="row">
+      <div class="table-responsive ">
+        <table class="table table-vcenter table-bordered">
+          <thead>
+            <th>Respondent name</th>
+            <th>Email</th>
+          </thead>
+          <tbody>
+            {% for respondent in respondents %}
+            <tr>
+              <td>
+                {{ respondent.first_name }} {{ respondent.last_name }}
+              </td>
+              <td>
+                <a href="#" class="text-reset">
+                  {{ respondent.email }}
                 </a>
-              </div>
-            </div>
-          </div>
-        </form>
+              </td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
       </div>
     </div>
+    {# End: respondents list #}
+
+    {% endif %}
+
+    <hr>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-sm-6">
+            <button type="submit" class="btn btn-primary">
+              {% trans 'Send invite' %}
+            </button>
+
+            <a href="#" class="btn btn-secondary">
+              {% trans 'Cancel' %}
+            </a>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
 {% endblock %}

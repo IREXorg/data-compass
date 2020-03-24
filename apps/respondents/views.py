@@ -243,9 +243,7 @@ class RespondentCreateInviteView(RespondentFacilitatorMixin, PageMixin, SendInvi
                 respondent = Respondent.objects.get(pk=item)
                 selected_respondents.append(respondent)
 
-            return render(request, self.template_name, {
-                'respondents': selected_respondents,
-                })
+        return render(request, self.template_name, {'respondents': selected_respondents})
 
 
 class RespondentSendInviteView(RespondentFacilitatorMixin, PageMixin, SendInvite):
