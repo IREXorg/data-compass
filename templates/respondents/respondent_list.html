@@ -44,7 +44,7 @@
 
     <div class="col-sm-auto pr-3">
       <a id="export-csv" class="btn btn-warning btn-sm mx-3" href="#">{% trans 'Export table' %}</a>
-      <a id="invite-respondent" class="btn btn-primary btn-sm mx-3" href="{% url 'respondents:respondent-create-invite' %}">{% trans 'Invite respondents' %}</a>
+      <a id="invite-respondent" class="btn btn-primary btn-sm mx-3" href="#">{% trans 'Invite respondents' %}</a>
 
       <span class="text-muted">
         {% trans 'Respondents found' %}:
@@ -53,8 +53,10 @@
     </div>
   </div>
 
-  <form method="POST" action="#" id="invite-respondent-form">
+  <form method="POST" action="{% url 'respondents:respondent-create-invite' %}" id="invite-respondent-form">
     {% csrf_token %}
+
+    <input type="hidden" name="survey" id="respondent-survey">
 
     <div id="#respondents" class="table-responsive">
       <table class="table table-bordered small">
@@ -116,6 +118,12 @@
 
     $('#invite-respondent').click(function() {
       var form = '#invite-respondent-form'
+
+      if (!$('#respondent-survey').val()) {
+        alert('Please specify respondent survey');
+        return;
+      }
+
       $(form).submit();
     });
 
@@ -125,5 +133,12 @@
       console.log($('.form-check-input[name^=respondent]').val());
       $('.form-check-input[name^=respondent]').trigger('click');
     });
+
+  $('#id_survey').change(function () {
+    var survey = $(this).val();
+    console.log('survey', survey);
+
+    $('#respondent-survey').attr('value', survey);
+  });
   </script>
 {% endblock extra_js %}

@@ -229,13 +229,8 @@ class RespondentCreateInviteView(RespondentFacilitatorMixin, PageMixin, SendInvi
     page_title = _('Create Survey Invite')
     context_object_name = 'respondents'
     queryset = Respondent.objects.all()
-    form_class= RespondentInviteForm
 
     def post(self, request, *args, **kwargs):
-        # foreach email,
-        # create new invite
-        # associate invite with email (resondent)
-
         form = self.form_class(request.POST)
 
         print(f'---------------{request.POST}---------------')
