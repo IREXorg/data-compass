@@ -133,6 +133,15 @@ class Survey(TimeStampedModel):
         choices=YES_NO_CHOICES
     )
 
+    #: Flag whether respondents can add their own roles.
+    allow_respondent_roles = models.BooleanField(
+        _('allow respondent roles'),
+        help_text=_('If Yes, respondents will be able to add their own roles.'),
+        blank=True,
+        default=False,
+        choices=YES_NO_CHOICES
+    )
+
     #: Flag whether survey respondents must login.
     login_required = models.BooleanField(
         _('login required'),

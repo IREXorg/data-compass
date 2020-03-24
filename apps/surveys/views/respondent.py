@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -7,11 +6,12 @@ from apps.respondents.models import Respondent
 from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import RespondentCreateForm, RespondentsUploadForm, RespondentUpdateForm
-from ..mixins import BasePopupModelFormMixin, CreatorMixin
+from ..mixins import (BasePopupModelFormMixin, CreatorMixin, SurveyFacilitatorMixin, SurveyFacilitatorRequiredMixin,
+                      SurveyRelatedFacilitatorMixin)
 from ..models import Survey
 
 
-class RespondentCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+class RespondentCreateView(SuccessMessageMixin, SurveyFacilitatorRequiredMixin, CreatorMixin,
                            PageTitleMixin, BasePopupModelFormMixin, CreateView):
     """
     Create survey respondent view.
@@ -34,29 +34,19 @@ class RespondentCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin
     form_class = RespondentCreateForm
     success_message = _('Respondent was created successfully')
 
-    def get_survey(self):
-        """
-        Get survey to associate a respondent with from url parameters
-        """
-        survey_pk = self.kwargs.get('survey_pk', None)
-        if survey_pk:
-            return Survey.objects.get(pk=survey_pk)
-
     def get_form_kwargs(self):
         """
         Add survey to form class initialization arguments
         """
         form_kwargs = super().get_form_kwargs()
-        survey = self.get_survey()
-        if survey:
-            form_kwargs['survey'] = survey
+        form_kwargs['survey'] = self.survey
         return form_kwargs
 
     def get_success_url(self):
         return reverse('surveys:edit-step-one', kwargs={'pk': self.object.survey.pk})
 
 
-class RespondentUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+class RespondentUpdateView(SuccessMessageMixin, SurveyRelatedFacilitatorMixin, CreatorMixin,
                            PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey respondent view.
@@ -83,7 +73,7 @@ class RespondentUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin
         return reverse('surveys:edit-step-one', kwargs={'pk': self.object.survey.pk})
 
 
-class RespondentDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
+class RespondentDeleteView(SuccessMessageMixin, SurveyRelatedFacilitatorMixin, PageTitleMixin,
                            PopupDeleteMixin, DeleteView):
     """
     Delete survey respondent view
@@ -109,7 +99,7 @@ class RespondentDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMix
         return reverse('surveys:edit-step-one', kwargs={'pk': self.object.survey.pk})
 
 
-class RespondentsUploadView(SuccessMessageMixin, LoginRequiredMixin,
+class RespondentsUploadView(SuccessMessageMixin, SurveyFacilitatorMixin,
                             PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Upload survey respondents view.

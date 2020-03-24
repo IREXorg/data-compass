@@ -1,6 +1,6 @@
 from django import forms
-from django.conf import settings
 from django.forms import ModelForm
+from django.templatetags.static import static
 from django.utils.translation import ugettext_lazy as _
 
 import xlrd
@@ -19,7 +19,7 @@ class ProjectCreateForm(ModelForm):
         'by this project. In order to be able to aggregate results well, '
         'please upload the dataflow hierarchy. '
         '<a href="%(template_url)s" download>Click here for data flow hierarchy file template</a>.'
-    ) % {'template_url': settings.STATIC_URL + 'files/templates/data-flow-hierarchy.xlsx'}
+    ) % {'template_url': static('files/templates/data-flow-hierarchy.xlsx')}
 
     hierarchy_file = forms.FileField(
         label=_('Data flow hierarchy'),

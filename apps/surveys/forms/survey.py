@@ -61,20 +61,22 @@ class SurveyEditStepOneForm(ModelForm):
     class Meta:
         model = Survey
         fields = [
-            'allow_respondent_hierarchy_levels', 'dont_link_hierarchy_levels',
-            'login_required', 'invitation_required',
-            'respondent_can_aggregate', 'respondent_can_invite'
+            # 'allow_respondent_hierarchy_levels',
+            'login_required', 'invitation_required', 'allow_respondent_roles',
+            # 'respondent_can_aggregate', 'respondent_can_invite'
         ]
         widgets = {
-            'allow_respondent_hierarchy_levels': forms.RadioSelect(),
-            'dont_link_hierarchy_levels': forms.RadioSelect(),
+            # 'allow_respondent_hierarchy_levels': forms.RadioSelect(),
+            # 'dont_link_hierarchy_levels': forms.RadioSelect(),
             'login_required': forms.RadioSelect(),
             'invitation_required': forms.RadioSelect(),
-            'respondent_can_aggregate': forms.RadioSelect(),
-            'respondent_can_invite': forms.RadioSelect()
+            'allow_respondent_roles': forms.RadioSelect(),
+            # 'respondent_can_aggregate': forms.RadioSelect(),
+            # 'respondent_can_invite': forms.RadioSelect()
         }
         labels = {
             'allow_respondent_hierarchy_levels': _('Allow respondents to add to Lists?'),
+            'allow_respondent_roles': _('Allow respondents to enter their own roles?'),
             'dont_link_hierarchy_levels': _('Do not link respondents with system hierarchy levels?'),
             'login_required': _('Do you want these users to log in before responding to the survey?'),
             'invitation_required': _('Do you want the survey to be taken by invited users only?'),
@@ -101,17 +103,17 @@ class SurveyEditStepTwoForm(ModelForm):
     """
     class Meta:
         model = Survey
-        fields = ['allow_respondent_topics', 'respondent_topic_number']
+        fields = ['allow_respondent_topics']
         widgets = {
             'allow_respondent_topics': forms.RadioSelect(),
         }
         labels = {
             'allow_respondent_topics': _('Allow respondents to enter their own value here?'),
-            'respondent_topic_number': _(
-                'What is the maximum number of topics you would like '
-                'Respondents to select? They will complete the entire '
-                'survey for each topic they select.'
-            ),
+            # 'respondent_topic_number': _(
+            #    'What is the maximum number of topics you would like '
+            #    'Respondents to select? They will complete the entire '
+            #    'survey for each topic they select.'
+            # ),
         }
 
     def __init__(self, *args, **kwargs):

@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -6,11 +5,12 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import DatasetCreateForm, DatasetUpdateForm
-from ..mixins import BasePopupModelFormMixin, CreatorMixin
-from ..models import Survey, Topic
+from ..mixins import (BasePopupModelFormMixin, CreatorMixin, SurveyFacilitatorRequiredMixin,
+                      SurveyRelatedFacilitatorMixin)
+from ..models import Topic
 
 
-class DatasetCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+class DatasetCreateView(SuccessMessageMixin, SurveyFacilitatorRequiredMixin, CreatorMixin,
                         PageTitleMixin, BasePopupModelFormMixin, CreateView):
     """
     Create survey dataset view.
@@ -33,29 +33,19 @@ class DatasetCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
     form_class = DatasetCreateForm
     success_message = _('Dataset was created successfully')
 
-    def get_survey(self):
-        """
-        Get survey to associate a dataset with from url parameters
-        """
-        survey_pk = self.kwargs.get('survey_pk', None)
-        if survey_pk:
-            return Survey.objects.get(pk=survey_pk)
-
     def get_form_kwargs(self):
         """
         Add survey to form class initialization arguments
         """
         form_kwargs = super().get_form_kwargs()
-        survey = self.get_survey()
-        if survey:
-            form_kwargs['survey'] = survey
+        form_kwargs['survey'] = self.survey
         return form_kwargs
 
     def get_success_url(self):
         return reverse('surveys:edit-step-three', kwargs={'pk': self.object.survey.pk})
 
 
-class DatasetUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+class DatasetUpdateView(SuccessMessageMixin, SurveyRelatedFacilitatorMixin, CreatorMixin,
                         PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey dataset view.
@@ -82,7 +72,8 @@ class DatasetUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
         return reverse('surveys:edit-step-three', kwargs={'pk': self.object.survey.pk})
 
 
-class DatasetDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin, PopupDeleteMixin, DeleteView):
+class DatasetDeleteView(SuccessMessageMixin, SurveyRelatedFacilitatorMixin, PageTitleMixin,
+                        PopupDeleteMixin, DeleteView):
     """
     Delete survey dataset view
 

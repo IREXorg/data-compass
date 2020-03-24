@@ -68,6 +68,11 @@ urlpatterns = [
         name='entity-create'
     ),
     path(
+        '<int:survey>/create-role',
+        views.RoleCreateView.as_view(),
+        name='role-create'
+    ),
+    path(
         '<int:survey>/create-storage',
         views.DatasetStorageCreateView.as_view(),
         name='dataset-storage-create'

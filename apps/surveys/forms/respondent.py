@@ -1,6 +1,6 @@
 from django import forms
-from django.conf import settings
 from django.forms import ModelForm
+from django.templatetags.static import static
 from django.utils.translation import ugettext_lazy as _
 
 import xlrd
@@ -30,7 +30,6 @@ class RespondentCreateForm(ModelForm):
     def __init__(self, survey=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['email'].required = True
-        self.fields['hierarchy_level'].required = True
         if survey:
             self.initial['survey'] = survey
             self.fields['hierarchy_level'].queryset = survey.project.hierarchy_levels.all()
@@ -87,7 +86,7 @@ class RespondentsUploadForm(ModelForm):
     respondents_file_help_text = _(
         'Please upload respondents. '
         '<a href="%(template_url)s" download>Click here for respondents file template</a>.'
-    ) % {'template_url': settings.STATIC_URL + 'files/templates/respondents.xlsx'}
+    ) % {'template_url': static('files/templates/respondents.xlsx')}
 
     respondents_file = forms.FileField(
         label=_('Respondents'),

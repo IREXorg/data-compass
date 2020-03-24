@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -6,11 +5,12 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import RoleCreateForm, RoleUpdateForm
-from ..mixins import BasePopupModelFormMixin, CreatorMixin
-from ..models import Role, Survey
+from ..mixins import (BasePopupModelFormMixin, CreatorMixin, SurveyFacilitatorRequiredMixin,
+                      SurveyRelatedFacilitatorMixin)
+from ..models import Role
 
 
-class RoleCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+class RoleCreateView(SuccessMessageMixin, SurveyFacilitatorRequiredMixin, CreatorMixin,
                      PageTitleMixin, BasePopupModelFormMixin, CreateView):
     """
     Create survey role view.
@@ -33,29 +33,19 @@ class RoleCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
     form_class = RoleCreateForm
     success_message = _('Role was created successfully')
 
-    def get_survey(self):
-        """
-        Get survey to associate a role with from url parameters
-        """
-        survey_pk = self.kwargs.get('survey_pk', None)
-        if survey_pk:
-            return Survey.objects.get(pk=survey_pk)
-
     def get_form_kwargs(self):
         """
         Add survey to form class initialization arguments
         """
         form_kwargs = super().get_form_kwargs()
-        survey = self.get_survey()
-        if survey:
-            form_kwargs['survey'] = survey
+        form_kwargs['survey'] = self.survey
         return form_kwargs
 
     def get_success_url(self):
         return reverse('surveys:edit-step-one', kwargs={'pk': self.object.survey.pk})
 
 
-class RoleUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+class RoleUpdateView(SuccessMessageMixin, SurveyRelatedFacilitatorMixin, CreatorMixin,
                      PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey role view.
@@ -82,7 +72,7 @@ class RoleUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
         return reverse('surveys:edit-step-one', kwargs={'pk': self.object.survey.pk})
 
 
-class RoleDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
+class RoleDeleteView(SuccessMessageMixin, SurveyRelatedFacilitatorMixin, PageTitleMixin,
                      PopupDeleteMixin, DeleteView):
     """
     Delete survey role view

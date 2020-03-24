@@ -5,11 +5,11 @@ from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView
 
 from apps.surveys.mixins import BasePopupModelFormMixin
-from apps.surveys.models import Dataset, DatasetStorage, Entity, Survey
+from apps.surveys.models import Dataset, DatasetStorage, Entity, Role, Survey
 from core.exceptions import NotAuthenticated
 from core.mixins import PageMixin
 
-from ..forms import EntityCreateForm
+from ..forms import EntityCreateForm, RoleCreateForm
 from ..mixins import ConsentCheckMixin, RespondentSurveyMixin
 
 
@@ -91,6 +91,19 @@ class EntityCreateView(BaseCreateView):
     fields = None
     form_class = EntityCreateForm
     allowed_by = 'allow_respondent_entities'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['survey'] = self.survey
+        return kwargs
+
+
+class RoleCreateView(BaseCreateView):
+    page_title = _('Add role')
+    model = Role
+    fields = None
+    form_class = RoleCreateForm
+    allowed_by = 'allow_respondent_roles'
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

@@ -76,7 +76,7 @@ urlpatterns = [
 
     # start: survey gender paths
     path('<int:survey_pk>/create-gender/', views.GenderCreateView.as_view(), name='survey-create-gender'),
-    path('<int:pk>/delete-gender/', views.GenderDeleteView.as_view(), name='survey-delete-gender'),
+    path('<int:survey_pk>/delete-gender/<int:pk>/', views.GenderDeleteView.as_view(), name='survey-delete-gender'),
     path('<int:pk>/update-gender/', views.GenderUpdateView.as_view(), name='survey-update-gender'),
     # end: survey gender paths
 
