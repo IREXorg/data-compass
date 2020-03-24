@@ -11,6 +11,7 @@ from invitations.utils import get_invitation_model
 from invitations.views import SendInvite
 
 from apps.responses.mixins import ConsentCheckMixin, RespondentSurveyMixin
+from apps.surveys.models import Survey
 from core.exceptions import NotAuthenticated
 from core.mixins import CSVResponseMixin, PageMixin
 
@@ -227,8 +228,13 @@ class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, 
 class RespondentCreateInviteView(RespondentFacilitatorMixin, PageMixin, SendInvite):
     template_name = 'invites/create_invite.html'
     page_title = _('Create Survey Invite')
-    queryset = Respondent.objects.all()
+    model = Respondent
     # form_class = RespondentCreateInviteForm
+
+    def get_queryset(self):
+        return super().get_queryset()\
+            .select_related('survey')\
+            .with_status()
 
     def post(self, request, *args, **kwargs):
         respondents = request.POST.getlist('respondents[]')
@@ -238,12 +244,26 @@ class RespondentCreateInviteView(RespondentFacilitatorMixin, PageMixin, SendInvi
             return redirect('/respondents')
         else:
             selected_respondents = []
+            selected_surveys = []
 
             for item in respondents:
                 respondent = Respondent.objects.get(pk=item)
                 selected_respondents.append(respondent)
 
-        return render(request, self.template_name, {'respondents': selected_respondents})
+            survey_queryset = list(self.get_queryset().values('survey'))
+            survey_queryset = {item['survey']:item for item in survey_queryset}.values()
+            print(f'----------{survey_queryset}-----------')
+
+            for item in survey_queryset:
+                print(f'----------{item}-----------')
+                print(f'----------{type(item)}-----------')
+                print(f'----------{list(item.values())[0]}-----------')
+
+                item = list(item.values())[0]
+                selected_surveys.append(Survey.objects.get(pk=item))
+
+
+        return render(request, self.template_name, {'respondents': selected_respondents, 'surveys': selected_surveys })
 
 
 class RespondentSendInviteView(RespondentFacilitatorMixin, PageMixin, SendInvite):

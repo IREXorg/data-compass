@@ -81,17 +81,28 @@
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
 
-      <div class="form-group">
-        <div class="row">
-          <div class="col-sm-6">
-            <button type="submit" class="btn btn-primary">
-              {% trans 'Send invite' %}
-            </button>
+      <div class="form-group mb-3 ">
+        <label class="form-label">Select survey</label>
+        <div>
+          <select class="form-select">
 
-            <a href="#" class="btn btn-secondary">
-              {% trans 'Cancel' %}
-            </a>
-          </div>
+            {% for survey in surveys %}
+            <option value={{ survey.id }}>{{ survey.name }}</option>
+            {% endfor %}
+
+          </select>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-6">
+          <button type="submit" class="btn btn-primary">
+            {% trans 'Send invite' %}
+          </button>
+
+          <a href="#" class="btn btn-secondary">
+            {% trans 'Cancel' %}
+          </a>
         </div>
       </div>
     </form>
