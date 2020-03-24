@@ -7,19 +7,17 @@ from django.views.generic import FormView, UpdateView
 from django.views.generic.list import ListView
 
 from django_filters.views import FilterView
+from invitations.utils import get_invitation_model
+from invitations.views import SendInvite
 
 from apps.responses.mixins import ConsentCheckMixin, RespondentSurveyMixin
 from core.exceptions import NotAuthenticated
 from core.mixins import CSVResponseMixin, PageMixin
 
 from .filters import RespondentFilter
-from .forms import RespondentConsentForm, ResponseRespondentForm
+from .forms import RespondentConsentForm, RespondentForm, RespondentInviteForm, ResponseRespondentForm
 from .mixins import RespondentFacilitatorMixin
-from .forms import RespondentInviteForm, RespondentConsentForm, RespondentForm
 from .models import Respondent
-
-from invitations.utils import get_invitation_model
-from invitations.views import SendInvite
 
 Invitation = get_invitation_model()
 
@@ -226,9 +224,31 @@ class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, 
         context['hierarchies'] = self.survey.project.hierarchies.values('id', 'level', 'name', 'parent')
         return context
 
-class RespondentInviteView(RespondentFacilitatorMixin, PageMixin, SendInvite):
-    template_name = 'invitations/send_invite.html'
-    page_title = _('Send Invite')
+class RespondentCreateInviteView(RespondentFacilitatorMixin, PageMixin, SendInvite):
+    template_name = 'invites/create_invite.html'
+    page_title = _('Create Survey Invite')
+    context_object_name = 'respondents'
+    queryset = Respondent.objects.all()
+    form_class= RespondentInviteForm
+
+    def post(self, request, *args, **kwargs):
+        # foreach email,
+        # create new invite
+        # associate invite with email (resondent)
+
+        form = self.form_class(request.POST)
+
+        print(f'---------------{request.POST}---------------')
+
+        if form.is_valid():
+            # <process form cleaned data>
+            return redirect('/respondents/invite')
+
+        return render(request, self.template_name, {'form': form})
+
+class RespondentSendInviteView(RespondentFacilitatorMixin, PageMixin, SendInvite):
+    template_name = 'invites/create_invite.html'
+    page_title = _('Create Invite')
     context_object_name = 'respondents'
     queryset = Respondent.objects.all()
     form_class= RespondentInviteForm

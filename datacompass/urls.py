@@ -41,8 +41,6 @@ urlpatterns = [
     path('respondents/', include('apps.respondents.urls', namespace='respondents')),
     path('responses/', include('apps.responses.urls', namespace='responses')),
     path('summernote/', include('django_summernote.urls')),
-    # path('invitations/send-invite/', SendInviteView.as_view()),
-    path('invitations/', include('invitations.urls', namespace='invitations')),
 ]
 
 if settings.DEBUG:
