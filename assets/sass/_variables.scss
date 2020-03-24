@@ -11,6 +11,7 @@ $success: #99b83c;
 $warning: #d76427;
 $light: #d8e6e6;
 $secondary: #9ba7a7;
+$dark-gray: #868C97;
 
 // Typography
 
@@ -72,6 +73,13 @@ $form-group-margin-top: 20px;
 $form-group-margin-left: 10px;
 $form-group-margin-right: 10px;
 $form-group-margin-bottom: 15px;
+
+$form-check-input-border-color: $light;
+$form-check-input-border: $border-width solid $form-check-input-border-color;
+$form-check-input-border-radius: 0;
+$form-check-input-border-color-hover: $dark-gray;
+$form-check-input-border-hover: $border-width solid $form-check-input-border-color-hover;
+
 
 // Buttons
 

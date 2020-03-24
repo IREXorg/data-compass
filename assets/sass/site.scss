@@ -149,12 +149,8 @@ form.login {
 }
 
 .form-check-input {
-  width: 1rem;
-  height: 1rem;
-  margin-top: .3rem;
-  vertical-align: top;
-  background-color: #d8e6e6;
-  border: 1px solid rgba(134,140,151,.24);
+  background-color: $light;
+  border: $form-check-input-border;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -163,12 +159,8 @@ form.login {
 }
 
 .form-check-input:hover {
-  width: 1rem;
-  height: 1rem;
-  margin-top: .3rem;
-  vertical-align: top;
-  background-color: #9ba7a7;
-  border: 1px solid rgba(134,140,151,.24);
+  background-color: $secondary;
+  border: $form-check-input-border-hover;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -178,7 +170,7 @@ form.login {
 
 select.select,
 select.form-select, {
-  background: #d8e6e6;
+  background: $light;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
