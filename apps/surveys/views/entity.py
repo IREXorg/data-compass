@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -6,11 +5,12 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import EntityCreateForm, EntityUpdateForm
-from ..mixins import BasePopupModelFormMixin, CreatorMixin
-from ..models import Entity, Survey
+from ..mixins import (BasePopupModelFormMixin, CreatorMixin, SurveyFacilitatorRequiredMixin,
+                      SurveyRelatedFacilitatorMixin)
+from ..models import Entity
 
 
-class EntityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+class EntityCreateView(SuccessMessageMixin, SurveyFacilitatorRequiredMixin, CreatorMixin,
                        PageTitleMixin, BasePopupModelFormMixin, CreateView):
     """
     Create survey entity view.
@@ -33,29 +33,19 @@ class EntityCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
     form_class = EntityCreateForm
     success_message = _('Entity was created successfully')
 
-    def get_survey(self):
-        """
-        Get survey to associate a entity with from url parameters
-        """
-        survey_pk = self.kwargs.get('survey_pk', None)
-        if survey_pk:
-            return Survey.objects.get(pk=survey_pk)
-
     def get_form_kwargs(self):
         """
         Add survey to form class initialization arguments
         """
         form_kwargs = super().get_form_kwargs()
-        survey = self.get_survey()
-        if survey:
-            form_kwargs['survey'] = survey
+        form_kwargs['survey'] = self.survey
         return form_kwargs
 
     def get_success_url(self):
         return reverse('surveys:edit-step-four', kwargs={'pk': self.object.survey.pk})
 
 
-class EntityUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+class EntityUpdateView(SuccessMessageMixin, SurveyRelatedFacilitatorMixin, CreatorMixin,
                        PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey entity view.
@@ -82,7 +72,7 @@ class EntityUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
         return reverse('surveys:edit-step-four', kwargs={'pk': self.object.survey.pk})
 
 
-class EntityDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
+class EntityDeleteView(SuccessMessageMixin, SurveyRelatedFacilitatorMixin, PageTitleMixin,
                        PopupDeleteMixin, DeleteView):
     """
     Delete survey entity view

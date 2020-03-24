@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy as reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
@@ -6,11 +5,12 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import DatasetStorageCreateForm, DatasetStorageUpdateForm
-from ..mixins import BasePopupModelFormMixin, CreatorMixin
-from ..models import DatasetStorage, Survey
+from ..mixins import (BasePopupModelFormMixin, CreatorMixin, SurveyFacilitatorRequiredMixin,
+                      SurveyRelatedFacilitatorMixin)
+from ..models import DatasetStorage
 
 
-class DatasetStorageCreateView(SuccessMessageMixin, LoginRequiredMixin,
+class DatasetStorageCreateView(SuccessMessageMixin, SurveyFacilitatorRequiredMixin,
                                CreatorMixin, PageTitleMixin,
                                BasePopupModelFormMixin, CreateView):
     """
@@ -34,29 +34,19 @@ class DatasetStorageCreateView(SuccessMessageMixin, LoginRequiredMixin,
     form_class = DatasetStorageCreateForm
     success_message = _('Dataset storage was created successfully')
 
-    def get_survey(self):
-        """
-        Get survey to associate a dataset storage with from url parameters
-        """
-        survey_pk = self.kwargs.get('survey_pk', None)
-        if survey_pk:
-            return Survey.objects.get(pk=survey_pk)
-
     def get_form_kwargs(self):
         """
         Add survey to form class initialization arguments
         """
         form_kwargs = super().get_form_kwargs()
-        survey = self.get_survey()
-        if survey:
-            form_kwargs['survey'] = survey
+        form_kwargs['survey'] = self.survey
         return form_kwargs
 
     def get_success_url(self):
         return reverse('surveys:edit-step-five', kwargs={'pk': self.object.survey.pk})
 
 
-class DatasetStorageUpdateView(SuccessMessageMixin, LoginRequiredMixin,
+class DatasetStorageUpdateView(SuccessMessageMixin, SurveyRelatedFacilitatorMixin,
                                CreatorMixin, PageTitleMixin,
                                BasePopupModelFormMixin, UpdateView):
     """
@@ -84,7 +74,7 @@ class DatasetStorageUpdateView(SuccessMessageMixin, LoginRequiredMixin,
         return reverse('surveys:edit-step-five', kwargs={'pk': self.object.survey.pk})
 
 
-class DatasetStorageDeleteView(SuccessMessageMixin, LoginRequiredMixin,
+class DatasetStorageDeleteView(SuccessMessageMixin, SurveyRelatedFacilitatorMixin,
                                PageTitleMixin, PopupDeleteMixin, DeleteView):
     """
     Delete survey dataset storage view

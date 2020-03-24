@@ -10,11 +10,10 @@ from apps.users.models import Gender
 from core.mixins import PageTitleMixin, PopupTemplateMixin, SuccessMessageMixin
 
 from ..forms import GenderCreateForm, GenderUpdateForm
-from ..mixins import BasePopupModelFormMixin
-from ..models import Survey
+from ..mixins import BasePopupModelFormMixin, SurveyFacilitatorRequiredMixin
 
 
-class GenderCreateView(SuccessMessageMixin, LoginRequiredMixin,
+class GenderCreateView(SuccessMessageMixin, SurveyFacilitatorRequiredMixin,
                        PageTitleMixin, BasePopupModelFormMixin, CreateView):
     """
     Create survey gender view.
@@ -37,22 +36,12 @@ class GenderCreateView(SuccessMessageMixin, LoginRequiredMixin,
     form_class = GenderCreateForm
     success_message = _('Gender was created successfully')
 
-    def get_survey(self):
-        """
-        Get survey to associate a gender with from url parameters
-        """
-        survey_pk = self.kwargs.get('survey_pk', None)
-        if survey_pk:
-            return Survey.objects.get(pk=survey_pk)
-
     def get_form_kwargs(self):
         """
         Add survey to form class initialization arguments
         """
         form_kwargs = super().get_form_kwargs()
-        survey = self.get_survey()
-        if survey:
-            form_kwargs['survey'] = survey
+        form_kwargs['survey'] = self.survey
         return form_kwargs
 
     def get_success_url(self):
@@ -82,11 +71,17 @@ class GenderUpdateView(SuccessMessageMixin, LoginRequiredMixin,
     form_class = GenderUpdateForm
     success_message = _('Gender was updated successfully')
 
+    def get_queryset(self):
+        return Gender.objects.filter(
+            is_primary=False,
+            survey__project__facilitators=self.request.user
+        )
+
     def get_success_url(self):
         return reverse('surveys:edit-step-six', kwargs={'pk': self.object.survey.pk})
 
 
-class GenderDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
+class GenderDeleteView(SuccessMessageMixin, SurveyFacilitatorRequiredMixin, PageTitleMixin,
                        PopupTemplateMixin, DeleteView):
     """
     Delete survey gender view
@@ -108,30 +103,26 @@ class GenderDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
     model = Gender
     success_message = _('Gender was deleted successfully')
 
+    def get_queryset(self):
+        return Gender.objects.filter(
+            is_primary=False,
+            survey__project__facilitators=self.request.user
+        )
+
     def get_success_url(self):
         return reverse('surveys:edit-step-six', kwargs={'pk': self.object.survey.pk})
 
-    def get_survey(self):
-        """
-        Get survey to diassociate a gender from url query parameters
-        """
-        survey_pk = self.request.GET.get('survey', None)
-        if survey_pk:
-            return Survey.objects.get(pk=survey_pk)
-
     def delete(self, request, *args, **kwargs):
-
-        survey = self.get_survey()
 
         if self.is_popup():
             self.object = self.get_object()
 
-            if survey or self.object.is_primary:
-                # di-associate primary gender
-                # and prevent delete shared genders
-                survey.genders.remove(self.object)
+            if self.object.is_primary:
+                # di-associate primary/shared gender
+                # and don't delete
+                self.survey.genders.remove(self.object)
             else:
-                # delete non-primary and non-shared gender
+                # delete non-primary/non-shared gender
                 self.object.delete()
 
             popup_response_data = json.dumps({

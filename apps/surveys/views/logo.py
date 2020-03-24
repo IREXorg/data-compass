@@ -6,7 +6,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from core.mixins import PageTitleMixin, PopupDeleteMixin, SuccessMessageMixin
 
 from ..forms import LogoCreateForm, LogoUpdateForm
-from ..mixins import BasePopupModelFormMixin, CreatorMixin
+from ..mixins import BasePopupModelFormMixin, CreatorMixin, SurveyRelatedFacilitatorMixin
 from ..models import Logo, Survey
 
 
@@ -55,7 +55,7 @@ class LogoCreateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
         return reverse('surveys:edit-step-six', kwargs={'pk': self.object.survey.pk})
 
 
-class LogoUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
+class LogoUpdateView(SuccessMessageMixin, SurveyRelatedFacilitatorMixin, CreatorMixin,
                      PageTitleMixin, BasePopupModelFormMixin, UpdateView):
     """
     Update survey logo view.
@@ -82,7 +82,7 @@ class LogoUpdateView(SuccessMessageMixin, LoginRequiredMixin, CreatorMixin,
         return reverse('surveys:edit-step-six', kwargs={'pk': self.object.survey.pk})
 
 
-class LogoDeleteView(SuccessMessageMixin, LoginRequiredMixin, PageTitleMixin,
+class LogoDeleteView(SuccessMessageMixin, SurveyRelatedFacilitatorMixin, PageTitleMixin,
                      PopupDeleteMixin, DeleteView):
     """
     Delete survey logo view

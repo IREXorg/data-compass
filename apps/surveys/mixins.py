@@ -5,6 +5,8 @@ from django.http import Http404
 from apps.projects.models import Project
 from core.mixins import FacilitatorMixin, PopupModelFormMixin
 
+from .models import Survey
+
 
 class CreatorMixin:
     """
@@ -72,6 +74,45 @@ class ProjectFacilitatorRequiredMixin(LoginRequiredMixin):
         try:
             return self.get_project_queryset().get(pk=project_pk)
         except Project.DoesNotExist:
+            raise Http404()
+
+
+class SurveyRelatedFacilitatorMixin(FacilitatorMixin):
+    """
+    CBV mixin which makes sure user is a facilitator and limits survey
+    queryset to only objects where the user is among the project facilitators.
+    """
+
+    def get_queryset(self):
+        """
+        Returns queryset of surveys where user is project facilitators.
+        """
+        return self.model.objects.filter(survey__project__facilitators=self.request.user)
+
+
+class SurveyFacilitatorRequiredMixin(LoginRequiredMixin):
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return self.handle_no_permission()
+
+        if not self.request.user.is_facilitator:
+            raise PermissionDenied()
+
+        self.survey = self.get_survey()
+
+        return super().dispatch(request, *args, **kwargs)
+
+    def get_survey(self):
+        survey_pk = self.kwargs.get('survey_pk', None)
+        if not survey_pk:
+            raise AttributeError(
+                "%s must be called with survey in the URLconf."
+                % self.__class__.__name__
+            )
+        try:
+            return Survey.objects.filter(project__facilitators=self.request.user).get(pk=survey_pk)
+        except Survey.DoesNotExist:
             raise Http404()
 
 
