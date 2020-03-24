@@ -56,13 +56,13 @@
   <form method="POST" action="#" id="invite-respondent-form">
     {% csrf_token %}
 
-    <div class="table-responsive">
+    <div id="#respondents" class="table-responsive">
       <table class="table table-bordered small">
         <thead>
             <tr>
               <th>
                 <label class="form-check m-0">
-                  <input type="checkbox" class="form-check-input" checked="">
+                  <input type="checkbox" class="form-check-input">
                   <span class="form-check-label"></span>
                 </label>
               </th>
@@ -80,7 +80,7 @@
             <tr>
               <td>
                 <label class="form-check m-0">
-                  <input type="checkbox" class="form-check-input" checked="" name="respondent" value="{{ respondent.id }}">
+                  <input type="checkbox" class="form-check-input" name="respondent" value="{{ respondent.id }}">
                   <span class="form-check-label"></span>
                 </label>
               </td>
@@ -117,6 +117,13 @@
     $('#invite-respondent').click(function() {
       var form = '#invite-respondent-form'
       $(form).submit();
+    });
+
+    $('th .form-check-input').click(function() {
+      console.log('clicked');
+
+      console.log($('.form-check-input[name^=respondent]').val());
+      $('.form-check-input[name^=respondent]').trigger('click');
     });
   </script>
 {% endblock extra_js %}
