@@ -56,7 +56,8 @@
   <form method="POST" action="{% url 'respondents:respondent-create-invite' %}" id="invite-respondent-form">
     {% csrf_token %}
 
-    <input type="hidden" name="survey" id="respondent-survey">
+    <input type="hidden" name="project" id="respondent-project" required>
+    <input type="hidden" name="survey" id="respondent-survey" required>
 
     <div id="#respondents" class="table-responsive">
       <table class="table table-bordered small">
@@ -82,7 +83,7 @@
             <tr>
               <td>
                 <label class="form-check m-0">
-                  <input type="checkbox" class="form-check-input" name="respondent" value="{{ respondent.id }}">
+                  <input type="checkbox" class="form-check-input" name="respondents[]" value="{{ respondent.id }}">
                   <span class="form-check-label"></span>
                 </label>
               </td>
@@ -119,9 +120,14 @@
     $('#invite-respondent').click(function() {
       var form = '#invite-respondent-form'
 
+      if (!$('#respondent-project').val()) {
+        // alert('Please specify respondent project');
+        // return;
+      }
+
       if (!$('#respondent-survey').val()) {
-        alert('Please specify respondent survey');
-        return;
+        // alert('Please specify respondent survey');
+        // return;
       }
 
       $(form).submit();
@@ -140,5 +146,13 @@
 
     $('#respondent-survey').attr('value', survey);
   });
+
+  $('#id_project').change(function () {
+    var project = $(this).val();
+    console.log('project', project);
+
+    $('#respondent-project').attr('value', project);
+  });
+
   </script>
 {% endblock extra_js %}

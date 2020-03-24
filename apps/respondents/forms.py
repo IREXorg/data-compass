@@ -86,7 +86,8 @@ class ResponseRespondentForm(RespondentForm):
 
         self.fields['hierarchy'].queryset = project.hierarchies.all()
 
-class RespondentInviteForm(forms.ModelForm):
-    class Meta:
-        model = Respondent
-        fields = ['first_name', 'last_name', 'email', 'gender']
+class RespondentCreateInviteForm(forms.Form):
+    survey = forms.CharField()
+    project = forms.CharField()
+    respondent = forms.MultipleChoiceField(required=True)
+

@@ -15,7 +15,7 @@ from core.exceptions import NotAuthenticated
 from core.mixins import CSVResponseMixin, PageMixin
 
 from .filters import RespondentFilter
-from .forms import RespondentConsentForm, RespondentForm, RespondentInviteForm, ResponseRespondentForm
+from .forms import RespondentConsentForm, RespondentForm, RespondentCreateInviteForm, ResponseRespondentForm
 from .mixins import RespondentFacilitatorMixin
 from .models import Respondent
 
@@ -227,36 +227,31 @@ class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, 
 class RespondentCreateInviteView(RespondentFacilitatorMixin, PageMixin, SendInvite):
     template_name = 'invites/create_invite.html'
     page_title = _('Create Survey Invite')
-    context_object_name = 'respondents'
     queryset = Respondent.objects.all()
+    # form_class = RespondentCreateInviteForm
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
+        respondents = request.POST.getlist('respondents[]')
 
-        print(f'---------------{request.POST}---------------')
+        if not respondents:
+            # TODO display error, must select respondent
+            return redirect('/respondents')
+        else:
+            selected_respondents = []
 
-        if form.is_valid():
-            # <process form cleaned data>
-            return redirect('/respondents/invite')
+            for item in respondents:
+                respondent = Respondent.objects.get(pk=item)
+                selected_respondents.append(respondent)
 
-        return render(request, self.template_name, {'form': form})
+            return render(request, self.template_name, {
+                'respondents': selected_respondents,
+                })
+
 
 class RespondentSendInviteView(RespondentFacilitatorMixin, PageMixin, SendInvite):
     template_name = 'invites/create_invite.html'
     page_title = _('Create Invite')
     context_object_name = 'respondents'
-    queryset = Respondent.objects.all()
-    form_class= RespondentInviteForm
-
-    # TODO: add respondent filters
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-
-        print(f'---------------{request.POST}---------------')
-
-        if form.is_valid():
-            # <process form cleaned data>
-            return redirect('/respondents/invite')
-
-        return render(request, self.template_name, {'form': form})
+        return redirect('/respondents/invite')
