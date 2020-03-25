@@ -3,8 +3,10 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import FormView, UpdateView
+from django.views.generic import FormView, UpdateView, DetailView
 from django.views.generic.list import ListView
+from django.views.generic.base import View
+
 
 from django_filters.views import FilterView
 from invitations.utils import get_invitation_model
@@ -16,7 +18,7 @@ from core.exceptions import NotAuthenticated
 from core.mixins import CSVResponseMixin, PageMixin
 
 from .filters import RespondentFilter
-from .forms import RespondentConsentForm, RespondentForm, RespondentCreateInviteForm, ResponseRespondentForm
+from .forms import RespondentConsentForm, RespondentForm, RespondentCreateInviteForm, ResponseRespondentForm, RespondentSendInviteForm
 from .mixins import RespondentFacilitatorMixin
 from .models import Respondent
 
@@ -225,11 +227,10 @@ class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, 
         context['hierarchies'] = self.survey.project.hierarchies.values('id', 'level', 'name', 'parent')
         return context
 
-class RespondentCreateInviteView(RespondentFacilitatorMixin, PageMixin, SendInvite):
+class RespondentCreateInviteView(RespondentFacilitatorMixin, PageMixin, FormView):
     template_name = 'invites/create_invite.html'
     page_title = _('Create Survey Invite')
     model = Respondent
-    # form_class = RespondentCreateInviteForm
 
     def get_queryset(self):
         return super().get_queryset()\
@@ -237,39 +238,71 @@ class RespondentCreateInviteView(RespondentFacilitatorMixin, PageMixin, SendInvi
             .with_status()
 
     def post(self, request, *args, **kwargs):
-        respondents = request.POST.getlist('respondents[]')
+        # get respondents from the request
+        respondents = request.POST.getlist('respondents')
 
-        if not respondents:
-            # TODO display error, must select respondent
-            return redirect('/respondents')
-        else:
+        # if respondents proceed to process request
+        # render invitation create form
+        if respondents:
             selected_respondents = []
             selected_surveys = []
 
+            # for item in respondents, get object details from db
+            # and append to selected_respondents list
             for item in respondents:
                 respondent = Respondent.objects.get(pk=item)
                 selected_respondents.append(respondent)
 
+            # get all surveys for the authenticated user
             survey_queryset = list(self.get_queryset().values('survey'))
+
+            # filter queryset to unique values only
             survey_queryset = {item['survey']:item for item in survey_queryset}.values()
-            print(f'----------{survey_queryset}-----------')
+            # print(f'----------{survey_queryset}-----------')
 
+            # for item in survey_queryset append to selected_surveys
             for item in survey_queryset:
-                print(f'----------{item}-----------')
-                print(f'----------{type(item)}-----------')
-                print(f'----------{list(item.values())[0]}-----------')
+                # print(f'----------{item}-----------')
+                # print(f'----------{type(item)}-----------')
+                # print(f'----------{list(item.values())[0]}-----------')
 
+                # change dict to list and get exact values (not key-value pair)
                 item = list(item.values())[0]
                 selected_surveys.append(Survey.objects.get(pk=item))
 
+            return render(request, self.template_name, {'respondents': selected_respondents, 'surveys': selected_surveys })
 
-        return render(request, self.template_name, {'respondents': selected_respondents, 'surveys': selected_surveys })
+        # the code below will run if respondents is empty
+
+        # TODO flash errors
+        return redirect('/respondents')
 
 
-class RespondentSendInviteView(RespondentFacilitatorMixin, PageMixin, SendInvite):
-    template_name = 'invites/create_invite.html'
-    page_title = _('Create Invite')
-    context_object_name = 'respondents'
+class RespondentSendInviteView(FormView):
+    form_class = RespondentSendInviteForm
+    template_name = 'respondents/respondent_list.html'
 
     def post(self, request, *args, **kwargs):
-        return redirect('/respondents/invite')
+        # get respondents from the request
+        respondents = request.POST.getlist('respondents')
+        # print(f'----------request.POST: {request.POST}-----------')
+
+        for item in respondents:
+            print(f'----------item: {item}-----------')
+            respondent_email = Respondent.objects.filter(pk=item).values('email')[0]
+            invite = Invitation.create(respondent_email, inviter=request.user)
+            invite.send_invitation(request)
+
+        # try:
+        #     invite = form.save(email)
+        #     invite.inviter = self.request.user
+        #     invite.save()
+        #     invite.send_invitation(self.request)
+        # except Exception:
+        #     return self.form_invalid(form)
+        # return self.render_to_response(
+        #         self.get_context_data(
+        #             success_message=_('%(email)s has been invited') % {
+        #                 "email": email}))
+
+        return redirect('/respondents')

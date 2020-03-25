@@ -91,3 +91,6 @@ class RespondentCreateInviteForm(forms.Form):
     project = forms.CharField()
     respondent = forms.MultipleChoiceField(required=True)
 
+class RespondentSendInviteForm(forms.Form):
+    survey = forms.CharField(required=True)
+    respondents = forms.MultipleChoiceField(required=True)

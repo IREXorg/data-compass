@@ -39,59 +39,64 @@
     {% endblocktrans %}
     </p>
 
-    {% if respondents %}
-    <p class="mt-4">
-    {% blocktrans %}
-    Confirm list of respondents or you can
-    {% endblocktrans %}
-    <a href="{% url 'respondents:respondent-list' %}">go back</a>.
-    </p>
-
-    <div class="row">
-      <div class="table-responsive ">
-        <table class="table table-vcenter table-bordered">
-          <thead>
-            <th>Respondent name</th>
-            <th>Email</th>
-          </thead>
-          <tbody>
-            {% for respondent in respondents %}
-            <tr>
-              <td>
-                {{ respondent.first_name }} {{ respondent.last_name }}
-              </td>
-              <td>
-                <a href="#" class="text-reset">
-                  {{ respondent.email }}
-                </a>
-              </td>
-            </tr>
-            {% endfor %}
-
-          </tbody>
-        </table>
-      </div>
-    </div>
-    {# End: respondents list #}
-
-    {% endif %}
-
-    <hr>
-
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" action="{% url 'respondents:respondent-send-invite' %}" enctype="multipart/form-data">
       {% csrf_token %}
 
-      <div class="form-group mb-3 ">
-        <label class="form-label">Select survey</label>
-        <div>
-          <select class="form-select">
+      <p class="mt-4">
+      {% blocktrans %}
+      Confirm list of respondents.
+      {% endblocktrans %}
+      </p>
 
-            {% for survey in surveys %}
-            <option value={{ survey.id }}>{{ survey.name }}</option>
-            {% endfor %}
-
-          </select>
+      <div class="row">
+        <div class="table-responsive ">
+          <table class="table table-vcenter table-bordered">
+            <thead>
+              <tr>
+                <th>
+                  <label class="form-check m-0">
+                    <input type="checkbox" class="form-check-input">
+                    <span class="form-check-label"></span>
+                  </label>
+                </th>
+                <th>Respondent name</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for respondent in respondents %}
+              <tr>
+                <td>
+                  <label class="form-check m-0">
+                    <input type="checkbox" class="form-check-input" name="respondents" value="{{ respondent.id }}" checked="{{ respondent.id }}">
+                    <span class="form-check-label"></span>
+                  </label>
+                </td>
+                <td>
+                  {{ respondent.first_name }} {{ respondent.last_name }}
+                </td>
+                <td>
+                  <a href="#" class="text-reset">
+                    {{ respondent.email }}
+                  </a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
+      </div>
+      {# End: respondents list #}
+
+      <div class="form-group mb-3">
+        <label class="form-label">Select survey</label>
+        <select class="form-select" name="survey">
+          {% for survey in surveys %}
+          <option value={{ survey.id }}>
+          {{ survey.name }}
+          </option>
+          {% endfor %}
+        </select>
       </div>
 
       <div class="row">
@@ -100,7 +105,7 @@
             {% trans 'Send invite' %}
           </button>
 
-          <a href="#" class="btn btn-secondary">
+          <a href="{% url 'respondents:respondent-list' %}" class="btn btn-secondary">
             {% trans 'Cancel' %}
           </a>
         </div>

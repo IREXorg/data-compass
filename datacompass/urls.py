@@ -41,6 +41,7 @@ urlpatterns = [
     path('respondents/', include('apps.respondents.urls', namespace='respondents')),
     path('responses/', include('apps.responses.urls', namespace='responses')),
     path('summernote/', include('django_summernote.urls')),
+    path('invitations/', include('invitations.urls')),
 ]
 
 if settings.DEBUG:
