@@ -3,13 +3,10 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, FormView, UpdateView
-from django.views.generic.base import View
-from django.views.generic.list import ListView
+from django.views.generic import FormView, UpdateView
 
 from django_filters.views import FilterView
 from invitations.utils import get_invitation_model
-from invitations.views import SendInvite
 
 from apps.responses.mixins import ConsentCheckMixin, RespondentSurveyMixin
 from apps.surveys.models import Survey
@@ -17,12 +14,12 @@ from core.exceptions import NotAuthenticated
 from core.mixins import CSVResponseMixin, PageMixin
 
 from .filters import RespondentFilter
-from .forms import (RespondentConsentForm, RespondentCreateInviteForm, RespondentForm, RespondentSendInviteForm,
-                    ResponseRespondentForm)
+from .forms import RespondentConsentForm, RespondentSendInviteForm, ResponseRespondentForm
 from .mixins import RespondentFacilitatorMixin
 from .models import Respondent
 
 Invitation = get_invitation_model()
+
 
 class RespondentListView(RespondentFacilitatorMixin, PageMixin, CSVResponseMixin, FilterView):
     """
@@ -227,6 +224,7 @@ class RespondentUpdateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin, 
         context['hierarchies'] = self.survey.project.hierarchies.values('id', 'level', 'name', 'parent')
         return context
 
+
 class RespondentCreateInviteView(RespondentFacilitatorMixin, PageMixin, FormView):
     template_name = 'invites/create_invite.html'
     page_title = _('Create Survey Invite')
@@ -257,7 +255,7 @@ class RespondentCreateInviteView(RespondentFacilitatorMixin, PageMixin, FormView
             survey_queryset = list(self.get_queryset().values('survey'))
 
             # filter queryset to unique values only
-            survey_queryset = {item['survey']:item for item in survey_queryset}.values()
+            survey_queryset = {item['survey']: item for item in survey_queryset}.values()
             # print(f'----------{survey_queryset}-----------')
 
             # for item in survey_queryset append to selected_surveys
@@ -270,7 +268,8 @@ class RespondentCreateInviteView(RespondentFacilitatorMixin, PageMixin, FormView
                 item = list(item.values())[0]
                 selected_surveys.append(Survey.objects.get(pk=item))
 
-            return render(request, self.template_name, {'respondents': selected_respondents, 'surveys': selected_surveys })
+            return render(request, self.template_name, {
+                'respondents': selected_respondents, 'surveys': selected_surveys})
 
         # the code below will run if respondents is empty
 

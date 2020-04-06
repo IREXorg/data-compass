@@ -86,10 +86,12 @@ class ResponseRespondentForm(RespondentForm):
 
         self.fields['hierarchy'].queryset = project.hierarchies.all()
 
+
 class RespondentCreateInviteForm(forms.Form):
     survey = forms.CharField()
     project = forms.CharField()
     respondent = forms.MultipleChoiceField(required=True)
+
 
 class RespondentSendInviteForm(forms.Form):
     survey = forms.CharField(required=True)
