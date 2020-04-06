@@ -3,10 +3,9 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import FormView, UpdateView, DetailView
-from django.views.generic.list import ListView
+from django.views.generic import DetailView, FormView, UpdateView
 from django.views.generic.base import View
-
+from django.views.generic.list import ListView
 
 from django_filters.views import FilterView
 from invitations.utils import get_invitation_model
@@ -18,7 +17,8 @@ from core.exceptions import NotAuthenticated
 from core.mixins import CSVResponseMixin, PageMixin
 
 from .filters import RespondentFilter
-from .forms import RespondentConsentForm, RespondentForm, RespondentCreateInviteForm, ResponseRespondentForm, RespondentSendInviteForm
+from .forms import (RespondentConsentForm, RespondentCreateInviteForm, RespondentForm, RespondentSendInviteForm,
+                    ResponseRespondentForm)
 from .mixins import RespondentFacilitatorMixin
 from .models import Respondent
 
@@ -292,17 +292,5 @@ class RespondentSendInviteView(FormView):
             respondent_email = Respondent.objects.filter(pk=item).values('email')[0]
             invite = Invitation.create(respondent_email, inviter=request.user)
             invite.send_invitation(request)
-
-        # try:
-        #     invite = form.save(email)
-        #     invite.inviter = self.request.user
-        #     invite.save()
-        #     invite.send_invitation(self.request)
-        # except Exception:
-        #     return self.form_invalid(form)
-        # return self.render_to_response(
-        #         self.get_context_data(
-        #             success_message=_('%(email)s has been invited') % {
-        #                 "email": email}))
 
         return redirect('/respondents')
