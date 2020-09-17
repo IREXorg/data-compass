@@ -15,6 +15,8 @@ https://django-environ.readthedocs.io/en/latest/
 from email.utils import getaddresses
 from pathlib import Path
 
+from django.utils.translation import gettext_lazy as _
+
 import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -79,6 +81,7 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -189,12 +192,13 @@ USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = [
-    ('en', 'English'),
-    ('sw', 'Swahili'),
+    ('en', _('English')),
+    ('sw', _('Swahili')),
 ]
 
-DEFAULT_LANGUAGES = ['en']
+LANGUAGE_COOKIE_NAME = env('LANGUAGE_COOKIE_NAME', default='datacompass_language')
 
+LOCALE_PATHS = env.list('LOCALE_PATHS', default=[str(BASE_DIR / 'locale')])
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/

@@ -1,0 +1,2585 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-17 07:14+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Tehamalab <developers@tehamalab.com>\n"
+"Language-Team: LANGUAGE <developers@tehamalab.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: apps/organizations/apps.py:7 apps/organizations/models.py:80
+msgid "Organizations"
+msgstr ""
+
+#: apps/organizations/models.py:19 apps/projects/models.py:19
+#: apps/respondents/models.py:34 apps/responses/models.py:34
+#: apps/responses/models.py:140 apps/responses/models.py:249
+#: apps/responses/models.py:332 apps/responses/models.py:382
+#: apps/responses/models.py:424 apps/responses/models.py:460
+#: apps/surveys/models/datasets.py:25 apps/surveys/models/datasets.py:83
+#: apps/surveys/models/datasets.py:150 apps/surveys/models/datasets.py:205
+#: apps/surveys/models/datasets.py:264 apps/surveys/models/entity.py:25
+#: apps/surveys/models/hierarchy.py:24 apps/surveys/models/hierarchy.py:95
+#: apps/surveys/models/logo.py:25 apps/surveys/models/questions.py:13
+#: apps/surveys/models/questions.py:74 apps/surveys/models/questions.py:127
+#: apps/surveys/models/role.py:25 apps/surveys/models/survey.py:42
+#: apps/users/models.py:20 apps/users/models.py:55
+msgid "UUID"
+msgstr ""
+
+#: apps/organizations/models.py:24 apps/projects/models.py:24
+#: apps/surveys/models/datasets.py:41 apps/surveys/models/datasets.py:108
+#: apps/surveys/models/datasets.py:221 apps/surveys/models/datasets.py:280
+#: apps/surveys/models/entity.py:51 apps/surveys/models/hierarchy.py:51
+#: apps/surveys/models/hierarchy.py:134 apps/surveys/models/logo.py:41
+#: apps/surveys/models/questions.py:25 apps/surveys/models/role.py:51
+#: apps/surveys/models/survey.py:69 apps/users/models.py:25
+msgid "name"
+msgstr ""
+
+#: apps/organizations/models.py:25 apps/projects/models.py:25
+#: apps/surveys/models/datasets.py:44 apps/surveys/models/datasets.py:111
+#: apps/surveys/models/entity.py:54 apps/surveys/models/hierarchy.py:54
+#: apps/surveys/models/hierarchy.py:137 apps/surveys/models/role.py:54
+#: apps/surveys/models/survey.py:75
+msgid "description"
+msgstr ""
+
+#: apps/organizations/models.py:27 apps/projects/models.py:27
+#: apps/surveys/models/survey.py:111 apps/users/models.py:26
+msgid "code"
+msgstr ""
+
+#: apps/organizations/models.py:32 apps/projects/models.py:42
+#: apps/users/models.py:78
+msgid "phone number"
+msgstr ""
+
+#: apps/organizations/models.py:33 apps/projects/models.py:41
+msgid "email"
+msgstr ""
+
+#: apps/organizations/models.py:35 apps/projects/models.py:44
+msgid "avatar"
+msgstr ""
+
+#: apps/organizations/models.py:52 apps/projects/models.py:49
+msgid "website"
+msgstr ""
+
+#: apps/organizations/models.py:53 apps/users/models.py:89
+msgid "country"
+msgstr ""
+
+#: apps/organizations/models.py:54 apps/users/models.py:90
+msgid "address"
+msgstr ""
+
+#: apps/organizations/models.py:57
+msgid "members"
+msgstr ""
+
+#: apps/organizations/models.py:64 apps/projects/models.py:58
+msgid "tags"
+msgstr ""
+
+#: apps/organizations/models.py:70 apps/projects/models.py:74
+#: apps/respondents/models.py:123 apps/responses/models.py:67
+#: apps/surveys/models/datasets.py:49 apps/surveys/models/datasets.py:116
+#: apps/surveys/models/datasets.py:171 apps/surveys/models/datasets.py:226
+#: apps/surveys/models/datasets.py:285 apps/surveys/models/entity.py:59
+#: apps/surveys/models/hierarchy.py:59 apps/surveys/models/hierarchy.py:142
+#: apps/surveys/models/logo.py:61 apps/surveys/models/questions.py:29
+#: apps/surveys/models/questions.py:105 apps/surveys/models/questions.py:147
+#: apps/surveys/models/role.py:59 apps/surveys/models/survey.py:60
+msgid "creator"
+msgstr ""
+
+#: apps/organizations/models.py:76 apps/projects/models.py:80
+#: apps/respondents/models.py:132 apps/responses/models.py:83
+#: apps/responses/models.py:193 apps/responses/models.py:285
+#: apps/responses/models.py:360 apps/surveys/models/datasets.py:57
+#: apps/surveys/models/datasets.py:124 apps/surveys/models/datasets.py:179
+#: apps/surveys/models/datasets.py:234 apps/surveys/models/datasets.py:293
+#: apps/surveys/models/entity.py:67 apps/surveys/models/logo.py:69
+#: apps/surveys/models/role.py:67 apps/surveys/models/survey.py:287
+msgid "extras"
+msgstr ""
+
+#: apps/organizations/models.py:79
+msgid "Organization"
+msgstr ""
+
+#: apps/projects/apps.py:7 apps/projects/models.py:84
+msgid "Projects"
+msgstr ""
+
+#: apps/projects/filters.py:17 apps/respondents/filters.py:25
+#: apps/surveys/filters/survey.py:18
+msgid "Search text"
+msgstr ""
+
+#: apps/projects/forms.py:18
+#, python-format
+msgid ""
+"You will issue one or more surveys to actors in the system encompassed by "
+"this project. In order to be able to aggregate results well, please upload "
+"the dataflow hierarchy. <a href=\"%(template_url)s\" download>Click here for "
+"data flow hierarchy file template</a>."
+msgstr ""
+
+#: apps/projects/forms.py:25 apps/projects/forms.py:188
+msgid "Data flow hierarchy"
+msgstr ""
+
+#: apps/projects/forms.py:37
+msgid ""
+"Please provide an email address of a collegue whom can be contacted "
+"regarding various issues related to this project."
+msgstr ""
+
+#: apps/projects/forms.py:42
+msgid "Contact information"
+msgstr ""
+
+#: apps/projects/forms.py:69
+msgid ""
+"Invalid file format. It must be an excel file with a sheet called hierarchy."
+msgstr ""
+
+#: apps/projects/forms.py:74
+msgid "The file must have sheet called hierarchy"
+msgstr ""
+
+#: apps/projects/models.py:38
+msgid "organization"
+msgstr ""
+
+#: apps/projects/models.py:52
+msgid "countries"
+msgstr ""
+
+#: apps/projects/models.py:69
+msgid "facilitators"
+msgstr ""
+
+#: apps/projects/models.py:83 apps/respondents/filters.py:50
+#: apps/responses/filters.py:16
+msgid "Project"
+msgstr ""
+
+#. Translators: This is projects list page title
+#: apps/projects/views.py:31 templates/projects/project_delete.html:10
+#: templates/projects/project_detail.html:12
+#: templates/projects/project_form.html:9
+#: templates/surveys/survey_create.html:9
+#: templates/surveys/survey_delete.html:9
+#: templates/surveys/survey_detail.html:9
+#: templates/surveys/survey_edit_finish.html:9
+#: templates/surveys/survey_edit_start.html:9
+#: templates/surveys/survey_edit_step_five.html:9
+#: templates/surveys/survey_edit_step_four.html:9
+#: templates/surveys/survey_edit_step_one.html:9
+#: templates/surveys/survey_edit_step_six.html:9
+#: templates/surveys/survey_edit_step_three.html:9
+#: templates/surveys/survey_edit_step_two.html:9
+#: templates/surveys/survey_publish.html:9
+#: templates/surveys/survey_share.html:9
+#: templates/surveys/survey_unpublish.html:9
+#: templates/surveys/survey_update.html:9
+msgid "My Projects"
+msgstr ""
+
+#. Translators: This is projects list page title
+#: apps/projects/views.py:57
+msgid "Create a project"
+msgstr ""
+
+#: apps/projects/views.py:62
+msgid "Project was created successfully"
+msgstr ""
+
+#. Translators: This is project view page title
+#: apps/projects/views.py:88
+msgid "View a project"
+msgstr ""
+
+#. Translators: This is project update page title
+#: apps/projects/views.py:124
+msgid "Update a project"
+msgstr ""
+
+#: apps/projects/views.py:130
+msgid "Project was updated successfully"
+msgstr ""
+
+#. Translators: This is project delete page title
+#: apps/projects/views.py:161 templates/projects/project_delete.html:25
+msgid "Delete a project"
+msgstr ""
+
+#: apps/projects/views.py:165
+msgid "Project was deleted successfully"
+msgstr ""
+
+#: apps/respondents/apps.py:7 apps/respondents/models.py:138
+#: apps/surveys/forms/respondent.py:92
+msgid "Respondents"
+msgstr ""
+
+#: apps/respondents/filters.py:20
+msgid "Registered"
+msgstr ""
+
+#: apps/respondents/filters.py:21
+msgid "Not registered"
+msgstr ""
+
+#: apps/respondents/filters.py:37 apps/responses/filters.py:27
+#: templates/respondents/respondent_list.html:65
+#: templates/responses/survey_response_list.html:46
+msgid "Status"
+msgstr ""
+
+#: apps/respondents/filters.py:43
+msgid "Registration status"
+msgstr ""
+
+#: apps/respondents/forms.py:11
+msgid "I have read and understand the information above."
+msgstr ""
+
+#: apps/respondents/forms.py:20
+msgid "Consent must be provided to continue"
+msgstr ""
+
+#: apps/respondents/forms.py:35 apps/responses/forms/dataset_responses.py:22
+#, python-brace-format
+msgid "Survey must be specified to initialize {self.__class__.__name__}"
+msgstr ""
+
+#: apps/respondents/forms.py:41
+#, python-brace-format
+msgid ""
+"Project or Survey must be specified to initialize {self.__class__.__name__}"
+msgstr ""
+
+#: apps/respondents/forms.py:59
+msgid "What is your first name?"
+msgstr ""
+
+#: apps/respondents/forms.py:60
+msgid "What is your last name?"
+msgstr ""
+
+#: apps/respondents/forms.py:61
+msgid "What is your email address?"
+msgstr ""
+
+#: apps/respondents/forms.py:62
+msgid "What is your gender?"
+msgstr ""
+
+#: apps/respondents/forms.py:63
+msgid "What is your role at your organization?"
+msgstr ""
+
+#: apps/respondents/models.py:27 apps/responses/models.py:27
+msgid "Not yet started"
+msgstr ""
+
+#: apps/respondents/models.py:28
+msgid "In progess"
+msgstr ""
+
+#: apps/respondents/models.py:29 apps/responses/models.py:29
+msgid "Completed"
+msgstr ""
+
+#: apps/respondents/models.py:45 apps/responses/models.py:45
+#: apps/responses/models.py:352 apps/surveys/models/datasets.py:36
+#: apps/surveys/models/datasets.py:94 apps/surveys/models/datasets.py:161
+#: apps/surveys/models/datasets.py:216 apps/surveys/models/datasets.py:275
+#: apps/surveys/models/entity.py:36 apps/surveys/models/logo.py:36
+#: apps/surveys/models/questions.py:22 apps/surveys/models/questions.py:85
+#: apps/surveys/models/role.py:36
+msgid "survey"
+msgstr ""
+
+#: apps/respondents/models.py:53
+msgid "user"
+msgstr ""
+
+#: apps/respondents/models.py:62
+msgid "first name"
+msgstr ""
+
+#: apps/respondents/models.py:65
+msgid "last name"
+msgstr ""
+
+#: apps/respondents/models.py:68
+msgid "email address"
+msgstr ""
+
+#: apps/respondents/models.py:78 apps/users/models.py:87
+msgid "gender"
+msgstr ""
+
+#: apps/respondents/models.py:84
+msgid "role"
+msgstr ""
+
+#: apps/respondents/models.py:95
+msgid "hierarchy"
+msgstr ""
+
+#: apps/respondents/models.py:106 apps/surveys/models/entity.py:43
+#: apps/surveys/models/role.py:43
+msgid "hierarchy level"
+msgstr ""
+
+#: apps/respondents/models.py:137
+msgid "Respondent"
+msgstr ""
+
+#. Translators: This is respondents list page title
+#: apps/respondents/views.py:26
+#: templates/users/includes/facilitator_profile.html:17
+msgid "Manage respondents"
+msgstr ""
+
+#: apps/responses/apps.py:7 apps/responses/models.py:90
+msgid "Responses"
+msgstr ""
+
+#: apps/responses/forms/dataset_responses.py:14
+msgid "In my everday work, I usually encounter information about:"
+msgstr ""
+
+#: apps/responses/forms/dataset_responses.py:64
+#, python-format
+msgid ""
+"How often do you produce, access or share information about %(dataset)s?"
+msgstr ""
+
+#: apps/responses/forms/dataset_responses.py:87
+#, python-format
+msgid ""
+"Who at %(hierarchy)s do you believe knows <u>the most</u> about %(topic)s "
+"regarding %(dataset)s?"
+msgstr ""
+
+#: apps/responses/forms/dataset_responses.py:127
+msgid "Please specify how this is accessible"
+msgstr ""
+
+#: apps/responses/forms/dataset_responses.py:163
+#: apps/responses/forms/dataset_responses.py:253
+msgid "Instance not specified"
+msgstr ""
+
+#: apps/responses/forms/dataset_responses.py:214
+msgid "Please specify topic"
+msgstr ""
+
+#: apps/responses/forms/entity.py:13 apps/responses/forms/role.py:13
+msgid "Level"
+msgstr ""
+
+#: apps/responses/mixins.py:85
+#, python-brace-format
+msgid ""
+"{self.__class__.__name__} view must be called with {self."
+"survey_lookup_url_kwarg}."
+msgstr ""
+
+#: apps/responses/mixins.py:93 apps/responses/views/dataset_responses.py:65
+#: apps/responses/views/dataset_responses.py:209
+msgid "Page not found."
+msgstr ""
+
+#: apps/responses/mixins.py:110
+msgid "You are not allowed to take this survey"
+msgstr ""
+
+#: apps/responses/models.py:28
+msgid "In progress"
+msgstr ""
+
+#: apps/responses/models.py:52 apps/users/models.py:52
+msgid "respondent"
+msgstr ""
+
+#: apps/responses/models.py:76
+msgid "consented at"
+msgstr ""
+
+#: apps/responses/models.py:80
+msgid "completed at"
+msgstr ""
+
+#: apps/responses/models.py:89
+msgid "Response"
+msgstr ""
+
+#: apps/responses/models.py:149 apps/responses/models.py:341
+msgid "response"
+msgstr ""
+
+#: apps/responses/models.py:160
+msgid "dataset"
+msgstr ""
+
+#: apps/responses/models.py:171 apps/surveys/models/datasets.py:166
+msgid "frequency"
+msgstr ""
+
+#: apps/responses/models.py:180
+msgid "shared to"
+msgstr ""
+
+#: apps/responses/models.py:189
+msgid "received from"
+msgstr ""
+
+#: apps/responses/models.py:196
+msgid "Dataset Response"
+msgstr ""
+
+#: apps/responses/models.py:197
+msgid "Dataset Responses"
+msgstr ""
+
+#: apps/responses/models.py:258 apps/responses/models.py:432
+#: apps/responses/models.py:468
+msgid "dataset response"
+msgstr ""
+
+#: apps/responses/models.py:269 apps/responses/models.py:442
+#: apps/responses/models.py:478
+msgid "topic"
+msgstr ""
+
+#: apps/responses/models.py:281
+msgid "perceived owner"
+msgstr ""
+
+#: apps/responses/models.py:288
+msgid "Dataset Topic Response"
+msgstr ""
+
+#: apps/responses/models.py:289
+msgid "Dataset Topic Responses"
+msgstr ""
+
+#: apps/responses/models.py:357
+msgid "data"
+msgstr ""
+
+#: apps/responses/models.py:363
+msgid "Question Response"
+msgstr ""
+
+#: apps/responses/models.py:364
+msgid "Question Responses"
+msgstr ""
+
+#: apps/responses/models.py:392
+msgid "dataset topic storage"
+msgstr ""
+
+#: apps/responses/models.py:399
+msgid "dataset storage"
+msgstr ""
+
+#: apps/responses/models.py:406
+msgid "dataset access"
+msgstr ""
+
+#: apps/responses/models.py:410 apps/responses/models.py:411
+msgid "Dataset Response Storage Access"
+msgstr ""
+
+#: apps/responses/models.py:437 apps/responses/models.py:473
+msgid "entity"
+msgstr ""
+
+#: apps/responses/models.py:446
+msgid "Dataset Topic Shared"
+msgstr ""
+
+#: apps/responses/models.py:447
+msgid "Dataset Topics Shared"
+msgstr ""
+
+#: apps/responses/models.py:482
+msgid "Dataset Topic Received"
+msgstr ""
+
+#: apps/responses/models.py:483
+msgid "Dataset Topics Received"
+msgstr ""
+
+#: apps/responses/views/dataset_responses.py:58
+#: apps/responses/views/dataset_responses.py:203
+#, python-brace-format
+msgid ""
+"{self.__class__.__name__} view must be called with {self.lookup_url_kwarg}."
+msgstr ""
+
+#: apps/responses/views/respondent_defined_options.py:24
+msgid "Create a role"
+msgstr ""
+
+#: apps/responses/views/respondent_defined_options.py:27
+msgid "A role was created successfully"
+msgstr ""
+
+#: apps/responses/views/respondent_defined_options.py:33
+msgid "allowed_by attribute must be defined"
+msgstr ""
+
+#: apps/responses/views/respondent_defined_options.py:77
+msgid "Add option"
+msgstr ""
+
+#: apps/responses/views/respondent_defined_options.py:83
+msgid "Add storage"
+msgstr ""
+
+#: apps/responses/views/respondent_defined_options.py:89
+msgid "Add entity"
+msgstr ""
+
+#: apps/responses/views/respondent_defined_options.py:102
+msgid "Add role"
+msgstr ""
+
+#. Translators: This is respondents list page title
+#: apps/responses/views/survey_response.py:29
+#: templates/users/includes/facilitator_profile.html:18
+msgid "Manage responses"
+msgstr ""
+
+#: apps/responses/views/survey_response.py:146
+msgid ""
+"Your response has been submitted. You may access your surveys and responses "
+"in your Profile page."
+msgstr ""
+
+#: apps/responses/views/survey_response.py:193
+#, python-format
+msgid "Survey Response: %(survey_name)s"
+msgstr ""
+
+#: apps/surveys/apps.py:7 apps/surveys/models/survey.py:297
+msgid "Surveys"
+msgstr ""
+
+#: apps/surveys/forms/entity.py:20 apps/surveys/forms/entity.py:40
+msgid "Entity Name"
+msgstr ""
+
+#: apps/surveys/forms/entity.py:21 apps/surveys/forms/entity.py:41
+#: apps/surveys/forms/respondent.py:27 apps/surveys/forms/respondent.py:60
+#: apps/surveys/forms/role.py:21 apps/surveys/forms/role.py:41
+msgid "System Hierarchy Level"
+msgstr ""
+
+#: apps/surveys/forms/gender.py:22 apps/surveys/forms/gender.py:57
+msgid "Gender Name"
+msgstr ""
+
+#: apps/surveys/forms/question.py:21 apps/surveys/forms/question.py:41
+#: apps/surveys/models/questions.py:116
+msgid "Question"
+msgstr ""
+
+#: apps/surveys/forms/respondent.py:26 apps/surveys/forms/respondent.py:59
+msgid "Email Address"
+msgstr ""
+
+#: apps/surveys/forms/respondent.py:87
+#, python-format
+msgid ""
+"Please upload respondents. <a href=\"%(template_url)s\" download>Click here "
+"for respondents file template</a>."
+msgstr ""
+
+#: apps/surveys/forms/respondent.py:121
+msgid ""
+"Invalid file format. It must be an excel file with a sheet called "
+"respondents."
+msgstr ""
+
+#: apps/surveys/forms/respondent.py:126
+msgid "The file must have sheet called respondents"
+msgstr ""
+
+#: apps/surveys/forms/role.py:20 apps/surveys/forms/role.py:40
+msgid "Role Name"
+msgstr ""
+
+#: apps/surveys/forms/survey.py:78
+msgid "Allow respondents to add to Lists?"
+msgstr ""
+
+#: apps/surveys/forms/survey.py:79
+msgid "Allow respondents to enter their own roles?"
+msgstr ""
+
+#: apps/surveys/forms/survey.py:80
+msgid "Do not link respondents with system hierarchy levels?"
+msgstr ""
+
+#: apps/surveys/forms/survey.py:81
+msgid "Do you want these users to log in before responding to the survey?"
+msgstr ""
+
+#: apps/surveys/forms/survey.py:82
+msgid "Do you want the survey to be taken by invited users only?"
+msgstr ""
+
+#: apps/surveys/forms/survey.py:84
+msgid ""
+"Do you want repondents to see visualizations or aggregates of other users' "
+"responses?"
+msgstr ""
+
+#: apps/surveys/forms/survey.py:88
+msgid ""
+"Do you want users to share email addresses of other potential respondents?"
+msgstr ""
+
+#: apps/surveys/forms/survey.py:111 apps/surveys/forms/survey.py:158
+msgid "Allow respondents to enter their own value here?"
+msgstr ""
+
+#: apps/surveys/forms/survey.py:137
+msgid "Allow users to add their own options?"
+msgstr ""
+
+#: apps/surveys/forms/survey.py:179
+msgid "Allow users to enter their own value here?"
+msgstr ""
+
+#: apps/surveys/forms/survey.py:204
+msgid "Introduction text:"
+msgstr ""
+
+#: apps/surveys/forms/survey.py:205
+msgid "Closing text:"
+msgstr ""
+
+#: apps/surveys/models/datasets.py:60
+msgid "Dataset"
+msgstr ""
+
+#: apps/surveys/models/datasets.py:61
+msgid "Datasets"
+msgstr ""
+
+#: apps/surveys/models/datasets.py:103
+msgid "topics"
+msgstr ""
+
+#: apps/surveys/models/datasets.py:127
+msgid "Topic"
+msgstr ""
+
+#: apps/surveys/models/datasets.py:128
+msgid "Topics"
+msgstr ""
+
+#: apps/surveys/models/datasets.py:182
+msgid "Dataset frequency"
+msgstr ""
+
+#: apps/surveys/models/datasets.py:183
+msgid "Dataset Frequencies"
+msgstr ""
+
+#: apps/surveys/models/datasets.py:237 apps/surveys/models/datasets.py:238
+msgid "Dataset Storage"
+msgstr ""
+
+#: apps/surveys/models/datasets.py:296 apps/surveys/models/datasets.py:297
+msgid "Dataset Access"
+msgstr ""
+
+#: apps/surveys/models/entity.py:70
+#: templates/responses/survey_response_detail.html:128
+#: templates/responses/survey_response_detail.html:159
+msgid "Entity"
+msgstr ""
+
+#: apps/surveys/models/entity.py:71
+msgid "Entities"
+msgstr ""
+
+#: apps/surveys/models/hierarchy.py:34 apps/surveys/models/hierarchy.py:105
+#: apps/surveys/models/survey.py:53
+#: templates/responses/survey_response_list.html:45
+msgid "project"
+msgstr ""
+
+#: apps/surveys/models/hierarchy.py:47 apps/surveys/models/hierarchy.py:118
+msgid "parent"
+msgstr ""
+
+#: apps/surveys/models/hierarchy.py:70
+msgid "Hierarchy Level"
+msgstr ""
+
+#: apps/surveys/models/hierarchy.py:71
+msgid "Hierarchy Levels"
+msgstr ""
+
+#: apps/surveys/models/hierarchy.py:131
+msgid "level name"
+msgstr ""
+
+#: apps/surveys/models/hierarchy.py:153
+msgid "Dataflow Hierarchy"
+msgstr ""
+
+#: apps/surveys/models/hierarchy.py:154
+msgid "Dataflow Hierarchies"
+msgstr ""
+
+#: apps/surveys/models/logo.py:45
+msgid "image"
+msgstr ""
+
+#: apps/surveys/models/logo.py:72
+msgid "Logo"
+msgstr ""
+
+#: apps/surveys/models/logo.py:73
+msgid "Logos"
+msgstr ""
+
+#: apps/surveys/models/questions.py:26
+msgid "group number"
+msgstr ""
+
+#: apps/surveys/models/questions.py:37
+msgid "Question Group"
+msgstr ""
+
+#: apps/surveys/models/questions.py:38
+msgid "Question Groups"
+msgstr ""
+
+#: apps/surveys/models/questions.py:67
+msgid "integer"
+msgstr ""
+
+#: apps/surveys/models/questions.py:68
+msgid "decimal"
+msgstr ""
+
+#: apps/surveys/models/questions.py:69
+msgid "text"
+msgstr ""
+
+#: apps/surveys/models/questions.py:90
+msgid "field name"
+msgstr ""
+
+#: apps/surveys/models/questions.py:94 apps/surveys/models/questions.py:141
+msgid "label"
+msgstr ""
+
+#: apps/surveys/models/questions.py:96 apps/surveys/models/questions.py:143
+msgid "this will be displayed to user"
+msgstr ""
+
+#: apps/surveys/models/questions.py:100
+msgid "type"
+msgstr ""
+
+#: apps/surveys/models/questions.py:113
+msgid "options"
+msgstr ""
+
+#: apps/surveys/models/questions.py:117
+msgid "Questions"
+msgstr ""
+
+#: apps/surveys/models/questions.py:134
+msgid "question"
+msgstr ""
+
+#: apps/surveys/models/questions.py:139
+msgid "choice value"
+msgstr ""
+
+#: apps/surveys/models/questions.py:155
+msgid "Choice"
+msgstr ""
+
+#: apps/surveys/models/questions.py:156
+msgid "Choices"
+msgstr ""
+
+#: apps/surveys/models/role.py:70
+msgid "Role"
+msgstr ""
+
+#: apps/surveys/models/role.py:71
+msgid "Roles"
+msgstr ""
+
+#: apps/surveys/models/survey.py:36
+msgid "Yes"
+msgstr ""
+
+#: apps/surveys/models/survey.py:37
+msgid "No"
+msgstr ""
+
+#: apps/surveys/models/survey.py:80
+msgid "alternative name"
+msgstr ""
+
+#: apps/surveys/models/survey.py:81
+msgid ""
+"Use this optional field to provide the survey name as Respondents will see "
+"it."
+msgstr ""
+
+#: apps/surveys/models/survey.py:89
+msgid "research question"
+msgstr ""
+
+#: apps/surveys/models/survey.py:90
+msgid ""
+"Every Data Compass survey must have a specific research question. What is "
+"yours?"
+msgstr ""
+
+#: apps/surveys/models/survey.py:101
+msgid ""
+"By default, all surveys have an English version. If your survey will be in "
+"other languages, select or add them here. You will provide translations "
+"later."
+msgstr ""
+
+#: apps/surveys/models/survey.py:104
+msgid "languages"
+msgstr ""
+
+#: apps/surveys/models/survey.py:118
+msgid "do not link respondents with system hierarchy levels"
+msgstr ""
+
+#: apps/surveys/models/survey.py:119
+msgid ""
+"This can be easier in some contexts, but will limit aggregate or comparative "
+"analyses."
+msgstr ""
+
+#: apps/surveys/models/survey.py:127
+msgid "allow respondent hierarchy levels"
+msgstr ""
+
+#: apps/surveys/models/survey.py:128
+msgid ""
+"Respondents will select from the List you provided for each level. If they "
+"can't find theirs, they can add their own?"
+msgstr ""
+
+#: apps/surveys/models/survey.py:138
+msgid "allow respondent roles"
+msgstr ""
+
+#: apps/surveys/models/survey.py:139
+msgid "If Yes, respondents will be able to add their own roles."
+msgstr ""
+
+#: apps/surveys/models/survey.py:147
+msgid "login required"
+msgstr ""
+
+#: apps/surveys/models/survey.py:148
+msgid ""
+"If no, they won't be able to save and return to their responses, or view "
+"previous responses."
+msgstr ""
+
+#: apps/surveys/models/survey.py:157
+msgid "invitation required"
+msgstr ""
+
+#: apps/surveys/models/survey.py:158
+msgid "If no, anyone with the survey link can respond to it."
+msgstr ""
+
+#: apps/surveys/models/survey.py:166
+msgid "respondent can aggregate"
+msgstr ""
+
+#: apps/surveys/models/survey.py:167
+msgid ""
+"'Yes', will update their networ visual with all users' responses in "
+"realtime. 'No' will not."
+msgstr ""
+
+#: apps/surveys/models/survey.py:176
+msgid "respondent can suggest others"
+msgstr ""
+
+#: apps/surveys/models/survey.py:177
+msgid ""
+"If Yes, the survey will include question collecting email address. "
+"Respondents are responsible for ensuring consent."
+msgstr ""
+
+#: apps/surveys/models/survey.py:187
+msgid "allow respondent topics"
+msgstr ""
+
+#: apps/surveys/models/survey.py:188
+msgid "If Yes, respondents will be able to add their own topics."
+msgstr ""
+
+#: apps/surveys/models/survey.py:196
+msgid "respondent topic number"
+msgstr ""
+
+#: apps/surveys/models/survey.py:197
+msgid "Up to 10 topics are allowed"
+msgstr ""
+
+#: apps/surveys/models/survey.py:205
+msgid "allow respondent datasets"
+msgstr ""
+
+#: apps/surveys/models/survey.py:206
+msgid ""
+"If Yes, respondents will be able to add their own datasets. This is not "
+"recommended."
+msgstr ""
+
+#: apps/surveys/models/survey.py:214
+msgid "allow respondent entities"
+msgstr ""
+
+#: apps/surveys/models/survey.py:215
+msgid "If Yes, respondents will be able to add their own entities."
+msgstr ""
+
+#: apps/surveys/models/survey.py:223
+msgid "allow respondent storages"
+msgstr ""
+
+#: apps/surveys/models/survey.py:224
+msgid "If Yes, respondents will be able to add their own storages."
+msgstr ""
+
+#: apps/surveys/models/survey.py:232
+msgid "introduction text"
+msgstr ""
+
+#: apps/surveys/models/survey.py:233
+msgid "What text do you want to appear when a respondent begins the survey?"
+msgstr ""
+
+#: apps/surveys/models/survey.py:239
+msgid "closing text"
+msgstr ""
+
+#: apps/surveys/models/survey.py:240
+msgid "What text do you want to appear when a respondent ends the survey?"
+msgstr ""
+
+#: apps/surveys/models/survey.py:246
+msgid "is active"
+msgstr ""
+
+#: apps/surveys/models/survey.py:247
+msgid "Is published"
+msgstr ""
+
+#: apps/surveys/models/survey.py:261
+msgid "genders"
+msgstr ""
+
+#: apps/surveys/models/survey.py:269
+msgid "collect email address"
+msgstr ""
+
+#: apps/surveys/models/survey.py:275
+msgid "collect name"
+msgstr ""
+
+#: apps/surveys/models/survey.py:281
+msgid "collect gender"
+msgstr ""
+
+#: apps/surveys/models/survey.py:296
+#: templates/respondents/respondent_list.html:64
+#: templates/responses/survey_response_list.html:44
+msgid "Survey"
+msgstr ""
+
+#: apps/surveys/models/survey.py:332
+msgid "A user is required"
+msgstr ""
+
+#. Translators: This is survey dataset create page title
+#: apps/surveys/views/dataset.py:29
+msgid "Create a survey dataset"
+msgstr ""
+
+#: apps/surveys/views/dataset.py:34
+msgid "Dataset was created successfully"
+msgstr ""
+
+#. Translators: This is survey dataset update page title
+#. Translators: This is survey dataset delete page title
+#: apps/surveys/views/dataset.py:64 apps/surveys/views/dataset.py:91
+msgid "Delete a survey dataset"
+msgstr ""
+
+#: apps/surveys/views/dataset.py:69
+msgid "Dataset was updated successfully"
+msgstr ""
+
+#: apps/surveys/views/dataset.py:95
+msgid "Dataset was deleted successfully"
+msgstr ""
+
+#. Translators: This is survey dataset storage create page title
+#: apps/surveys/views/dataset_storage.py:30
+msgid "Create a survey dataset storage"
+msgstr ""
+
+#: apps/surveys/views/dataset_storage.py:35
+msgid "Dataset storage was created successfully"
+msgstr ""
+
+#. Translators: This is survey dataset storage update page title
+#. Translators: This is survey dataset storage delete page title
+#: apps/surveys/views/dataset_storage.py:66
+#: apps/surveys/views/dataset_storage.py:93
+msgid "Delete a survey dataset storage"
+msgstr ""
+
+#: apps/surveys/views/dataset_storage.py:71
+msgid "Dataset storage was updated successfully"
+msgstr ""
+
+#: apps/surveys/views/dataset_storage.py:97
+msgid "Dataset storage was deleted successfully"
+msgstr ""
+
+#. Translators: This is survey entity create page title
+#: apps/surveys/views/entity.py:29
+msgid "Create a survey entity"
+msgstr ""
+
+#: apps/surveys/views/entity.py:34
+msgid "Entity was created successfully"
+msgstr ""
+
+#. Translators: This is survey entity update page title
+#. Translators: This is survey entity delete page title
+#: apps/surveys/views/entity.py:64 apps/surveys/views/entity.py:91
+msgid "Delete a survey entity"
+msgstr ""
+
+#: apps/surveys/views/entity.py:69
+msgid "Entity was updated successfully"
+msgstr ""
+
+#: apps/surveys/views/entity.py:95
+msgid "Entity was deleted successfully"
+msgstr ""
+
+#. Translators: This is survey gender create page title
+#: apps/surveys/views/gender.py:32
+msgid "Create a survey gender"
+msgstr ""
+
+#: apps/surveys/views/gender.py:37
+msgid "Gender was created successfully"
+msgstr ""
+
+#. Translators: This is survey gender update page title
+#. Translators: This is survey gender delete page title
+#: apps/surveys/views/gender.py:67 apps/surveys/views/gender.py:100
+msgid "Delete a survey gender"
+msgstr ""
+
+#: apps/surveys/views/gender.py:72
+msgid "Gender was updated successfully"
+msgstr ""
+
+#: apps/surveys/views/gender.py:104
+msgid "Gender was deleted successfully"
+msgstr ""
+
+#. Translators: This is survey logo create page title
+#: apps/surveys/views/logo.py:29
+msgid "Create a survey logo"
+msgstr ""
+
+#: apps/surveys/views/logo.py:34
+msgid "Logo was created successfully"
+msgstr ""
+
+#. Translators: This is survey logo update page title
+#. Translators: This is survey logo delete page title
+#: apps/surveys/views/logo.py:74 apps/surveys/views/logo.py:101
+msgid "Delete a survey logo"
+msgstr ""
+
+#: apps/surveys/views/logo.py:79
+msgid "Logo was updated successfully"
+msgstr ""
+
+#: apps/surveys/views/logo.py:105
+msgid "Logo was deleted successfully"
+msgstr ""
+
+#. Translators: This is survey question create page title
+#: apps/surveys/views/question.py:29
+msgid "Create a survey question"
+msgstr ""
+
+#: apps/surveys/views/question.py:34
+msgid "Question was created successfully"
+msgstr ""
+
+#. Translators: This is survey question update page title
+#. Translators: This is survey question delete page title
+#: apps/surveys/views/question.py:64 apps/surveys/views/question.py:91
+msgid "Delete a survey question"
+msgstr ""
+
+#: apps/surveys/views/question.py:69
+msgid "Question was updated successfully"
+msgstr ""
+
+#: apps/surveys/views/question.py:95
+msgid "Question was deleted successfully"
+msgstr ""
+
+#. Translators: This is survey respondent create page title
+#: apps/surveys/views/respondent.py:30
+msgid "Create a survey respondent"
+msgstr ""
+
+#: apps/surveys/views/respondent.py:35
+msgid "Respondent was created successfully"
+msgstr ""
+
+#. Translators: This is survey respondent update page title
+#. Translators: This is survey respondent delete page title
+#: apps/surveys/views/respondent.py:65 apps/surveys/views/respondent.py:92
+msgid "Delete a survey respondent"
+msgstr ""
+
+#: apps/surveys/views/respondent.py:70
+msgid "Respondent was updated successfully"
+msgstr ""
+
+#: apps/surveys/views/respondent.py:96
+msgid "Respondent was deleted successfully"
+msgstr ""
+
+#. Translators: This is survey respondents upload page title
+#: apps/surveys/views/respondent.py:118
+msgid "Upload survey respondents"
+msgstr ""
+
+#: apps/surveys/views/respondent.py:123
+msgid "Respondents was uploaded successfully"
+msgstr ""
+
+#. Translators: This is survey role create page title
+#: apps/surveys/views/role.py:29
+msgid "Create a survey role"
+msgstr ""
+
+#: apps/surveys/views/role.py:34
+msgid "Role was created successfully"
+msgstr ""
+
+#. Translators: This is survey role update page title
+#. Translators: This is survey role delete page title
+#: apps/surveys/views/role.py:64 apps/surveys/views/role.py:91
+msgid "Delete a survey role"
+msgstr ""
+
+#: apps/surveys/views/role.py:69
+msgid "Role was updated successfully"
+msgstr ""
+
+#: apps/surveys/views/role.py:95
+msgid "Role was deleted successfully"
+msgstr ""
+
+#. Translators: This is surveys list page title
+#: apps/surveys/views/survey.py:33
+msgid "Surveys List"
+msgstr ""
+
+#. Translators: This is survey create page title
+#: apps/surveys/views/survey.py:66
+msgid "Create a survey"
+msgstr ""
+
+#: apps/surveys/views/survey.py:71
+msgid "Survey was created successfully"
+msgstr ""
+
+#. Translators: This is survey view page title
+#: apps/surveys/views/survey.py:108
+msgid "View Survey"
+msgstr ""
+
+#. Translators: This is survey update page title
+#: apps/surveys/views/survey.py:130
+msgid "Update a survey"
+msgstr ""
+
+#: apps/surveys/views/survey.py:135 apps/surveys/views/survey.py:368
+#: apps/surveys/views/survey.py:399 apps/surveys/views/survey.py:430
+#: apps/surveys/views/survey.py:461 apps/surveys/views/survey.py:492
+#: apps/surveys/views/survey.py:523
+msgid "Survey was updated successfully"
+msgstr ""
+
+#. Translators: This is survey delete page title
+#: apps/surveys/views/survey.py:157 templates/surveys/survey_delete.html:25
+msgid "Delete a survey"
+msgstr ""
+
+#: apps/surveys/views/survey.py:161
+msgid "Survey was deleted successfully"
+msgstr ""
+
+#. Translators: This is survey unpublish page title
+#: apps/surveys/views/survey.py:183 templates/surveys/survey_unpublish.html:25
+msgid "Unpublish a survey"
+msgstr ""
+
+#: apps/surveys/views/survey.py:188
+msgid "Survey was unpublished successfully"
+msgstr ""
+
+#. Translators: This is survey publish page title
+#: apps/surveys/views/survey.py:214 templates/surveys/survey_publish.html:25
+msgid "Publish a survey"
+msgstr ""
+
+#: apps/surveys/views/survey.py:219
+msgid "Survey was published successfully"
+msgstr ""
+
+#: apps/surveys/views/survey.py:232
+msgid ""
+"Failed to publish a survey. Respondents are missing. Please add respondents "
+"to a survey."
+msgstr ""
+
+#: apps/surveys/views/survey.py:241
+msgid ""
+"Failed to publish a survey. Roles are missing. Please add roles to a survey."
+msgstr ""
+
+#: apps/surveys/views/survey.py:250
+msgid ""
+"Failed to publish a survey. Topics are missing. Please add topics to a "
+"survey."
+msgstr ""
+
+#: apps/surveys/views/survey.py:259
+msgid ""
+"Failed to publish a survey. Datasets are missing. Please add datasets to a "
+"survey."
+msgstr ""
+
+#: apps/surveys/views/survey.py:268
+msgid ""
+"Failed to publish a survey. Entities are missing. Please add entities to a "
+"survey."
+msgstr ""
+
+#: apps/surveys/views/survey.py:277
+msgid ""
+"Failed to publish a survey. Dataset storages are missing. Please add dataset "
+"storages to a survey."
+msgstr ""
+
+#: apps/surveys/views/survey.py:289
+msgid ""
+"Failed to publish a survey. Genders are missing. Please add genders to a "
+"survey."
+msgstr ""
+
+#. Translators: This is survey share page title
+#: apps/surveys/views/survey.py:314 templates/surveys/survey_detail.html:60
+msgid "Share Survey"
+msgstr ""
+
+#: apps/surveys/views/survey.py:320
+msgid "Share"
+msgstr ""
+
+#. Translators: This is survey view page title
+#. Translators: This is survey update page title
+#. Translators: This is survey view page title
+#: apps/surveys/views/survey.py:337 apps/surveys/views/survey.py:363
+#: apps/surveys/views/survey.py:394 apps/surveys/views/survey.py:425
+#: apps/surveys/views/survey.py:456 apps/surveys/views/survey.py:487
+#: apps/surveys/views/survey.py:518 apps/surveys/views/survey.py:546
+msgid "Edit new survey"
+msgstr ""
+
+#: apps/surveys/views/survey.py:343 apps/surveys/views/survey.py:371
+#: apps/surveys/views/survey.py:402 apps/surveys/views/survey.py:433
+#: apps/surveys/views/survey.py:464 apps/surveys/views/survey.py:495
+#: apps/surveys/views/survey.py:526 apps/surveys/views/survey.py:552
+#: templates/projects/includes/project_item.html:24
+#: templates/surveys/includes/survey_item.html:28
+#: templates/surveys/survey_edit_start.html:25
+#: templates/surveys/survey_list.html:89 templates/users/profile.html:25
+#: templates/users/profile.html:39 templates/users/profile.html:74
+#: templates/users/profile.html:79
+msgid "Edit"
+msgstr ""
+
+#. Translators: This is survey topic create page title
+#: apps/surveys/views/topic.py:29
+msgid "Create a survey topic"
+msgstr ""
+
+#: apps/surveys/views/topic.py:34
+msgid "Topic was created successfully"
+msgstr ""
+
+#. Translators: This is survey topic update page title
+#. Translators: This is survey topic delete page title
+#: apps/surveys/views/topic.py:64 apps/surveys/views/topic.py:91
+msgid "Delete a survey topic"
+msgstr ""
+
+#: apps/surveys/views/topic.py:69
+msgid "Topic was updated successfully"
+msgstr ""
+
+#: apps/surveys/views/topic.py:95
+msgid "Topic was deleted successfully"
+msgstr ""
+
+#: apps/users/apps.py:7
+msgid "Users"
+msgstr ""
+
+#: apps/users/models.py:28
+msgid "is primary"
+msgstr ""
+
+#: apps/users/models.py:31
+msgid "Shared system wide. Not for specific project or survey only."
+msgstr ""
+
+#: apps/users/models.py:37 apps/users/models.py:38
+#: templates/respondents/respondent_list.html:63
+#: templates/responses/survey_response_detail.html:19
+msgid "Gender"
+msgstr ""
+
+#: apps/users/models.py:50
+msgid "administrator"
+msgstr ""
+
+#: apps/users/models.py:51
+msgid "facilitator"
+msgstr ""
+
+#: apps/users/models.py:61
+msgid "profile picture"
+msgstr ""
+
+#: apps/users/models.py:91
+msgid "is facilitator"
+msgstr ""
+
+#: apps/users/models.py:92
+msgid "is respondent"
+msgstr ""
+
+#: apps/users/views.py:15 templates/includes/nav_primary.html:38
+msgid "My Profile"
+msgstr ""
+
+#: apps/users/views.py:49
+msgid "Update Profile"
+msgstr ""
+
+#: core/models.py:11
+msgid "created at"
+msgstr ""
+
+#: core/models.py:16
+msgid "modified at"
+msgstr ""
+
+#: datacompass/settings/base.py:195
+msgid "English"
+msgstr ""
+
+#: datacompass/settings/base.py:196
+msgid "Swahili"
+msgstr ""
+
+#: templates/account/login.html:7 templates/account/login.html:31
+#: templates/includes/nav_primary.html:52
+msgid "Sign In"
+msgstr ""
+
+#: templates/account/login.html:12
+msgid "Sign In to begin"
+msgstr ""
+
+#: templates/account/login.html:14
+msgid "or"
+msgstr ""
+
+#: templates/account/login.html:15
+msgid "Click here to register using new password"
+msgstr ""
+
+#: templates/account/login.html:34
+msgid "Click here if you forgot your password"
+msgstr ""
+
+#: templates/account/logout.html:5 templates/account/logout.html:8
+#: templates/account/logout.html:18
+msgid "Sign Out"
+msgstr ""
+
+#: templates/account/logout.html:11
+msgid "Are you sure you want to sign out?"
+msgstr ""
+
+#: templates/account/password_change.html:6
+#: templates/account/password_change.html:11
+#: templates/account/password_change.html:15
+msgid "Change Password"
+msgstr ""
+
+#: templates/account/password_reset.html:6
+#: templates/account/password_reset.html:9
+#: templates/account/password_reset_done.html:5
+#: templates/account/password_reset_done.html:8
+msgid "Password Reset"
+msgstr ""
+
+#: templates/account/password_reset.html:17
+msgid ""
+"Forgotten your password? Enter your e-mail address below, and we'll send you "
+"an e-mail allowing you to reset it."
+msgstr ""
+
+#: templates/account/password_reset.html:24
+msgid "Reset My Password"
+msgstr ""
+
+#: templates/account/password_reset.html:28
+msgid "Please contact us if you have any trouble resetting your password."
+msgstr ""
+
+#: templates/account/password_reset_done.html:16
+msgid ""
+"We have sent you a password reset link. Please contact us if you do not "
+"receive it within a few minutes."
+msgstr ""
+
+#: templates/account/signup.html:6
+msgid "Signup"
+msgstr ""
+
+#: templates/account/signup.html:10
+msgid "Register"
+msgstr ""
+
+#: templates/account/signup.html:13
+#, python-format
+msgid ""
+"Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
+msgstr ""
+
+#: templates/account/signup.html:26
+msgid "Sign Up"
+msgstr ""
+
+#: templates/base.html:11
+msgid "Data Compass"
+msgstr ""
+
+#: templates/core/popup_response.html:4
+msgid "Popup closing…"
+msgstr ""
+
+#: templates/home.html:4
+msgid "Welcome"
+msgstr ""
+
+#: templates/includes/footer.html:29
+msgid ""
+"View our <a href=\"https://www.irex.org/policies-data-compass-website\" "
+"target=\"_blank\">Responsible Data Policy</a>."
+msgstr ""
+
+#: templates/includes/footer.html:35
+msgid ""
+"This software is available under an <a href=\"https://github.com/IREXorg/"
+"data-compass/blob/master/LICENSE\" target=\"blank_\">open source license</"
+"a>. Find the source code: <a href=\"https://github.com/IREXorg/data-compass"
+"\" target='blank_'>here</a>"
+msgstr ""
+
+#: templates/includes/nav_primary.html:31
+msgid "Administration"
+msgstr ""
+
+#: templates/includes/nav_primary.html:44
+msgid "Sign out"
+msgstr ""
+
+#: templates/projects/includes/project_item.html:20
+#: templates/surveys/includes/survey_item.html:25
+msgid "View"
+msgstr ""
+
+#: templates/projects/includes/project_item.html:28
+#: templates/projects/project_delete.html:31
+#: templates/surveys/includes/survey_item.html:31
+#: templates/surveys/survey_dataset_delete_popup.html:35
+#: templates/surveys/survey_dataset_storage_delete_popup.html:35
+#: templates/surveys/survey_delete.html:31
+#: templates/surveys/survey_entity_delete_popup.html:35
+#: templates/surveys/survey_gender_delete_popup.html:35
+#: templates/surveys/survey_list.html:86
+#: templates/surveys/survey_logo_delete_popup.html:35
+#: templates/surveys/survey_question_delete_popup.html:35
+#: templates/surveys/survey_respondent_delete_popup.html:35
+#: templates/surveys/survey_role_delete_popup.html:35
+#: templates/surveys/survey_topic_delete_popup.html:35
+msgid "Delete"
+msgstr ""
+
+#: templates/projects/project_delete.html:27
+msgid "Are you sure you want to delete this project?"
+msgstr ""
+
+#: templates/projects/project_detail.html:28
+msgid "This project contains"
+msgstr ""
+
+#: templates/projects/project_detail.html:29
+msgid ""
+"surveys. Select one you would like to edit from the list below, or create a "
+"new one."
+msgstr ""
+
+#: templates/projects/project_detail.html:47
+#: templates/surveys/survey_list.html:27
+msgid "Search surveys…"
+msgstr ""
+
+#: templates/projects/project_detail.html:56
+#: templates/projects/project_detail.html:78
+#: templates/surveys/survey_list.html:32
+msgid "New Survey"
+msgstr ""
+
+#: templates/projects/project_detail.html:74
+msgid "project has no surveys."
+msgstr ""
+
+#: templates/projects/project_detail.html:75
+msgid "Start by creating new survey."
+msgstr ""
+
+#: templates/projects/project_form.html:37
+msgid "Provide some basic information about this project."
+msgstr ""
+
+#: templates/projects/project_form.html:56
+#: templates/surveys/survey_create.html:65
+#: templates/surveys/survey_edit_step_five.html:125
+#: templates/surveys/survey_edit_step_four.html:127
+#: templates/surveys/survey_edit_step_one.html:182
+#: templates/surveys/survey_edit_step_six.html:185
+#: templates/surveys/survey_edit_step_three.html:120
+#: templates/surveys/survey_edit_step_two.html:120
+#: templates/surveys/survey_update.html:66
+msgid "Cancel"
+msgstr ""
+
+#: templates/projects/project_form.html:59
+msgid "Save project"
+msgstr ""
+
+#: templates/projects/project_list.html:7 templates/users/profile.html:8
+msgid "Home"
+msgstr ""
+
+#: templates/projects/project_list.html:16
+msgid ""
+"A project is a set of one or more surveys. You can only create or modify a "
+"survey once you've created a project for it."
+msgstr ""
+
+#: templates/projects/project_list.html:25
+msgid "Select from your projects below or create a new one."
+msgstr ""
+
+#: templates/projects/project_list.html:35
+msgid "Search projects…"
+msgstr ""
+
+#: templates/projects/project_list.html:46
+#: templates/projects/project_list.html:74
+msgid "New Project"
+msgstr ""
+
+#: templates/projects/project_list.html:50
+#: templates/projects/project_list.html:78
+msgid "Clear Search"
+msgstr ""
+
+#: templates/projects/project_list.html:67
+msgid "No projects found."
+msgstr ""
+
+#: templates/projects/project_list.html:70
+msgid "Start by creating new project."
+msgstr ""
+
+#: templates/projects/project_update.html:11
+msgid "Current Data flow hierarchy"
+msgstr ""
+
+#: templates/respondents/respondent_consent.html:20
+msgid "Quit"
+msgstr ""
+
+#: templates/respondents/respondent_consent.html:24
+msgid "Agree and continue"
+msgstr ""
+
+#: templates/respondents/respondent_list.html:8
+msgid "Filter respondents"
+msgstr ""
+
+#: templates/respondents/respondent_list.html:13
+#: templates/responses/survey_response_list.html:14
+msgid "Apply filters"
+msgstr ""
+
+#: templates/respondents/respondent_list.html:14
+#: templates/responses/survey_response_list.html:15
+msgid "Reset filters"
+msgstr ""
+
+#: templates/respondents/respondent_list.html:22
+msgid ""
+"Browse, add, and select respondents, and then choose an action for the "
+"selected respondents."
+msgstr ""
+
+#: templates/respondents/respondent_list.html:39
+msgid "Search respondents…"
+msgstr ""
+
+#: templates/respondents/respondent_list.html:46
+#: templates/responses/survey_response_list.html:29
+msgid "Export table"
+msgstr ""
+
+#: templates/respondents/respondent_list.html:49
+msgid "Respondents found"
+msgstr ""
+
+#: templates/respondents/respondent_list.html:59
+#: templates/responses/survey_response_list.html:42
+msgid "ID"
+msgstr ""
+
+#: templates/respondents/respondent_list.html:60
+#: templates/responses/survey_response_detail.html:22
+#: templates/responses/survey_response_list.html:43
+#: templates/users/profile.html:72
+msgid "Email"
+msgstr ""
+
+#: templates/respondents/respondent_list.html:61
+#: templates/responses/survey_response_detail.html:13
+msgid "First name"
+msgstr ""
+
+#: templates/respondents/respondent_list.html:62
+#: templates/responses/survey_response_detail.html:16
+msgid "Last name"
+msgstr ""
+
+#: templates/respondents/respondent_update.html:20
+#, python-format
+msgid "What is your %(level_name)s?"
+msgstr ""
+
+#: templates/respondents/respondent_update.html:26
+#, python-format
+msgid "Select %(level_name)s"
+msgstr ""
+
+#: templates/respondents/respondent_update.html:51
+msgid "Add another role?"
+msgstr ""
+
+#: templates/responses/base_response_form.html:21
+#: templates/responses/survey_response_complete.html:13
+msgid "Back"
+msgstr ""
+
+#: templates/responses/base_response_form.html:25
+#: templates/surveys/survey_edit_step_five.html:129
+#: templates/surveys/survey_edit_step_four.html:131
+#: templates/surveys/survey_edit_step_one.html:186
+#: templates/surveys/survey_edit_step_three.html:124
+#: templates/surveys/survey_edit_step_two.html:124
+msgid "Save and continue"
+msgstr ""
+
+#: templates/responses/base_response_form_popup.html:23
+#: templates/users/profile_update.html:15
+msgid "Save"
+msgstr ""
+
+#: templates/responses/dataset_topic_received_update.html:6
+#, python-format
+msgid ""
+"From whom do you <u>receive</u> information about %(dataset_name)s, and what "
+"kind of information do you receive?"
+msgstr ""
+
+#: templates/responses/dataset_topic_response_update.html:11
+#, python-format
+msgid ""
+"Where at %(hierarchy)s is %(topic_name)s regarding %(dataset_name)s stored?"
+msgstr ""
+
+#: templates/responses/dataset_topic_response_update.html:60
+msgid "Somewhere else?"
+msgstr ""
+
+#: templates/responses/dataset_topic_shared_update.html:8
+#, python-format
+msgid ""
+"To whom do you <u>send or share information</u> about %(dataset_name)s, and "
+"what kind of information do you share?"
+msgstr ""
+
+#: templates/responses/dataset_topic_shared_update.html:63
+msgid "Someone else?"
+msgstr ""
+
+#: templates/responses/survey_response_complete.html:17
+msgid "Submit your response"
+msgstr ""
+
+#: templates/responses/survey_response_detail.html:9
+msgid "General Information"
+msgstr ""
+
+#: templates/responses/survey_response_detail.html:29
+msgid "Topic-related responses"
+msgstr ""
+
+#: templates/responses/survey_response_detail.html:50
+#, python-format
+msgid ""
+"How often do you produce, access or share information about %(dataset_name)s?"
+msgstr ""
+
+#: templates/responses/survey_response_detail.html:70
+#, python-format
+msgid ""
+"Who at %(hierarchy_name)s do you believe knows most about %(topic_name)s "
+"regarding %(dataset_name)s?"
+msgstr ""
+
+#: templates/responses/survey_response_detail.html:85
+#, python-format
+msgid ""
+"Where at %(hierarchy_name)s is %(topic_name)s regarding %(dataset_name)s is "
+"stored?"
+msgstr ""
+
+#: templates/responses/survey_response_detail.html:94
+msgid "Storage"
+msgstr ""
+
+#: templates/responses/survey_response_detail.html:95
+msgid "Access"
+msgstr ""
+
+#: templates/responses/survey_response_detail.html:113
+msgid "Information sources"
+msgstr ""
+
+#: templates/responses/survey_response_detail.html:118
+#, python-format
+msgid ""
+"From whom do you receive information about %(dataset_name)s, and what kind "
+"of information do you receive?"
+msgstr ""
+
+#: templates/responses/survey_response_detail.html:129
+msgid "Information received"
+msgstr ""
+
+#: templates/responses/survey_response_detail.html:144
+msgid "Information sharing"
+msgstr ""
+
+#: templates/responses/survey_response_detail.html:149
+#, python-format
+msgid ""
+"To whom do you send or share information about %(dataset_name)s, and what "
+"kind of information do you share?"
+msgstr ""
+
+#: templates/responses/survey_response_detail.html:160
+msgid "Information shared"
+msgstr ""
+
+#: templates/responses/survey_response_list.html:9
+msgid "Filter responses"
+msgstr ""
+
+#: templates/responses/survey_response_list.html:32
+#, python-format
+msgid "%(count)s responses"
+msgstr ""
+
+#: templates/responses/survey_response_list.html:47
+msgid "Consent time"
+msgstr ""
+
+#: templates/responses/survey_response_list.html:48
+msgid "Completion time"
+msgstr ""
+
+#: templates/responses/survey_response_list.html:74
+msgid "No response found."
+msgstr ""
+
+#: templates/surveys/includes/survey_item.html:9
+#: templates/surveys/survey_list.html:65
+msgid "Published"
+msgstr ""
+
+#: templates/surveys/includes/survey_item.html:11
+#: templates/surveys/survey_list.html:63
+msgid "Un-published"
+msgstr ""
+
+#: templates/surveys/includes/user_survey_item.html:40
+msgid "Facilited by"
+msgstr ""
+
+#: templates/surveys/includes/user_survey_item.html:68
+msgid "View my survey response"
+msgstr ""
+
+#: templates/surveys/includes/user_survey_item.html:72
+#: templates/surveys/includes/user_survey_item.html:82
+msgid "Start survey"
+msgstr ""
+
+#: templates/surveys/includes/user_survey_item.html:77
+msgid "Continue survey"
+msgstr ""
+
+#: templates/surveys/includes/user_survey_item.html:86
+msgid "Contact facilitator"
+msgstr ""
+
+#: templates/surveys/survey_create.html:49
+msgid ""
+"Provide some basic information about this survey. Once <b>you</b> click "
+"\"Save\", this survey will appear alongside other surveys in <b>the project "
+"called"
+msgstr ""
+
+#: templates/surveys/survey_create.html:50
+#: templates/surveys/survey_update.html:51
+msgid "</b>"
+msgstr ""
+
+#: templates/surveys/survey_create.html:68
+#: templates/surveys/survey_update.html:69
+msgid "Save Survey"
+msgstr ""
+
+#: templates/surveys/survey_dataset_create_popup.html:34
+msgid "Create survey dataset."
+msgstr ""
+
+#: templates/surveys/survey_dataset_create_popup.html:51
+#: templates/surveys/survey_dataset_update_popup.html:51
+msgid "Save Dataset"
+msgstr ""
+
+#: templates/surveys/survey_dataset_delete_popup.html:29
+msgid "Delete a dataset"
+msgstr ""
+
+#: templates/surveys/survey_dataset_delete_popup.html:31
+msgid "Are you sure you want to delete this survey dataset?"
+msgstr ""
+
+#: templates/surveys/survey_dataset_storage_create_popup.html:34
+msgid "Create survey dataset storage."
+msgstr ""
+
+#: templates/surveys/survey_dataset_storage_create_popup.html:51
+#: templates/surveys/survey_dataset_storage_update_popup.html:51
+msgid "Save Storage"
+msgstr ""
+
+#: templates/surveys/survey_dataset_storage_delete_popup.html:29
+msgid "Delete a dataset storage"
+msgstr ""
+
+#: templates/surveys/survey_dataset_storage_delete_popup.html:31
+msgid "Are you sure you want to delete this survey dataset storage?"
+msgstr ""
+
+#: templates/surveys/survey_dataset_storage_update_popup.html:34
+msgid "Update survey dataset storage."
+msgstr ""
+
+#: templates/surveys/survey_dataset_update_popup.html:34
+msgid "Update survey dataset."
+msgstr ""
+
+#: templates/surveys/survey_delete.html:27
+msgid "Are you sure you want to delete this survey?"
+msgstr ""
+
+#: templates/surveys/survey_detail.html:45
+msgid "This survey is a part of project"
+msgstr ""
+
+#: templates/surveys/survey_detail.html:53
+msgid "Please select an option:"
+msgstr ""
+
+#: templates/surveys/survey_detail.html:56
+msgid "Edit Survey"
+msgstr ""
+
+#: templates/surveys/survey_detail.html:59
+#: templates/surveys/survey_unpublish.html:31
+msgid "Unpublish Survey"
+msgstr ""
+
+#: templates/surveys/survey_detail.html:65
+msgid "Export responses"
+msgstr ""
+
+#: templates/surveys/survey_detail.html:68
+msgid "Entities & information shared to"
+msgstr ""
+
+#: templates/surveys/survey_detail.html:69
+msgid "Entities & information received from"
+msgstr ""
+
+#: templates/surveys/survey_detail.html:70
+msgid "Entities & information shared & received"
+msgstr ""
+
+#: templates/surveys/survey_detail.html:71
+msgid "Information storage & access"
+msgstr ""
+
+#: templates/surveys/survey_detail.html:72
+msgid "Information encounter frequency"
+msgstr ""
+
+#: templates/surveys/survey_detail.html:76
+#: templates/surveys/survey_publish.html:31
+msgid "Publish Survey"
+msgstr ""
+
+#: templates/surveys/survey_detail.html:79
+msgid "Delete Survey"
+msgstr ""
+
+#: templates/surveys/survey_edit_finish.html:49
+#: templates/surveys/survey_edit_start.html:49
+#: templates/surveys/survey_edit_step_five.html:49
+#: templates/surveys/survey_edit_step_four.html:49
+#: templates/surveys/survey_edit_step_one.html:49
+#: templates/surveys/survey_edit_step_six.html:49
+#: templates/surveys/survey_edit_step_three.html:49
+#: templates/surveys/survey_edit_step_two.html:49
+msgid "This survey is part of"
+msgstr ""
+
+#: templates/surveys/survey_edit_finish.html:49
+#: templates/surveys/survey_edit_start.html:49
+#: templates/surveys/survey_edit_step_five.html:49
+#: templates/surveys/survey_edit_step_four.html:49
+#: templates/surveys/survey_edit_step_one.html:49
+#: templates/surveys/survey_edit_step_six.html:49
+#: templates/surveys/survey_edit_step_three.html:49
+#: templates/surveys/survey_edit_step_two.html:49
+msgid "You can edit its information"
+msgstr ""
+
+#: templates/surveys/survey_edit_finish.html:49
+#: templates/surveys/survey_edit_start.html:49
+#: templates/surveys/survey_edit_step_five.html:49
+#: templates/surveys/survey_edit_step_four.html:49
+#: templates/surveys/survey_edit_step_one.html:49
+#: templates/surveys/survey_edit_step_six.html:49
+#: templates/surveys/survey_edit_step_three.html:49
+#: templates/surveys/survey_edit_step_two.html:49
+msgid "here"
+msgstr ""
+
+#: templates/surveys/survey_edit_finish.html:52
+#: templates/surveys/survey_edit_start.html:52
+#: templates/surveys/survey_edit_step_five.html:52
+#: templates/surveys/survey_edit_step_four.html:52
+#: templates/surveys/survey_edit_step_one.html:52
+#: templates/surveys/survey_edit_step_six.html:52
+#: templates/surveys/survey_edit_step_three.html:52
+#: templates/surveys/survey_edit_step_two.html:52
+msgid "Your research question is:"
+msgstr ""
+
+#: templates/surveys/survey_edit_finish.html:60
+msgid "Done"
+msgstr ""
+
+#: templates/surveys/survey_edit_finish.html:64
+msgid "Click button below to return to the"
+msgstr ""
+
+#: templates/surveys/survey_edit_finish.html:67
+msgid "Back to survey overview"
+msgstr ""
+
+#: templates/surveys/survey_edit_start.html:56
+msgid "Start editing survey"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_five.html:25
+#: templates/surveys/survey_edit_step_four.html:25
+#: templates/surveys/survey_edit_step_one.html:25
+#: templates/surveys/survey_edit_step_six.html:25
+#: templates/surveys/survey_edit_step_three.html:25
+#: templates/surveys/survey_edit_step_two.html:25
+msgid "Editing"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_five.html:62
+msgid "Where can data be kept?"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_five.html:74
+msgid ""
+"What information systems do you want respondents to be able to select when "
+"they take survey?"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_five.html:79
+msgid "Information systems are places that store information."
+msgstr ""
+
+#: templates/surveys/survey_edit_step_five.html:89
+#: templates/surveys/survey_edit_step_five.html:105
+msgid "Add New Dataset Storage"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_five.html:92
+msgid "Edit Dataset Storage"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_five.html:95
+msgid "Delete Dataset Storage"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_five.html:103
+msgid "No dataset storage."
+msgstr ""
+
+#: templates/surveys/survey_edit_step_four.html:62
+msgid "Who can access, share, or manage information?"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_four.html:75
+msgid ""
+"What entities do you want respondents to be able to select when they take "
+"survey?"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_four.html:80
+msgid ""
+"Entities are people, organizations, or teams—any person or group who might "
+"have, receive, or share information."
+msgstr ""
+
+#: templates/surveys/survey_edit_step_four.html:91
+#: templates/surveys/survey_edit_step_four.html:107
+msgid "Add New Entity"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_four.html:94
+msgid "Edit Entity"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_four.html:97
+msgid "Delete Entity"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_four.html:105
+msgid "No entities."
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:62
+msgid "Who will take this survey?"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:77
+msgid "Who will you invite to take the survey?"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:82
+msgid ""
+"To help you aggregate results later on, each respondent should be tagged to "
+"a System Hierarchy level. This hierarchy is pulled from your Project"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:93
+#: templates/surveys/survey_edit_step_one.html:109
+msgid "Add New Respondent"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:96
+msgid "Edit Respondent"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:99
+msgid "Delete Respondent"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:107
+msgid "No respondents."
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:119
+#: templates/surveys/survey_respondent_upload_popup.html:51
+msgid "Upload Respondents"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:119
+msgid "Bulk Upload"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:122
+msgid "Visit the Manage Respondents page"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:131
+msgid "What are all the possible roles of respondents?"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:142
+#: templates/surveys/survey_edit_step_one.html:158
+msgid "Add New Role"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:145
+msgid "Edit Role"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:148
+msgid "Delete Role"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_one.html:156
+msgid "No roles."
+msgstr ""
+
+#: templates/surveys/survey_edit_step_six.html:62
+msgid "Additional information"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_six.html:75
+msgid "By default survey will collect:"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_six.html:90
+msgid "What options should respondents select when asked about their gender?"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_six.html:102
+#: templates/surveys/survey_edit_step_six.html:120
+msgid "Add New Gender"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_six.html:106
+msgid "Edit Gender"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_six.html:110
+msgid "Delete Gender"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_six.html:118
+msgid "No genders."
+msgstr ""
+
+#: templates/surveys/survey_edit_step_six.html:138
+msgid "Add logos(s) to the survey footer"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_six.html:152
+#: templates/surveys/survey_edit_step_six.html:168
+msgid "Add New Logo"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_six.html:155
+msgid "Edit Logo"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_six.html:158
+msgid "Delete Logo"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_six.html:166
+msgid "No logos."
+msgstr ""
+
+#: templates/surveys/survey_edit_step_six.html:189
+msgid "Save Survey Changes"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_three.html:62
+msgid "What data do you want to learn about, for each topic?"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_three.html:74
+msgid ""
+"Respondents will share how they use or share data about each topic. What "
+"specific kind of data do you want them to share about?"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_three.html:84
+#: templates/surveys/survey_edit_step_three.html:100
+msgid "Add New Dataset"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_three.html:87
+msgid "Edit Dataset"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_three.html:90
+msgid "Delete Dataset"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_three.html:98
+msgid "No datasets."
+msgstr ""
+
+#: templates/surveys/survey_edit_step_two.html:62
+msgid "What topics they will respond about?"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_two.html:74
+msgid ""
+"Your survey will ask Respondents how they work with data about a specific "
+"topic. They will choose that topic from a drop-down list of options that you "
+"specify here."
+msgstr ""
+
+#: templates/surveys/survey_edit_step_two.html:84
+#: templates/surveys/survey_edit_step_two.html:100
+msgid "Add New Topic"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_two.html:87
+msgid "Edit Topic"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_two.html:90
+msgid "Delete Topic"
+msgstr ""
+
+#: templates/surveys/survey_edit_step_two.html:98
+msgid "No topics."
+msgstr ""
+
+#: templates/surveys/survey_entity_create_popup.html:34
+msgid "Create survey entity."
+msgstr ""
+
+#: templates/surveys/survey_entity_create_popup.html:51
+#: templates/surveys/survey_entity_update_popup.html:51
+msgid "Save Entity"
+msgstr ""
+
+#: templates/surveys/survey_entity_delete_popup.html:29
+msgid "Delete a entity"
+msgstr ""
+
+#: templates/surveys/survey_entity_delete_popup.html:31
+msgid "Are you sure you want to delete this survey entity?"
+msgstr ""
+
+#: templates/surveys/survey_entity_update_popup.html:34
+msgid "Update survey entity."
+msgstr ""
+
+#: templates/surveys/survey_gender_create_popup.html:34
+msgid "Create survey gender."
+msgstr ""
+
+#: templates/surveys/survey_gender_create_popup.html:51
+#: templates/surveys/survey_gender_update_popup.html:51
+msgid "Save Gender"
+msgstr ""
+
+#: templates/surveys/survey_gender_delete_popup.html:29
+msgid "Delete a gender"
+msgstr ""
+
+#: templates/surveys/survey_gender_delete_popup.html:31
+msgid "Are you sure you want to delete this survey gender?"
+msgstr ""
+
+#: templates/surveys/survey_gender_update_popup.html:34
+msgid "Update survey gender."
+msgstr ""
+
+#: templates/surveys/survey_list.html:122
+msgid "Previous"
+msgstr ""
+
+#: templates/surveys/survey_list.html:132
+msgid "Next"
+msgstr ""
+
+#: templates/surveys/survey_logo_create_popup.html:34
+msgid "Create survey logo."
+msgstr ""
+
+#: templates/surveys/survey_logo_create_popup.html:51
+#: templates/surveys/survey_logo_update_popup.html:51
+msgid "Save Logo"
+msgstr ""
+
+#: templates/surveys/survey_logo_delete_popup.html:29
+msgid "Delete a logo"
+msgstr ""
+
+#: templates/surveys/survey_logo_delete_popup.html:31
+msgid "Are you sure you want to delete this survey logo?"
+msgstr ""
+
+#: templates/surveys/survey_logo_update_popup.html:34
+msgid "Update survey logo."
+msgstr ""
+
+#: templates/surveys/survey_publish.html:27
+msgid "Are you sure you want to publish this survey?"
+msgstr ""
+
+#: templates/surveys/survey_question_create_popup.html:34
+msgid "Create survey question."
+msgstr ""
+
+#: templates/surveys/survey_question_create_popup.html:51
+#: templates/surveys/survey_question_update_popup.html:51
+msgid "Save Question"
+msgstr ""
+
+#: templates/surveys/survey_question_delete_popup.html:29
+msgid "Delete a question"
+msgstr ""
+
+#: templates/surveys/survey_question_delete_popup.html:31
+msgid "Are you sure you want to delete this survey question?"
+msgstr ""
+
+#: templates/surveys/survey_question_update_popup.html:34
+msgid "Update survey question."
+msgstr ""
+
+#: templates/surveys/survey_respondent_create_popup.html:34
+msgid "Create survey respondent."
+msgstr ""
+
+#: templates/surveys/survey_respondent_create_popup.html:51
+#: templates/surveys/survey_respondent_update_popup.html:31
+msgid "Save Respondent"
+msgstr ""
+
+#: templates/surveys/survey_respondent_delete_popup.html:29
+msgid "Delete a respondent"
+msgstr ""
+
+#: templates/surveys/survey_respondent_delete_popup.html:31
+msgid "Are you sure you want to delete this survey respondent?"
+msgstr ""
+
+#: templates/surveys/survey_respondent_update_popup.html:14
+msgid "Update survey respondent."
+msgstr ""
+
+#: templates/surveys/survey_respondent_upload_popup.html:34
+msgid "Upload survey respondents."
+msgstr ""
+
+#: templates/surveys/survey_role_create_popup.html:34
+msgid "Create survey role."
+msgstr ""
+
+#: templates/surveys/survey_role_create_popup.html:51
+#: templates/surveys/survey_role_update_popup.html:51
+msgid "Save Role"
+msgstr ""
+
+#: templates/surveys/survey_role_delete_popup.html:29
+msgid "Delete a role"
+msgstr ""
+
+#: templates/surveys/survey_role_delete_popup.html:31
+msgid "Are you sure you want to delete this survey role?"
+msgstr ""
+
+#: templates/surveys/survey_role_update_popup.html:34
+msgid "Update survey role."
+msgstr ""
+
+#: templates/surveys/survey_share.html:25
+msgid "Share a survey"
+msgstr ""
+
+#: templates/surveys/survey_share.html:27
+msgid "Click button below to copy and share survey link with respondents."
+msgstr ""
+
+#: templates/surveys/survey_share.html:35
+msgid "Copy Survey Link"
+msgstr ""
+
+#: templates/surveys/survey_topic_create_popup.html:34
+msgid "Create survey topic."
+msgstr ""
+
+#: templates/surveys/survey_topic_create_popup.html:51
+#: templates/surveys/survey_topic_update_popup.html:51
+msgid "Save Topic"
+msgstr ""
+
+#: templates/surveys/survey_topic_delete_popup.html:29
+msgid "Delete a topic"
+msgstr ""
+
+#: templates/surveys/survey_topic_delete_popup.html:31
+msgid "Are you sure you want to delete this survey topic?"
+msgstr ""
+
+#: templates/surveys/survey_topic_update_popup.html:34
+msgid "Update survey topic."
+msgstr ""
+
+#: templates/surveys/survey_unpublish.html:27
+msgid "Are you sure you want to unpublish this survey?"
+msgstr ""
+
+#: templates/surveys/survey_update.html:50
+msgid ""
+"Update basic information about this survey. Once <b>you</b> click \"Save\", "
+"this survey will appear alongside other surveys in <b>the project called"
+msgstr ""
+
+#: templates/users/includes/facilitator_profile.html:5
+msgid ""
+"This is your Facilitator profile page. You can view your projects, which is "
+"where you can create or edit surveys, or you can manage respondents and "
+"responses."
+msgstr ""
+
+#: templates/users/includes/facilitator_profile.html:11
+msgid "Choose an option:"
+msgstr ""
+
+#: templates/users/includes/facilitator_profile.html:16
+msgid "My projects"
+msgstr ""
+
+#: templates/users/includes/respondent_profile.html:5
+msgid ""
+"As a Respondent with an account, you can return to surveys in progress and "
+"view your previous survey responses."
+msgstr ""
+
+#: templates/users/includes/respondent_profile.html:12
+msgid "My Surveys"
+msgstr ""
+
+#: templates/users/includes/respondent_profile.html:26
+msgid "Other Surveys"
+msgstr ""
+
+#: templates/users/profile.html:18
+msgid "Avatar"
+msgstr ""
+
+#: templates/users/profile.html:34
+msgid "Your Name"
+msgstr ""
+
+#: templates/users/profile.html:44
+msgid "User type"
+msgstr ""
+
+#: templates/users/profile.html:67
+msgid "Account Settings"
+msgstr ""
+
+#: templates/users/profile.html:77
+msgid "Phone number"
+msgstr ""
+
+#: templates/users/profile.html:84
+msgid "Change password"
+msgstr ""
