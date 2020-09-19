@@ -12,6 +12,8 @@
 {# End: Breadcrumbs #}
 
 {% block content %}
+  
+  {% trans 'Not added yet' as not_added_yet %}
   <div class="row">
     <div class="col-sm-2 text-center">
       {% if user.avatar %}
@@ -75,7 +77,7 @@
         </p>
         <p class="text-nowrap">
           <span class="font-weight-bold">{% trans "Phone number" %}</span>:<br>
-          {{ user.phone_number|default:'Not added yet' }}
+          {{ user.phone_number|default:not_added_yet }}
           <a href="{% url 'users:profile-update' %}" class="ml-2">{% trans 'Edit' %}</a>
         </p>
       </div>

@@ -82,7 +82,8 @@ class RespondentSurveyMixin:
         slug = self.kwargs.get(self.survey_lookup_url_kwarg)
         if not slug:
             raise AttributeError(
-                _(f'{self.__class__.__name__} view must be called with {self.survey_lookup_url_kwarg}.')
+                _('%(class_name)s view must be called with %(url_kwarg)s.')
+                % {'class_name': self.__class__.__name__, 'url_kwarg': self.survey_lookup_url_kwarg}
             )
 
         # get survey object matching the query

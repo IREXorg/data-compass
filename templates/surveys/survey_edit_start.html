@@ -46,10 +46,15 @@
   <div class="col">
     <div class="text-wrap">
       <p>
-        {% trans 'This survey is part of' %} {{survey.project.name}}. {% trans 'You can edit its information' %} <a href="{% url 'surveys:survey-update' survey.pk %}">{% trans 'here' %}.</a>
+        {% url 'surveys:survey-update' survey.pk as survey_update_url %}
+        {% blocktrans trimmed with project_name=survey.project.name %}
+        This survey is part of {{ project_name }}. You can edit its information <a href="{{ survey_update_url }}">here</a>.
+        {% endblocktrans %}
       </p>
       <p>
-        {% trans 'Your research question is:' %} {{ survey.research_question }}
+        {% blocktrans trimmed with research_question=survey.research_question %}
+        Your research question is: {{ research_question }}
+        {% endblocktrans %}
       </p>
     </div>
     <div class="btn-list mt-6 justify-content-center">

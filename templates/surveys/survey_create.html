@@ -46,8 +46,9 @@
     <div class="card">
       <div class="card-body">
         <p class="text-muted">
-          {% blocktrans trimmed %}
-          Provide some basic information about this survey. Once <b>you</b> click "Save", this survey will appear alongside other surveys in <b>the project called {% endblocktrans %} {{ project.name }} {% blocktrans trimmed %}</b>
+          {% blocktrans trimmed with project_name=project.name %}
+          Provide some basic information about this survey. Once <b>you</b> click "Save",
+          this survey will appear alongside other surveys in <b>the project called {{ project_name }}</b>
           {% endblocktrans %}
         </p>
         <hr>

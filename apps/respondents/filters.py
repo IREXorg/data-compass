@@ -1,6 +1,7 @@
 from distutils.util import strtobool
 
 from django import forms
+from django.utils.translation import pgettext_lazy
 from django.utils.translation import ugettext_lazy as _
 
 import django_filters
@@ -17,8 +18,8 @@ class RespondentFilter(SearchVectorFilterMixin, django_filters.FilterSet):
     NOT_REGISTERED = 0
 
     REGISTERED_CHOICES = (
-        (REGISTERED, _('Registered')),
-        (NOT_REGISTERED, _('Not registered')),
+        (REGISTERED, pgettext_lazy('users', 'Registered')),
+        (NOT_REGISTERED, pgettext_lazy('users', 'Not registered')),
     )
 
     q = django_filters.CharFilter(

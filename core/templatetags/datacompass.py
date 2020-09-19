@@ -1,5 +1,6 @@
 from django import template
 from django.template.defaultfilters import stringfilter
+from django.utils.translation import gettext_lazy as _
 
 register = template.Library()
 
@@ -42,3 +43,13 @@ def alert_class(value):
 def lookup(value, key):
     if value:
         return value.get(key, None)
+
+
+@register.filter(name='naturaltext')
+def naturalize_text(value):
+    lookup = {
+        'not started': _('not started'),
+        'in progress': _('in progress'),
+        'completed': _('completed')
+    }
+    return lookup.get(value, value)

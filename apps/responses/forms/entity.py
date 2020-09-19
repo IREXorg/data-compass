@@ -1,4 +1,4 @@
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import pgettext_lazy
 
 from apps.surveys.forms import EntityCreateForm as BaseEntityCreateForm
 from apps.surveys.models import Entity
@@ -10,7 +10,7 @@ class EntityCreateForm(BaseEntityCreateForm):
         model = Entity
         fields = ['name', 'hierarchy_level']
         labels = {
-            'hierarchy_level': _('Level')
+            'hierarchy_level': pgettext_lazy('administrative', 'Level')
         }
 
     def __init__(self, *args, **kwargs):

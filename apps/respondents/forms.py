@@ -32,13 +32,19 @@ class RespondentForm(forms.ModelForm):
     def __init__(self, survey=None, project=None, *args, **kwargs):
 
         if not survey:
-            raise ValueError(_(f'Survey must be specified to initialize {self.__class__.__name__}'))
+            raise ValueError(
+                _('Survey must be specified to initialize %(class_name)s')
+                % {'class_name': self.__class__.__name__}
+            )
 
         # get project inorder to limit hierarchy_level choices
         if not project:
             project = survey.project
         elif not project:
-            raise ValueError(_(f'Project or Survey must be specified to initialize {self.__class__.__name__}'))
+            raise ValueError(
+                _('Project or Survey must be specified to initialize %(class_name)s')
+                % {'class_name': self.__class__.__name__}
+            )
 
         super().__init__(*args, **kwargs)
         if 'hierarchy_level' in self.fields:

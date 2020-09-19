@@ -7,14 +7,14 @@
 {% block content %}
 <div class="jumbotron">
   <h1 class="display-4">Data Compass</h1>
-  <p class="lead">Collect and visualize information about data flows.</p>
+  <p class="lead">{% blocktrans %}Collect and visualize information about data flows.{% endblocktrans %}</p>
   <hr class="my-4">
   {% if user.is_authenticated %}
-  <p>Check your profile.</p>
-  <a class="btn btn-primary btn-lg" href="{% url 'users:profile-detail' %}" role="button">My Profile</a>
+  <p>{% trans 'Check your profile.' %}</p>
+  <a class="btn btn-primary btn-lg" href="{% url 'users:profile-detail' %}" role="button">{% trans 'My Profile' %}</a>
   {% else %}
-  <p>Please log in to continue.</p>
-  <a class="btn btn-success btn-lg" href="{% url 'account_login' %}" role="button">Sign In</a>
+  <p>{% blocktrans %}Please log in to continue.{% endblocktrans %}</p>
+  <a class="btn btn-success btn-lg" href="{% url 'account_login' %}" role="button">{% trans 'Sign In' %}</a>
   {% endif %}
 </div>
 {% endblock content %}

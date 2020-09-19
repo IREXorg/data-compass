@@ -19,7 +19,10 @@ class DatasetSelectForm(forms.Form):
 
         # get survey in order to limit hierarchy choices
         if not survey:
-            raise ValueError(_(f'Survey must be specified to initialize {self.__class__.__name__}'))
+            raise ValueError(
+                _('Survey must be specified to initialize %(class_name)s')
+                % {'class_name': self.__class__.__name__}
+            )
 
         super().__init__(*args, **kwargs)
         if survey_response:

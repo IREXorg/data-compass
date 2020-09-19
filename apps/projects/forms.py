@@ -14,13 +14,6 @@ class ProjectCreateForm(ModelForm):
     Project create form
     """
 
-    hierarchy_file_help_text = _(
-        'You will issue one or more surveys to actors in the system encompassed '
-        'by this project. In order to be able to aggregate results well, '
-        'please upload the dataflow hierarchy. '
-        '<a href="%(template_url)s" download>Click here for data flow hierarchy file template</a>.'
-    ) % {'template_url': static('files/templates/data-flow-hierarchy.xlsx')}
-
     hierarchy_file = forms.FileField(
         label=_('Data flow hierarchy'),
     )
@@ -47,7 +40,14 @@ class ProjectCreateForm(ModelForm):
         super().__init__(*args, **kwargs)
         self.user = user
 
-        self.fields['hierarchy_file'].help_text = self.hierarchy_file_help_text
+        hierarchy_file_help_text = _(
+            'You will issue one or more surveys to actors in the system encompassed '
+            'by this project. In order to be able to aggregate results well, '
+            'please upload the dataflow hierarchy. '
+            '<a href="%(template_url)s" download>Click here for data flow hierarchy file template</a>.'
+        ) % {'template_url': static('files/templates/data-flow-hierarchy.xlsx')}
+
+        self.fields['hierarchy_file'].help_text = hierarchy_file_help_text
 
         _required = getattr(self.Meta, 'required', [])
         for field in _required:

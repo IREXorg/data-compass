@@ -25,8 +25,8 @@
   <div class="row">
     <div class="col">
       <p>
-        {% blocktrans trimmed %}
-        This project contains {% endblocktrans %} {{ surveys.count }} {% blocktrans trimmed %} surveys.
+        {% blocktrans trimmed with survey_count=surveys.count %}
+        This project contains {{ survey_count }} surveys.
         Select one you would like to edit from the list below, or create a new one.
         {% endblocktrans %}
       </p>

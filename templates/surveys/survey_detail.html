@@ -42,10 +42,15 @@
   <div class="row">
     <div class="col">
       <div class="text-wrap">
-        <p class="text-muted">{% trans 'This survey is a part of project' %} <a href="{% url 'projects:project-detail' survey.project.pk %}">{{ survey.project.name }}</a>.</p>
+        <p class="text-muted">
+          {% url 'projects:project-detail' survey.project.pk as project_url %}
+          {% blocktrans trimmed with project_name=survey.project.name %}
+          This survey is a part of project <a href="{{ project_url }}">{{ project_name }}</a>.
+          {% endblocktrans %}
+        </p>
 
         <div>
-          <h2 class="small">Description</h2>
+          <h2 class="small">{% trans 'Description' %}</h2>
           {{ survey.description|linebreaks }}
         </div>
       </div>
