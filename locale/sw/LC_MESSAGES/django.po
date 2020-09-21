@@ -3,24 +3,24 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: 0.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-17 07:14+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2020-09-21 05:24+0000\n"
+"PO-Revision-Date: 2020-09-20 10:44+0300\n"
 "Last-Translator: Tehamalab <developers@tehamalab.com>\n"
 "Language-Team: LANGUAGE <developers@tehamalab.com>\n"
-"Language: \n"
+"Language: sw\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.3\n"
 
 #: apps/organizations/apps.py:7 apps/organizations/models.py:80
 msgid "Organizations"
-msgstr ""
+msgstr "Taasisi"
 
 #: apps/organizations/models.py:19 apps/projects/models.py:19
 #: apps/respondents/models.py:34 apps/responses/models.py:34
@@ -36,7 +36,7 @@ msgstr ""
 #: apps/surveys/models/role.py:25 apps/surveys/models/survey.py:42
 #: apps/users/models.py:20 apps/users/models.py:55
 msgid "UUID"
-msgstr ""
+msgstr "UUID"
 
 #: apps/organizations/models.py:24 apps/projects/models.py:24
 #: apps/surveys/models/datasets.py:41 apps/surveys/models/datasets.py:108
@@ -46,7 +46,7 @@ msgstr ""
 #: apps/surveys/models/questions.py:25 apps/surveys/models/role.py:51
 #: apps/surveys/models/survey.py:69 apps/users/models.py:25
 msgid "name"
-msgstr ""
+msgstr "jina"
 
 #: apps/organizations/models.py:25 apps/projects/models.py:25
 #: apps/surveys/models/datasets.py:44 apps/surveys/models/datasets.py:111
@@ -54,7 +54,7 @@ msgstr ""
 #: apps/surveys/models/hierarchy.py:137 apps/surveys/models/role.py:54
 #: apps/surveys/models/survey.py:75
 msgid "description"
-msgstr ""
+msgstr "maelezo"
 
 #: apps/organizations/models.py:27 apps/projects/models.py:27
 #: apps/surveys/models/survey.py:111 apps/users/models.py:26
@@ -64,11 +64,11 @@ msgstr ""
 #: apps/organizations/models.py:32 apps/projects/models.py:42
 #: apps/users/models.py:78
 msgid "phone number"
-msgstr ""
+msgstr "namba ya simu"
 
 #: apps/organizations/models.py:33 apps/projects/models.py:41
 msgid "email"
-msgstr ""
+msgstr "barua pepe"
 
 #: apps/organizations/models.py:35 apps/projects/models.py:44
 msgid "avatar"
@@ -76,23 +76,23 @@ msgstr ""
 
 #: apps/organizations/models.py:52 apps/projects/models.py:49
 msgid "website"
-msgstr ""
+msgstr "tovuti"
 
 #: apps/organizations/models.py:53 apps/users/models.py:89
 msgid "country"
-msgstr ""
+msgstr "nchi"
 
 #: apps/organizations/models.py:54 apps/users/models.py:90
 msgid "address"
-msgstr ""
+msgstr "anwani"
 
 #: apps/organizations/models.py:57
 msgid "members"
-msgstr ""
+msgstr "wanachama"
 
 #: apps/organizations/models.py:64 apps/projects/models.py:58
 msgid "tags"
-msgstr ""
+msgstr "tagi"
 
 #: apps/organizations/models.py:70 apps/projects/models.py:74
 #: apps/respondents/models.py:123 apps/responses/models.py:67
@@ -104,7 +104,7 @@ msgstr ""
 #: apps/surveys/models/questions.py:105 apps/surveys/models/questions.py:147
 #: apps/surveys/models/role.py:59 apps/surveys/models/survey.py:60
 msgid "creator"
-msgstr ""
+msgstr "muanzilishi"
 
 #: apps/organizations/models.py:76 apps/projects/models.py:80
 #: apps/respondents/models.py:132 apps/responses/models.py:83
@@ -115,22 +115,38 @@ msgstr ""
 #: apps/surveys/models/entity.py:67 apps/surveys/models/logo.py:69
 #: apps/surveys/models/role.py:67 apps/surveys/models/survey.py:287
 msgid "extras"
-msgstr ""
+msgstr "ziada"
 
 #: apps/organizations/models.py:79
 msgid "Organization"
-msgstr ""
+msgstr "Taasisi"
 
 #: apps/projects/apps.py:7 apps/projects/models.py:84
 msgid "Projects"
 msgstr ""
 
-#: apps/projects/filters.py:17 apps/respondents/filters.py:25
+#: apps/projects/filters.py:17 apps/respondents/filters.py:26
 #: apps/surveys/filters/survey.py:18
 msgid "Search text"
-msgstr ""
+msgstr "Tafuta"
 
-#: apps/projects/forms.py:18
+#: apps/projects/forms.py:18 apps/projects/forms.py:188
+msgid "Data flow hierarchy"
+msgstr "Ngazi za mtiririko wa data"
+
+#: apps/projects/forms.py:30
+msgid ""
+"Please provide an email address of a collegue whom can be contacted "
+"regarding various issues related to this project."
+msgstr ""
+"Tafadhali bainisha anuani ya barua pepe ya mtua ambaye watu wataweza "
+"kuwasiliana nae kuhusu mambo mbalimbali kuhusu project hii."
+
+#: apps/projects/forms.py:35
+msgid "Contact information"
+msgstr "Taarifa za mawasiliano"
+
+#: apps/projects/forms.py:44
 #, python-format
 msgid ""
 "You will issue one or more surveys to actors in the system encompassed by "
@@ -138,46 +154,38 @@ msgid ""
 "the dataflow hierarchy. <a href=\"%(template_url)s\" download>Click here for "
 "data flow hierarchy file template</a>."
 msgstr ""
-
-#: apps/projects/forms.py:25 apps/projects/forms.py:188
-msgid "Data flow hierarchy"
-msgstr ""
-
-#: apps/projects/forms.py:37
-msgid ""
-"Please provide an email address of a collegue whom can be contacted "
-"regarding various issues related to this project."
-msgstr ""
-
-#: apps/projects/forms.py:42
-msgid "Contact information"
-msgstr ""
+"Utoa survey moja au zaidi kwa kutokana na project hii.Ili kuweza kufanya "
+"majumisho ya matokeo vizuri, tafadhali bainisha na pakia ngazi za mtiririko "
+"wa data utakaotumika. <a href=\"%(template_url)s\" download>Bofya hapa ili "
+"kupata template ya kubainisha ngazi za mtiririko wa data</a>."
 
 #: apps/projects/forms.py:69
 msgid ""
 "Invalid file format. It must be an excel file with a sheet called hierarchy."
 msgstr ""
+"Aina batili ya faili. Inatakiwa kuwa faili la excel lenye sheet inayoitwa "
+"hierarchy."
 
 #: apps/projects/forms.py:74
 msgid "The file must have sheet called hierarchy"
-msgstr ""
+msgstr "Faili hili ni lazima liwe na `sheet` inayotwa hierarchy"
 
 #: apps/projects/models.py:38
 msgid "organization"
-msgstr ""
+msgstr "taasisi"
 
 #: apps/projects/models.py:52
 msgid "countries"
-msgstr ""
+msgstr "nchi"
 
 #: apps/projects/models.py:69
 msgid "facilitators"
-msgstr ""
+msgstr "wawezeshaji"
 
-#: apps/projects/models.py:83 apps/respondents/filters.py:50
+#: apps/projects/models.py:83 apps/respondents/filters.py:51
 #: apps/responses/filters.py:16
 msgid "Project"
-msgstr ""
+msgstr "Project"
 
 #. Translators: This is projects list page title
 #: apps/projects/views.py:31 templates/projects/project_delete.html:10
@@ -199,113 +207,114 @@ msgstr ""
 #: templates/surveys/survey_unpublish.html:9
 #: templates/surveys/survey_update.html:9
 msgid "My Projects"
-msgstr ""
+msgstr "Project zangu"
 
 #. Translators: This is projects list page title
 #: apps/projects/views.py:57
 msgid "Create a project"
-msgstr ""
+msgstr "Tengeneza project"
 
 #: apps/projects/views.py:62
 msgid "Project was created successfully"
-msgstr ""
+msgstr "Project ilitengenezwa kwa mafinikio"
 
 #. Translators: This is project view page title
 #: apps/projects/views.py:88
 msgid "View a project"
-msgstr ""
+msgstr "Angalia project"
 
 #. Translators: This is project update page title
 #: apps/projects/views.py:124
 msgid "Update a project"
-msgstr ""
+msgstr "Sasisha project"
 
 #: apps/projects/views.py:130
 msgid "Project was updated successfully"
-msgstr ""
+msgstr "Project imesasishwa kwa mafanikio"
 
 #. Translators: This is project delete page title
 #: apps/projects/views.py:161 templates/projects/project_delete.html:25
 msgid "Delete a project"
-msgstr ""
+msgstr "Futa project"
 
 #: apps/projects/views.py:165
 msgid "Project was deleted successfully"
-msgstr ""
+msgstr "Project imefutwa kwa mafanikio"
 
 #: apps/respondents/apps.py:7 apps/respondents/models.py:138
 #: apps/surveys/forms/respondent.py:92
 msgid "Respondents"
-msgstr ""
-
-#: apps/respondents/filters.py:20
-msgid "Registered"
-msgstr ""
+msgstr "Wahojiwa"
 
 #: apps/respondents/filters.py:21
-msgid "Not registered"
-msgstr ""
+msgctxt "users"
+msgid "Registered"
+msgstr "Waliosajilia"
 
-#: apps/respondents/filters.py:37 apps/responses/filters.py:27
+#: apps/respondents/filters.py:22
+msgctxt "users"
+msgid "Not registered"
+msgstr "Wasiosajiliwa"
+
+#: apps/respondents/filters.py:38 apps/responses/filters.py:27
 #: templates/respondents/respondent_list.html:65
 #: templates/responses/survey_response_list.html:46
 msgid "Status"
-msgstr ""
+msgstr "Hali"
 
-#: apps/respondents/filters.py:43
+#: apps/respondents/filters.py:44
 msgid "Registration status"
-msgstr ""
+msgstr "Hali ya usajili"
 
 #: apps/respondents/forms.py:11
 msgid "I have read and understand the information above."
-msgstr ""
+msgstr "Nimesoma na kuelewa maelezo ya hapo juu."
 
 #: apps/respondents/forms.py:20
 msgid "Consent must be provided to continue"
+msgstr "Ridhaa inahitajika ili kuendelea"
+
+#: apps/respondents/forms.py:36 apps/responses/forms/dataset_responses.py:23
+#, python-format
+msgid "Survey must be specified to initialize %(class_name)s"
 msgstr ""
 
-#: apps/respondents/forms.py:35 apps/responses/forms/dataset_responses.py:22
-#, python-brace-format
-msgid "Survey must be specified to initialize {self.__class__.__name__}"
+#: apps/respondents/forms.py:45
+#, python-format
+msgid "Project or Survey must be specified to initialize %(class_name)s"
 msgstr ""
 
-#: apps/respondents/forms.py:41
-#, python-brace-format
-msgid ""
-"Project or Survey must be specified to initialize {self.__class__.__name__}"
-msgstr ""
-
-#: apps/respondents/forms.py:59
+#: apps/respondents/forms.py:65
 msgid "What is your first name?"
-msgstr ""
+msgstr "Jina lako la kwanza ni nani?"
 
-#: apps/respondents/forms.py:60
+#: apps/respondents/forms.py:66
 msgid "What is your last name?"
-msgstr ""
+msgstr "Jina lako la mwisho ni nani?"
 
-#: apps/respondents/forms.py:61
+#: apps/respondents/forms.py:67
 msgid "What is your email address?"
-msgstr ""
+msgstr "Anuani yako ya barua pepe ni ipi?"
 
-#: apps/respondents/forms.py:62
+#: apps/respondents/forms.py:68
 msgid "What is your gender?"
-msgstr ""
+msgstr "Jinsia yako ni nani?"
 
-#: apps/respondents/forms.py:63
+#: apps/respondents/forms.py:69
 msgid "What is your role at your organization?"
-msgstr ""
+msgstr "Una nafasi gani kwenye taasisi yako?"
 
 #: apps/respondents/models.py:27 apps/responses/models.py:27
 msgid "Not yet started"
-msgstr ""
+msgstr "Bado haijaanza"
 
 #: apps/respondents/models.py:28
 msgid "In progess"
-msgstr ""
+msgstr "Inaendelea"
 
 #: apps/respondents/models.py:29 apps/responses/models.py:29
 msgid "Completed"
-msgstr ""
+msgstr "Imekamilika"
 
 #: apps/respondents/models.py:45 apps/responses/models.py:45
 #: apps/responses/models.py:352 apps/surveys/models/datasets.py:36
@@ -319,23 +328,23 @@ msgstr ""
 
 #: apps/respondents/models.py:53
 msgid "user"
-msgstr ""
+msgstr "mtumiaji"
 
 #: apps/respondents/models.py:62
 msgid "first name"
-msgstr ""
+msgstr "jina la kwanza"
 
 #: apps/respondents/models.py:65
 msgid "last name"
-msgstr ""
+msgstr "jina la mwisho"
 
 #: apps/respondents/models.py:68
 msgid "email address"
-msgstr ""
+msgstr "anuani ya barua pepe"
 
 #: apps/respondents/models.py:78 apps/users/models.py:87
 msgid "gender"
-msgstr ""
+msgstr "jinsia"
 
 #: apps/respondents/models.py:84
 msgid "role"
@@ -352,95 +361,99 @@ msgstr ""
 
 #: apps/respondents/models.py:137
 msgid "Respondent"
-msgstr ""
+msgstr "Mhojiwa"
 
 #. Translators: This is respondents list page title
 #: apps/respondents/views.py:26
 #: templates/users/includes/facilitator_profile.html:17
 msgid "Manage respondents"
-msgstr ""
+msgstr "Ratibu wahojiwa"
 
 #: apps/responses/apps.py:7 apps/responses/models.py:90
 msgid "Responses"
-msgstr ""
+msgstr "Majibu"
 
 #: apps/responses/forms/dataset_responses.py:14
 msgid "In my everday work, I usually encounter information about:"
-msgstr ""
+msgstr "Katika kazi zangu za kila siku, huwa nakutana na taarifa kuhusu:"
 
-#: apps/responses/forms/dataset_responses.py:64
+#: apps/responses/forms/dataset_responses.py:67
 #, python-format
 msgid ""
 "How often do you produce, access or share information about %(dataset)s?"
 msgstr ""
+"Ni mara ngapi huwa unazalisha, unapata au unashirikisha wengine taarifa "
+"kuhusu %(dataset)s?"
 
-#: apps/responses/forms/dataset_responses.py:87
+#: apps/responses/forms/dataset_responses.py:90
 #, python-format
 msgid ""
 "Who at %(hierarchy)s do you believe knows <u>the most</u> about %(topic)s "
 "regarding %(dataset)s?"
 msgstr ""
+"Nani %(hierarchy)s unaamini anafahamu <u>zaidi</u> kuhusu %(topic)s na "
+"%(dataset)s?"
 
-#: apps/responses/forms/dataset_responses.py:127
+#: apps/responses/forms/dataset_responses.py:130
 msgid "Please specify how this is accessible"
-msgstr ""
+msgstr "Tafadhali bainisha hii inapatikanaje"
 
-#: apps/responses/forms/dataset_responses.py:163
-#: apps/responses/forms/dataset_responses.py:253
+#: apps/responses/forms/dataset_responses.py:166
+#: apps/responses/forms/dataset_responses.py:256
 msgid "Instance not specified"
 msgstr ""
 
-#: apps/responses/forms/dataset_responses.py:214
+#: apps/responses/forms/dataset_responses.py:217
 msgid "Please specify topic"
-msgstr ""
+msgstr "Tafadhali bainisha mada"
 
 #: apps/responses/forms/entity.py:13 apps/responses/forms/role.py:13
+msgctxt "administrative"
 msgid "Level"
+msgstr "Ngazi"
+
+#: apps/responses/mixins.py:85 apps/responses/views/dataset_responses.py:58
+#: apps/responses/views/dataset_responses.py:204
+#, python-format
+msgid "%(class_name)s view must be called with %(url_kwarg)s."
 msgstr ""
 
-#: apps/responses/mixins.py:85
-#, python-brace-format
-msgid ""
-"{self.__class__.__name__} view must be called with {self."
-"survey_lookup_url_kwarg}."
-msgstr ""
-
-#: apps/responses/mixins.py:93 apps/responses/views/dataset_responses.py:65
-#: apps/responses/views/dataset_responses.py:209
+#: apps/responses/mixins.py:94 apps/responses/views/dataset_responses.py:66
+#: apps/responses/views/dataset_responses.py:211
 msgid "Page not found."
-msgstr ""
+msgstr "Ukurasa haujapatikana."
 
-#: apps/responses/mixins.py:110
+#: apps/responses/mixins.py:111
 msgid "You are not allowed to take this survey"
-msgstr ""
+msgstr "Hauruhusiwi kujibu survey hii"
 
 #: apps/responses/models.py:28
 msgid "In progress"
-msgstr ""
+msgstr "Inaendelea"
 
 #: apps/responses/models.py:52 apps/users/models.py:52
 msgid "respondent"
-msgstr ""
+msgstr "mhojiwa"
 
 #: apps/responses/models.py:76
 msgid "consented at"
-msgstr ""
+msgstr "imeridhiwa"
 
 #: apps/responses/models.py:80
 msgid "completed at"
-msgstr ""
+msgstr "imekamilishwa"
 
 #: apps/responses/models.py:89
 msgid "Response"
-msgstr ""
+msgstr "Jibu"
 
 #: apps/responses/models.py:149 apps/responses/models.py:341
 msgid "response"
-msgstr ""
+msgstr "jibu"
 
 #: apps/responses/models.py:160
 msgid "dataset"
-msgstr ""
+msgstr "seti ya data"
 
 #: apps/responses/models.py:171 apps/surveys/models/datasets.py:166
 msgid "frequency"
@@ -470,7 +483,7 @@ msgstr ""
 #: apps/responses/models.py:269 apps/responses/models.py:442
 #: apps/responses/models.py:478
 msgid "topic"
-msgstr ""
+msgstr "mada"
 
 #: apps/responses/models.py:281
 msgid "perceived owner"
@@ -490,11 +503,11 @@ msgstr ""
 
 #: apps/responses/models.py:363
 msgid "Question Response"
-msgstr ""
+msgstr "Jibu la Swali"
 
 #: apps/responses/models.py:364
 msgid "Question Responses"
-msgstr ""
+msgstr "Majibu ya Maswali"
 
 #: apps/responses/models.py:392
 msgid "dataset topic storage"
@@ -514,7 +527,7 @@ msgstr ""
 
 #: apps/responses/models.py:437 apps/responses/models.py:473
 msgid "entity"
-msgstr ""
+msgstr "mdau"
 
 #: apps/responses/models.py:446
 msgid "Dataset Topic Shared"
@@ -532,20 +545,13 @@ msgstr ""
 msgid "Dataset Topics Received"
 msgstr ""
 
-#: apps/responses/views/dataset_responses.py:58
-#: apps/responses/views/dataset_responses.py:203
-#, python-brace-format
-msgid ""
-"{self.__class__.__name__} view must be called with {self.lookup_url_kwarg}."
-msgstr ""
-
 #: apps/responses/views/respondent_defined_options.py:24
 msgid "Create a role"
-msgstr ""
+msgstr "Tengeneza nafasi/wazifa"
 
 #: apps/responses/views/respondent_defined_options.py:27
 msgid "A role was created successfully"
-msgstr ""
+msgstr "Nafali ilitengenezwa kwa mafanikio"
 
 #: apps/responses/views/respondent_defined_options.py:33
 msgid "allowed_by attribute must be defined"
@@ -553,36 +559,38 @@ msgstr ""
 
 #: apps/responses/views/respondent_defined_options.py:77
 msgid "Add option"
-msgstr ""
+msgstr "Ongeza chaguo"
 
 #: apps/responses/views/respondent_defined_options.py:83
 msgid "Add storage"
-msgstr ""
+msgstr "Ongeza hifandi"
 
 #: apps/responses/views/respondent_defined_options.py:89
 msgid "Add entity"
-msgstr ""
+msgstr "Ongeza mdau"
 
 #: apps/responses/views/respondent_defined_options.py:102
 msgid "Add role"
-msgstr ""
+msgstr "Ongeza nafasi"
 
 #. Translators: This is respondents list page title
 #: apps/responses/views/survey_response.py:29
 #: templates/users/includes/facilitator_profile.html:18
 msgid "Manage responses"
-msgstr ""
+msgstr "Ratibu majibu"
 
 #: apps/responses/views/survey_response.py:146
 msgid ""
 "Your response has been submitted. You may access your surveys and responses "
 "in your Profile page."
 msgstr ""
+"Majibu yako yamewasilishwa. Unaweza kuipata survey na majibu yako uliyotoa "
+"kwenye ukurasa wako wa Wasifu."
 
 #: apps/responses/views/survey_response.py:193
 #, python-format
 msgid "Survey Response: %(survey_name)s"
-msgstr ""
+msgstr "Majibu ya Survey: %(survey_name)s"
 
 #: apps/surveys/apps.py:7 apps/surveys/models/survey.py:297
 msgid "Surveys"
@@ -590,26 +598,26 @@ msgstr ""
 
 #: apps/surveys/forms/entity.py:20 apps/surveys/forms/entity.py:40
 msgid "Entity Name"
-msgstr ""
+msgstr "Jina la Mdau"
 
 #: apps/surveys/forms/entity.py:21 apps/surveys/forms/entity.py:41
 #: apps/surveys/forms/respondent.py:27 apps/surveys/forms/respondent.py:60
 #: apps/surveys/forms/role.py:21 apps/surveys/forms/role.py:41
 msgid "System Hierarchy Level"
-msgstr ""
+msgstr "Ngazi"
 
 #: apps/surveys/forms/gender.py:22 apps/surveys/forms/gender.py:57
 msgid "Gender Name"
-msgstr ""
+msgstr "Jina la Jinsia"
 
 #: apps/surveys/forms/question.py:21 apps/surveys/forms/question.py:41
 #: apps/surveys/models/questions.py:116
 msgid "Question"
-msgstr ""
+msgstr "Swali"
 
 #: apps/surveys/forms/respondent.py:26 apps/surveys/forms/respondent.py:59
 msgid "Email Address"
-msgstr ""
+msgstr "Anwani ya Barua Pepe"
 
 #: apps/surveys/forms/respondent.py:87
 #, python-format
@@ -626,19 +634,19 @@ msgstr ""
 
 #: apps/surveys/forms/respondent.py:126
 msgid "The file must have sheet called respondents"
-msgstr ""
+msgstr "Faili ni lazima liwe na sheet inayoitwa respondents"
 
 #: apps/surveys/forms/role.py:20 apps/surveys/forms/role.py:40
 msgid "Role Name"
-msgstr ""
+msgstr "Jina la Nafasi"
 
 #: apps/surveys/forms/survey.py:78
 msgid "Allow respondents to add to Lists?"
-msgstr ""
+msgstr "Unataka kuruhusu wahojiwa kuongeza vitu kwenye orodha?"
 
 #: apps/surveys/forms/survey.py:79
 msgid "Allow respondents to enter their own roles?"
-msgstr ""
+msgstr "Unataka kuruhusu wahojiwa kuongeza nafasi zao wenyewe?"
 
 #: apps/surveys/forms/survey.py:80
 msgid "Do not link respondents with system hierarchy levels?"
@@ -646,11 +654,11 @@ msgstr ""
 
 #: apps/surveys/forms/survey.py:81
 msgid "Do you want these users to log in before responding to the survey?"
-msgstr ""
+msgstr "Unataka watu wasajiliwe kabla ya kujibu survey?"
 
 #: apps/surveys/forms/survey.py:82
 msgid "Do you want the survey to be taken by invited users only?"
-msgstr ""
+msgstr "Unataka survey hii ijibiwe na walioalikwa pekee?"
 
 #: apps/surveys/forms/survey.py:84
 msgid ""
@@ -665,43 +673,43 @@ msgstr ""
 
 #: apps/surveys/forms/survey.py:111 apps/surveys/forms/survey.py:158
 msgid "Allow respondents to enter their own value here?"
-msgstr ""
+msgstr "Unataka kuruhusu wahojiwa kuingiza mengineyo hapa?"
 
 #: apps/surveys/forms/survey.py:137
 msgid "Allow users to add their own options?"
-msgstr ""
+msgstr "Unataka kuruhusu watumiaji kuongeza machaguo yao wenyewe?"
 
 #: apps/surveys/forms/survey.py:179
 msgid "Allow users to enter their own value here?"
-msgstr ""
+msgstr "Unataka kuruhusu watumiaji kuingiza machaguo ya wenyewe hapa?"
 
 #: apps/surveys/forms/survey.py:204
 msgid "Introduction text:"
-msgstr ""
+msgstr "Ujumbe wa utangulizi:"
 
 #: apps/surveys/forms/survey.py:205
 msgid "Closing text:"
-msgstr ""
+msgstr "Ujumbe wa mwishoni:"
 
 #: apps/surveys/models/datasets.py:60
 msgid "Dataset"
-msgstr ""
+msgstr "Seti ya Data"
 
 #: apps/surveys/models/datasets.py:61
 msgid "Datasets"
-msgstr ""
+msgstr "Seti za Data"
 
 #: apps/surveys/models/datasets.py:103
 msgid "topics"
-msgstr ""
+msgstr "mada"
 
 #: apps/surveys/models/datasets.py:127
 msgid "Topic"
-msgstr ""
+msgstr "Mada"
 
 #: apps/surveys/models/datasets.py:128
 msgid "Topics"
-msgstr ""
+msgstr "Mada"
 
 #: apps/surveys/models/datasets.py:182
 msgid "Dataset frequency"
@@ -713,7 +721,7 @@ msgstr ""
 
 #: apps/surveys/models/datasets.py:237 apps/surveys/models/datasets.py:238
 msgid "Dataset Storage"
-msgstr ""
+msgstr "Hifadhi ya Seti ya Data"
 
 #: apps/surveys/models/datasets.py:296 apps/surveys/models/datasets.py:297
 msgid "Dataset Access"
@@ -723,11 +731,11 @@ msgstr ""
 #: templates/responses/survey_response_detail.html:128
 #: templates/responses/survey_response_detail.html:159
 msgid "Entity"
-msgstr ""
+msgstr "Mdau"
 
 #: apps/surveys/models/entity.py:71
 msgid "Entities"
-msgstr ""
+msgstr "Wadau"
 
 #: apps/surveys/models/hierarchy.py:34 apps/surveys/models/hierarchy.py:105
 #: apps/surveys/models/survey.py:53
@@ -761,27 +769,27 @@ msgstr ""
 
 #: apps/surveys/models/logo.py:45
 msgid "image"
-msgstr ""
+msgstr "picha"
 
 #: apps/surveys/models/logo.py:72
 msgid "Logo"
-msgstr ""
+msgstr "Nembo"
 
 #: apps/surveys/models/logo.py:73
 msgid "Logos"
-msgstr ""
+msgstr "Nembo"
 
 #: apps/surveys/models/questions.py:26
 msgid "group number"
-msgstr ""
+msgstr "namba ya kundi"
 
 #: apps/surveys/models/questions.py:37
 msgid "Question Group"
-msgstr ""
+msgstr "Kundi la Maswali"
 
 #: apps/surveys/models/questions.py:38
 msgid "Question Groups"
-msgstr ""
+msgstr "Makundi ya Maswali"
 
 #: apps/surveys/models/questions.py:67
 msgid "integer"
@@ -817,11 +825,11 @@ msgstr ""
 
 #: apps/surveys/models/questions.py:117
 msgid "Questions"
-msgstr ""
+msgstr "Maswali"
 
 #: apps/surveys/models/questions.py:134
 msgid "question"
-msgstr ""
+msgstr "swali"
 
 #: apps/surveys/models/questions.py:139
 msgid "choice value"
@@ -829,47 +837,51 @@ msgstr ""
 
 #: apps/surveys/models/questions.py:155
 msgid "Choice"
-msgstr ""
+msgstr "Chaguo"
 
 #: apps/surveys/models/questions.py:156
 msgid "Choices"
-msgstr ""
+msgstr "Machaguo"
 
 #: apps/surveys/models/role.py:70
 msgid "Role"
-msgstr ""
+msgstr "Nafasi"
 
 #: apps/surveys/models/role.py:71
 msgid "Roles"
-msgstr ""
+msgstr "Nafasi"
 
 #: apps/surveys/models/survey.py:36
 msgid "Yes"
-msgstr ""
+msgstr "Ndiyo"
 
 #: apps/surveys/models/survey.py:37
 msgid "No"
-msgstr ""
+msgstr "Hapana"
 
 #: apps/surveys/models/survey.py:80
 msgid "alternative name"
-msgstr ""
+msgstr "jina mbadala"
 
 #: apps/surveys/models/survey.py:81
 msgid ""
 "Use this optional field to provide the survey name as Respondents will see "
 "it."
 msgstr ""
+"Tumia uga huu usio wa lazima kubainisha jina la survey kama ambavyo "
+"ungependa lionekane kwa Wahojiwa."
 
 #: apps/surveys/models/survey.py:89
 msgid "research question"
-msgstr ""
+msgstr "swali la utafiti"
 
 #: apps/surveys/models/survey.py:90
 msgid ""
 "Every Data Compass survey must have a specific research question. What is "
 "yours?"
 msgstr ""
+"Kila survey kwenye Data Compass ni lazima iwe na swali la utafiti. Wewe lako "
+"ni nini?"
 
 #: apps/surveys/models/survey.py:101
 msgid ""
@@ -880,7 +892,7 @@ msgstr ""
 
 #: apps/surveys/models/survey.py:104
 msgid "languages"
-msgstr ""
+msgstr "lugha"
 
 #: apps/surveys/models/survey.py:118
 msgid "do not link respondents with system hierarchy levels"
@@ -908,7 +920,7 @@ msgstr ""
 
 #: apps/surveys/models/survey.py:139
 msgid "If Yes, respondents will be able to add their own roles."
-msgstr ""
+msgstr "Kama Ndiyo, wahojiwa wataweza kuongeza nafasi zao."
 
 #: apps/surveys/models/survey.py:147
 msgid "login required"
@@ -919,18 +931,20 @@ msgid ""
 "If no, they won't be able to save and return to their responses, or view "
 "previous responses."
 msgstr ""
+"Kama hapana,hawataweza ku-save na kurudi baadae kuendelea kujibu, au "
+"kuonamajibu yaliyopita."
 
 #: apps/surveys/models/survey.py:157
 msgid "invitation required"
-msgstr ""
+msgstr "mualiko unahitajika"
 
 #: apps/surveys/models/survey.py:158
 msgid "If no, anyone with the survey link can respond to it."
-msgstr ""
+msgstr "Kama hapana, yoyote mwenye kiungo ataweza kujibu."
 
 #: apps/surveys/models/survey.py:166
 msgid "respondent can aggregate"
-msgstr ""
+msgstr "wahojiwa wanaweza kufanya majumuisho"
 
 #: apps/surveys/models/survey.py:167
 msgid ""
@@ -940,7 +954,7 @@ msgstr ""
 
 #: apps/surveys/models/survey.py:176
 msgid "respondent can suggest others"
-msgstr ""
+msgstr "mhojiwa anaweza kupendekeza wengine"
 
 #: apps/surveys/models/survey.py:177
 msgid ""
@@ -950,11 +964,11 @@ msgstr ""
 
 #: apps/surveys/models/survey.py:187
 msgid "allow respondent topics"
-msgstr ""
+msgstr "ruhusu mada za wahojiwa"
 
 #: apps/surveys/models/survey.py:188
 msgid "If Yes, respondents will be able to add their own topics."
-msgstr ""
+msgstr "Kama Ndiyo, wahojiwa wataweza kuongeza mada zao wenyewe."
 
 #: apps/surveys/models/survey.py:196
 msgid "respondent topic number"
@@ -962,49 +976,51 @@ msgstr ""
 
 #: apps/surveys/models/survey.py:197
 msgid "Up to 10 topics are allowed"
-msgstr ""
+msgstr "Mada hadi 10 zinaruhusiwa"
 
 #: apps/surveys/models/survey.py:205
 msgid "allow respondent datasets"
-msgstr ""
+msgstr "ruhusu seti za data kutoka kwa wahojiwa"
 
 #: apps/surveys/models/survey.py:206
 msgid ""
 "If Yes, respondents will be able to add their own datasets. This is not "
 "recommended."
 msgstr ""
+"Kama Ndiyo, wahojiwa watakuwa na uwezo wa kuongeza seti zao za data. Mara "
+"nyingi haishauriwi."
 
 #: apps/surveys/models/survey.py:214
 msgid "allow respondent entities"
-msgstr ""
+msgstr "ruhusu wadau kutoka kwa wahojiwa"
 
 #: apps/surveys/models/survey.py:215
 msgid "If Yes, respondents will be able to add their own entities."
-msgstr ""
+msgstr "Kama Ndiyo, wahojiwa wataweza kuongeza wadau wao wenyewe."
 
 #: apps/surveys/models/survey.py:223
 msgid "allow respondent storages"
-msgstr ""
+msgstr "ruhusu hifadhi kutoka kwa wahojiwa"
 
 #: apps/surveys/models/survey.py:224
 msgid "If Yes, respondents will be able to add their own storages."
-msgstr ""
+msgstr "Kama Ndiyo, wahojiwa wataweza kuongeza hifadhi zingine wenyewe."
 
 #: apps/surveys/models/survey.py:232
 msgid "introduction text"
-msgstr ""
+msgstr "ujumbe wa utangulizi"
 
 #: apps/surveys/models/survey.py:233
 msgid "What text do you want to appear when a respondent begins the survey?"
-msgstr ""
+msgstr "Ni ujumbe ganiunataka uonekane wakati mhojiwa anaanza survey?"
 
 #: apps/surveys/models/survey.py:239
 msgid "closing text"
-msgstr ""
+msgstr "ujumbe wa hitimiso"
 
 #: apps/surveys/models/survey.py:240
 msgid "What text do you want to appear when a respondent ends the survey?"
-msgstr ""
+msgstr "Ni ujumbe ganiunataka uonekane wakati mhojiwa anamaliza survey?"
 
 #: apps/surveys/models/survey.py:246
 msgid "is active"
@@ -1016,19 +1032,19 @@ msgstr ""
 
 #: apps/surveys/models/survey.py:261
 msgid "genders"
-msgstr ""
+msgstr "jinsia"
 
 #: apps/surveys/models/survey.py:269
 msgid "collect email address"
-msgstr ""
+msgstr "kusanya anwani ya barua pepe"
 
 #: apps/surveys/models/survey.py:275
 msgid "collect name"
-msgstr ""
+msgstr "kusanya jina"
 
 #: apps/surveys/models/survey.py:281
 msgid "collect gender"
-msgstr ""
+msgstr "kusanya jinsia"
 
 #: apps/surveys/models/survey.py:296
 #: templates/respondents/respondent_list.html:64
@@ -1038,309 +1054,323 @@ msgstr ""
 
 #: apps/surveys/models/survey.py:332
 msgid "A user is required"
-msgstr ""
+msgstr "Mtumiaji anahitajika"
 
 #. Translators: This is survey dataset create page title
 #: apps/surveys/views/dataset.py:29
 msgid "Create a survey dataset"
-msgstr ""
+msgstr "Tengeneza seti ya data kwa ajili ya survey"
 
 #: apps/surveys/views/dataset.py:34
 msgid "Dataset was created successfully"
-msgstr ""
+msgstr "Seti ya data imetengenezwa kwa mafinikio"
 
 #. Translators: This is survey dataset update page title
 #. Translators: This is survey dataset delete page title
 #: apps/surveys/views/dataset.py:64 apps/surveys/views/dataset.py:91
 msgid "Delete a survey dataset"
-msgstr ""
+msgstr "Futa seti ya data kwa survey"
 
 #: apps/surveys/views/dataset.py:69
 msgid "Dataset was updated successfully"
-msgstr ""
+msgstr "Seti ya data imesasishwa kwa mafanikio"
 
 #: apps/surveys/views/dataset.py:95
 msgid "Dataset was deleted successfully"
-msgstr ""
+msgstr "Seti ya data imefutwa kwa mafanikio"
 
 #. Translators: This is survey dataset storage create page title
 #: apps/surveys/views/dataset_storage.py:30
 msgid "Create a survey dataset storage"
-msgstr ""
+msgstr "Tengeneza hifadhi ya seti za data kwa ajili ya survey"
 
 #: apps/surveys/views/dataset_storage.py:35
 msgid "Dataset storage was created successfully"
-msgstr ""
+msgstr "Hifadhi ya seti ya data imeundwa kwa mafanikio"
 
 #. Translators: This is survey dataset storage update page title
 #. Translators: This is survey dataset storage delete page title
 #: apps/surveys/views/dataset_storage.py:66
 #: apps/surveys/views/dataset_storage.py:93
 msgid "Delete a survey dataset storage"
-msgstr ""
+msgstr "Futa hifadhi ya seti ya data"
 
 #: apps/surveys/views/dataset_storage.py:71
 msgid "Dataset storage was updated successfully"
-msgstr ""
+msgstr "Hifadhi ya seti ya data imesasishwa kwa mafanikio"
 
 #: apps/surveys/views/dataset_storage.py:97
 msgid "Dataset storage was deleted successfully"
-msgstr ""
+msgstr "Hifadhi ya seti ya data imefutwa kwa mafanikio"
 
 #. Translators: This is survey entity create page title
 #: apps/surveys/views/entity.py:29
 msgid "Create a survey entity"
-msgstr ""
+msgstr "Ongeza mdau wa survey"
 
 #: apps/surveys/views/entity.py:34
 msgid "Entity was created successfully"
-msgstr ""
+msgstr "Mdau wa survey ametengenezwa kwa mafanikio"
 
 #. Translators: This is survey entity update page title
 #. Translators: This is survey entity delete page title
 #: apps/surveys/views/entity.py:64 apps/surveys/views/entity.py:91
 msgid "Delete a survey entity"
-msgstr ""
+msgstr "Futa mdau wa survey"
 
 #: apps/surveys/views/entity.py:69
 msgid "Entity was updated successfully"
-msgstr ""
+msgstr "Mdau alisasishwa kwa mafanikio"
 
 #: apps/surveys/views/entity.py:95
 msgid "Entity was deleted successfully"
-msgstr ""
+msgstr "Mdau alifutwa kwa mafanikio"
 
 #. Translators: This is survey gender create page title
 #: apps/surveys/views/gender.py:32
 msgid "Create a survey gender"
-msgstr ""
+msgstr "Tengeneza jinsia kwenye survey"
 
 #: apps/surveys/views/gender.py:37
 msgid "Gender was created successfully"
-msgstr ""
+msgstr "Jinsia imeundwa kwa mafanikio"
 
 #. Translators: This is survey gender update page title
 #. Translators: This is survey gender delete page title
 #: apps/surveys/views/gender.py:67 apps/surveys/views/gender.py:100
 msgid "Delete a survey gender"
-msgstr ""
+msgstr "Futa jinsia kwenye survey"
 
 #: apps/surveys/views/gender.py:72
 msgid "Gender was updated successfully"
-msgstr ""
+msgstr "Jinsia imesasishwa kwa mafanikio"
 
 #: apps/surveys/views/gender.py:104
 msgid "Gender was deleted successfully"
-msgstr ""
+msgstr "Jinsia imefutwa kwa mafanikio"
 
 #. Translators: This is survey logo create page title
 #: apps/surveys/views/logo.py:29
 msgid "Create a survey logo"
-msgstr ""
+msgstr "Tengeneza nembo kwa ajili survey"
 
 #: apps/surveys/views/logo.py:34
 msgid "Logo was created successfully"
-msgstr ""
+msgstr "Nembo imetengenezwa kwa mafanikio"
 
 #. Translators: This is survey logo update page title
 #. Translators: This is survey logo delete page title
 #: apps/surveys/views/logo.py:74 apps/surveys/views/logo.py:101
 msgid "Delete a survey logo"
-msgstr ""
+msgstr "Nembo logo ya survey"
 
 #: apps/surveys/views/logo.py:79
 msgid "Logo was updated successfully"
-msgstr ""
+msgstr "Nembo imesasishwa kwa mafanikio"
 
 #: apps/surveys/views/logo.py:105
 msgid "Logo was deleted successfully"
-msgstr ""
+msgstr "Nembo imefutwa kwa mafanikio"
 
 #. Translators: This is survey question create page title
 #: apps/surveys/views/question.py:29
 msgid "Create a survey question"
-msgstr ""
+msgstr "Tengeneza swali la survey"
 
 #: apps/surveys/views/question.py:34
 msgid "Question was created successfully"
-msgstr ""
+msgstr "Swali limetengenezwa kwa mafanikio"
 
 #. Translators: This is survey question update page title
 #. Translators: This is survey question delete page title
 #: apps/surveys/views/question.py:64 apps/surveys/views/question.py:91
 msgid "Delete a survey question"
-msgstr ""
+msgstr "Futa swali la survey"
 
 #: apps/surveys/views/question.py:69
 msgid "Question was updated successfully"
-msgstr ""
+msgstr "Swali limesasishwa kwa mafanikio"
 
 #: apps/surveys/views/question.py:95
 msgid "Question was deleted successfully"
-msgstr ""
+msgstr "Swali limefutwa kwa mafanikio"
 
 #. Translators: This is survey respondent create page title
 #: apps/surveys/views/respondent.py:30
 msgid "Create a survey respondent"
-msgstr ""
+msgstr "Tengeneza mhojiwa wa survey"
 
 #: apps/surveys/views/respondent.py:35
 msgid "Respondent was created successfully"
-msgstr ""
+msgstr "Mhojiwa alitengenezwa kwa mafanikio"
 
 #. Translators: This is survey respondent update page title
 #. Translators: This is survey respondent delete page title
 #: apps/surveys/views/respondent.py:65 apps/surveys/views/respondent.py:92
 msgid "Delete a survey respondent"
-msgstr ""
+msgstr "Futa mhojiwa wa survey"
 
 #: apps/surveys/views/respondent.py:70
 msgid "Respondent was updated successfully"
-msgstr ""
+msgstr "Mhojiwa alisasishwa kwa mafanikio"
 
 #: apps/surveys/views/respondent.py:96
 msgid "Respondent was deleted successfully"
-msgstr ""
+msgstr "Mhojiwa alifutwa kwa mafanikio"
 
 #. Translators: This is survey respondents upload page title
 #: apps/surveys/views/respondent.py:118
 msgid "Upload survey respondents"
-msgstr ""
+msgstr "Pakia wahojiwa wa survey"
 
 #: apps/surveys/views/respondent.py:123
 msgid "Respondents was uploaded successfully"
-msgstr ""
+msgstr "Wahojiwa walipakiwa kwa mafanikio"
 
 #. Translators: This is survey role create page title
 #: apps/surveys/views/role.py:29
 msgid "Create a survey role"
-msgstr ""
+msgstr "Tengeneza wazifa au nafasi kwa ajili ya survey"
 
 #: apps/surveys/views/role.py:34
 msgid "Role was created successfully"
-msgstr ""
+msgstr "Nafasi ilitengenezwa kwa mafanikio"
 
 #. Translators: This is survey role update page title
 #. Translators: This is survey role delete page title
 #: apps/surveys/views/role.py:64 apps/surveys/views/role.py:91
 msgid "Delete a survey role"
-msgstr ""
+msgstr "Futa nafasi kwenye survey"
 
 #: apps/surveys/views/role.py:69
 msgid "Role was updated successfully"
-msgstr ""
+msgstr "Nafasi imesasishwa kwa mafanikio"
 
 #: apps/surveys/views/role.py:95
 msgid "Role was deleted successfully"
-msgstr ""
+msgstr "Nafasi ilifutwa kwa mafanikio"
 
 #. Translators: This is surveys list page title
 #: apps/surveys/views/survey.py:33
 msgid "Surveys List"
-msgstr ""
+msgstr "Orodha ya Survey"
 
 #. Translators: This is survey create page title
 #: apps/surveys/views/survey.py:66
 msgid "Create a survey"
-msgstr ""
+msgstr "Tengeneza survey mpya"
 
 #: apps/surveys/views/survey.py:71
 msgid "Survey was created successfully"
-msgstr ""
+msgstr "Survey ilitengenezwa kwa mafanikio"
 
 #. Translators: This is survey view page title
 #: apps/surveys/views/survey.py:108
 msgid "View Survey"
-msgstr ""
+msgstr "Angalia survey"
 
 #. Translators: This is survey update page title
 #: apps/surveys/views/survey.py:130
 msgid "Update a survey"
-msgstr ""
+msgstr "Badili survey"
 
 #: apps/surveys/views/survey.py:135 apps/surveys/views/survey.py:368
 #: apps/surveys/views/survey.py:399 apps/surveys/views/survey.py:430
 #: apps/surveys/views/survey.py:461 apps/surveys/views/survey.py:492
 #: apps/surveys/views/survey.py:523
 msgid "Survey was updated successfully"
-msgstr ""
+msgstr "Survey ilisasishwa kwa mafanikio"
 
 #. Translators: This is survey delete page title
 #: apps/surveys/views/survey.py:157 templates/surveys/survey_delete.html:25
 msgid "Delete a survey"
-msgstr ""
+msgstr "Futa survey"
 
 #: apps/surveys/views/survey.py:161
 msgid "Survey was deleted successfully"
-msgstr ""
+msgstr "Survey ilifutwa kwa mafanikio"
 
 #. Translators: This is survey unpublish page title
 #: apps/surveys/views/survey.py:183 templates/surveys/survey_unpublish.html:25
 msgid "Unpublish a survey"
-msgstr ""
+msgstr "Sitisha kuhadhiri survey"
 
 #: apps/surveys/views/survey.py:188
 msgid "Survey was unpublished successfully"
-msgstr ""
+msgstr "Uhadhiri wa survey umesitishwa kwa mafanikio"
 
 #. Translators: This is survey publish page title
 #: apps/surveys/views/survey.py:214 templates/surveys/survey_publish.html:25
 msgid "Publish a survey"
-msgstr ""
+msgstr "Hadhiri survey"
 
 #: apps/surveys/views/survey.py:219
 msgid "Survey was published successfully"
-msgstr ""
+msgstr "Survey ilihadhiriwa kwa mafanikio"
 
 #: apps/surveys/views/survey.py:232
 msgid ""
 "Failed to publish a survey. Respondents are missing. Please add respondents "
 "to a survey."
 msgstr ""
+"Imeshindikana kuhadhiri survey. Wahojiwa wamekosekana. Tafadhali ongeza "
+"wahojiwa kwenye survey."
 
 #: apps/surveys/views/survey.py:241
 msgid ""
 "Failed to publish a survey. Roles are missing. Please add roles to a survey."
 msgstr ""
+"Imeshindikana kuhadhiri survey. Nafasi au nyazifa zimekosekana. Tafadhali "
+"ongeza nafasi wazifa kwenye survey."
 
 #: apps/surveys/views/survey.py:250
 msgid ""
 "Failed to publish a survey. Topics are missing. Please add topics to a "
 "survey."
 msgstr ""
+"Imeshindikana kuhadhiri survey. Mada zimekosekana. Tafadhali ongeza "
+"madakwenye survey."
 
 #: apps/surveys/views/survey.py:259
 msgid ""
 "Failed to publish a survey. Datasets are missing. Please add datasets to a "
 "survey."
 msgstr ""
+"Imeshindikana kuhadhiri survey. Seti za data zimekosekana. Tafadhali ongeza "
+"seti za data kwenye survey."
 
 #: apps/surveys/views/survey.py:268
 msgid ""
 "Failed to publish a survey. Entities are missing. Please add entities to a "
 "survey."
 msgstr ""
+"Imeshindikana kuhadhiri survey. Wadau wamekosekana. Tafadhali ongeza wadau "
+"kwenye survey."
 
 #: apps/surveys/views/survey.py:277
 msgid ""
 "Failed to publish a survey. Dataset storages are missing. Please add dataset "
 "storages to a survey."
 msgstr ""
+"Imeshindikana kuhadhiri survey. Hifadhi za seti za data zimekosekana. "
+"Tafadhali ongeza hifadhi za seti za data kwenye survey."
 
 #: apps/surveys/views/survey.py:289
 msgid ""
 "Failed to publish a survey. Genders are missing. Please add genders to a "
 "survey."
 msgstr ""
+"Imeshindikana kuhadhiri survey. Jinsia zimekosekana. Tafadhali ongeza jinsia "
+"kwenye survey."
 
 #. Translators: This is survey share page title
-#: apps/surveys/views/survey.py:314 templates/surveys/survey_detail.html:60
+#: apps/surveys/views/survey.py:314 templates/surveys/survey_detail.html:65
 msgid "Share Survey"
-msgstr ""
+msgstr "Shirikisha Survey"
 
 #: apps/surveys/views/survey.py:320
 msgid "Share"
-msgstr ""
+msgstr "Shirikisha"
 
 #. Translators: This is survey view page title
 #. Translators: This is survey update page title
@@ -1350,7 +1380,7 @@ msgstr ""
 #: apps/surveys/views/survey.py:456 apps/surveys/views/survey.py:487
 #: apps/surveys/views/survey.py:518 apps/surveys/views/survey.py:546
 msgid "Edit new survey"
-msgstr ""
+msgstr "Badili survey mpya"
 
 #: apps/surveys/views/survey.py:343 apps/surveys/views/survey.py:371
 #: apps/surveys/views/survey.py:402 apps/surveys/views/survey.py:433
@@ -1359,38 +1389,38 @@ msgstr ""
 #: templates/projects/includes/project_item.html:24
 #: templates/surveys/includes/survey_item.html:28
 #: templates/surveys/survey_edit_start.html:25
-#: templates/surveys/survey_list.html:89 templates/users/profile.html:25
-#: templates/users/profile.html:39 templates/users/profile.html:74
-#: templates/users/profile.html:79
+#: templates/surveys/survey_list.html:89 templates/users/profile.html:27
+#: templates/users/profile.html:41 templates/users/profile.html:76
+#: templates/users/profile.html:81
 msgid "Edit"
-msgstr ""
+msgstr "Badili"
 
 #. Translators: This is survey topic create page title
 #: apps/surveys/views/topic.py:29
 msgid "Create a survey topic"
-msgstr ""
+msgstr "Tengeneza mada ya survey"
 
 #: apps/surveys/views/topic.py:34
 msgid "Topic was created successfully"
-msgstr ""
+msgstr "Mada ilitengenezwa kwa mafanikio"
 
 #. Translators: This is survey topic update page title
 #. Translators: This is survey topic delete page title
 #: apps/surveys/views/topic.py:64 apps/surveys/views/topic.py:91
 msgid "Delete a survey topic"
-msgstr ""
+msgstr "Futa mada ya survey"
 
 #: apps/surveys/views/topic.py:69
 msgid "Topic was updated successfully"
-msgstr ""
+msgstr "Mada ilisasishwa kwa mafanikio"
 
 #: apps/surveys/views/topic.py:95
 msgid "Topic was deleted successfully"
-msgstr ""
+msgstr "Mada ilifutwa kwa mafanikio"
 
 #: apps/users/apps.py:7
 msgid "Users"
-msgstr ""
+msgstr "Watumiaji"
 
 #: apps/users/models.py:28
 msgid "is primary"
@@ -1404,35 +1434,36 @@ msgstr ""
 #: templates/respondents/respondent_list.html:63
 #: templates/responses/survey_response_detail.html:19
 msgid "Gender"
-msgstr ""
+msgstr "Jinsia"
 
 #: apps/users/models.py:50
 msgid "administrator"
-msgstr ""
+msgstr "msimamizi"
 
 #: apps/users/models.py:51
 msgid "facilitator"
-msgstr ""
+msgstr "muwezeshaji"
 
 #: apps/users/models.py:61
 msgid "profile picture"
-msgstr ""
+msgstr "picha ya kwenye wasifu"
 
 #: apps/users/models.py:91
 msgid "is facilitator"
-msgstr ""
+msgstr "ni muwezeshaji"
 
 #: apps/users/models.py:92
 msgid "is respondent"
-msgstr ""
+msgstr "ni mhojiwa"
 
-#: apps/users/views.py:15 templates/includes/nav_primary.html:38
+#: apps/users/views.py:15 templates/home.html:14
+#: templates/includes/nav_primary.html:38
 msgid "My Profile"
-msgstr ""
+msgstr "Wasifu Wangu"
 
 #: apps/users/views.py:49
 msgid "Update Profile"
-msgstr ""
+msgstr "Sasisha Wasifu"
 
 #: core/models.py:11
 msgid "created at"
@@ -1442,94 +1473,114 @@ msgstr ""
 msgid "modified at"
 msgstr ""
 
+#: core/templatetags/datacompass.py:51
+msgid "not started"
+msgstr "bado haijaanza"
+
+#: core/templatetags/datacompass.py:52
+msgid "in progress"
+msgstr "inaendelea"
+
+#: core/templatetags/datacompass.py:53
+msgid "completed"
+msgstr "imekamilika"
+
 #: datacompass/settings/base.py:195
 msgid "English"
-msgstr ""
+msgstr "Kiingereza"
 
 #: datacompass/settings/base.py:196
 msgid "Swahili"
-msgstr ""
+msgstr "Kiswahili"
 
 #: templates/account/login.html:7 templates/account/login.html:31
-#: templates/includes/nav_primary.html:52
+#: templates/home.html:17 templates/includes/nav_primary.html:52
 msgid "Sign In"
-msgstr ""
+msgstr "Ingia"
 
 #: templates/account/login.html:12
 msgid "Sign In to begin"
-msgstr ""
+msgstr "Ingia ili kuanza"
 
 #: templates/account/login.html:14
 msgid "or"
-msgstr ""
+msgstr "au"
 
 #: templates/account/login.html:15
 msgid "Click here to register using new password"
-msgstr ""
+msgstr "Bofya hapa kujisajili kwa kutumia nenosiri jipya"
 
 #: templates/account/login.html:34
 msgid "Click here if you forgot your password"
-msgstr ""
+msgstr "Bofya hapa ikiwa umesahau nenosiri lako"
 
 #: templates/account/logout.html:5 templates/account/logout.html:8
 #: templates/account/logout.html:18
 msgid "Sign Out"
-msgstr ""
+msgstr "Ondoka"
 
 #: templates/account/logout.html:11
 msgid "Are you sure you want to sign out?"
-msgstr ""
+msgstr "Una uhakika unataka kuondoka?"
 
 #: templates/account/password_change.html:6
 #: templates/account/password_change.html:11
 #: templates/account/password_change.html:15
 msgid "Change Password"
-msgstr ""
+msgstr "Badilisha Nenosiri"
 
 #: templates/account/password_reset.html:6
 #: templates/account/password_reset.html:9
 #: templates/account/password_reset_done.html:5
 #: templates/account/password_reset_done.html:8
 msgid "Password Reset"
-msgstr ""
+msgstr "Seti Upya Nenosiri"
 
 #: templates/account/password_reset.html:17
 msgid ""
 "Forgotten your password? Enter your e-mail address below, and we'll send you "
 "an e-mail allowing you to reset it."
 msgstr ""
+"Umesahau nenisiri lako? Ingiza anwani yako ya barua pepe hapo chini, na "
+"tutakutumia barua pepe itakayokuruhusu kuiseti upya."
 
 #: templates/account/password_reset.html:24
 msgid "Reset My Password"
-msgstr ""
+msgstr "Seti Upya Nenosiri Langu"
 
 #: templates/account/password_reset.html:28
 msgid "Please contact us if you have any trouble resetting your password."
 msgstr ""
+"Tafadhali wasiliana nasi ikiwa una shida yoyote katika kuseti upya nenosiri "
+"lako."
 
 #: templates/account/password_reset_done.html:16
 msgid ""
 "We have sent you a password reset link. Please contact us if you do not "
 "receive it within a few minutes."
 msgstr ""
+"Tumekutumia kiungo kwa ajili ya kuseti upya nenosiri. Tafadhali wasiliana "
+"nasi ikiwa hitakipata ndani ya dakika chache."
 
 #: templates/account/signup.html:6
 msgid "Signup"
-msgstr ""
+msgstr "Jisajili"
 
 #: templates/account/signup.html:10
 msgid "Register"
-msgstr ""
+msgstr "Jisajili"
 
 #: templates/account/signup.html:13
 #, python-format
 msgid ""
 "Already have an account? Then please <a href=\"%(login_url)s\">sign in</a>."
 msgstr ""
+"Tayari una akaunti? Kama ni hivyo tafadhali <a href=\"%(login_url)s\">ingia</"
+"a>."
 
 #: templates/account/signup.html:26
 msgid "Sign Up"
-msgstr ""
+msgstr "Jisajili"
 
 #: templates/base.html:11
 msgid "Data Compass"
@@ -1541,7 +1592,19 @@ msgstr ""
 
 #: templates/home.html:4
 msgid "Welcome"
-msgstr ""
+msgstr "Karibu"
+
+#: templates/home.html:10
+msgid "Collect and visualize information about data flows."
+msgstr "Kusanya na pata taswira ya taarifa kuhusu mtiririko wa data."
+
+#: templates/home.html:13
+msgid "Check your profile."
+msgstr "Cheki wasifu wako."
+
+#: templates/home.html:16
+msgid "Please log in to continue."
+msgstr "Tafadhali ingia ili kuendelea."
 
 #: templates/includes/footer.html:29
 msgid ""
@@ -1559,16 +1622,16 @@ msgstr ""
 
 #: templates/includes/nav_primary.html:31
 msgid "Administration"
-msgstr ""
+msgstr "Utawala"
 
 #: templates/includes/nav_primary.html:44
 msgid "Sign out"
-msgstr ""
+msgstr "Ondoka"
 
 #: templates/projects/includes/project_item.html:20
 #: templates/surveys/includes/survey_item.html:25
 msgid "View"
-msgstr ""
+msgstr "Angalia"
 
 #: templates/projects/includes/project_item.html:28
 #: templates/projects/project_delete.html:31
@@ -1585,56 +1648,56 @@ msgstr ""
 #: templates/surveys/survey_role_delete_popup.html:35
 #: templates/surveys/survey_topic_delete_popup.html:35
 msgid "Delete"
-msgstr ""
+msgstr "Futa"
 
 #: templates/projects/project_delete.html:27
 msgid "Are you sure you want to delete this project?"
-msgstr ""
+msgstr "Una uhakika unataka kufuta project hii?"
 
 #: templates/projects/project_detail.html:28
-msgid "This project contains"
-msgstr ""
-
-#: templates/projects/project_detail.html:29
+#, python-format
 msgid ""
-"surveys. Select one you would like to edit from the list below, or create a "
-"new one."
+"This project contains %(survey_count)s surveys. Select one you would like to "
+"edit from the list below, or create a new one."
 msgstr ""
+"Project hii ina survey %(survey_count)s. Ukitaka kufanya mabadiliko kwenye "
+"kwenye survey ichague kwenye orodha ifuatayo, au unaweza kutengeneza survey "
+"mpya."
 
 #: templates/projects/project_detail.html:47
 #: templates/surveys/survey_list.html:27
 msgid "Search surveys…"
-msgstr ""
+msgstr "Tafuta survey…"
 
 #: templates/projects/project_detail.html:56
 #: templates/projects/project_detail.html:78
 #: templates/surveys/survey_list.html:32
 msgid "New Survey"
-msgstr ""
+msgstr "Survey Mpya"
 
 #: templates/projects/project_detail.html:74
 msgid "project has no surveys."
-msgstr ""
+msgstr "project hii haina survey."
 
 #: templates/projects/project_detail.html:75
 msgid "Start by creating new survey."
-msgstr ""
+msgstr "Anza kwa kutengeneza survey mpya."
 
 #: templates/projects/project_form.html:37
 msgid "Provide some basic information about this project."
-msgstr ""
+msgstr "Toa taarifa za msingi kuhusu project hii."
 
 #: templates/projects/project_form.html:56
-#: templates/surveys/survey_create.html:65
-#: templates/surveys/survey_edit_step_five.html:125
-#: templates/surveys/survey_edit_step_four.html:127
-#: templates/surveys/survey_edit_step_one.html:182
-#: templates/surveys/survey_edit_step_six.html:185
-#: templates/surveys/survey_edit_step_three.html:120
-#: templates/surveys/survey_edit_step_two.html:120
-#: templates/surveys/survey_update.html:66
+#: templates/surveys/survey_create.html:66
+#: templates/surveys/survey_edit_step_five.html:132
+#: templates/surveys/survey_edit_step_four.html:134
+#: templates/surveys/survey_edit_step_one.html:189
+#: templates/surveys/survey_edit_step_six.html:192
+#: templates/surveys/survey_edit_step_three.html:127
+#: templates/surveys/survey_edit_step_two.html:127
+#: templates/surveys/survey_update.html:68
 msgid "Cancel"
-msgstr ""
+msgstr "Sitisha"
 
 #: templates/projects/project_form.html:59
 msgid "Save project"
@@ -1642,65 +1705,67 @@ msgstr ""
 
 #: templates/projects/project_list.html:7 templates/users/profile.html:8
 msgid "Home"
-msgstr ""
+msgstr "Mwanzo"
 
 #: templates/projects/project_list.html:16
 msgid ""
 "A project is a set of one or more surveys. You can only create or modify a "
 "survey once you've created a project for it."
 msgstr ""
+"Project hujumisha survey moja au zaidi. Unaweza kutengeneza au kubadilisha "
+"survey pale tu utakapotengeneza project kwa ajili yake."
 
 #: templates/projects/project_list.html:25
 msgid "Select from your projects below or create a new one."
-msgstr ""
+msgstr "Chagua kwenye project zako hapo chini au tengeneza mpya."
 
 #: templates/projects/project_list.html:35
 msgid "Search projects…"
-msgstr ""
+msgstr "Tafuta project…"
 
 #: templates/projects/project_list.html:46
 #: templates/projects/project_list.html:74
 msgid "New Project"
-msgstr ""
+msgstr "Project Mpya"
 
 #: templates/projects/project_list.html:50
 #: templates/projects/project_list.html:78
 msgid "Clear Search"
-msgstr ""
+msgstr "Safisha Utafutaji"
 
 #: templates/projects/project_list.html:67
 msgid "No projects found."
-msgstr ""
+msgstr "Hakuna project iliyopatikana."
 
 #: templates/projects/project_list.html:70
 msgid "Start by creating new project."
-msgstr ""
+msgstr "Anza kwa kutengeneza project mpya."
 
 #: templates/projects/project_update.html:11
 msgid "Current Data flow hierarchy"
-msgstr ""
+msgstr "Ngazi za Mtiririko wa Data kwa sasa"
 
 #: templates/respondents/respondent_consent.html:20
 msgid "Quit"
-msgstr ""
+msgstr "Ghairi"
 
 #: templates/respondents/respondent_consent.html:24
 msgid "Agree and continue"
-msgstr ""
+msgstr "Kubali na endelea"
 
 #: templates/respondents/respondent_list.html:8
 msgid "Filter respondents"
-msgstr ""
+msgstr "Chuja wahojiwa"
 
 #: templates/respondents/respondent_list.html:13
 #: templates/responses/survey_response_list.html:14
 msgid "Apply filters"
-msgstr ""
+msgstr "Chuja"
 
 #: templates/respondents/respondent_list.html:14
 #: templates/responses/survey_response_list.html:15
 msgid "Reset filters"
-msgstr ""
+msgstr "Seti upya chujio"
 
 #: templates/respondents/respondent_list.html:22
 msgid ""
@@ -1710,7 +1775,7 @@ msgstr ""
 
 #: templates/respondents/respondent_list.html:39
 msgid "Search respondents…"
-msgstr ""
+msgstr "Tafuta wahojiwa…"
 
 #: templates/respondents/respondent_list.html:46
 #: templates/responses/survey_response_list.html:29
@@ -1719,7 +1784,7 @@ msgstr ""
 
 #: templates/respondents/respondent_list.html:49
 msgid "Respondents found"
-msgstr ""
+msgstr "Wahojiwa waliopatikana"
 
 #: templates/respondents/respondent_list.html:59
 #: templates/responses/survey_response_list.html:42
@@ -1729,47 +1794,47 @@ msgstr ""
 #: templates/respondents/respondent_list.html:60
 #: templates/responses/survey_response_detail.html:22
 #: templates/responses/survey_response_list.html:43
-#: templates/users/profile.html:72
+#: templates/users/profile.html:74
 msgid "Email"
-msgstr ""
+msgstr "Barua pepe"
 
 #: templates/respondents/respondent_list.html:61
 #: templates/responses/survey_response_detail.html:13
 msgid "First name"
-msgstr ""
+msgstr "Jina la kwanza"
 
 #: templates/respondents/respondent_list.html:62
 #: templates/responses/survey_response_detail.html:16
 msgid "Last name"
-msgstr ""
+msgstr "Jina la mwisho"
 
 #: templates/respondents/respondent_update.html:20
 #, python-format
 msgid "What is your %(level_name)s?"
-msgstr ""
+msgstr "%(level_name)s yako ni nini?"
 
 #: templates/respondents/respondent_update.html:26
 #, python-format
 msgid "Select %(level_name)s"
-msgstr ""
+msgstr "Chagua %(level_name)s"
 
 #: templates/respondents/respondent_update.html:51
 msgid "Add another role?"
-msgstr ""
+msgstr "Ongeza nafasi au wazifa?"
 
 #: templates/responses/base_response_form.html:21
 #: templates/responses/survey_response_complete.html:13
 msgid "Back"
-msgstr ""
+msgstr "Nyuma"
 
 #: templates/responses/base_response_form.html:25
-#: templates/surveys/survey_edit_step_five.html:129
-#: templates/surveys/survey_edit_step_four.html:131
-#: templates/surveys/survey_edit_step_one.html:186
-#: templates/surveys/survey_edit_step_three.html:124
-#: templates/surveys/survey_edit_step_two.html:124
+#: templates/surveys/survey_edit_step_five.html:136
+#: templates/surveys/survey_edit_step_four.html:138
+#: templates/surveys/survey_edit_step_one.html:193
+#: templates/surveys/survey_edit_step_three.html:131
+#: templates/surveys/survey_edit_step_two.html:131
 msgid "Save and continue"
-msgstr ""
+msgstr "Save na endelea"
 
 #: templates/responses/base_response_form_popup.html:23
 #: templates/users/profile_update.html:15
@@ -1782,16 +1847,20 @@ msgid ""
 "From whom do you <u>receive</u> information about %(dataset_name)s, and what "
 "kind of information do you receive?"
 msgstr ""
+"Kutoka kwa nani huwa <u>unapata</u> taarifa kuhusu %(dataset_name)s, na ni "
+"taarifa za aina gani huwa unapokea?"
 
 #: templates/responses/dataset_topic_response_update.html:11
 #, python-format
 msgid ""
 "Where at %(hierarchy)s is %(topic_name)s regarding %(dataset_name)s stored?"
 msgstr ""
+"Kwa %(hierarchy)s, wapi taarifa za %(topic_name)s na %(dataset_name)s "
+"huhifadhiwa?"
 
 #: templates/responses/dataset_topic_response_update.html:60
 msgid "Somewhere else?"
-msgstr ""
+msgstr "Pengine?"
 
 #: templates/responses/dataset_topic_shared_update.html:8
 #, python-format
@@ -1799,28 +1868,33 @@ msgid ""
 "To whom do you <u>send or share information</u> about %(dataset_name)s, and "
 "what kind of information do you share?"
 msgstr ""
+"Ni nahi huwa <u>unamshirikisha au humtumia</u> taarifa kuhusu "
+"%(dataset_name)s, na ni taarifa kuhusu nini hasa huwa unamshirikisha au "
+"kumtumia?"
 
 #: templates/responses/dataset_topic_shared_update.html:63
 msgid "Someone else?"
-msgstr ""
+msgstr "Wengine?"
 
 #: templates/responses/survey_response_complete.html:17
 msgid "Submit your response"
-msgstr ""
+msgstr "Wasilisha majibu yako"
 
 #: templates/responses/survey_response_detail.html:9
 msgid "General Information"
-msgstr ""
+msgstr "Taarifa za ujumla"
 
 #: templates/responses/survey_response_detail.html:29
 msgid "Topic-related responses"
-msgstr ""
+msgstr "Majibu kuhusiana na mada"
 
 #: templates/responses/survey_response_detail.html:50
 #, python-format
 msgid ""
 "How often do you produce, access or share information about %(dataset_name)s?"
 msgstr ""
+"Ni mara ngapi huwa unazalisha, unapata au unashirikisha wengine taarifa "
+"kuhusu %(dataset_name)s?"
 
 #: templates/responses/survey_response_detail.html:70
 #, python-format
@@ -1828,6 +1902,8 @@ msgid ""
 "Who at %(hierarchy_name)s do you believe knows most about %(topic_name)s "
 "regarding %(dataset_name)s?"
 msgstr ""
+"Nani %(hierarchy_name)s unaamini anafahamu zaidi kuhusu %(topic_name)s na "
+"%(dataset_name)s?"
 
 #: templates/responses/survey_response_detail.html:85
 #, python-format
@@ -1835,18 +1911,20 @@ msgid ""
 "Where at %(hierarchy_name)s is %(topic_name)s regarding %(dataset_name)s is "
 "stored?"
 msgstr ""
+"Kwa %(hierarchy_name)s, wapi taarifa za %(topic_name)s na %(dataset_name)s "
+"huhifadhiwa?"
 
 #: templates/responses/survey_response_detail.html:94
 msgid "Storage"
-msgstr ""
+msgstr "Uhifadhi"
 
 #: templates/responses/survey_response_detail.html:95
 msgid "Access"
-msgstr ""
+msgstr "Upatikanaji"
 
 #: templates/responses/survey_response_detail.html:113
 msgid "Information sources"
-msgstr ""
+msgstr "Vyanzo vya taarifa"
 
 #: templates/responses/survey_response_detail.html:118
 #, python-format
@@ -1854,14 +1932,16 @@ msgid ""
 "From whom do you receive information about %(dataset_name)s, and what kind "
 "of information do you receive?"
 msgstr ""
+"Kutoka kwa nani huwa unapata taarifa kuhusu %(dataset_name)s, na ni taarifa "
+"za aina gani huwa unapokea?"
 
 #: templates/responses/survey_response_detail.html:129
 msgid "Information received"
-msgstr ""
+msgstr "Taarifa zinazopokewa"
 
 #: templates/responses/survey_response_detail.html:144
 msgid "Information sharing"
-msgstr ""
+msgstr "Ushirikishanaji wa taarifa"
 
 #: templates/responses/survey_response_detail.html:149
 #, python-format
@@ -1869,667 +1949,686 @@ msgid ""
 "To whom do you send or share information about %(dataset_name)s, and what "
 "kind of information do you share?"
 msgstr ""
+"Ni nahi huwa unamshirikisha au humtumia taarifa kuhusu %(dataset_name)s, na "
+"ni taarifa kuhusu nini hasa huwa unamshirikisha au kumtumia?"
 
 #: templates/responses/survey_response_detail.html:160
 msgid "Information shared"
-msgstr ""
+msgstr "Taarifa zinazotolewa"
 
 #: templates/responses/survey_response_list.html:9
 msgid "Filter responses"
-msgstr ""
+msgstr "Chuja majibu"
 
 #: templates/responses/survey_response_list.html:32
 #, python-format
 msgid "%(count)s responses"
-msgstr ""
+msgstr "majibu %(count)s"
 
 #: templates/responses/survey_response_list.html:47
 msgid "Consent time"
-msgstr ""
+msgstr "Muda wa kuridhia"
 
 #: templates/responses/survey_response_list.html:48
 msgid "Completion time"
-msgstr ""
+msgstr "Muda wa kumaliza"
 
 #: templates/responses/survey_response_list.html:74
 msgid "No response found."
-msgstr ""
+msgstr "Hakuna majibu yaliyopatikana."
 
 #: templates/surveys/includes/survey_item.html:9
 #: templates/surveys/survey_list.html:65
 msgid "Published"
-msgstr ""
+msgstr "Imehadhiriwa"
 
 #: templates/surveys/includes/survey_item.html:11
 #: templates/surveys/survey_list.html:63
 msgid "Un-published"
-msgstr ""
+msgstr "Uhadhiri umesitishwa"
 
 #: templates/surveys/includes/user_survey_item.html:40
 msgid "Facilited by"
-msgstr ""
+msgstr "Inawezeshwa na"
 
 #: templates/surveys/includes/user_survey_item.html:68
 msgid "View my survey response"
-msgstr ""
+msgstr "Kuangalia majibu yangu ya survey"
 
 #: templates/surveys/includes/user_survey_item.html:72
 #: templates/surveys/includes/user_survey_item.html:82
 msgid "Start survey"
-msgstr ""
+msgstr "Anza survey"
 
 #: templates/surveys/includes/user_survey_item.html:77
 msgid "Continue survey"
-msgstr ""
+msgstr "Endelea na survey"
 
 #: templates/surveys/includes/user_survey_item.html:86
 msgid "Contact facilitator"
-msgstr ""
+msgstr "Wasiliana na muwezeshaji"
 
 #: templates/surveys/survey_create.html:49
+#, python-format
 msgid ""
 "Provide some basic information about this survey. Once <b>you</b> click "
 "\"Save\", this survey will appear alongside other surveys in <b>the project "
-"called"
+"called %(project_name)s</b>"
 msgstr ""
+"Weka taarifa za msingi kuhusu survey hii. Utakapobofya \"Save\", survey hii "
+"itakuwa pamoja na survey zingine <b>kwenye project iitwayo %(project_name)s</"
+"b>"
 
-#: templates/surveys/survey_create.html:50
-#: templates/surveys/survey_update.html:51
-msgid "</b>"
-msgstr ""
-
-#: templates/surveys/survey_create.html:68
-#: templates/surveys/survey_update.html:69
+#: templates/surveys/survey_create.html:69
+#: templates/surveys/survey_update.html:71
 msgid "Save Survey"
 msgstr ""
 
 #: templates/surveys/survey_dataset_create_popup.html:34
 msgid "Create survey dataset."
-msgstr ""
+msgstr "Ongeza seti ya data."
 
 #: templates/surveys/survey_dataset_create_popup.html:51
 #: templates/surveys/survey_dataset_update_popup.html:51
 msgid "Save Dataset"
-msgstr ""
+msgstr "Save Seti ya Data"
 
 #: templates/surveys/survey_dataset_delete_popup.html:29
 msgid "Delete a dataset"
-msgstr ""
+msgstr "Futa Seti ya Data"
 
 #: templates/surveys/survey_dataset_delete_popup.html:31
 msgid "Are you sure you want to delete this survey dataset?"
-msgstr ""
+msgstr "Una uhakika unataka kufuta seti hii ya data kwenye survey?"
 
 #: templates/surveys/survey_dataset_storage_create_popup.html:34
 msgid "Create survey dataset storage."
-msgstr ""
+msgstr "Tengeneza hifadhi ya data ya survey."
 
 #: templates/surveys/survey_dataset_storage_create_popup.html:51
 #: templates/surveys/survey_dataset_storage_update_popup.html:51
 msgid "Save Storage"
-msgstr ""
+msgstr "Save Hifadhi"
 
 #: templates/surveys/survey_dataset_storage_delete_popup.html:29
 msgid "Delete a dataset storage"
-msgstr ""
+msgstr "Futa hifadhi ya seti ya data"
 
 #: templates/surveys/survey_dataset_storage_delete_popup.html:31
 msgid "Are you sure you want to delete this survey dataset storage?"
-msgstr ""
+msgstr "Una uhakika unatakakufuta hifadhi hii ya data kwenye survey?"
 
 #: templates/surveys/survey_dataset_storage_update_popup.html:34
 msgid "Update survey dataset storage."
-msgstr ""
+msgstr "Sasisha hifadhi ya seti za data."
 
 #: templates/surveys/survey_dataset_update_popup.html:34
 msgid "Update survey dataset."
-msgstr ""
+msgstr "Sasisha seti ya data kwa ajili ya survey."
 
 #: templates/surveys/survey_delete.html:27
 msgid "Are you sure you want to delete this survey?"
-msgstr ""
+msgstr "Una uhakika unataka kuifuta survey hii?"
 
-#: templates/surveys/survey_detail.html:45
-msgid "This survey is a part of project"
+#: templates/surveys/survey_detail.html:47
+#, python-format
+msgid ""
+"This survey is a part of project <a href=\"%(project_url)s\">"
+"%(project_name)s</a>."
 msgstr ""
+"Survey hii ni sehemu ya project ya <a href=\"%(project_url)s\">"
+"%(project_name)s</a>."
 
 #: templates/surveys/survey_detail.html:53
+msgid "Description"
+msgstr "Maelezo"
+
+#: templates/surveys/survey_detail.html:58
 msgid "Please select an option:"
-msgstr ""
+msgstr "Tafadhali chagua:"
 
-#: templates/surveys/survey_detail.html:56
+#: templates/surveys/survey_detail.html:61
 msgid "Edit Survey"
-msgstr ""
+msgstr "Badili Survey"
 
-#: templates/surveys/survey_detail.html:59
+#: templates/surveys/survey_detail.html:64
 #: templates/surveys/survey_unpublish.html:31
 msgid "Unpublish Survey"
-msgstr ""
+msgstr "Sitisha Kuhadhiri Survey"
 
-#: templates/surveys/survey_detail.html:65
+#: templates/surveys/survey_detail.html:70
 msgid "Export responses"
-msgstr ""
+msgstr "Pakua majibu"
 
-#: templates/surveys/survey_detail.html:68
+#: templates/surveys/survey_detail.html:73
 msgid "Entities & information shared to"
 msgstr ""
 
-#: templates/surveys/survey_detail.html:69
+#: templates/surveys/survey_detail.html:74
 msgid "Entities & information received from"
 msgstr ""
 
-#: templates/surveys/survey_detail.html:70
+#: templates/surveys/survey_detail.html:75
 msgid "Entities & information shared & received"
 msgstr ""
 
-#: templates/surveys/survey_detail.html:71
+#: templates/surveys/survey_detail.html:76
 msgid "Information storage & access"
 msgstr ""
 
-#: templates/surveys/survey_detail.html:72
+#: templates/surveys/survey_detail.html:77
 msgid "Information encounter frequency"
 msgstr ""
 
-#: templates/surveys/survey_detail.html:76
+#: templates/surveys/survey_detail.html:81
 #: templates/surveys/survey_publish.html:31
 msgid "Publish Survey"
-msgstr ""
+msgstr "Hadhiri Survey"
 
-#: templates/surveys/survey_detail.html:79
+#: templates/surveys/survey_detail.html:84
 msgid "Delete Survey"
-msgstr ""
+msgstr "Futa Survey"
 
-#: templates/surveys/survey_edit_finish.html:49
-#: templates/surveys/survey_edit_start.html:49
-#: templates/surveys/survey_edit_step_five.html:49
-#: templates/surveys/survey_edit_step_four.html:49
-#: templates/surveys/survey_edit_step_one.html:49
-#: templates/surveys/survey_edit_step_six.html:49
-#: templates/surveys/survey_edit_step_three.html:49
-#: templates/surveys/survey_edit_step_two.html:49
-msgid "This survey is part of"
-msgstr ""
-
-#: templates/surveys/survey_edit_finish.html:49
-#: templates/surveys/survey_edit_start.html:49
-#: templates/surveys/survey_edit_step_five.html:49
-#: templates/surveys/survey_edit_step_four.html:49
-#: templates/surveys/survey_edit_step_one.html:49
-#: templates/surveys/survey_edit_step_six.html:49
-#: templates/surveys/survey_edit_step_three.html:49
-#: templates/surveys/survey_edit_step_two.html:49
-msgid "You can edit its information"
-msgstr ""
-
-#: templates/surveys/survey_edit_finish.html:49
-#: templates/surveys/survey_edit_start.html:49
-#: templates/surveys/survey_edit_step_five.html:49
-#: templates/surveys/survey_edit_step_four.html:49
-#: templates/surveys/survey_edit_step_one.html:49
-#: templates/surveys/survey_edit_step_six.html:49
-#: templates/surveys/survey_edit_step_three.html:49
-#: templates/surveys/survey_edit_step_two.html:49
-msgid "here"
-msgstr ""
-
-#: templates/surveys/survey_edit_finish.html:52
-#: templates/surveys/survey_edit_start.html:52
+#: templates/surveys/survey_edit_finish.html:50
+#: templates/surveys/survey_edit_start.html:50
 #: templates/surveys/survey_edit_step_five.html:52
 #: templates/surveys/survey_edit_step_four.html:52
 #: templates/surveys/survey_edit_step_one.html:52
 #: templates/surveys/survey_edit_step_six.html:52
 #: templates/surveys/survey_edit_step_three.html:52
 #: templates/surveys/survey_edit_step_two.html:52
-msgid "Your research question is:"
+#, python-format
+msgid ""
+"This survey is part of %(project_name)s. You can edit its information <a "
+"href=\"%(survey_update_url)s\">here</a>."
 msgstr ""
+"Survey hii ni sehemu ya %(project_name)s. Unaweza kubadili taarifa zake <a "
+"href=\"%(survey_update_url)s\">hapa</a>."
 
-#: templates/surveys/survey_edit_finish.html:60
+#: templates/surveys/survey_edit_finish.html:55
+#: templates/surveys/survey_edit_start.html:55
+#: templates/surveys/survey_edit_step_five.html:57
+#: templates/surveys/survey_edit_step_four.html:57
+#: templates/surveys/survey_edit_step_one.html:57
+#: templates/surveys/survey_edit_step_six.html:57
+#: templates/surveys/survey_edit_step_three.html:57
+#: templates/surveys/survey_edit_step_two.html:57
+#, python-format
+msgid "Your research question is: %(research_question)s"
+msgstr "Swali lako la utafiti ni: %(research_question)s"
+
+#: templates/surveys/survey_edit_finish.html:65
 msgid "Done"
-msgstr ""
+msgstr "Imekamilika"
 
-#: templates/surveys/survey_edit_finish.html:64
-msgid "Click button below to return to the"
+#: templates/surveys/survey_edit_finish.html:70
+#, python-format
+msgid "Click button below to return to the %(survey_name)s overview page."
 msgstr ""
+"Bofya kitufe hapo chini ili kurudi kwenyeukurasa wa muhtasari wa "
+"%(survey_name)s."
 
-#: templates/surveys/survey_edit_finish.html:67
+#: templates/surveys/survey_edit_finish.html:76
 msgid "Back to survey overview"
-msgstr ""
+msgstr "Rudi kwenye muhtasari wa survey"
 
-#: templates/surveys/survey_edit_start.html:56
+#: templates/surveys/survey_edit_start.html:61
 msgid "Start editing survey"
-msgstr ""
+msgstr "Anza kuhariri survey"
 
-#: templates/surveys/survey_edit_step_five.html:25
-#: templates/surveys/survey_edit_step_four.html:25
-#: templates/surveys/survey_edit_step_one.html:25
-#: templates/surveys/survey_edit_step_six.html:25
-#: templates/surveys/survey_edit_step_three.html:25
-#: templates/surveys/survey_edit_step_two.html:25
-msgid "Editing"
-msgstr ""
+#: templates/surveys/survey_edit_step_five.html:26
+#: templates/surveys/survey_edit_step_four.html:26
+#: templates/surveys/survey_edit_step_one.html:26
+#: templates/surveys/survey_edit_step_six.html:26
+#: templates/surveys/survey_edit_step_three.html:26
+#: templates/surveys/survey_edit_step_two.html:26
+#, python-format
+msgid "Editing %(survey_name)s"
+msgstr "Kubadili %(survey_name)s"
 
-#: templates/surveys/survey_edit_step_five.html:62
+#: templates/surveys/survey_edit_step_five.html:69
 msgid "Where can data be kept?"
-msgstr ""
+msgstr "Data zinaweza kuhifadhiwa wapi?"
 
-#: templates/surveys/survey_edit_step_five.html:74
+#: templates/surveys/survey_edit_step_five.html:81
 msgid ""
 "What information systems do you want respondents to be able to select when "
 "they take survey?"
 msgstr ""
+"Ni mifumo gani ya kuhifadhi taarifa ungependa wahojiwa waweze kuichagua "
+"wanapojibu survey?"
 
-#: templates/surveys/survey_edit_step_five.html:79
+#: templates/surveys/survey_edit_step_five.html:86
 msgid "Information systems are places that store information."
-msgstr ""
+msgstr "Mifumo ya taarifa ni sehemu ambazo hutumika kuhifadhi taarifa."
 
-#: templates/surveys/survey_edit_step_five.html:89
-#: templates/surveys/survey_edit_step_five.html:105
+#: templates/surveys/survey_edit_step_five.html:96
+#: templates/surveys/survey_edit_step_five.html:112
 msgid "Add New Dataset Storage"
-msgstr ""
+msgstr "Ongeza Hifadhi Mpya ya Taarifa"
 
-#: templates/surveys/survey_edit_step_five.html:92
+#: templates/surveys/survey_edit_step_five.html:99
 msgid "Edit Dataset Storage"
-msgstr ""
+msgstr "Badili Hifadhi ya Taarifa"
 
-#: templates/surveys/survey_edit_step_five.html:95
+#: templates/surveys/survey_edit_step_five.html:102
 msgid "Delete Dataset Storage"
-msgstr ""
+msgstr "Futa Hifadhi ya Taarifa"
 
-#: templates/surveys/survey_edit_step_five.html:103
+#: templates/surveys/survey_edit_step_five.html:110
 msgid "No dataset storage."
-msgstr ""
+msgstr "Hakuna hifadhi ya taarifa."
 
-#: templates/surveys/survey_edit_step_four.html:62
+#: templates/surveys/survey_edit_step_four.html:69
 msgid "Who can access, share, or manage information?"
-msgstr ""
+msgstr "Ni nani anaweza kutoa, kuratibu au kupata taarifa?"
 
-#: templates/surveys/survey_edit_step_four.html:75
+#: templates/surveys/survey_edit_step_four.html:82
 msgid ""
 "What entities do you want respondents to be able to select when they take "
 "survey?"
 msgstr ""
+"Unataka wadau gani waweze kuchaguliwa na wahojiwa wakati wa kujibu survey?"
 
-#: templates/surveys/survey_edit_step_four.html:80
+#: templates/surveys/survey_edit_step_four.html:87
 msgid ""
 "Entities are people, organizations, or teams—any person or group who might "
 "have, receive, or share information."
 msgstr ""
+"Wadau hapa ni watu, taasisi, au makundi, au yoyote anayeweza kumiliki, "
+"kupata au kutoa taarifa."
 
-#: templates/surveys/survey_edit_step_four.html:91
-#: templates/surveys/survey_edit_step_four.html:107
+#: templates/surveys/survey_edit_step_four.html:98
+#: templates/surveys/survey_edit_step_four.html:114
 msgid "Add New Entity"
-msgstr ""
+msgstr "Ongeza Mdau Mpya"
 
-#: templates/surveys/survey_edit_step_four.html:94
+#: templates/surveys/survey_edit_step_four.html:101
 msgid "Edit Entity"
-msgstr ""
+msgstr "Badili Mdau"
 
-#: templates/surveys/survey_edit_step_four.html:97
+#: templates/surveys/survey_edit_step_four.html:104
 msgid "Delete Entity"
-msgstr ""
+msgstr "Futa Mdau"
 
-#: templates/surveys/survey_edit_step_four.html:105
+#: templates/surveys/survey_edit_step_four.html:112
 msgid "No entities."
-msgstr ""
+msgstr "Hakuna wadau."
 
-#: templates/surveys/survey_edit_step_one.html:62
+#: templates/surveys/survey_edit_step_one.html:69
 msgid "Who will take this survey?"
-msgstr ""
+msgstr "Ni nani atajibu survey hii?"
 
-#: templates/surveys/survey_edit_step_one.html:77
+#: templates/surveys/survey_edit_step_one.html:84
 msgid "Who will you invite to take the survey?"
-msgstr ""
+msgstr "Unamualika nani kujibu survey hii?"
 
-#: templates/surveys/survey_edit_step_one.html:82
+#: templates/surveys/survey_edit_step_one.html:89
 msgid ""
 "To help you aggregate results later on, each respondent should be tagged to "
 "a System Hierarchy level. This hierarchy is pulled from your Project"
 msgstr ""
+"Ili kusaidia majumuisho ya matokeo baadae, kila mhojiwa ni lazima awe na "
+"ngazi flani kwenye mfumo. Mpangilio huu ngazi unatokana na project husika"
 
-#: templates/surveys/survey_edit_step_one.html:93
-#: templates/surveys/survey_edit_step_one.html:109
+#: templates/surveys/survey_edit_step_one.html:100
+#: templates/surveys/survey_edit_step_one.html:116
 msgid "Add New Respondent"
-msgstr ""
+msgstr "Ongeza Mhojiwa Mpya"
 
-#: templates/surveys/survey_edit_step_one.html:96
+#: templates/surveys/survey_edit_step_one.html:103
 msgid "Edit Respondent"
-msgstr ""
+msgstr "Badili Wahojiwa"
 
-#: templates/surveys/survey_edit_step_one.html:99
+#: templates/surveys/survey_edit_step_one.html:106
 msgid "Delete Respondent"
-msgstr ""
+msgstr "Futa wahojiwa"
 
-#: templates/surveys/survey_edit_step_one.html:107
+#: templates/surveys/survey_edit_step_one.html:114
 msgid "No respondents."
-msgstr ""
+msgstr "Hakuna wahojiwa."
 
-#: templates/surveys/survey_edit_step_one.html:119
+#: templates/surveys/survey_edit_step_one.html:126
 #: templates/surveys/survey_respondent_upload_popup.html:51
 msgid "Upload Respondents"
-msgstr ""
+msgstr "Pakia Wahojiwa"
 
-#: templates/surveys/survey_edit_step_one.html:119
+#: templates/surveys/survey_edit_step_one.html:126
 msgid "Bulk Upload"
-msgstr ""
+msgstr "Pakia kwa mkupuo"
 
-#: templates/surveys/survey_edit_step_one.html:122
+#: templates/surveys/survey_edit_step_one.html:129
 msgid "Visit the Manage Respondents page"
-msgstr ""
+msgstr "Nenda kwenye ukurasa wa kuratibu Wahojiwa"
 
-#: templates/surveys/survey_edit_step_one.html:131
+#: templates/surveys/survey_edit_step_one.html:138
 msgid "What are all the possible roles of respondents?"
-msgstr ""
+msgstr "Nafasi au nyazifa zote za wahojiwa ni zipi?"
 
-#: templates/surveys/survey_edit_step_one.html:142
-#: templates/surveys/survey_edit_step_one.html:158
+#: templates/surveys/survey_edit_step_one.html:149
+#: templates/surveys/survey_edit_step_one.html:165
 msgid "Add New Role"
-msgstr ""
+msgstr "Ongeza Nafasi Mpya"
 
-#: templates/surveys/survey_edit_step_one.html:145
+#: templates/surveys/survey_edit_step_one.html:152
 msgid "Edit Role"
-msgstr ""
+msgstr "Badili Nafasi"
 
-#: templates/surveys/survey_edit_step_one.html:148
+#: templates/surveys/survey_edit_step_one.html:155
 msgid "Delete Role"
-msgstr ""
+msgstr "Futa Nafasi"
 
-#: templates/surveys/survey_edit_step_one.html:156
+#: templates/surveys/survey_edit_step_one.html:163
 msgid "No roles."
-msgstr ""
+msgstr "Hakuna nafasi/nyazifa."
 
-#: templates/surveys/survey_edit_step_six.html:62
+#: templates/surveys/survey_edit_step_six.html:69
 msgid "Additional information"
-msgstr ""
+msgstr "Taarifa za ziada"
 
-#: templates/surveys/survey_edit_step_six.html:75
+#: templates/surveys/survey_edit_step_six.html:82
 msgid "By default survey will collect:"
-msgstr ""
+msgstr "Kwa kawaida survey itakusanya:"
 
-#: templates/surveys/survey_edit_step_six.html:90
+#: templates/surveys/survey_edit_step_six.html:97
 msgid "What options should respondents select when asked about their gender?"
 msgstr ""
+"Ni machaguo gani yanayotakiwa kuchaguliwa na wahojiwa wanapoulizwa kuhusu "
+"jinsia zao?"
 
-#: templates/surveys/survey_edit_step_six.html:102
-#: templates/surveys/survey_edit_step_six.html:120
+#: templates/surveys/survey_edit_step_six.html:109
+#: templates/surveys/survey_edit_step_six.html:127
 msgid "Add New Gender"
-msgstr ""
+msgstr "Ongeza Jinsia"
 
-#: templates/surveys/survey_edit_step_six.html:106
+#: templates/surveys/survey_edit_step_six.html:113
 msgid "Edit Gender"
-msgstr ""
+msgstr "Badilisha Jinsia"
 
-#: templates/surveys/survey_edit_step_six.html:110
+#: templates/surveys/survey_edit_step_six.html:117
 msgid "Delete Gender"
-msgstr ""
+msgstr "Futa Jinsia"
 
-#: templates/surveys/survey_edit_step_six.html:118
+#: templates/surveys/survey_edit_step_six.html:125
 msgid "No genders."
-msgstr ""
+msgstr "Hakuna jinsia."
 
-#: templates/surveys/survey_edit_step_six.html:138
+#: templates/surveys/survey_edit_step_six.html:145
 msgid "Add logos(s) to the survey footer"
-msgstr ""
+msgstr "Ongeza nembo kwenye kijachini cha survey"
 
-#: templates/surveys/survey_edit_step_six.html:152
-#: templates/surveys/survey_edit_step_six.html:168
+#: templates/surveys/survey_edit_step_six.html:159
+#: templates/surveys/survey_edit_step_six.html:175
 msgid "Add New Logo"
-msgstr ""
+msgstr "Ongeza Nembo Mpya"
 
-#: templates/surveys/survey_edit_step_six.html:155
+#: templates/surveys/survey_edit_step_six.html:162
 msgid "Edit Logo"
-msgstr ""
+msgstr "Badilisha nembo"
 
-#: templates/surveys/survey_edit_step_six.html:158
+#: templates/surveys/survey_edit_step_six.html:165
 msgid "Delete Logo"
-msgstr ""
+msgstr "Futa nembo"
 
-#: templates/surveys/survey_edit_step_six.html:166
+#: templates/surveys/survey_edit_step_six.html:173
 msgid "No logos."
-msgstr ""
+msgstr "Hakuna nembo."
 
-#: templates/surveys/survey_edit_step_six.html:189
+#: templates/surveys/survey_edit_step_six.html:196
 msgid "Save Survey Changes"
-msgstr ""
+msgstr "Save Mabadiliko ya Survey"
 
-#: templates/surveys/survey_edit_step_three.html:62
+#: templates/surveys/survey_edit_step_three.html:69
 msgid "What data do you want to learn about, for each topic?"
-msgstr ""
+msgstr "Ni data zipi ungependa kupata taarifa zake kwa kila mada?"
 
-#: templates/surveys/survey_edit_step_three.html:74
+#: templates/surveys/survey_edit_step_three.html:81
 msgid ""
 "Respondents will share how they use or share data about each topic. What "
 "specific kind of data do you want them to share about?"
 msgstr ""
+"Wahojiwa watabainisha jinsi wanavyotumia au wanavyoshirikishana data kuhusu "
+"kila mada. Ni aina gani ya data ambazo unawataka watu kuzitolea taarifa?"
 
-#: templates/surveys/survey_edit_step_three.html:84
-#: templates/surveys/survey_edit_step_three.html:100
+#: templates/surveys/survey_edit_step_three.html:91
+#: templates/surveys/survey_edit_step_three.html:107
 msgid "Add New Dataset"
-msgstr ""
+msgstr "Ongeza Seti Mpya ya Data"
 
-#: templates/surveys/survey_edit_step_three.html:87
+#: templates/surveys/survey_edit_step_three.html:94
 msgid "Edit Dataset"
-msgstr ""
+msgstr "Badili Seti ya Data"
 
-#: templates/surveys/survey_edit_step_three.html:90
+#: templates/surveys/survey_edit_step_three.html:97
 msgid "Delete Dataset"
-msgstr ""
+msgstr "Futa seti ya data"
 
-#: templates/surveys/survey_edit_step_three.html:98
+#: templates/surveys/survey_edit_step_three.html:105
 msgid "No datasets."
-msgstr ""
+msgstr "Hakuna seti ya data."
 
-#: templates/surveys/survey_edit_step_two.html:62
+#: templates/surveys/survey_edit_step_two.html:69
 msgid "What topics they will respond about?"
-msgstr ""
+msgstr "Ni mada zipi zitahusika kwenye kujibu?"
 
-#: templates/surveys/survey_edit_step_two.html:74
+#: templates/surveys/survey_edit_step_two.html:81
 msgid ""
 "Your survey will ask Respondents how they work with data about a specific "
 "topic. They will choose that topic from a drop-down list of options that you "
 "specify here."
 msgstr ""
+"Survey yako itawauliza watu maswali kuhusu wanavyofanya kazi na data "
+"kulingana na mada fulani. Watachagua mada hizo kutoka kwenye orodha ya mada "
+"zinazobainishwa hapa."
 
-#: templates/surveys/survey_edit_step_two.html:84
-#: templates/surveys/survey_edit_step_two.html:100
+#: templates/surveys/survey_edit_step_two.html:91
+#: templates/surveys/survey_edit_step_two.html:107
 msgid "Add New Topic"
-msgstr ""
+msgstr "Ongeza Mada Mpya"
 
-#: templates/surveys/survey_edit_step_two.html:87
+#: templates/surveys/survey_edit_step_two.html:94
 msgid "Edit Topic"
-msgstr ""
+msgstr "Badili Mada"
 
-#: templates/surveys/survey_edit_step_two.html:90
+#: templates/surveys/survey_edit_step_two.html:97
 msgid "Delete Topic"
-msgstr ""
+msgstr "Futa Mada"
 
-#: templates/surveys/survey_edit_step_two.html:98
+#: templates/surveys/survey_edit_step_two.html:105
 msgid "No topics."
-msgstr ""
+msgstr "Hakuna Mada."
 
 #: templates/surveys/survey_entity_create_popup.html:34
 msgid "Create survey entity."
-msgstr ""
+msgstr "Tengeneza mdau wa survey."
 
 #: templates/surveys/survey_entity_create_popup.html:51
 #: templates/surveys/survey_entity_update_popup.html:51
 msgid "Save Entity"
-msgstr ""
+msgstr "Save Mdau"
 
 #: templates/surveys/survey_entity_delete_popup.html:29
 msgid "Delete a entity"
-msgstr ""
+msgstr "Futa mdau"
 
 #: templates/surveys/survey_entity_delete_popup.html:31
 msgid "Are you sure you want to delete this survey entity?"
-msgstr ""
+msgstr "Una hakika unataka kumfuta mdau huyu kutoka kwenye survey?"
 
 #: templates/surveys/survey_entity_update_popup.html:34
 msgid "Update survey entity."
-msgstr ""
+msgstr "Sasisha mdau kwenye survey."
 
 #: templates/surveys/survey_gender_create_popup.html:34
 msgid "Create survey gender."
-msgstr ""
+msgstr "Ongeza jinsia kwenye survey."
 
 #: templates/surveys/survey_gender_create_popup.html:51
 #: templates/surveys/survey_gender_update_popup.html:51
 msgid "Save Gender"
-msgstr ""
+msgstr "Save Jinsia"
 
 #: templates/surveys/survey_gender_delete_popup.html:29
 msgid "Delete a gender"
-msgstr ""
+msgstr "Futa jinsia"
 
 #: templates/surveys/survey_gender_delete_popup.html:31
 msgid "Are you sure you want to delete this survey gender?"
-msgstr ""
+msgstr "Una uhakika unataka kuifuta jinsia hii kwenye survey?"
 
 #: templates/surveys/survey_gender_update_popup.html:34
 msgid "Update survey gender."
-msgstr ""
+msgstr "Sasisha jinsia kwa ajili ya survey."
 
 #: templates/surveys/survey_list.html:122
 msgid "Previous"
-msgstr ""
+msgstr "Iliyopita"
 
 #: templates/surveys/survey_list.html:132
 msgid "Next"
-msgstr ""
+msgstr "Inayofuata"
 
 #: templates/surveys/survey_logo_create_popup.html:34
 msgid "Create survey logo."
-msgstr ""
+msgstr "Tengeneza nembo ya survey."
 
 #: templates/surveys/survey_logo_create_popup.html:51
 #: templates/surveys/survey_logo_update_popup.html:51
 msgid "Save Logo"
-msgstr ""
+msgstr "Save Nembo"
 
 #: templates/surveys/survey_logo_delete_popup.html:29
 msgid "Delete a logo"
-msgstr ""
+msgstr "Futa nembo"
 
 #: templates/surveys/survey_logo_delete_popup.html:31
 msgid "Are you sure you want to delete this survey logo?"
-msgstr ""
+msgstr "Una uhakika unataka kufuta nembo hii ya survey?"
 
 #: templates/surveys/survey_logo_update_popup.html:34
 msgid "Update survey logo."
-msgstr ""
+msgstr "Sasisha nembo ya survey."
 
 #: templates/surveys/survey_publish.html:27
 msgid "Are you sure you want to publish this survey?"
-msgstr ""
+msgstr "Una uhakika unataka kuhadhiri survey hii?"
 
 #: templates/surveys/survey_question_create_popup.html:34
 msgid "Create survey question."
-msgstr ""
+msgstr "Tengeneza swali la survey."
 
 #: templates/surveys/survey_question_create_popup.html:51
 #: templates/surveys/survey_question_update_popup.html:51
 msgid "Save Question"
-msgstr ""
+msgstr "Save Swali"
 
 #: templates/surveys/survey_question_delete_popup.html:29
 msgid "Delete a question"
-msgstr ""
+msgstr "Futa swali"
 
 #: templates/surveys/survey_question_delete_popup.html:31
 msgid "Are you sure you want to delete this survey question?"
-msgstr ""
+msgstr "Una uhakika unataka kufuta swali hili kwenye survey?"
 
 #: templates/surveys/survey_question_update_popup.html:34
 msgid "Update survey question."
-msgstr ""
+msgstr "Sasisha swali la survey."
 
 #: templates/surveys/survey_respondent_create_popup.html:34
 msgid "Create survey respondent."
-msgstr ""
+msgstr "Tengeneza mhojiwa wa survey."
 
 #: templates/surveys/survey_respondent_create_popup.html:51
 #: templates/surveys/survey_respondent_update_popup.html:31
 msgid "Save Respondent"
-msgstr ""
+msgstr "Save mhojiwa"
 
 #: templates/surveys/survey_respondent_delete_popup.html:29
 msgid "Delete a respondent"
-msgstr ""
+msgstr "Futa mhojiwa"
 
 #: templates/surveys/survey_respondent_delete_popup.html:31
 msgid "Are you sure you want to delete this survey respondent?"
-msgstr ""
+msgstr "Una uhakika unataka kumfuta mhojiwa huyu kenye survey?"
 
 #: templates/surveys/survey_respondent_update_popup.html:14
 msgid "Update survey respondent."
-msgstr ""
+msgstr "Sasisha wahojiwa wa survey."
 
 #: templates/surveys/survey_respondent_upload_popup.html:34
 msgid "Upload survey respondents."
-msgstr ""
+msgstr "Pakia wahojiwa wa survey."
 
 #: templates/surveys/survey_role_create_popup.html:34
 msgid "Create survey role."
-msgstr ""
+msgstr "Tengeneza nafasi/wazifa mpya kwenye survey."
 
 #: templates/surveys/survey_role_create_popup.html:51
 #: templates/surveys/survey_role_update_popup.html:51
 msgid "Save Role"
-msgstr ""
+msgstr "Save Nafasi"
 
 #: templates/surveys/survey_role_delete_popup.html:29
 msgid "Delete a role"
-msgstr ""
+msgstr "Futa nafasi"
 
 #: templates/surveys/survey_role_delete_popup.html:31
 msgid "Are you sure you want to delete this survey role?"
-msgstr ""
+msgstr "Una uhakika unataka kufuta nafasi hii kwenye survey?"
 
 #: templates/surveys/survey_role_update_popup.html:34
 msgid "Update survey role."
-msgstr ""
+msgstr "Sasisha nafasi kwenye survey."
 
 #: templates/surveys/survey_share.html:25
 msgid "Share a survey"
-msgstr ""
+msgstr "Shirikisha survey"
 
 #: templates/surveys/survey_share.html:27
 msgid "Click button below to copy and share survey link with respondents."
 msgstr ""
+"Bofya kitufe hapo chini ili kunakili na kushirikisha watu survey kwa kutumia "
+"kiungo (link)."
 
 #: templates/surveys/survey_share.html:35
 msgid "Copy Survey Link"
-msgstr ""
+msgstr "Nakili kiungo cha survey"
 
 #: templates/surveys/survey_topic_create_popup.html:34
 msgid "Create survey topic."
-msgstr ""
+msgstr "Ongeza mada kwenye survey."
 
 #: templates/surveys/survey_topic_create_popup.html:51
 #: templates/surveys/survey_topic_update_popup.html:51
 msgid "Save Topic"
-msgstr ""
+msgstr "Save Mada"
 
 #: templates/surveys/survey_topic_delete_popup.html:29
 msgid "Delete a topic"
-msgstr ""
+msgstr "Futa mada"
 
 #: templates/surveys/survey_topic_delete_popup.html:31
 msgid "Are you sure you want to delete this survey topic?"
-msgstr ""
+msgstr "Una uhakiaka unataka kufuta mada hii katika survey?"
 
 #: templates/surveys/survey_topic_update_popup.html:34
 msgid "Update survey topic."
-msgstr ""
+msgstr "Sasisha mada ya survey."
 
 #: templates/surveys/survey_unpublish.html:27
 msgid "Are you sure you want to unpublish this survey?"
-msgstr ""
+msgstr "Una uhakika unataka kusitisha kuhadhiri survey hii?"
 
 #: templates/surveys/survey_update.html:50
+#, python-format
 msgid ""
 "Update basic information about this survey. Once <b>you</b> click \"Save\", "
-"this survey will appear alongside other surveys in <b>the project called"
+"this survey will appear alongside other surveys in <b>the project called "
+"%(project_name)s</b>"
 msgstr ""
+"Sasisha taarifa za msingi kuhusu survey hii. Utakapobofya \"Save\", survey "
+"hii itakuwa pamoja na survey zingine <b>kwenye project iitwayo "
+"%(project_name)s</b>"
 
 #: templates/users/includes/facilitator_profile.html:5
 msgid ""
@@ -2537,49 +2636,58 @@ msgid ""
 "where you can create or edit surveys, or you can manage respondents and "
 "responses."
 msgstr ""
+"Huu ni ukurasa wa Wasifu wa mwezeshaji. Hapa unaweza kuangalia project zako, "
+"na kisha unaweza kutengeneza au kubadilisha survey au kuratibu wahojiwa na "
+"majibu."
 
 #: templates/users/includes/facilitator_profile.html:11
 msgid "Choose an option:"
-msgstr ""
+msgstr "Chagua chaguo:"
 
 #: templates/users/includes/facilitator_profile.html:16
 msgid "My projects"
-msgstr ""
+msgstr "Project zangu"
 
 #: templates/users/includes/respondent_profile.html:5
 msgid ""
 "As a Respondent with an account, you can return to surveys in progress and "
 "view your previous survey responses."
 msgstr ""
+"Kama mhojiwa mwenye akaunti, unaweza kuenedelea na survey ambayo "
+"hazijakamalika na kuangalia majibu yako ya survey zilizopita."
 
 #: templates/users/includes/respondent_profile.html:12
 msgid "My Surveys"
-msgstr ""
+msgstr "Survey Zangu"
 
 #: templates/users/includes/respondent_profile.html:26
 msgid "Other Surveys"
-msgstr ""
+msgstr "Survey Zingine"
 
-#: templates/users/profile.html:18
+#: templates/users/profile.html:16
+msgid "Not added yet"
+msgstr "Bado haijawekwa"
+
+#: templates/users/profile.html:20
 msgid "Avatar"
-msgstr ""
+msgstr "Picha ya utambulisho (Avatar)"
 
-#: templates/users/profile.html:34
+#: templates/users/profile.html:36
 msgid "Your Name"
-msgstr ""
+msgstr "Jina Lako"
 
-#: templates/users/profile.html:44
+#: templates/users/profile.html:46
 msgid "User type"
-msgstr ""
+msgstr "Aina ya mtumiaji"
 
-#: templates/users/profile.html:67
+#: templates/users/profile.html:69
 msgid "Account Settings"
-msgstr ""
+msgstr "Mpangilio wa akaunti"
 
-#: templates/users/profile.html:77
+#: templates/users/profile.html:79
 msgid "Phone number"
-msgstr ""
+msgstr "Namba ya simu"
 
-#: templates/users/profile.html:84
+#: templates/users/profile.html:86
 msgid "Change password"
-msgstr ""
+msgstr "Badili nenosiri"
