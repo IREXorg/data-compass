@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 from django.template.defaultfilters import stringfilter
 from django.utils.translation import gettext_lazy as _
 
@@ -53,3 +54,12 @@ def naturalize_text(value):
         'completed': _('completed')
     }
     return lookup.get(value, value)
+
+
+@register.filter(name='untranslatedurl')
+def untranslate_url(path):
+    langs = [lang[0] for lang in settings.LANGUAGES]
+    path_components = path.split('/')
+    if path_components[1] in langs:
+        del path_components[1]
+    return '/'.join(path_components)

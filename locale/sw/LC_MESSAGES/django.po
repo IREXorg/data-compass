@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-21 05:24+0000\n"
+"POT-Creation-Date: 2020-09-21 08:31+0000\n"
 "PO-Revision-Date: 2020-09-20 10:44+0300\n"
 "Last-Translator: Tehamalab <developers@tehamalab.com>\n"
 "Language-Team: LANGUAGE <developers@tehamalab.com>\n"
@@ -1457,7 +1457,7 @@ msgid "is respondent"
 msgstr "ni mhojiwa"
 
 #: apps/users/views.py:15 templates/home.html:14
-#: templates/includes/nav_primary.html:38
+#: templates/includes/nav_primary.html:39
 msgid "My Profile"
 msgstr "Wasifu Wangu"
 
@@ -1473,15 +1473,15 @@ msgstr ""
 msgid "modified at"
 msgstr ""
 
-#: core/templatetags/datacompass.py:51
+#: core/templatetags/datacompass.py:52
 msgid "not started"
 msgstr "bado haijaanza"
 
-#: core/templatetags/datacompass.py:52
+#: core/templatetags/datacompass.py:53
 msgid "in progress"
 msgstr "inaendelea"
 
-#: core/templatetags/datacompass.py:53
+#: core/templatetags/datacompass.py:54
 msgid "completed"
 msgstr "imekamilika"
 
@@ -1494,7 +1494,7 @@ msgid "Swahili"
 msgstr "Kiswahili"
 
 #: templates/account/login.html:7 templates/account/login.html:31
-#: templates/home.html:17 templates/includes/nav_primary.html:52
+#: templates/home.html:17 templates/includes/nav_primary.html:53
 msgid "Sign In"
 msgstr "Ingia"
 
@@ -1620,13 +1620,17 @@ msgid ""
 "\" target='blank_'>here</a>"
 msgstr ""
 
-#: templates/includes/nav_primary.html:31
+#: templates/includes/nav_primary.html:32
 msgid "Administration"
 msgstr "Utawala"
 
-#: templates/includes/nav_primary.html:44
+#: templates/includes/nav_primary.html:45
 msgid "Sign out"
 msgstr "Ondoka"
+
+#: templates/includes/nav_primary.html:73
+msgid "change language"
+msgstr ""
 
 #: templates/projects/includes/project_item.html:20
 #: templates/surveys/includes/survey_item.html:25
