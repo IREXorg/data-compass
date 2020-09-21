@@ -24,22 +24,26 @@ Including another URLconf
 
 """
 from django.conf import settings
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('admin/', admin.site.urls),
+    path('summernote/', include('django_summernote.urls')),
+]
+
+urlpatterns += i18n_patterns(
+    path('', TemplateView.as_view(template_name='home.html'), name='home'),
     path('accounts/', include('allauth.urls')),
     path('users/', include('apps.users.urls', namespace='users')),
     path('projects/', include('apps.projects.urls', namespace='projects')),
     path('surveys/', include('apps.surveys.urls', namespace='surveys')),
     path('respondents/', include('apps.respondents.urls', namespace='respondents')),
-    path('responses/', include('apps.responses.urls', namespace='responses')),
-    path('summernote/', include('django_summernote.urls')),
-]
+    path('responses/', include('apps.responses.urls', namespace='responses'))
+)
 
 if settings.DEBUG:
     import debug_toolbar
