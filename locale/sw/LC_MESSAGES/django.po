@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-21 08:50+0000\n"
-"PO-Revision-Date: 2020-09-21 11:50+0300\n"
+"POT-Creation-Date: 2020-09-24 10:19+0000\n"
+"PO-Revision-Date: 2020-09-24 10:25+0300\n"
 "Last-Translator: Tehamalab <developers@tehamalab.com>\n"
 "Language-Team: LANGUAGE <developers@tehamalab.com>\n"
 "Language: sw\n"
@@ -131,7 +131,7 @@ msgstr "Tafuta"
 
 #: apps/projects/forms.py:18 apps/projects/forms.py:188
 msgid "Data flow hierarchy"
-msgstr "Ngazi za mtiririko wa data"
+msgstr "Hierakia ya mtiririko wa data"
 
 #: apps/projects/forms.py:30
 msgid ""
@@ -276,12 +276,12 @@ msgstr "Ridhaa inahitajika ili kuendelea"
 #: apps/respondents/forms.py:36 apps/responses/forms/dataset_responses.py:23
 #, python-format
 msgid "Survey must be specified to initialize %(class_name)s"
-msgstr ""
+msgstr "Survey ni lazima ibainishwe ili kuanzisha %(class_name)s"
 
 #: apps/respondents/forms.py:45
 #, python-format
 msgid "Project or Survey must be specified to initialize %(class_name)s"
-msgstr ""
+msgstr "Project au Survey ni lazima vibainishwe kuanzisha %(class_name)s"
 
 #: apps/respondents/forms.py:65
 msgid "What is your first name?"
@@ -347,16 +347,16 @@ msgstr "jinsia"
 
 #: apps/respondents/models.py:84
 msgid "role"
-msgstr ""
+msgstr "nafasi"
 
 #: apps/respondents/models.py:95
 msgid "hierarchy"
-msgstr ""
+msgstr "hierakia"
 
 #: apps/respondents/models.py:106 apps/surveys/models/entity.py:43
 #: apps/surveys/models/role.py:43
 msgid "hierarchy level"
-msgstr ""
+msgstr "ngazi ya hierakia"
 
 #: apps/respondents/models.py:137
 msgid "Respondent"
@@ -456,15 +456,15 @@ msgstr "seti ya data"
 
 #: apps/responses/models.py:171 apps/surveys/models/datasets.py:166
 msgid "frequency"
-msgstr ""
+msgstr "mzunguko"
 
 #: apps/responses/models.py:180
 msgid "shared to"
-msgstr ""
+msgstr "hutumwa kwa"
 
 #: apps/responses/models.py:189
 msgid "received from"
-msgstr ""
+msgstr "hutoka kwa"
 
 #: apps/responses/models.py:196
 msgid "Dataset Response"
@@ -486,7 +486,7 @@ msgstr "mada"
 
 #: apps/responses/models.py:281
 msgid "perceived owner"
-msgstr ""
+msgstr "anayeonekana kumiliki"
 
 #: apps/responses/models.py:288
 msgid "Dataset Topic Response"
@@ -603,7 +603,7 @@ msgstr "Jina la Mdau"
 #: apps/surveys/forms/respondent.py:27 apps/surveys/forms/respondent.py:60
 #: apps/surveys/forms/role.py:21 apps/surveys/forms/role.py:41
 msgid "System Hierarchy Level"
-msgstr "Ngazi"
+msgstr "Ngazi ya Hierakia"
 
 #: apps/surveys/forms/gender.py:22 apps/surveys/forms/gender.py:57
 msgid "Gender Name"
@@ -653,7 +653,7 @@ msgstr "Unataka kuruhusu wahojiwa kuongeza nafasi zao wenyewe?"
 
 #: apps/surveys/forms/survey.py:80
 msgid "Do not link respondents with system hierarchy levels?"
-msgstr ""
+msgstr "Wahojiwa wasiunganishwe na ngazi za kihierakia?"
 
 #: apps/surveys/forms/survey.py:81
 msgid "Do you want these users to log in before responding to the survey?"
@@ -752,23 +752,23 @@ msgstr ""
 
 #: apps/surveys/models/hierarchy.py:70
 msgid "Hierarchy Level"
-msgstr ""
+msgstr "Ngazi ya Hierakia"
 
 #: apps/surveys/models/hierarchy.py:71
 msgid "Hierarchy Levels"
-msgstr ""
+msgstr "Ngazi za Hierakia"
 
 #: apps/surveys/models/hierarchy.py:131
 msgid "level name"
-msgstr ""
+msgstr "jina la ngazi"
 
 #: apps/surveys/models/hierarchy.py:153
 msgid "Dataflow Hierarchy"
-msgstr ""
+msgstr "Hierakia ya Mtiririko wa Data"
 
 #: apps/surveys/models/hierarchy.py:154
 msgid "Dataflow Hierarchies"
-msgstr ""
+msgstr "Hierakia za Mtiririko wa Data"
 
 #: apps/surveys/models/logo.py:45
 msgid "image"
@@ -800,7 +800,7 @@ msgstr ""
 
 #: apps/surveys/models/questions.py:68
 msgid "decimal"
-msgstr ""
+msgstr "desimali"
 
 #: apps/surveys/models/questions.py:69
 msgid "text"
@@ -808,23 +808,23 @@ msgstr ""
 
 #: apps/surveys/models/questions.py:90
 msgid "field name"
-msgstr ""
+msgstr "jina la field"
 
 #: apps/surveys/models/questions.py:94 apps/surveys/models/questions.py:141
 msgid "label"
-msgstr ""
+msgstr "lebo"
 
 #: apps/surveys/models/questions.py:96 apps/surveys/models/questions.py:143
 msgid "this will be displayed to user"
-msgstr ""
+msgstr "hii itaonyeshwa kwa mtumiaji"
 
 #: apps/surveys/models/questions.py:100
 msgid "type"
-msgstr ""
+msgstr "aina"
 
 #: apps/surveys/models/questions.py:113
 msgid "options"
-msgstr ""
+msgstr "machaguo"
 
 #: apps/surveys/models/questions.py:117
 msgid "Questions"
@@ -836,7 +836,7 @@ msgstr "swali"
 
 #: apps/surveys/models/questions.py:139
 msgid "choice value"
-msgstr ""
+msgstr "thamani ya chaguo"
 
 #: apps/surveys/models/questions.py:155
 msgid "Choice"
@@ -899,27 +899,31 @@ msgstr "lugha"
 
 #: apps/surveys/models/survey.py:118
 msgid "do not link respondents with system hierarchy levels"
-msgstr ""
+msgstr "wahojiwa wasiunganishwa na ngazi za hierakia kwenye mfumo"
 
 #: apps/surveys/models/survey.py:119
 msgid ""
 "This can be easier in some contexts, but will limit aggregate or comparative "
 "analyses."
 msgstr ""
+"Hii inaweza kuwa rahisi zaidi kwa baadhi ya muktadha, lakini itazuia "
+"uchambuzi wa majumuisho au ulinganisho."
 
 #: apps/surveys/models/survey.py:127
 msgid "allow respondent hierarchy levels"
-msgstr ""
+msgstr "ruhusu ngazi za hierakia kutoka kwa wahojiwa"
 
 #: apps/surveys/models/survey.py:128
 msgid ""
 "Respondents will select from the List you provided for each level. If they "
 "can't find theirs, they can add their own?"
 msgstr ""
+"Wahojiwa watachagua kutoka kwenye Orodha uliyotoa kwa kila ngazi. Je, kama "
+"hawatapata inayohusika, wanaweza kuongeza ya kwao wenyewe?"
 
 #: apps/surveys/models/survey.py:138
 msgid "allow respondent roles"
-msgstr ""
+msgstr "ruhusu nafasi/nyazifa/majukuku kutoka kwa wahojiwa"
 
 #: apps/surveys/models/survey.py:139
 msgid "If Yes, respondents will be able to add their own roles."
@@ -927,7 +931,7 @@ msgstr "Kama Ndiyo, wahojiwa wataweza kuongeza nafasi zao."
 
 #: apps/surveys/models/survey.py:147
 msgid "login required"
-msgstr ""
+msgstr "kuingia (login) kunahitajika"
 
 #: apps/surveys/models/survey.py:148
 msgid ""
@@ -964,6 +968,8 @@ msgid ""
 "If Yes, the survey will include question collecting email address. "
 "Respondents are responsible for ensuring consent."
 msgstr ""
+"Kama Ndiyo, survey itakuwa na maswali yanayokusanya barua pepe. Wahojiwa "
+"wanajukumu la kuridhia."
 
 #: apps/surveys/models/survey.py:187
 msgid "allow respondent topics"
@@ -975,7 +981,7 @@ msgstr "Kama Ndiyo, wahojiwa wataweza kuongeza mada zao wenyewe."
 
 #: apps/surveys/models/survey.py:196
 msgid "respondent topic number"
-msgstr ""
+msgstr "idadi ya mada za wahojiwa"
 
 #: apps/surveys/models/survey.py:197
 msgid "Up to 10 topics are allowed"
@@ -1031,7 +1037,7 @@ msgstr ""
 
 #: apps/surveys/models/survey.py:247
 msgid "Is published"
-msgstr ""
+msgstr "Imehadhiriwa"
 
 #: apps/surveys/models/survey.py:261
 msgid "genders"
@@ -1432,6 +1438,7 @@ msgstr ""
 #: apps/users/models.py:31
 msgid "Shared system wide. Not for specific project or survey only."
 msgstr ""
+"Inatumika kwenye mfumo kwa ujumla. Si kwa project au survey flani pekee."
 
 #: apps/users/models.py:37 apps/users/models.py:38
 #: templates/respondents/respondent_list.html:63
@@ -1468,13 +1475,45 @@ msgstr "Wasifu Wangu"
 msgid "Update Profile"
 msgstr "Sasisha Wasifu"
 
+#: core/extra_translations.py:9
+msgid "E-mail"
+msgstr "Barua pepe"
+
+#: core/extra_translations.py:10
+msgid "Remember Me"
+msgstr "Nikumbuke"
+
+#: core/extra_translations.py:11
+msgid "E-mail address"
+msgstr "Anuani ya barua pepe"
+
+#: core/extra_translations.py:12
+msgid "The e-mail address and/or password you specified are not correct."
+msgstr "Anuani ya barua pepe na/au nenosiri ililotoa haviko sahihi."
+
+#: core/extra_translations.py:13
+msgid "The e-mail address is not assigned to any user account"
+msgstr "Anuani hiyo ya barua pepe haijapewa akaunti yoyote ya mtumiaji"
+
+#: core/extra_translations.py:14
+msgid "You must type the same password each time."
+msgstr "Ni lazima uandike nenosiri lile lile kila mara."
+
+#: core/extra_translations.py:15
+msgid "Password (again)"
+msgstr "Nenosiri (tena)"
+
+#: core/extra_translations.py:16
+msgid "A user is already registered with this e-mail address."
+msgstr "Tayari kuna mtumiaji amesajiliwa kwa anuani hii ya barua pepe."
+
 #: core/models.py:11
 msgid "created at"
-msgstr ""
+msgstr "ilipotengenezwa"
 
 #: core/models.py:16
 msgid "modified at"
-msgstr ""
+msgstr "ilipobadilishwa"
 
 #: core/templatetags/datacompass.py:52
 msgid "not started"
@@ -1609,11 +1648,21 @@ msgstr "Cheki wasifu wako."
 msgid "Please log in to continue."
 msgstr "Tafadhali ingia ili kuendelea."
 
+#: templates/includes/footer.html:15
+msgid "Developed by"
+msgstr "Imetengenezwa na"
+
+#: templates/includes/footer.html:20
+msgid "With support from"
+msgstr "Kwa msaada wa"
+
 #: templates/includes/footer.html:29
 msgid ""
 "View our <a href=\"https://www.irex.org/policies-data-compass-website\" "
 "target=\"_blank\">Responsible Data Policy</a>."
 msgstr ""
+"Angalia <a href=\"https://www.irex.org/policies-data-compass-website\" "
+"target=\"_blank\">Responsible Data Policy</a> yetu."
 
 #: templates/includes/footer.html:35
 msgid ""
@@ -1622,6 +1671,10 @@ msgid ""
 "a>. Find the source code: <a href=\"https://github.com/IREXorg/data-compass"
 "\" target='blank_'>here</a>"
 msgstr ""
+"Sofware hii inapatikana chini ya <a href=\"https://github.com/IREXorg/data-"
+"compass/blob/master/LICENSE\" target=\"blank_\">open source license</a>. "
+"Pata source code: <a href=\"https://github.com/IREXorg/data-compass\" "
+"target='blank_'>hapa</a>"
 
 #: templates/includes/nav_primary.html:32
 msgid "Administration"
@@ -1633,7 +1686,7 @@ msgstr "Ondoka"
 
 #: templates/includes/nav_primary.html:73
 msgid "change language"
-msgstr ""
+msgstr "badili lugha"
 
 #: templates/projects/includes/project_item.html:20
 #: templates/surveys/includes/survey_item.html:25
@@ -2109,23 +2162,23 @@ msgstr "Pakua majibu"
 
 #: templates/surveys/survey_detail.html:73
 msgid "Entities & information shared to"
-msgstr ""
+msgstr "Wadau & taarifa walizoshirikishwa"
 
 #: templates/surveys/survey_detail.html:74
 msgid "Entities & information received from"
-msgstr ""
+msgstr "Wadau $ taarifa zilizotoka kwao"
 
 #: templates/surveys/survey_detail.html:75
 msgid "Entities & information shared & received"
-msgstr ""
+msgstr "Wadau na taarifa walizotoa au kupokea"
 
 #: templates/surveys/survey_detail.html:76
 msgid "Information storage & access"
-msgstr ""
+msgstr "Uhifahi wa taarifa & upatikanaji"
 
 #: templates/surveys/survey_detail.html:77
 msgid "Information encounter frequency"
-msgstr ""
+msgstr "Mzunguko wa kukutana na taarifa"
 
 #: templates/surveys/survey_detail.html:81
 #: templates/surveys/survey_publish.html:31
@@ -2276,7 +2329,8 @@ msgid ""
 "a System Hierarchy level. This hierarchy is pulled from your Project"
 msgstr ""
 "Ili kusaidia majumuisho ya matokeo baadae, kila mhojiwa ni lazima awe na "
-"ngazi flani kwenye mfumo. Mpangilio huu ngazi unatokana na project husika"
+"ngazi flani za kihierakia kwenye mfumo. Hierakia hii inatokana na project "
+"husika"
 
 #: templates/surveys/survey_edit_step_one.html:100
 #: templates/surveys/survey_edit_step_one.html:116
