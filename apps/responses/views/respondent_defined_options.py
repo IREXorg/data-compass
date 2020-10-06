@@ -68,7 +68,8 @@ class BaseCreateView(PageMixin, RespondentSurveyMixin, ConsentCheckMixin,
         return self.survey.get_or_create_respondent(**respondent_lookup)[0]
 
     def form_valid(self, form):
-        form.instance.creator = self.request.user
+        if self.request.user.is_authenticated:
+            form.instance.creator = self.request.user
         form.instance.survey = self.survey
         return super().form_valid(form)
 
