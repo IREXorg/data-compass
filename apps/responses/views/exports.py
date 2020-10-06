@@ -292,6 +292,13 @@ class DatasetSharedReceivedListView(DatasetSharedListView):
                 entity_hierarchy_level_name = ''
                 entity_hierarchy_level_id = None
 
+            if respondent.gender:
+                respondent_gender_name = respondent.gender.name
+                respondent_gender_id = respondent.gender.id
+            else:
+                respondent_gender_name = ''
+                respondent_gender_id = None
+
             yield [
                 obj.id,
                 obj._type,
@@ -308,8 +315,8 @@ class DatasetSharedReceivedListView(DatasetSharedListView):
                 respondent.first_name,
                 respondent.last_name,
                 respondent.email,
-                respondent.gender.name,
-                respondent.gender.id,
+                respondent_gender_name,
+                respondent_gender_id,
                 hierarchy_level_name,
                 hierarchy_level_id,
                 hierarchy_name,
@@ -434,6 +441,13 @@ class DatasetStorageAccessListView(SingleObjectMixin, FacilitatorMixin, PageMixi
                 hierarchy_name = ''
                 hierarchy_id = None
 
+            if respondent.gender:
+                respondent_gender_name = respondent.gender.name
+                respondent_gender_id = respondent.gender.id
+            else:
+                respondent_gender_name = ''
+                respondent_gender_id = None
+
             yield [
                 obj.id,
                 obj.response.dataset_response.dataset.name,
@@ -448,8 +462,8 @@ class DatasetStorageAccessListView(SingleObjectMixin, FacilitatorMixin, PageMixi
                 respondent.first_name,
                 respondent.last_name,
                 respondent.email,
-                respondent.gender.name,
-                respondent.gender.id,
+                respondent_gender_name,
+                respondent_gender_id,
                 hierarchy_level_name,
                 hierarchy_level_id,
                 hierarchy_name,
@@ -570,6 +584,13 @@ class DatasetResponseListView(SingleObjectMixin, FacilitatorMixin, PageMixin, CS
                 hierarchy_name = ''
                 hierarchy_id = None
 
+            if respondent.gender:
+                respondent_gender_name = respondent.gender.name
+                respondent_gender_id = respondent.gender.id
+            else:
+                respondent_gender_name = ''
+                respondent_gender_id = None
+
             yield [
                 obj.id,
                 obj.dataset.name,
@@ -580,8 +601,8 @@ class DatasetResponseListView(SingleObjectMixin, FacilitatorMixin, PageMixin, CS
                 respondent.first_name,
                 respondent.last_name,
                 respondent.email,
-                respondent.gender.name,
-                respondent.gender.id,
+                respondent_gender_name,
+                respondent_gender_id,
                 hierarchy_level_name,
                 hierarchy_level_id,
                 hierarchy_name,
