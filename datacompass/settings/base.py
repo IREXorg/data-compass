@@ -373,16 +373,16 @@ SUMMERNOTE_CONFIG = {
 # Surveys
 
 SURVEYS_DEFAULT_DATASET_FREQUENCIES = env.list('SURVEYS_DEFAULT_DATASET_FREQUENCIES', default=[
-    'Every day',
-    'A few days a week',
-    'A few times a month',
-    'A few times a year',
+    'Weekly',
+    'Monthly',
+    'Quarterly',
+    'Annually',
 ])
 
 SURVEYS_DEFAULT_DATASET_ACCESS = env.list('SURVEYS_DEFAULT_DATASET_ACCESS', default=[
     'Only I or a few people can access',
     'All staff can access',
-    'Everybody can access',
+    'Public can access',
 ])
 
 # Azure
