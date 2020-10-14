@@ -5,12 +5,18 @@
 {% load widget_tweaks %}
 
 {% block form_fields %}
-  <div class="pb-4">{{ form|crispy }}</div>
+  <div class="pb-4">
+    {{ form|crispy }}
+  </div>
 
   <div class="my-4">
     {% blocktrans trimmed with hierarchy=respondent_hierarchy.name topic_name=topic.name dataset_name=dataset.name %}
     Where at {{ hierarchy }} is {{ topic_name }} regarding {{ dataset_name }} stored?
     {% endblocktrans %}
+
+    <p class="form-text text-muted small">
+      {% trans 'Select all that apply and indicate who has access in the dropdown' %}
+    </p>
 
     <div class="my-3">
       {{ formset.management_form }}

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-24 10:19+0000\n"
+"POT-Creation-Date: 2020-10-14 12:29+0000\n"
 "PO-Revision-Date: 2020-09-24 10:25+0300\n"
 "Last-Translator: Tehamalab <developers@tehamalab.com>\n"
 "Language-Team: LANGUAGE <developers@tehamalab.com>\n"
@@ -273,7 +273,7 @@ msgstr "Nimesoma na kuelewa maelezo ya hapo juu."
 msgid "Consent must be provided to continue"
 msgstr "Ridhaa inahitajika ili kuendelea"
 
-#: apps/respondents/forms.py:36 apps/responses/forms/dataset_responses.py:23
+#: apps/respondents/forms.py:36 apps/responses/forms/dataset_responses.py:24
 #, python-format
 msgid "Survey must be specified to initialize %(class_name)s"
 msgstr "Survey ni lazima ibainishwe ili kuanzisha %(class_name)s"
@@ -376,7 +376,11 @@ msgstr "Majibu"
 msgid "In my everday work, I usually encounter information about:"
 msgstr "Katika kazi zangu za kila siku, huwa nakutana na taarifa kuhusu:"
 
-#: apps/responses/forms/dataset_responses.py:67
+#: apps/responses/forms/dataset_responses.py:15
+msgid "Select all that apply"
+msgstr "Chagua vyote vinavyohusika"
+
+#: apps/responses/forms/dataset_responses.py:68
 #, python-format
 msgid ""
 "How often do you produce, access or share information about %(dataset)s?"
@@ -384,7 +388,12 @@ msgstr ""
 "Ni mara ngapi huwa unazalisha, unapata au unashirikisha wengine taarifa "
 "kuhusu %(dataset)s?"
 
-#: apps/responses/forms/dataset_responses.py:90
+#: apps/responses/forms/dataset_responses.py:71
+#: apps/responses/forms/dataset_responses.py:81
+msgid "Select one"
+msgstr "Chagua moja"
+
+#: apps/responses/forms/dataset_responses.py:93
 #, python-format
 msgid ""
 "Who at %(hierarchy)s do you believe knows <u>the most</u> about %(topic)s "
@@ -393,16 +402,16 @@ msgstr ""
 "Nani %(hierarchy)s unaamini anafahamu <u>zaidi</u> kuhusu %(topic)s na "
 "%(dataset)s?"
 
-#: apps/responses/forms/dataset_responses.py:130
+#: apps/responses/forms/dataset_responses.py:133
 msgid "Please specify how this is accessible"
 msgstr "Tafadhali bainisha hii inapatikanaje"
 
-#: apps/responses/forms/dataset_responses.py:166
-#: apps/responses/forms/dataset_responses.py:256
+#: apps/responses/forms/dataset_responses.py:169
+#: apps/responses/forms/dataset_responses.py:259
 msgid "Instance not specified"
 msgstr ""
 
-#: apps/responses/forms/dataset_responses.py:217
+#: apps/responses/forms/dataset_responses.py:220
 msgid "Please specify topic"
 msgstr "Tafadhali bainisha mada"
 
@@ -556,19 +565,19 @@ msgstr "Nafali ilitengenezwa kwa mafanikio"
 msgid "allowed_by attribute must be defined"
 msgstr ""
 
-#: apps/responses/views/respondent_defined_options.py:77
+#: apps/responses/views/respondent_defined_options.py:78
 msgid "Add option"
 msgstr "Ongeza chaguo"
 
-#: apps/responses/views/respondent_defined_options.py:83
+#: apps/responses/views/respondent_defined_options.py:84
 msgid "Add storage"
 msgstr "Ongeza hifandi"
 
-#: apps/responses/views/respondent_defined_options.py:89
+#: apps/responses/views/respondent_defined_options.py:90
 msgid "Add entity"
 msgstr "Ongeza mdau"
 
-#: apps/responses/views/respondent_defined_options.py:102
+#: apps/responses/views/respondent_defined_options.py:103
 msgid "Add role"
 msgstr "Ongeza nafasi"
 
@@ -1910,7 +1919,12 @@ msgstr ""
 "Kutoka kwa nani huwa <u>unapata</u> taarifa kuhusu %(dataset_name)s, na ni "
 "taarifa za aina gani huwa unapokea?"
 
-#: templates/responses/dataset_topic_response_update.html:11
+#: templates/responses/dataset_topic_received_update.html:12
+msgid ""
+"Select all that apply and indicate information you receive in the dropdown"
+msgstr "Chagua kila kinachohusika na onesha taarifa unazozipata kwenye dropdown"
+
+#: templates/responses/dataset_topic_response_update.html:13
 #, python-format
 msgid ""
 "Where at %(hierarchy)s is %(topic_name)s regarding %(dataset_name)s stored?"
@@ -1918,7 +1932,11 @@ msgstr ""
 "Kwa %(hierarchy)s, wapi taarifa za %(topic_name)s na %(dataset_name)s "
 "huhifadhiwa?"
 
-#: templates/responses/dataset_topic_response_update.html:60
+#: templates/responses/dataset_topic_response_update.html:18
+msgid "Select all that apply and indicate who has access in the dropdown"
+msgstr "Chagua kila kinachohusika na onesha nani anaweka kuzipata kwenye dropdown"
+
+#: templates/responses/dataset_topic_response_update.html:66
 msgid "Somewhere else?"
 msgstr "Pengine?"
 
@@ -1932,7 +1950,12 @@ msgstr ""
 "%(dataset_name)s, na ni taarifa kuhusu nini hasa huwa unamshirikisha au "
 "kumtumia?"
 
-#: templates/responses/dataset_topic_shared_update.html:63
+#: templates/responses/dataset_topic_shared_update.html:14
+msgid ""
+"Select all that apply and indicate information you share in the dropdown"
+msgstr "Chagua kila kinachohusika na onesha taarifa unazowahirikisha kwenye dropdown"
+
+#: templates/responses/dataset_topic_shared_update.html:67
 msgid "Someone else?"
 msgstr "Wengine?"
 

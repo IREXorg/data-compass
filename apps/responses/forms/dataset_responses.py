@@ -12,6 +12,7 @@ class DatasetSelectForm(forms.Form):
         queryset=None,
         widget=forms.CheckboxSelectMultiple,
         label=_('In my everday work, I usually encounter information about:'),
+        help_text=_('Select all that apply')
     )
 
     def __init__(self, survey=None, survey_response=None, *args, **kwargs):
@@ -67,6 +68,7 @@ class DatasetResponseFrequencyForm(DatasetResponseForm):
                 'How often do you produce, access or share information '
                 'about %(dataset)s?'
             ) % {'dataset': self.instance.dataset.name}
+            self.fields['dataset_frequency'].help_text = _('Select one')
 
 
 class DatasetTopicResponseForm(forms.ModelForm):
@@ -75,7 +77,8 @@ class DatasetTopicResponseForm(forms.ModelForm):
         queryset=None,
         widget=forms.RadioSelect,
         required=True,
-        empty_label=None
+        empty_label=None,
+        help_text=_('Select one')
     )
 
     class Meta:
