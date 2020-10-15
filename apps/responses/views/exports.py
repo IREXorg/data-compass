@@ -125,6 +125,13 @@ class DatasetSharedListView(SingleObjectMixin, FacilitatorMixin, PageMixin, CSVR
                 entity_hierarchy_level_name = ''
                 entity_hierarchy_level_id = None
 
+            if respondent.gender:
+                respondent_gender_name = respondent.gender.name
+                respondent_gender_id = respondent.gender.id
+            else:
+                respondent_gender_name = ''
+                respondent_gender_id = None
+
             yield [
                 obj.id,
                 obj.entity.name,
@@ -140,8 +147,8 @@ class DatasetSharedListView(SingleObjectMixin, FacilitatorMixin, PageMixin, CSVR
                 respondent.first_name,
                 respondent.last_name,
                 respondent.email,
-                respondent.gender.name,
-                respondent.gender.id,
+                respondent_gender_name,
+                respondent_gender_id,
                 hierarchy_level_name,
                 hierarchy_level_id,
                 hierarchy_name,
