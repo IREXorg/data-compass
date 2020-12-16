@@ -10,7 +10,7 @@ to modify and use it for your needs.
 
 If you would like to use the software without deploying it yourself,
 please contact IREX for a license to use their readily available software.
-IREX is a global development and education organization. Please contact cali@irex.org with inquiries.
+IREX is a global development and education organization. Please contact contact.cali@irex.org with inquiries.
 
 
 Installation
