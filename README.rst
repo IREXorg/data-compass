@@ -13,8 +13,15 @@ please contact IREX for a license to use their readily available software.
 IREX is a global development and education organization. Please contact contact.cali@irex.org with inquiries.
 
 
-Installation
-============
+Technology
+==========
+
+This project is based on Python_ with Django_ framework, Postgresql_ database and
+Webpack_ for frontend assets management.
+
+
+Development Installation
+========================
 
 Database Setup
 --------------
@@ -61,7 +68,7 @@ While you are in the database shell create the database user and grant appropria
     GRANT ALL PRIVILEGES ON DATABASE datacompass TO datacompass;
     exit;
 
-When running tests locally against `postgresql` database, you should allow database user to have `CREATEDB` role.
+When running tests locally against `postgresql` database, you should allow the database user to have the `CREATEDB` role.
 
 .. code:: sql
 
@@ -183,7 +190,7 @@ Working with frontend assets
 ----------------------------
 The most frontend Javascript, CSS (SaSS) and static images for UI files are managed using Webpack.
 
-If you want to modify frontend assets; Install relevant dependancies using
+If you want to modify frontend assets; Install relevant dependencies using
 
 .. code:: bash
 
@@ -242,7 +249,7 @@ Building Documentation
 ----------------------
 The project uses Sphinx_ for managing and compiling documentation.
 
-To build the HTML documentation, Install documentation dependancies:
+To build the HTML documentation, Install documentation dependencies:
 
 .. code:: bash
 
@@ -257,7 +264,19 @@ Build the documentation:
 The HTML docs will be created in ``docs/_build/html/`` folder
 
 
+Deployment
+==========
+
+Data Compas can be deployed using any standard Django deployment.
+For more information on Django deployment please look for the available resources on the Internet
+including https://docs.djangoproject.com/en/3.0/howto/deployment/
+
+
 .. _tox: https://tox.readthedocs.io/en/latest/
 .. _flake8: https://flake8.pycqa.org/en/latest/
 .. _isort: https://isort.readthedocs.io/en/latest/
 .. _Sphinx: https://www.sphinx-doc.org/en/master/
+.. _Python: https://www.python.org/
+.. _Django: https://www.djangoproject.com/
+.. _Webpack: https://webpack.js.org/
+.. _Postgresql: https://www.postgresql.org/
